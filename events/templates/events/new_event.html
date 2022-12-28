@@ -1,0 +1,70 @@
+{% extends 'events/layout.html' %}
+{% load static %}
+
+{% block title %}
+Event editor
+{% endblock %}
+
+{% block body %}
+
+  <script src="{% static 'events/new_event.js' %}"></script>
+
+  <h1>Event editor</h1>
+  <h2>Create and customize your event</h2>
+
+  <div class="section p-2 shadow rounded">
+    <button type="button" class="btn btn-outline-success float-end visually-hidden" id="btnSaveEvent" disabled>
+      <span class="material-symbols-outlined">save</span>
+      Save
+    </button>
+    <!-- Event title -->
+    <div class="row m-3 mt-5 intro-animated" id="titleRow">
+      <div class="col">
+        <h4>Enter a title</h4>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="eventTitle" placeholder="Title for your event..." maxlength="70">
+          <label for="eventTitle">Event title</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event location -->
+    <div class="row m-3 intro-animated" id="locationRow">
+      <div class="col-8">
+        <h4>Choose a location</h4>
+      </div>
+      <div class="col-4">
+        <div class="form-check form-switch fs-4">
+          <input class="form-check-input" type="checkbox" role="switch" id="checkEventLocation" checked>
+        </div> 
+      </div>
+      <div class="w-100"></div>
+      <div class="col" id="locationCol">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="eventLocation" placeholder="Location of your event" maxlength="30">
+          <label for="eventLocation">Event location</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event date and time -->
+    <div class="row m-3 intro-animated" id="dateRow">
+      <div class="col">
+        <h4>Set a date and time <span class="text-muted">(you can indicate more than one possible date)</span></h4>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-8 col-md-4 mb-3">
+        <div class="form-floating mb-3">
+          <input type="datetime-local" class="form-control" id="dateInp">
+          <label for="dateInp">Event date</label>
+        </div>
+      </div>
+      <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
+        <span class="material-symbols-outlined fs-1 cursor-pointer" id="add-date">add_circle</span>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'events/layout.html' %}
+{% load static %}
+
+{% block title %}
+index
+{% endblock %}
+
+{% block body %}
+  <h1>Welcome to Schedama</h1>
+  <h2>Create and share your important events</h2>
+
+  <p class="lead">Schedama is a quick and intuitive way to create an event, share it and agree on a date and time.</p>
+
+  <div class="row">
+    <div class="col-12">
+      <p>When you create an event, 2 links are generated</p>
+    </div>
+    <div class="row">
+      <div class="col-3"><b>Link for participants:</b></div>
+      <div class="col-9">Anyone with this link will be able to see event details and register their partecipation.</div>
+    </div>
+    <div class="row">
+      <div class="col-3"><b>Link for admins:</b></div>
+      <div class="col-9">Anyone with this link will be able to fully edit the event, modify date and time, location, remove participants and cancel the event.</div>  
+    </div>
+  </div>
+
+{% endblock %}
