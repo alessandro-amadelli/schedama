@@ -3,13 +3,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Button to save event
     document.querySelector("#btnSaveEvent").onclick = () => {
-        validateEvent();
+        let isValidated = validateEvent();
+        if (isValidated) {
+            sendEventToServer();
+        }
     }
 
     // Button to add a new date to the event
     const btnAddDate = document.querySelector("#add-date");
     btnAddDate.onclick = () => {
         createNewDate();
+        saveLocally();
+    }
+
+    // Button to add participant to event
+    const btnAddParticipant = document.querySelector("#add-participant");
+    btnAddParticipant.onclick = () => {
+        createNewParticipant();
         saveLocally();
     }
 
@@ -23,15 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if a local, unsaved event is available
     const unsavedEvent = localStorage.getItem("unsavedEvent");
     if (unsavedEvent) {
-        let restoreData = confirm("You have an unsaved event. Do you want to load previous data?");
-        if (restoreData) {
-            restorePreviousData();
-        } else {
-            localStorage.removeItem("unsavedEvent");
-        }
+        showModalRestoreData();
     }
 
 });
+
+function showModalRestoreData() {
+    document.querySelector("#btnRestoreData").onclick = () => {restorePreviousData();};
+    document.querySelector("#btnClearData").onclick = () => {clearPreviousData();};
+    modal = new bootstrap.Modal(document.querySelector("#modalRestoreData"));
+    modal.show();
+}
 
 function initializeTitleRow() {
     // Intro animation start
@@ -87,11 +99,19 @@ function initializeDateRow() {
     // Intro animation start
     const dateRow = document.querySelector("#dateRow");
     dateRow.style.animationPlayState = "running";
+
+    // Initialize participant row
+    initializeParticipantRow();
+}
+
+function initializeParticipantRow() {
+    const participantRow = document.querySelector("#participantRow");
+    participantRow.style.animationPlayState = "running";
 }
 
 function createNewDate() {
     const dateRow = document.querySelector("#dateRow");
-    const firstDate = dateRow.querySelector("input"); // First date input field
+    const firstDate = dateRow.querySelector("#dateInp"); // First date input field
 
     if (firstDate.value == '') {
         setInvalid(firstDate, true);
@@ -115,6 +135,7 @@ function createNewDate() {
     newDateInp.setAttribute("type","datetime-local");
     newDateInp.setAttribute("name","eventDate");
     newDateInp.classList.add("form-control");
+    newDateInp.setAttribute("min", new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":")));
     const newDateLabel = document.createElement("label");
     newDateLabel.setAttribute("for", "eventDate");
     newDateLabel.innerText = "Event Date";
@@ -143,10 +164,72 @@ function createNewDate() {
     dateRow.appendChild(newDateCol);
     dateRow.appendChild(newBtnCol);
 
+    // Event listener for new input
+    newDateInp.addEventListener('change', saveLocally);
+
     // Set new input value to first date and reset first date value
     newDateInp.value = firstDate.value;
     firstDate.value = "";
     setInvalid(firstDate, false);
+}
+
+function createNewParticipant() {
+    const dateRow = document.querySelector("#participantRow");
+    const partInp = document.querySelector("#participantInp");
+
+    if (partInp.value == '') {
+        setInvalid(partInp, true);
+        return false;
+    }
+
+    // Add new w-100
+    const new100 = document.createElement("div");
+    new100.classList.add("w-100");
+
+    // Add new date input col
+    const newParticipantCol = document.createElement("div");
+    newParticipantCol.classList.add("col-8", "col-md-4", "mb-3", "appearing");
+    const newFormDiv =  document.createElement("div");
+    newFormDiv.classList.add("form-floating", "mb-3");
+    const newParticipantInp = document.createElement("input");
+    newParticipantInp.setAttribute("type","text");
+    newParticipantInp.setAttribute("name","participantName");
+    newParticipantInp.classList.add("form-control");
+    const newParticipantLabel = document.createElement("label");
+    newParticipantLabel.setAttribute("for", "participantName");
+    newParticipantLabel.innerText = "Name";
+    newFormDiv.appendChild(newParticipantInp);
+    newFormDiv.appendChild(newParticipantLabel);
+    newParticipantCol.appendChild(newFormDiv);
+
+    // Add new button col
+    const newBtnCol = document.createElement("div");
+    newBtnCol.classList.add("col-4", "col-md-8", "mb-3", "fs-1", "align-middle");
+
+    // New btn del
+    const newBtnDel = document.createElement("span");
+    newBtnDel.classList.add("material-symbols-outlined", "fs-1", "cursor-pointer", "remove-date", "text-danger");
+    newBtnDel.innerText = "delete";
+    newBtnDel.onclick = () => {
+        new100.remove();
+        newParticipantCol.remove();
+        newBtnCol.remove();
+        saveLocally(); // Save event data
+    }
+    newBtnCol.appendChild(newBtnDel);
+
+    //Append new children
+    dateRow.appendChild(new100);
+    dateRow.appendChild(newParticipantCol);
+    dateRow.appendChild(newBtnCol);
+
+    // Event listener for new input
+    newParticipantInp.addEventListener('change', saveLocally);
+
+    // Set new input value to first date and reset first date value
+    newParticipantInp.value = partInp.value;
+    partInp.value = "";
+    setInvalid(partInp, false);
 }
 
 function setInvalid(element, isInvalid) {
@@ -186,7 +269,7 @@ function validateEvent() {
     }
 
     //Check #3 Date and time
-    const firstDate = document.querySelector("#dateRow").querySelector("input");
+    const firstDate = document.querySelector("#dateInp");
     const dates = document.querySelectorAll("[name='eventDate']");
     if (dates.length == 0) {
         setInvalid(firstDate, true);
@@ -194,6 +277,8 @@ function validateEvent() {
     } else {
         setInvalid(firstDate, false);
     }
+
+    return validated;
 }
 
 function restorePreviousData() {
@@ -202,6 +287,10 @@ function restorePreviousData() {
     if (!unsavedEvent) {
         return false;
     }
+
+    // Event settings
+    document.querySelector("#switchAddParticipant").checked = unsavedEvent.settings.add_participant;
+    document.querySelector("#switchRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
 
     // Event title
     document.querySelector("#eventTitle").value = unsavedEvent.title;
@@ -215,10 +304,20 @@ function restorePreviousData() {
     // Event dates
     initializeDateRow();
     unsavedEvent.dates.forEach((item) => {
-        document.querySelector("#dateRow").querySelector("input").value = item;
+        document.querySelector("#dateInp").value = item;
         createNewDate();
-    })
+    });
 
+    // Participants
+    initializeParticipantRow();
+    unsavedEvent.participants.forEach((participant) => {
+        document.querySelector("#participantInp"). value = participant.name;
+        createNewParticipant();
+    });
+}
+
+function clearPreviousData() {
+    localStorage.removeItem("unsavedEvent");
 }
 
 function saveLocally() {
@@ -226,20 +325,137 @@ function saveLocally() {
     const eventLocation = document.querySelector("#eventLocation").value;
     const locationActive = document.querySelector("#checkEventLocation").checked;
     const eventDates = document.querySelectorAll("[name='eventDate']");
+    const participants = document.querySelectorAll("[name='participantName']");
+
+    // Settings
+    const addParticipant = document.querySelector("#switchAddParticipant").checked;
+    const removeParticipant = document.querySelector("#switchRemoveParticipant").checked;
     
+    // Populating date list
     let dateList = [];
     eventDates.forEach((item) => {
         dateList.push(item.value);
     });
 
+    // Populating participant list
+    let participantList = [];
+    participants.forEach((item) => {
+        participantList.push({
+            name: item.value,
+            dates: []
+        });
+    });
+
     // Create unsaved event object
     unsavedEvent = {
-        "title": eventTitle,
-        "location": eventLocation,
-        "has_location": locationActive,
-        "dates": dateList
+        title: eventTitle,
+        location: eventLocation,
+        has_location: locationActive,
+        dates: dateList,
+        participants: participantList,
+        settings: {
+            add_participant: addParticipant,
+            remove_participant: removeParticipant
+        }
     }
 
     // Save event data to local storage
     localStorage.setItem("unsavedEvent", JSON.stringify(unsavedEvent)); 
+}
+
+async function sendEventToServer() {
+    const data = JSON.parse(localStorage.getItem("unsavedEvent"));
+    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+
+    let reqHeaders = new Headers();
+    reqHeaders.append('Content-type', 'application/json');
+    reqHeaders.append('X-CSRFToken', csrftoken);
+
+    let initObject = {
+        method: 'POST',
+        headers: reqHeaders,
+        body: JSON.stringify(data),
+        credentials: 'include',
+    };
+
+    showLoading();
+
+    await fetch('/save-event/', initObject)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            eventCreatedSuccessfully(data);
+            removeLoading();
+        })
+        .catch(function (err) {
+            showPageMsg("alert-danger", "An error has occurred. Please try again later.");
+            removeLoading();
+        });
+}
+
+function eventCreatedSuccessfully(data) {
+    // Saving title of the event (to display it after)
+    const eventTitle = document.querySelector("#eventTitle").value;
+
+    // Created event data
+    const itemID = data.item_id;
+    const adminKey = data.admin_key;
+
+    // Delete page content
+    const section = document.querySelector(".section");
+    section.innerHTML = ""; // Empty the section area
+
+    // Changing page titles
+    document.querySelector("h1").innerText = "Event created";
+    document.querySelector("h2").innerText = "Your event has been successfully created";
+
+    // Display event title
+    const displayName = document.createElement("h1");
+    displayName.innerText = eventTitle;
+    displayName.setAttribute("class", "text-center mb-5");
+
+    // Display participant's URL
+    const displayPartURL = document.createElement("h3");
+    displayPartURL.innerText = "Participation URL";
+    displayPartURL.setAttribute("class", "text-center");
+    const div1 = document.createElement("div");
+    div1.setAttribute("class", "w-100 mb-5 text-center display-6");
+    const participantURL = document.createElement("strong");
+    participantURL.innerText = window.location.href.replace("create-event/", "participate/"+itemID);
+    participantURL.setAttribute("id", "partURL");
+
+    // Display administration URL
+    const displayAdminURL = document.createElement("h3");
+    displayAdminURL.innerText = "Administration URL";
+    displayAdminURL.setAttribute("class", "text-center");
+    const div2 = document.createElement("div");
+    div2.setAttribute("class", "w-100 mb-5 text-center display-6");
+    const adminURL = document.createElement("strong");
+    adminURL.innerText = window.location.href.replace("create-event/", "edit-event/"+itemID+"?k="+adminKey);
+    adminURL.setAttribute("id", "adminURL");
+
+    // Warning instructing user to save URLs
+    const divw = document.createElement("div");
+    divw.setAttribute("class", "w-100 text-center mb-2");
+    const warn = document.createElement("strong");
+    warn.innerHTML = `<span class="material-symbols-outlined">warning</span> 
+    IMPORTANT: before leaving the page make sure to save this link, it's the only way you'll be able to administrate your event. 
+    <span class="material-symbols-outlined">warning</span>`
+    warn.setAttribute("class", "text-danger")
+
+    // Append elements
+    section.appendChild(displayName);
+
+    section.appendChild(displayPartURL);
+    section.appendChild(div1);
+    div1.appendChild(participantURL);
+
+    section.appendChild(displayAdminURL);
+    section.appendChild(divw);
+    divw.appendChild(warn);
+    section.appendChild(div2);
+    div2.appendChild(adminURL);
+
 }

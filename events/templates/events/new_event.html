@@ -12,11 +12,23 @@ Event editor
   <h1>Event editor</h1>
   <h2>Create and customize your event</h2>
 
+  {% csrf_token %}
+
   <div class="section p-2 shadow rounded">
-    <button type="button" class="btn btn-outline-success float-end visually-hidden" id="btnSaveEvent" disabled>
-      <span class="material-symbols-outlined">save</span>
-      Save
-    </button>
+    <div class="row">
+      <div class="col-6">
+        <button type="button" class="btn btn-light float-start" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn btn-success float-end visually-hidden" id="btnSaveEvent" disabled>
+          <span class="material-symbols-outlined">save</span>
+          Save
+        </button>
+      </div>
+    </div>
+
     <!-- Event title -->
     <div class="row m-3 mt-5 intro-animated" id="titleRow">
       <div class="col">
@@ -44,7 +56,7 @@ Event editor
       <div class="w-100"></div>
       <div class="col" id="locationCol">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="eventLocation" placeholder="Location of your event" maxlength="30">
+          <input type="text" class="form-control" id="eventLocation" placeholder="Location of your event" maxlength="70">
           <label for="eventLocation">Event location</label>
         </div>
       </div>
@@ -58,12 +70,86 @@ Event editor
       <div class="w-100"></div>
       <div class="col-8 col-md-4 mb-3">
         <div class="form-floating mb-3">
-          <input type="datetime-local" class="form-control" id="dateInp">
+          <input type="datetime-local" class="form-control" id="dateInp" min="{% now 'Y-m-d\TH:i' %}">
           <label for="dateInp">Event date</label>
         </div>
       </div>
       <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
         <span class="material-symbols-outlined fs-1 cursor-pointer" id="add-date">add_circle</span>
+      </div>
+    </div>
+
+    <!-- Participants -->
+    <div class="row m-3 intro-animated" id="participantRow">
+      <div class="col">
+        <h4>Add participants <span class="text-muted">(Optional)</span></h4>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-8 col-md-4 mb-3">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="participantInp" maxlength="30">
+          <label for="participantInp">Name</label>
+        </div>
+      </div>
+      <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
+        <span class="material-symbols-outlined fs-1 cursor-pointer" placeholder="Participant's name" id="add-participant">person_add</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal to restore previous event data -->
+  <div class="modal fade" id="modalRestoreData" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog rounded">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Restore unsaved data</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>It seems you have an unsaved event. <br> 
+          Do you wish to reload previous data?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnClearData">
+            <span class="material-symbols-outlined">delete</span> Nah, don't care
+          </button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btnRestoreData">
+            <span class="material-symbols-outlined">restore_page</span> Restore data
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal to configure event options -->
+  <div class="modal fade" id="modalEventSettings" tabindex="-1">
+    <div class="modal-dialog rounded">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><span class="material-symbols-outlined">build</span> Event settings</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <h5>Choose what participants are allowed to do</h5>
+            <div class="mb-3">
+              <div class="form-check form-switch fs-4">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" checked>
+                <label class="form-check-label" for="switchAddParticipant">Add participants</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-check form-switch fs-4">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant">
+                <label class="form-check-label" for="switchRemoveParticipant">Remove participants</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Ok</button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,125 @@
+{% extends 'events/layout.html' %}
+{% load static %}
+
+{% block title %}
+Participate
+{% endblock %}
+
+{% block body %}
+    {% csrf_token %}
+    <span id="item-id" hidden>{{ event.item_id }}</span>
+
+    <!-- Passing event's data to javascript in a secure way -->
+    {{ event.participants|json_script:"participants" }}
+    {{ event.dates|json_script:"dates" }}
+    <script>
+        const participants = JSON.parse(document.getElementById('participants').textContent);
+        const dates = JSON.parse(document.getElementById('dates').textContent);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'events/view_event.js' %}"></script>
+
+    <!-- Title row -->
+    <div class="row mb-3 d-flex">
+        <div class="col-8 col-lg-10 event-title-div rounded shadow d-flex">{{ event.title }}</div>
+        <div class="col-4 col-lg-2 p-0 ps-1 position-relative shadow">
+            <canvas class="event-tot-div p-2 rounded" id="totChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Event info row -->
+    <div class="row mb-3">
+        <div class="col-12 event-info-div display-5 p-3 shadow rounded">
+            {% if event.has_location %}
+                <div class="row mb-5">
+                    <div class="col ">
+                        <span class="material-symbols-outlined fs-1">location_on</span> {{ event.location }}
+                    </div>
+                </div>
+            {% endif %}
+            
+            <div class="row mb-5">
+                {% for date in event.dates %}
+                    <div class="col-12 mb-2">
+                        <span class="material-symbols-outlined fs-1">event</span> {{ date }}
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-12 col-lg-2 mb-1">
+                    <span class="material-symbols-outlined fs-1">group</span> {{ event.participants|length }}
+                </div>
+                <div class="col-12 col-lg-4 text-danger cursor-pointer" data-bs-target="#modalParticipate" data-bs-toggle="modal">
+                    Participate
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart area  -->
+    <div class="row p-0 mb-3">
+        <div class="col-12 p-0">
+            <div class="position-relative">
+                <canvas class="event-chart-div rounded shadow" id="datesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal to participate in the event and see participants -->
+    <div class="modal modal-xl fade" id="modalParticipate" tabindex="-1">
+        <div class="modal-dialog rounded">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">
+                    <span class="material-symbols-outlined">group</span>
+                     Join the event
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if event.settings.add_participant %}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <button class="btn btn-light" id="btnAddParticipant"><span class="material-symbols-outlined">person_add</span> Add participant</button>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <h4>Participants</h4>
+                    <table class="table" id="tableParticipants">
+                        <thead>
+                            <tr>
+                                <th><span class="material-symbols-outlined">person</span></th>
+                                {% for date in event.dates %}
+                                    <th>{{ date }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for participant in event.participants %}
+                                <tr>
+                                    <td class="">{{ participant.name }}</td>
+                                    {% for date in event.dates %}
+                                        <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %} 
+                                            {% if not event.edit_participant %}disabled{% endif %}></td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelAddParticipant">
+                    <span class="material-symbols-outlined">delete</span> Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="btnSaveParticipants">
+                    <span class="material-symbols-outlined">person_add</span> Join
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

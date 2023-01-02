@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="light" />
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Bootstrap CSS  -->
@@ -21,13 +21,13 @@
     
 </head>
   <body>
+    <!-- Navbar with bootstrap styling -->
+    {% include 'events/navbar.html' %}
+
     <script>
       let currentMode = localStorage.getItem("currentMode");
       setMode(currentMode);
     </script>
-
-    <!-- Navbar with bootstrap styling -->
-    {% include 'events/navbar.html' %}
 
     <!-- Body of the page  -->
     <div class="container">

@@ -85,12 +85,6 @@ nav {
     animation-play-state: running;
 }
 
-.section {
-    background-color: var(--section-bg-color);
-    margin-bottom: 1em;
-    min-height: 30em;
-}
-
 body {
     color: var(--color);
     background-color: var(--body-bg-color);
@@ -98,20 +92,58 @@ body {
     transition: background-color 2s ease;
 }
 
-input, .form-control {
+.loading-overlay{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.8);
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+  
+  .overlay-content {
+    position: relative;
+    top: 25%;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+.section {
+    background-color: var(--section-bg-color);
+    margin-bottom: 1em;
+    min-height: 30em;
+    word-wrap: break-word;
+}
+
+input, .form-control, input:focus, .form-control:focus {
     color: var(--color);
     border-color: transparent;
     background-color: var(--input-bg-color);
 }
 
-input:focus {
-    color: var(--color);
-    border-color: transparent;
-    background-color: var(--input-bg-color);
+.modal div {
+    background-color: var(--body-bg-color);
 }
 
-.form-control:focus {
-    color: var(--color);
-    border-color: transparent;
-    background-color: var(--input-bg-color);
+.event-title-div {
+    background-color: var(--section-bg-color);
+    font-size: 3rem;
+    align-items: center;
+    word-wrap: break-word;
+}
+
+.event-tot-div {
+    background-color: var(--section-bg-color);
+}
+
+.event-info-div {
+    background-color: var(--section-bg-color);
+}
+
+.event-chart-div {
+    background-color: var(--section-bg-color);
 }
