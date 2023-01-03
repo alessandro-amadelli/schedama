@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // let currentMode = localStorage.getItem("currentMode");
-    // setMode(currentMode);
+    let currentMode = localStorage.getItem("currentMode");
+    setMode(currentMode);
 
     document.querySelector("#darkModeToggle").addEventListener('click', () => {
         toggleMode();

@@ -9,7 +9,7 @@ Event editor
 
   <script src="{% static 'events/new_event.js' %}"></script>
 
-  <h1>Event editor</h1>
+  <h1>Event editor <span class="material-symbols-outlined">edit_calendar</span></h1>
   <h2>Create and customize your event</h2>
 
   {% csrf_token %}
@@ -30,7 +30,7 @@ Event editor
     </div>
 
     <!-- Event title -->
-    <div class="row m-3 mt-5 intro-animated" id="titleRow">
+    <div class="row p-3 mb-3 mt-5 intro-animated" id="titleRow">
       <div class="col">
         <h4>Enter a title</h4>
       </div>
@@ -44,7 +44,7 @@ Event editor
     </div>
 
     <!-- Event location -->
-    <div class="row m-3 intro-animated" id="locationRow">
+    <div class="row p-3 mb-3 intro-animated" id="locationRow">
       <div class="col-8">
         <h4>Choose a location</h4>
       </div>
@@ -63,7 +63,7 @@ Event editor
     </div>
 
     <!-- Event date and time -->
-    <div class="row m-3 intro-animated" id="dateRow">
+    <div class="row p-3 mb-3 intro-animated" id="dateRow">
       <div class="col">
         <h4>Set a date and time <span class="text-muted">(you can indicate more than one possible date)</span></h4>
       </div>
@@ -80,7 +80,7 @@ Event editor
     </div>
 
     <!-- Participants -->
-    <div class="row m-3 intro-animated" id="participantRow">
+    <div class="row p-3 mb-3 intro-animated" id="participantRow">
       <div class="col">
         <h4>Add participants <span class="text-muted">(Optional)</span></h4>
       </div>
@@ -88,7 +88,7 @@ Event editor
       <div class="col-8 col-md-4 mb-3">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="participantInp" maxlength="30">
-          <label for="participantInp">Name</label>
+          <label for="participantInp">Enter new participant</label>
         </div>
       </div>
       <div class="col-4 col-md-8 mb-3 fs-1 align-middle">

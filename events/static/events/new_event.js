@@ -194,6 +194,7 @@ function createNewParticipant() {
     const newParticipantInp = document.createElement("input");
     newParticipantInp.setAttribute("type","text");
     newParticipantInp.setAttribute("name","participantName");
+    newParticipantInp.setAttribute("maxlength","30");
     newParticipantInp.classList.add("form-control");
     const newParticipantLabel = document.createElement("label");
     newParticipantLabel.setAttribute("for", "participantName");

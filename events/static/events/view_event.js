@@ -4,19 +4,28 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeChartDates();
 
     // Add participant functionality
-    document.querySelector("#btnAddParticipant").onclick = () => {
-        addParticipant();
-    };
+    const btnAddParticipant = document.querySelector("#btnAddParticipant");
+    if (btnAddParticipant) {
+        btnAddParticipant.onclick = () => {
+            addParticipant();
+        };
+    }
 
     // Cancel add participant functionality
-    document.querySelector("#btnCancelAddParticipant").onclick = () => {
-        cancelAddParticipant();
-    };
+    const btnCancelAddParticipant = document.querySelector("#btnCancelAddParticipant");
+    if (btnCancelAddParticipant) {
+        btnCancelAddParticipant.onclick = () => {
+            cancelAddParticipant();
+        };
+    }
 
     // Save added participants
-    document.querySelector("#btnSaveParticipants").onclick = () => {
-        addParticipants();
-    };
+    const btnSaveParticipants = document.querySelector("#btnSaveParticipants");
+    if (btnSaveParticipants) {
+        btnSaveParticipants.onclick = () => {
+            addParticipants();
+        };
+    }
 
 });
 
@@ -34,7 +43,7 @@ function initializeChartTot() {
     let data = {
         labels: ["Confirmed","Not confirmed"],
         datasets: [{
-            backgroundColor: ["#00CF0E", "#6f7372"],
+            backgroundColor: ["#00cc99", "#6f7372"],
             data: [confirmed, notConfirmed],
             hoverOffset: 10,
             borderWidth: 0,
@@ -87,6 +96,7 @@ function initializeChartDates() {
     let evDates = dates.slice();
     let values = [];
     let noIndic = 0;
+    let color = [];
 
     evDates.forEach(d => {
         datVal = 0;
@@ -107,11 +117,21 @@ function initializeChartDates() {
     evDates.push("No Indications");
     values.push(noIndic);
 
+    // Set color of bars (with max bars colored differently)
+    values.forEach((val) => {
+        if (val == Math.max(...values)) {
+            color.push("#00cc99");
+        } else {
+            color.push("#006699");
+        }
+    });
+
     let data = {
         labels: evDates,
         datasets: [{
             label: "Preferences",
             data: values,
+            backgroundColor: color,
             barPercentage: 0.4,
             borderRadius: 5
         }],
@@ -137,7 +157,8 @@ function initializeChartDates() {
                         display: false
                     },
                     ticks: {
-                        stepSize: 1
+                        stepSize: 1,
+                        display: false
                     }
                 }
             }
@@ -151,6 +172,12 @@ function initializeChartDates() {
 }
 
 function addParticipant() {
+    // Check if new participants' name are filled before adding new one
+    let isValidated = validateAddParticipants(true);
+    if (!isValidated) {
+        return false;
+    }
+
     const tableParticipants = document.querySelector("#tableParticipants").querySelector("tbody");
     const newTr = document.createElement("tr");
     const nameTd = document.createElement("td");
@@ -180,12 +207,13 @@ function cancelAddParticipant() {
     });
 }
 
-function validateAddParticipants() {
+function validateAddParticipants(admitEmpty=false) {
     let isValidated = true;
     const newParticipants = document.querySelectorAll(".new-participant");
 
+    // If there is no new participant, return value of admitEmpty {true, false}
     if (newParticipants.length == 0) {
-        return false;
+        return admitEmpty;
     }
 
     newParticipants.forEach((participant) => {
@@ -258,8 +286,6 @@ async function callAddParticipant(addedParticipants) {
         credentials: 'include',
     };
 
-    console.log(data);
-
     await fetch('/add-participant/', initObject)
         .then(function (response) {
             return response.json();
@@ -269,7 +295,8 @@ async function callAddParticipant(addedParticipants) {
             participantAddedSuccessfully(data);
         })
         .catch(function (err) {
-            console.log("An error occurred: ", err);
+            showPageMsg("alert-danger", "An error has occurred. Please try again later.");
+            removeLoading();
         });
 }
 

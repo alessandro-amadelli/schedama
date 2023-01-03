@@ -22,7 +22,7 @@ Participate
 
     <!-- Title row -->
     <div class="row mb-3 d-flex">
-        <div class="col-8 col-lg-10 event-title-div rounded shadow d-flex">{{ event.title }}</div>
+        <div class="col-8 col-lg-10 event-title-div rounded shadow">{{ event.title }}</div>
         <div class="col-4 col-lg-2 p-0 ps-1 position-relative shadow">
             <canvas class="event-tot-div p-2 rounded" id="totChart"></canvas>
         </div>
@@ -33,7 +33,7 @@ Participate
         <div class="col-12 event-info-div display-5 p-3 shadow rounded">
             {% if event.has_location %}
                 <div class="row mb-5">
-                    <div class="col ">
+                    <div class="col">
                         <span class="material-symbols-outlined fs-1">location_on</span> {{ event.location }}
                     </div>
                 </div>
@@ -52,17 +52,17 @@ Participate
                     <span class="material-symbols-outlined fs-1">group</span> {{ event.participants|length }}
                 </div>
                 <div class="col-12 col-lg-4 text-danger cursor-pointer" data-bs-target="#modalParticipate" data-bs-toggle="modal">
-                    Participate
+                    {% if event.settings.add_participant %}Participate{% else %}Participants{% endif %}
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Chart area  -->
-    <div class="row p-0 mb-3">
-        <div class="col-12 p-0">
+    <div class="row p-0 mb-3 d-flex">
+        <div class="col-12 col-lg-6 p-0">
             <div class="position-relative">
-                <canvas class="event-chart-div rounded shadow" id="datesChart"></canvas>
+                <canvas class="event-chart-div p-2 rounded shadow" id="datesChart"></canvas>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@ Participate
                 <div class="modal-header">
                 <h4 class="modal-title">
                     <span class="material-symbols-outlined">group</span>
-                     Join the event
+                     {% if event.settings.add_participant %}Join the event{% else %}See participants{% endif %}
                 </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -99,7 +99,7 @@ Participate
                         <tbody>
                             {% for participant in event.participants %}
                                 <tr>
-                                    <td class="">{{ participant.name }}</td>
+                                    <td>{{ participant.name }}</td>
                                     {% for date in event.dates %}
                                         <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %} 
                                             {% if not event.edit_participant %}disabled{% endif %}></td>
@@ -110,12 +110,16 @@ Participate
                     </table>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelAddParticipant">
-                    <span class="material-symbols-outlined">delete</span> Cancel
-                </button>
-                <button type="button" class="btn btn-primary" id="btnSaveParticipants">
-                    <span class="material-symbols-outlined">person_add</span> Join
-                </button>
+                    {% if event.settings.add_participant %}
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelAddParticipant">
+                            <span class="material-symbols-outlined">delete</span> Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnSaveParticipants">
+                            <span class="material-symbols-outlined">person_add</span> Join
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {% endif %}
                 </div>
             </div>
         </div>

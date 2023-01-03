@@ -1,0 +1,159 @@
+{% extends 'events/layout.html' %}
+{% load static %}
+
+{% block title %}
+Event administration
+{% endblock %}
+
+{% block body %}
+    <script src="{% static 'events/edit_event.js' %}"></script>
+
+    <h1>Event administration <span class="material-symbols-outlined">admin_panel_settings</span></h1>
+    <h2>Administrate your event</h2>
+
+    {% csrf_token %}
+    <input type="text" id="item-id" value="{{ event.item_id }}" hidden>
+    <input type="text" id="admin-key" value="{{ event.admin_key }}" hidden>
+
+    <div class="section p-2 shadow rounded">
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-light float-start" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
+                <span class="material-symbols-outlined">settings</span>
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn btn-success float-end visually-hidden" id="btnSaveEvent" disabled>
+                <span class="material-symbols-outlined">save</span>
+                Save
+                </button>
+            </div>
+        </div>
+      
+        <!-- Event title -->
+        <div class="row m-3 mt-5" id="titleRow">
+            <div class="col">
+                <h4>Event title</h4>
+            </div>
+            <div class="w-100"></div>
+            <div class="col">
+                <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="eventTitle" placeholder="Event title" value="{{ event.title }}" maxlength="70">
+                <label for="eventTitle">Event title</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event location -->
+        <div class="row m-3" id="locationRow">
+            <div class="col-8">
+                <h4>Event location</h4>
+            </div>
+            <div class="col-4">
+                <div class="form-check form-switch fs-4">
+                    <input class="form-check-input" type="checkbox" role="switch" id="checkEventLocation" {% if event.has_location %}checked{% endif %}>
+                </div> 
+            </div>
+            <div class="w-100"></div>
+            <div class="col" id="locationCol">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="eventLocation" value="{{ event.location }}" placeholder="Event location" maxlength="70">
+                    <label for="eventLocation">Event location</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event date and time -->
+        <div class="row m-3" id="dateRow">
+            <div class="col">
+                <h4>Date and time</h4>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-8 col-md-4 mb-3">
+                <div class="form-floating mb-3">
+                    <input type="datetime-local" class="form-control" id="dateInp" min="{% now 'Y-m-d\TH:i' %}">
+                    <label for="dateInp">Event date</label>
+                </div>
+            </div>
+            <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
+                <span class="material-symbols-outlined fs-1 cursor-pointer" id="add-date">add_circle</span>
+            </div>
+            {% for date in event.dates %}
+                <div class="w-100"></div>
+                <div class="col-8 col-md-4 mb-3">
+                    <div class="form-floating mb-3">
+                        <input type="datetime-local" class="form-control" name="eventDate" min="{% now 'Y-m-d\TH:i' %}" value="{{ date }}">
+                        <label for="eventDate">Event date</label>
+                    </div>
+                </div>
+                <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
+                    <span class="material-symbols-outlined fs-1 cursor-pointer remove-date text-danger">delete</span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Participants -->
+        <div class="row p-3 mb-3">
+            <h4>Participants (<span id="participantsNum">{{ event.participants|length }}</span>)</h4>
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><span class="material-symbols-outlined">person</span></th>
+                            {% for date in event.dates %}
+                                <th>{{ date }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for participant in event.participants %}
+                            <tr>
+                                <td>
+                                    <div class="col-8"><input type="text" class="form-control" name="participantName" value="{{ participant.name }}"></div>
+                                    <div class="col-4"></div>
+                                </td>
+                                {% for date in event.dates %}
+                                    <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %}></td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal to configure event options -->
+    <div class="modal fade" id="modalEventSettings" tabindex="-1">
+        <div class="modal-dialog rounded">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span class="material-symbols-outlined">build</span> Event settings</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <h5>Choose what participants are allowed to do</h5>
+                <div class="mb-3">
+                    <div class="form-check form-switch fs-4">
+                    <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" {% if event.settings.add_participant %}checked{% endif %}>
+                    <label class="form-check-label" for="switchAddParticipant">Add participants</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check form-switch fs-4">
+                    <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant" {% if event.settings.remove_participant %}checked{% endif %}>
+                    <label class="form-check-label" for="switchRemoveParticipant">Remove participants</label>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Ok</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

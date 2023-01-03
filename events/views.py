@@ -6,6 +6,7 @@ import json
 import schedama.dynamodb_ops as dynamodb_ops
 
 def get_event_data(item_id, item_type="event"):
+    # TO-DO: implement cache-first
     return dynamodb_ops.select_record_by_id(item_id, item_type)
 
 def index(request):
@@ -75,7 +76,7 @@ def add_participant_view(request):
     request_data = json.loads(request.body)
     item_id = request_data.get("item_id")
     added_participants = request_data.get("participants")
-    admin_key = request_data.get("admin_key")
+    admin_key = request_data.get("admin_key", None)
 
     # Event data retrieved from database
     event_data = get_event_data(item_id, "event")
@@ -111,3 +112,72 @@ def add_participant_view(request):
 
     return JsonResponse(response)
 
+def edit_event_view(request, eventID):
+    admin_key = request.GET.get('k','')
+    
+    ### CHECK AUTHORIZATION ###
+    # Check if the admin key (URL parameter k) is present
+    if admin_key == '':
+        return redirect("participate_view", eventID)
+
+    # Get event data (only if the admin key is present)
+    event_data = get_event_data(eventID, "event")
+
+    # Check if the admin key provided as URL parameter correspond with the one associated with the event
+    if admin_key != event_data["admin_key"]:
+        return redirect("index")
+    ### ###
+
+    # All checks are passed
+    context = {
+        "event": event_data
+    }
+
+    return render(request, "events/edit_event.html", context)
+
+def update_event_view(request):
+    if request.method != 'POST':
+        return redirect("index")
+
+    #Retrieve request data
+    request_data = json.loads(request.body)
+    item_id = request_data.get("item_id", "")
+    admin_key = request_data.get("admin_key", "")
+
+    # Retrieve event's data
+    event_data = get_event_data(item_id, "event")
+    if event_data == []:
+        response = {
+            "status": "ERROR",
+            "description": "An error has occurred."
+        }
+        return JsonResponse(response)
+
+    event_settings = event_data["settings"]
+
+
+    ### CHECK AUTHORIZATION ###
+    # Check user's and event authorizations
+    is_admin = admin_key == event_data["admin_key"]
+    add_participant = event_settings.get("add_participant", False)
+    remove_participant = event_settings.get("remove_participant", False)
+    ### ###
+
+    # Update ADMIN fields of the event
+    if is_admin:
+        event_data["title"] = request_data.get("title", event_data["title"])
+        event_data["has_location"] = request_data.get("has_location", False)
+        event_data["location"] = request_data.get("location", "")
+        event_data["dates"] = request_data.get("dates", [])
+        event_data["participants"] = request_data.get("participants", [])
+        event_data["settings"]["add_participant"] = request_data["settings"].get("add_participant", False)
+        event_data["settings"]["remove_participant"] = request_data["settings"].get("remove_participant", False)
+    
+    # Saving new event's info
+    dynamodb_ops.insert_record(event_data)
+
+    response = {
+        "status": "OK"
+    }
+
+    return JsonResponse(response)
