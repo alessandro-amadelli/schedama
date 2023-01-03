@@ -21,38 +21,45 @@ Participate
     <script src="{% static 'events/view_event.js' %}"></script>
 
     <!-- Title row -->
-    <div class="row mb-3 d-flex">
-        <div class="col-8 col-lg-10 event-title-div rounded shadow">{{ event.title }}</div>
-        <div class="col-4 col-lg-2 p-0 ps-1 position-relative shadow">
-            <canvas class="event-tot-div p-2 rounded" id="totChart"></canvas>
-        </div>
+    <div class="row mb-3 justify-content-center">
+        <div class="col-12 event-title-div text-center rounded shadow">{{ event.title }}</div>
     </div>
 
     <!-- Event info row -->
-    <div class="row mb-3">
+    <div class="row mb-4">
         <div class="col-12 event-info-div display-5 p-3 shadow rounded">
             {% if event.has_location %}
-                <div class="row mb-5">
+                <div class="row mb-4">
                     <div class="col">
-                        <span class="material-symbols-outlined fs-1">location_on</span> {{ event.location }}
+                        <span class="material-symbols-outlined fs-1 text-danger">location_on</span> 
+                        <a href="" id="eventLocation" target="_blank">{{ event.location }}</a>
                     </div>
                 </div>
             {% endif %}
             
-            <div class="row mb-5">
+            <div class="row mb-4">
                 {% for date in event.dates %}
                     <div class="col-12 mb-2">
-                        <span class="material-symbols-outlined fs-1">event</span> {{ date }}
+                        <span class="material-symbols-outlined fs-1 text-success">event</span> {{ date }}
                     </div>
                 {% endfor %}
             </div>
             
-            <div class="row mb-5">
-                <div class="col-12 col-lg-2 mb-1">
-                    <span class="material-symbols-outlined fs-1">group</span> {{ event.participants|length }}
+            <div class="row mb-4">
+                <div class="col mb-4">
+                    <span class="material-symbols-outlined fs-1 text-warning">group</span> {{ event.participants|length }}
                 </div>
-                <div class="col-12 col-lg-4 text-danger cursor-pointer" data-bs-target="#modalParticipate" data-bs-toggle="modal">
-                    {% if event.settings.add_participant %}Participate{% else %}Participants{% endif %}
+                <div class="w-100"></div>
+                <div class="col">
+                    <button type="button" class="btn btn-light fs-1" data-bs-target="#modalParticipate" data-bs-toggle="modal">
+                        {% if event.settings.add_participant %}
+                            <span class="material-symbols-outlined fs-1">person_add</span>
+                            Participate
+                        {% else %}
+                            <span class="material-symbols-outlined fs-1">group</span>
+                            Participants
+                        {% endif %}
+                    </button>
                 </div>
             </div>
         </div>
@@ -60,9 +67,14 @@ Participate
 
     <!-- Chart area  -->
     <div class="row p-0 mb-3 d-flex">
-        <div class="col-12 col-lg-6 p-0">
-            <div class="position-relative">
-                <canvas class="event-chart-div p-2 rounded shadow" id="datesChart"></canvas>
+        <div class="col-12 col-lg-4 mb-3">
+            <div class="position-relative shadow rounded">
+                <canvas class="event-tot-div p-2 rounded" id="totChart"></canvas>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 mb-3">
+            <div class="position-relative shadow rounded">
+                <canvas class="event-chart-div p-2 rounded " id="datesChart"></canvas>
             </div>
         </div>
     </div>
@@ -86,28 +98,31 @@ Participate
                             </div>
                         </div>
                     {% endif %}
-                    <h4>Participants</h4>
-                    <table class="table" id="tableParticipants">
-                        <thead>
-                            <tr>
-                                <th><span class="material-symbols-outlined">person</span></th>
-                                {% for date in event.dates %}
-                                    <th>{{ date }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for participant in event.participants %}
+                    <div class="row overflow-auto">
+                        <h4>Participants</h4>
+                        <table class="table table-striped" id="tableParticipants">
+                            <thead>
                                 <tr>
-                                    <td>{{ participant.name }}</td>
+                                    <th><span class="material-symbols-outlined">person</span></th>
                                     {% for date in event.dates %}
-                                        <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %} 
-                                            {% if not event.edit_participant %}disabled{% endif %}></td>
+                                        <th>{{ date }}</th>
                                     {% endfor %}
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for participant in event.participants %}
+                                    <tr>
+                                        <td>{{ participant.name }}</td>
+                                        {% for date in event.dates %}
+                                            <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %} 
+                                                {% if not event.edit_participant %}disabled{% endif %}></td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     {% if event.settings.add_participant %}

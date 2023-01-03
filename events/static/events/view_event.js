@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    const locationLink = document.querySelector("#eventLocation");
+    if (locationLink) {
+        locationLink.setAttribute("href", "https://www.google.com/maps/search/?api=1&query=" + encodeURI(locationLink.innerText));
+    }
+
 });
 
 function initializeChartTot() {
@@ -55,7 +60,7 @@ function initializeChartTot() {
         type: 'doughnut',
         data,
         options: {
-            cutout: "85%",
+            cutout: "88%",
             plugins: {
                 legend: {
                 display: false

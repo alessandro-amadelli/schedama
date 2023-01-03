@@ -141,6 +141,7 @@ def update_event_view(request):
 
     #Retrieve request data
     request_data = json.loads(request.body)
+    print(request_data)
     item_id = request_data.get("item_id", "")
     admin_key = request_data.get("admin_key", "")
 
@@ -154,7 +155,6 @@ def update_event_view(request):
         return JsonResponse(response)
 
     event_settings = event_data["settings"]
-
 
     ### CHECK AUTHORIZATION ###
     # Check user's and event authorizations

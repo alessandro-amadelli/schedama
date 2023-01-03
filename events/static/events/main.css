@@ -88,6 +88,9 @@ nav {
 body {
     color: var(--color);
     background-color: var(--body-bg-color);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(11,11,172,1) 35%, rgba(0,212,255,1) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: .5em;
     transition: background-color 2s ease;
 }

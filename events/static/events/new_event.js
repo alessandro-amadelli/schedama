@@ -459,4 +459,6 @@ function eventCreatedSuccessfully(data) {
     section.appendChild(div2);
     div2.appendChild(adminURL);
 
+    // Remove "unsavedEvent" from local storage
+    localStorage.removeItem("unsavedEvent");
 }
