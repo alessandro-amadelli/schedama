@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
 
 import json
 
@@ -181,3 +181,7 @@ def update_event_view(request):
     }
 
     return JsonResponse(response)
+
+def error404_view(request, exception):
+    
+    return render(request, "events/error404.html")
