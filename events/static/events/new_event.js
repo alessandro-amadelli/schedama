@@ -291,7 +291,7 @@ function restorePreviousData() {
 
     // Event settings
     document.querySelector("#switchAddParticipant").checked = unsavedEvent.settings.add_participant;
-    document.querySelector("#switchRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
+    // document.querySelector("#switchRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
 
     // Event title
     document.querySelector("#eventTitle").value = unsavedEvent.title;
@@ -330,7 +330,7 @@ function saveLocally() {
 
     // Settings
     const addParticipant = document.querySelector("#switchAddParticipant").checked;
-    const removeParticipant = document.querySelector("#switchRemoveParticipant").checked;
+    // const removeParticipant = document.querySelector("#switchRemoveParticipant").checked;
     
     // Populating date list
     let dateList = [];
@@ -356,7 +356,7 @@ function saveLocally() {
         participants: participantList,
         settings: {
             add_participant: addParticipant,
-            remove_participant: removeParticipant
+            // remove_participant: removeParticipant
         }
     }
 
@@ -396,6 +396,51 @@ async function sendEventToServer() {
         });
 }
 
+function generateShareBtn(contentURL) {
+    const text = "Hey, check out this amazing event on Schedama.com!";
+    const btnDiv = document.createElement("div");
+    btnDiv.classList.add("btn-group");
+    
+    const btn = document.createElement("button");
+    btn.setAttribute("type","button");
+    btn.setAttribute("data-bs-toggle","dropdown");
+    btn.setAttribute("aria-expanded","false");
+    btn.classList.add("btn","btn-secondary", "dropdown-toggle");
+    btn.innerHTML = `<span class="material-symbols-outlined">share</span>`;
+
+    const btnUl = document.createElement("ul");
+    btnUl.classList.add("dropdown-menu");
+    
+    const telegramLi = document.createElement("li");
+    telegramLi.innerHTML = `<a class="dropdown-item" href="https://telegram.me/share/url?url=` + contentURL + `&text=` + text + `" target="_blank"><span class="material-symbols-outlined">send</span> Telegram </a>`;
+    const whatsappLi = document.createElement("li");
+    whatsappLi.innerHTML = `<a class="dropdown-item" href="https://api.whatsapp.com/send?text=` + text + ` ` + contentURL + `" data-action="share/whatsapp/share" target="_blank"><span class="material-symbols-outlined">chat</span> Whatsapp </a>`;
+    const emailLi = document.createElement("li");
+    emailLi.innerHTML = `<a class="dropdown-item" href="mailto:?subject='Schedama Event'&body=` + text + ` ` + contentURL + `" target="_blank"><span class="material-symbols-outlined">email</span> e-mail</a>`;
+    const dividerLi = document.createElement("li");
+    dividerLi.innerHTML = `<hr class="dropdown-divider">`;
+    const copyLi = document.createElement("li");
+    copyLi.innerHTML = `<a class="dropdown-item" href=""><span class="material-symbols-outlined">content_copy</span> Copy to clipboard</a>`;
+    copyLi.querySelector("a").addEventListener("click", (e) => {
+        const copyContent = async () => {
+            await navigator.clipboard.writeText(contentURL);
+        }
+        copyContent();
+        e.preventDefault();
+    }, false);
+
+    // Append elements
+    btnDiv.appendChild(btn);
+    btnDiv.appendChild(btnUl);
+    btnUl.appendChild(telegramLi);
+    btnUl.appendChild(whatsappLi);
+    btnUl.appendChild(emailLi);
+    btnUl.appendChild(dividerLi);
+    btnUl.appendChild(copyLi);
+
+    return btnDiv
+}
+
 function eventCreatedSuccessfully(data) {
     // Saving title of the event (to display it after)
     const eventTitle = document.querySelector("#eventTitle").value;
@@ -421,43 +466,64 @@ function eventCreatedSuccessfully(data) {
     const displayPartURL = document.createElement("h3");
     displayPartURL.innerText = "Participation URL";
     displayPartURL.setAttribute("class", "text-center");
-    const div1 = document.createElement("div");
-    div1.setAttribute("class", "w-100 mb-5 text-center display-6");
+    const partRow = document.createElement("div");
+    partRow.classList.add("row");
+    const partCol1 = document.createElement("div");
+    partCol1.setAttribute("class", "col-12 mb-5 text-center display-6");
     const participantURL = document.createElement("strong");
     participantURL.innerText = window.location.href.replace("create-event/", "participate/"+itemID);
     participantURL.setAttribute("id", "partURL");
+    const sharePartCol = document.createElement("div");
+    sharePartCol.classList.add("col-12", "text-center");
+    const btnSharePart = generateShareBtn(participantURL.innerText);
 
     // Display administration URL
     const displayAdminURL = document.createElement("h3");
     displayAdminURL.innerText = "Administration URL";
     displayAdminURL.setAttribute("class", "text-center");
-    const div2 = document.createElement("div");
-    div2.setAttribute("class", "w-100 mb-5 text-center display-6");
+    const admRow = document.createElement("div");
+    admRow.classList.add("row");
+    const admCol1 = document.createElement("div");
+    admCol1.setAttribute("class", "col-12 mb-5 text-center display-6");
     const adminURL = document.createElement("strong");
     adminURL.innerText = window.location.href.replace("create-event/", "edit-event/"+itemID+"?k="+adminKey);
     adminURL.setAttribute("id", "adminURL");
+    const shareAdmCol = document.createElement("div");
+    shareAdmCol.classList.add("col-12", "text-center");
+    const btnShareAdm = generateShareBtn(adminURL.innerText);
 
     // Warning instructing user to save URLs
-    const divw = document.createElement("div");
-    divw.setAttribute("class", "w-100 text-center mb-2");
+    const warnCol = document.createElement("div");
+    warnCol.setAttribute("class", "col-12 text-center mb-2");
     const warn = document.createElement("strong");
     warn.innerHTML = `<span class="material-symbols-outlined">warning</span> 
     IMPORTANT: before leaving the page make sure to save this link, it's the only way you'll be able to administrate your event. 
-    <span class="material-symbols-outlined">warning</span>`
-    warn.setAttribute("class", "text-danger")
+    <span class="material-symbols-outlined">warning</span>`;
+    warn.setAttribute("class", "text-danger");
+
+    // hr
+    newHr = document.createElement("hr");
 
     // Append elements
     section.appendChild(displayName);
 
     section.appendChild(displayPartURL);
-    section.appendChild(div1);
-    div1.appendChild(participantURL);
+    section.appendChild(partRow);
+    partRow.appendChild(partCol1);
+    partCol1.appendChild(participantURL);
+    partRow.appendChild(sharePartCol);
+    sharePartCol.appendChild(btnSharePart);
+
+    section.appendChild(newHr);
 
     section.appendChild(displayAdminURL);
-    section.appendChild(divw);
-    divw.appendChild(warn);
-    section.appendChild(div2);
-    div2.appendChild(adminURL);
+    section.appendChild(admRow);
+    admRow.appendChild(warnCol);
+    warnCol.appendChild(warn);
+    admRow.appendChild(admCol1);
+    admCol1.appendChild(adminURL);
+    admRow.appendChild(shareAdmCol);
+    shareAdmCol.appendChild(btnShareAdm);
 
     // Remove "unsavedEvent" from local storage
     localStorage.removeItem("unsavedEvent");

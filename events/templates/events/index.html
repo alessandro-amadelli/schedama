@@ -1,14 +1,67 @@
 {% extends 'events/layout.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-index
+Schedama.com
 {% endblock %}
 
 {% block body %}
-  <h1>Welcome to Schedama</h1>
-  <h2>Create and share your important events</h2>
+  <h1 class="entering">{% translate "Welcome to Schedama" %}</h1>
+  <h2 class="entering-1">{% translate "Create and share your important events" %}</h2>
 
-  <p class="lead">Schedama is a quick and intuitive way to create an event, share it and agree on a date and time.</p>
+  <p class="lead entering-2">{% translate "Schedama is a quick and intuitive way to create an event, share it and agree on a date and time." %}</p>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 my-5">
+
+    <div class="col mb-3 d-flex">
+      <div class="card rounded appearing-1">
+        <div class="card-body">
+          <h2 class="card-title text-center">{% translate "Create an event" %}</h2>
+          <p class="card-text">{% translate "Easily create a new event by clicking on <strong>Create event</strong>" %}</p>
+        </div>
+        <div class="card-footer text-center">
+          <h1>1</h1>
+        </div>
+      </div>
+    </div>
+      
+    <div class="col mb-3 d-flex">
+      <div class="card rounded appearing-2">
+        <div class="card-body">
+          <h2 class="card-title text-center">{% translate "Save event links" %}</h2>
+          <p class="card-text">{% translate "After event creation, 2 links are generated: <strong>Participation URL</strong> and <strong>Administration URL</strong>" %}</p>
+        </div>
+        <div class="card-footer text-center">
+          <h1>2</h1>
+        </div>
+      </div>
+    </div>
+      
+    <div class="col mb-3 d-flex">
+      <div class="card rounded appearing-3">
+        <div class="card-body">
+          <h2 class="card-title text-center">{% translate "Share event" %}</h2>
+          <p class="card-text">{% translate "Share the event with whoever you like by sending them the <strong>Participation URL</strong>" %}</p>
+        </div>
+        <div class="card-footer text-center">
+          <h1>3</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mb-3 d-flex">
+      <div class="card rounded appearing-4">
+        <div class="card-body">
+          <h2 class="card-title text-center">{% translate "Administrate your event" %}</h2>
+          <p class="card-text">{% translate "You can fully manage your event by visiting the <strong>Administration URL</strong>." %}</p>
+        </div>
+        <div class="card-footer text-center">
+          <h1>4</h1>
+        </div>
+      </div>
+    </div>
+  
+  </div>
 
 {% endblock %}

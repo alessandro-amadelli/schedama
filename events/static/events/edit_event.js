@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener on every input field to enable btn to save event info
     document.querySelectorAll("input").forEach((inp) => {
-        inp.addEventListener("change", () => {
-            enableSave();
-        });
+        // Ignore input inside modal (managed differently)
+        if (inp.getAttribute("id") != "newPartName") {
+            inp.addEventListener("change", () => {
+                enableSave();
+            });
+        }
     });
     
     // Button to add a new date to the event
@@ -22,18 +25,35 @@ document.addEventListener('DOMContentLoaded', () => {
             w100.remove();
             dateDiv.remove();
             delDiv.remove();
+
+            enableSave();
         };
     });
 
     // Initialize remove participant buttons
     document.querySelectorAll(".remove-participant").forEach((btn) => {
         btn.onclick = () => {
-            btn.parentElement.parentElement.parentElement.parentElement.remove();
-            enableSave();
+            removeParticipantRow(btn);
         };
     });
 
+    // Initialize button do add participant
+    document.querySelector("#btnOpenAddPartModal").onclick = () => {
+        prepareModalAddPart();
+    };
+
+    // Initialize modal add participant confirm button
+    document.querySelector("#btnConfirmAdd").onclick = () => {
+        addParticipantToTable();
+    };
+
 });
+
+function removeParticipantRow(btn) {
+    btn.parentElement.parentElement.parentElement.parentElement.remove();
+    updateParticipantsNum();
+    enableSave();
+}
 
 function enableSave() {
     const btnSave = document.querySelector("#btnSaveEvent");
@@ -114,6 +134,115 @@ function setInvalid(element, isInvalid) {
     }
 }
 
+function updateParticipantsNum() {
+    document.querySelector("#participantsNum").innerText = document.querySelectorAll("input[name=participantName]").length;
+}
+
+function prepareModalAddPart() {
+    const modalAddPart = document.querySelector("#modalAddParticipant");
+    const partName = modalAddPart.querySelector("#newPartName");
+    
+    // Empty input with participant name
+    partName.value = "";
+
+    // Removing old dates
+    modalAddPart.querySelectorAll(".modal-date").forEach((date) => {
+        date.remove();
+    });
+
+    // Adding date switch for each available date to modal
+    document.querySelectorAll("input[name=eventDate]").forEach((date) => {
+        const newDiv = document.createElement("div");
+        newDiv.classList.add("form-check","form-switch", "modal-date");
+
+        const newDateSwitch= document.createElement("input");
+        newDateSwitch.setAttribute("type", "checkbox");
+        newDateSwitch.setAttribute("role", "switch");
+        newDateSwitch.setAttribute("value", date.value);
+        newDateSwitch.setAttribute("name", "switchAddParticipant");
+        newDateSwitch.classList.add("form-check-input");
+
+        const newLabel = document.createElement("label");
+        newLabel.setAttribute("for","switchAddParticipant");
+        newLabel.classList.add("form-check-label");
+        newLabel.innerText = date.value;
+
+        // Append new elements
+        newDiv.appendChild(newDateSwitch);
+        newDiv.appendChild(newLabel);
+        modalAddPart.querySelector(".modal-body").appendChild(newDiv);
+    });
+}
+
+function addParticipantToTable() {
+    const modalAddPart = document.querySelector("#modalAddParticipant");
+    const partName = modalAddPart.querySelector("#newPartName");
+    if (partName.value == "") {
+        setInvalid(partName, true);
+        return false;
+    }
+    
+    setInvalid(partName, false);
+
+    const newTr = document.createElement("tr");
+
+    const newTdInp = document.createElement("td");
+    newTdInp.style.minWidth = "20em";
+
+    const newRow = document.createElement("div");
+    newRow.classList.add("row");
+
+    const newCol1 = document.createElement("div");
+    newCol1.classList.add("col-1");
+
+    // Button to remove participant
+    const newSpan = document.createElement("span");
+    newSpan.classList.add("material-symbols-outlined","cursor-pointer","remove-participant","text-danger");
+    newSpan.innerText = "delete";
+    newSpan.onclick = () => {
+        removeParticipantRow(newSpan);
+    };
+
+    const newCol2 = document.createElement("div");
+    newCol2.classList.add("col-11");
+
+    const newInp = document.createElement("input");
+    newInp.setAttribute("type","text");
+    newInp.setAttribute("name","participantName");
+    newInp.setAttribute("value", partName.value);
+    newInp.setAttribute("maxlength","30");
+    newInp.classList.add("form-control");
+
+    // Append elements
+    document.querySelector("#participantTable").querySelector("tbody").prepend(newTr);
+    newTr.appendChild(newTdInp);
+    newTdInp.appendChild(newRow);
+    newRow.appendChild(newCol1);
+    newCol1.appendChild(newSpan);
+    newRow.appendChild(newCol2);
+    newCol2.appendChild(newInp);
+
+    // Create date TDs and append to table
+    modalAddPart.querySelectorAll("input[type=checkbox]").forEach((check) => {
+        const newDateTd = document.createElement("td");
+
+        const newDateCheck = document.createElement("input");
+        newDateCheck.setAttribute("type","checkbox");
+        newDateCheck.setAttribute("value", check.value);
+        newDateCheck.classList.add("form-check-input");
+        newDateCheck.checked = check.checked;
+
+        // Append elements
+        newDateTd.appendChild(newDateCheck);
+        newTr.appendChild(newDateTd);
+    })
+
+    // Close modal
+    modalAddPart.querySelector("[data-bs-dismiss=modal]").click();
+
+    enableSave();
+}
+
 function getEventData() {
     const eventTitle = document.querySelector("#eventTitle").value;
     const hasLocation = document.querySelector("#checkEventLocation").checked;
@@ -141,7 +270,7 @@ function getEventData() {
     });
 
     const eventAddParticipant = document.querySelector("#switchAddParticipant").checked;
-    const eventRemoveParticipant = document.querySelector("#switchRemoveParticipant").checked;
+    // const eventRemoveParticipant = document.querySelector("#switchRemoveParticipant").checked;
 
     const itemID = document.querySelector("#item-id").value;
     const adminKey = document.querySelector("#admin-key").value;
@@ -156,7 +285,7 @@ function getEventData() {
         participants: eventParticipants,
         settings: {
             add_participant: eventAddParticipant,
-            remove_participant: eventRemoveParticipant
+            // remove_participant: eventRemoveParticipant
         }
     };
 

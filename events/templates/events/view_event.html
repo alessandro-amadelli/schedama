@@ -1,5 +1,6 @@
 {% extends 'events/layout.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
 Participate
@@ -66,15 +67,15 @@ Participate
     </div>
 
     <!-- Chart area  -->
-    <div class="row p-0 mb-3 d-flex">
-        <div class="col-12 col-lg-4 mb-3">
-            <div class="position-relative shadow rounded">
-                <canvas class="event-tot-div p-2 rounded" id="totChart"></canvas>
+    <div class="row p-0 mb-3 event-chart-div shadow rounded">
+        <div class="col-12 col-lg-4 p-0 mb-3">
+            <div class="position-relative p-4">
+                <canvas id="totChart"></canvas>
             </div>
         </div>
-        <div class="col-12 col-lg-8 mb-3">
-            <div class="position-relative shadow rounded">
-                <canvas class="event-chart-div p-2 rounded " id="datesChart"></canvas>
+        <div class="col-12 col-lg-8 p-0 mb-3">
+            <div class="position-relative p-2">
+                <canvas id="datesChart"></canvas>
             </div>
         </div>
     </div>

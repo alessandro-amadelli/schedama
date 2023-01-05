@@ -1,16 +1,17 @@
 {% extends 'events/layout.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-Event editor
+{% translate "Event editor" %}
 {% endblock %}
 
 {% block body %}
 
   <script src="{% static 'events/new_event.js' %}"></script>
 
-  <h1>Event editor <span class="material-symbols-outlined">edit_calendar</span></h1>
-  <h2>Create and customize your event</h2>
+  <h1>{% translate "Event editor" %} <span class="material-symbols-outlined">edit_calendar</span></h1>
+  <h2>{% translate "Create and customize your event" %}</h2>
 
   {% csrf_token %}
 
@@ -24,7 +25,7 @@ Event editor
       <div class="col-6">
         <button type="button" class="btn btn-success float-end visually-hidden" id="btnSaveEvent" disabled>
           <span class="material-symbols-outlined">save</span>
-          Save
+          {% translate "Save" %}
         </button>
       </div>
     </div>
@@ -32,13 +33,13 @@ Event editor
     <!-- Event title -->
     <div class="row p-3 mb-3 mt-5 intro-animated" id="titleRow">
       <div class="col">
-        <h4>Enter a title</h4>
+        <h4>{% translate "Enter a title" %}</h4>
       </div>
       <div class="w-100"></div>
       <div class="col">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="eventTitle" placeholder="Title for your event..." maxlength="70">
-          <label for="eventTitle">Event title</label>
+          <label for="eventTitle">{% translate "Event title" %}</label>
         </div>
       </div>
     </div>
@@ -46,7 +47,7 @@ Event editor
     <!-- Event location -->
     <div class="row p-3 mb-3 intro-animated" id="locationRow">
       <div class="col-8">
-        <h4>Choose a location</h4>
+        <h4>{% translate "Choose a location" %}</h4>
       </div>
       <div class="col-4">
         <div class="form-check form-switch fs-4">
@@ -57,7 +58,7 @@ Event editor
       <div class="col" id="locationCol">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="eventLocation" placeholder="Location of your event" maxlength="70">
-          <label for="eventLocation">Event location</label>
+          <label for="eventLocation">{% translate "Event location" %}</label>
         </div>
       </div>
     </div>
@@ -65,13 +66,13 @@ Event editor
     <!-- Event date and time -->
     <div class="row p-3 mb-3 intro-animated" id="dateRow">
       <div class="col">
-        <h4>Set a date and time <span class="text-muted">(you can indicate more than one possible date)</span></h4>
+        <h4>{% translate "Set a date and time" %} <span class="text-muted">({% translate "you can indicate more than one possible date" %})</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col-8 col-md-4 mb-3">
         <div class="form-floating mb-3">
           <input type="datetime-local" class="form-control" id="dateInp" min="{% now 'Y-m-d\TH:i' %}">
-          <label for="dateInp">Event date</label>
+          <label for="dateInp">{% translate "Event date" %}</label>
         </div>
       </div>
       <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
@@ -82,13 +83,13 @@ Event editor
     <!-- Participants -->
     <div class="row p-3 mb-3 intro-animated" id="participantRow">
       <div class="col">
-        <h4>Add participants <span class="text-muted">(Optional)</span></h4>
+        <h4>{% translate "Add participants" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col-8 col-md-4 mb-3">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="participantInp" maxlength="30">
-          <label for="participantInp">Enter new participant</label>
+          <label for="participantInp">{% translate "Enter new participant" %}</label>
         </div>
       </div>
       <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
@@ -103,19 +104,19 @@ Event editor
     <div class="modal-dialog rounded">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Restore unsaved data</h4>
+          <h4 class="modal-title">{% translate "Restore unsaved data" %}</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>It seems you have an unsaved event. <br> 
-          Do you wish to reload previous data?</p>
+          <p>{% translate "It seems you have an unsaved event." %} <br> 
+          {% translate "Do you wish to reload previous data?" %}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnClearData">
-            <span class="material-symbols-outlined">delete</span> Nah, don't care
+            <span class="material-symbols-outlined">delete</span> {% translate "Nah, don't care" %}
           </button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btnRestoreData">
-            <span class="material-symbols-outlined">restore_page</span> Restore data
+            <span class="material-symbols-outlined">restore_page</span> {% translate "Restore data" %}
           </button>
         </div>
       </div>
@@ -127,24 +128,26 @@ Event editor
     <div class="modal-dialog rounded">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title"><span class="material-symbols-outlined">build</span> Event settings</h4>
+          <h4 class="modal-title"><span class="material-symbols-outlined">build</span> {% translate "Event settings" %}</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form>
-            <h5>Choose what participants are allowed to do</h5>
+            <h5>{% translate "Choose what participants are allowed to do" %}</h5>
             <div class="mb-3">
               <div class="form-check form-switch fs-4">
                 <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" checked>
-                <label class="form-check-label" for="switchAddParticipant">Add participants</label>
+                <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
               </div>
             </div>
+            {% comment %}
             <div class="mb-3">
               <div class="form-check form-switch fs-4">
                 <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant">
-                <label class="form-check-label" for="switchRemoveParticipant">Remove participants</label>
+                <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
               </div>
             </div>
+            {% endcomment %}
           </form>
         </div>
         <div class="modal-footer">

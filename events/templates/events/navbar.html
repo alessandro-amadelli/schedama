@@ -1,3 +1,4 @@
+{% load i18n %}
 <nav class="navbar navbar-light navbar-expand-md shadow p-2 mb-2 rounded">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">Schedama</a>
@@ -10,10 +11,10 @@
                     <span class="material-symbols-outlined">home</span>Home
                 </a>
                 <a class="nav-link {% if request.resolver_match.url_name == 'new_event_view' %}active{% endif %}" href="{% url 'new_event_view' %}">
-                    <span class="material-symbols-outlined">edit_calendar</span>Create event
+                    <span class="material-symbols-outlined">edit_calendar</span>{% translate "Create event" %}
                 </a>
                 <a class="nav-link {% if request.resolver_match.url_name == 'about_us_view' %}active{% endif %}" href="{% url 'about_us_view' %}">
-                    <span class="material-symbols-outlined">info</span>About us
+                    <span class="material-symbols-outlined">info</span>{% translate "About us" %}
                 </a>
                 <div class="nav-link cursor-pointer" id="darkModeToggle" aria-label="Dark mode toggle">
                     <span class="material-symbols-outlined fs-2 float-end me-0">dark_mode</span>
