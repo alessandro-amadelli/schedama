@@ -314,7 +314,6 @@ async function sendUpdateToServer() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             eventUpdated(data);
         })
         .catch(function (err) {

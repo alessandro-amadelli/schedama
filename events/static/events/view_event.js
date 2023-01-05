@@ -296,7 +296,6 @@ async function callAddParticipant(addedParticipants) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             participantAddedSuccessfully(data);
         })
         .catch(function (err) {

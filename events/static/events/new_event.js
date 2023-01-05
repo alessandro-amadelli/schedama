@@ -386,7 +386,6 @@ async function sendEventToServer() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             eventCreatedSuccessfully(data);
             removeLoading();
         })
