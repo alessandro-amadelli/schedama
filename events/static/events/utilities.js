@@ -105,6 +105,10 @@ function showLoading(message=""){
     //   let randMsg = Math.floor(Math.random() * messages.length);
     //   message = messages[randMsg];
     // }
+
+    if (message == "") {
+        message = gettext("Loading, please wait.")
+    }
   
     let overlay = document.createElement("div");
     overlay.setAttribute("class", "loading-overlay")

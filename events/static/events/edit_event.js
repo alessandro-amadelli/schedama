@@ -93,7 +93,7 @@ function createNewDate() {
     newDateInp.setAttribute("min", new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":")));
     const newDateLabel = document.createElement("label");
     newDateLabel.setAttribute("for", "eventDate");
-    newDateLabel.innerText = "Event Date";
+    newDateLabel.innerText = gettext("Event Date");
     newFormDiv.appendChild(newDateInp);
     newFormDiv.appendChild(newDateLabel);
     newDateCol.appendChild(newFormDiv);
@@ -317,7 +317,7 @@ async function sendUpdateToServer() {
             eventUpdated(data);
         })
         .catch(function (err) {
-            showPageMsg("alert-danger", "An error has occurred. Please try again later.");
+            showPageMsg("alert-danger", gettext("An error has occurred. Please try again later."));
             removeLoading();
         });
 }

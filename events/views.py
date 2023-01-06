@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
+from django.utils.translation import gettext as _
 
 import json
 
@@ -32,7 +33,7 @@ def save_event_view(request):
     if "item_id" in event_data.keys():
         response = {
             "status": "ERROR",
-            "description": "You are not authorized to perform this operation."
+            "description": _("You are not authorized to perform this operation.")
         }
         return JsonResponse(response)
 
@@ -41,7 +42,7 @@ def save_event_view(request):
     except:
         response = {
             "status": "ERROR",
-            "description": "An error has occurred while creating the event. Please try again later."
+            "description": _("An error has occurred while creating the event. Please try again later.")
             }
         return JsonResponse(response)
 
@@ -96,7 +97,7 @@ def add_participant_view(request):
     if not is_admin and not user_add_participant:
         response = {
             "status": "ERROR",
-            "description": "You are not authorized to perform this operation."
+            "description": _("You are not authorized to perform this operation.")
         }
         return JsonResponse(response)
     ### ###
@@ -150,7 +151,7 @@ def update_event_view(request):
     if event_data == []:
         response = {
             "status": "ERROR",
-            "description": "An error has occurred."
+            "description": _("An error has occurred.")
         }
         return JsonResponse(response)
 

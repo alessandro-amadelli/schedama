@@ -46,7 +46,7 @@ function initializeChartTot() {
     });
 
     let data = {
-        labels: ["Confirmed","Not confirmed"],
+        labels: [gettext("Confirmed"),gettext("Not confirmed")],
         datasets: [{
             backgroundColor: ["#00cc99", "#6f7372"],
             data: [confirmed, notConfirmed],
@@ -119,7 +119,7 @@ function initializeChartDates() {
         }
     });
 
-    evDates.push("No Indications");
+    evDates.push(gettext("No Indications"));
     values.push(noIndic);
 
     // Set color of bars (with max bars colored differently)
@@ -134,7 +134,7 @@ function initializeChartDates() {
     let data = {
         labels: evDates,
         datasets: [{
-            label: "Preferences",
+            label: gettext("Preferences"),
             data: values,
             backgroundColor: color,
             barPercentage: 0.4,
@@ -299,7 +299,7 @@ async function callAddParticipant(addedParticipants) {
             participantAddedSuccessfully(data);
         })
         .catch(function (err) {
-            showPageMsg("alert-danger", "An error has occurred. Please try again later.");
+            showPageMsg("alert-danger", gettext("An error has occurred. Please try again later."));
             removeLoading();
         });
 }

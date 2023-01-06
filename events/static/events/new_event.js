@@ -390,13 +390,13 @@ async function sendEventToServer() {
             removeLoading();
         })
         .catch(function (err) {
-            showPageMsg("alert-danger", "An error has occurred. Please try again later.");
+            showPageMsg("alert-danger", gettext("An error has occurred. Please try again later."));
             removeLoading();
         });
 }
 
 function generateShareBtn(contentURL) {
-    const text = "Hey, check out this amazing event on Schedama.com!";
+    const text = gettext("Hey, check out this amazing event on Schedama.com!");
     const btnDiv = document.createElement("div");
     btnDiv.classList.add("btn-group");
     
@@ -419,7 +419,7 @@ function generateShareBtn(contentURL) {
     const dividerLi = document.createElement("li");
     dividerLi.innerHTML = `<hr class="dropdown-divider">`;
     const copyLi = document.createElement("li");
-    copyLi.innerHTML = `<a class="dropdown-item" href=""><span class="material-symbols-outlined">content_copy</span> Copy to clipboard</a>`;
+    copyLi.innerHTML = `<a class="dropdown-item" href=""><span class="material-symbols-outlined">content_copy</span> ` + gettext("Copy to clipboard") + `</a>`;
     copyLi.querySelector("a").addEventListener("click", (e) => {
         const copyContent = async () => {
             await navigator.clipboard.writeText(contentURL);
@@ -453,8 +453,8 @@ function eventCreatedSuccessfully(data) {
     section.innerHTML = ""; // Empty the section area
 
     // Changing page titles
-    document.querySelector("h1").innerText = "Event created";
-    document.querySelector("h2").innerText = "Your event has been successfully created";
+    document.querySelector("h1").innerText = gettext("Event created");
+    document.querySelector("h2").innerText = gettext("Your event has been successfully created");
 
     // Display event title
     const displayName = document.createElement("h1");
@@ -495,9 +495,9 @@ function eventCreatedSuccessfully(data) {
     const warnCol = document.createElement("div");
     warnCol.setAttribute("class", "col-12 text-center mb-2");
     const warn = document.createElement("strong");
-    warn.innerHTML = `<span class="material-symbols-outlined">warning</span> 
+    warn.innerHTML = gettext(`<span class="material-symbols-outlined">warning</span> 
     IMPORTANT: before leaving the page make sure to save this link, it's the only way you'll be able to administrate your event. 
-    <span class="material-symbols-outlined">warning</span>`;
+    <span class="material-symbols-outlined">warning</span>`);
     warn.setAttribute("class", "text-danger");
 
     // hr
