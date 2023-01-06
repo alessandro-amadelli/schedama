@@ -28,6 +28,7 @@ Participate
 
     <!-- Event info row -->
     <div class="row mb-4">
+        <!-- Event location -->
         <div class="col-12 event-info-div display-5 p-3 shadow rounded">
             {% if event.has_location %}
                 <div class="row mb-4">
@@ -38,14 +39,17 @@ Participate
                 </div>
             {% endif %}
             
+            <!-- Event date and time -->
             <div class="row mb-4">
-                {% for date in event.dates %}
+                {% for date in event.dates_formatted %}
                     <div class="col-12 mb-2">
-                        <span class="material-symbols-outlined fs-1 text-success">event</span> {{ date }}
+                        <span class="material-symbols-outlined fs-1 text-success">event</span>{{ date|date:"d N Y"}}
+                        <span class="material-symbols-outlined fs-1 text-success">watch</span>{{ date|time:"G:i"}}
                     </div>
                 {% endfor %}
             </div>
             
+            <!-- Event participants -->
             <div class="row mb-4">
                 <div class="col mb-4">
                     <span class="material-symbols-outlined fs-1 text-warning">group</span> {{ event.participants|length }}

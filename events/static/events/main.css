@@ -1,23 +1,25 @@
 /* CSS variables for LIGHT MODE */
 :root {
-    --body-background: linear-gradient(0deg, rgba(0,105,158,1) 0%, rgba(0,179,233,1) 35%);
+    --body-background: linear-gradient(180deg, rgba(0,105,158,1) 0%, rgba(0,179,233,1) 30%);
     --body-bg-color: rgba(0,179,233,1);
     --card-bg-color: rgba(255,255,255,.7);
     --color: black;
+    --event-div-bg: rgba(255,255,255,.4);
     --input-bg-color: rgba(255,255,255,.8);
     --navbar-bg-color: white;
-    --section-bg-color: rgba(255,255,255,.5);
+    --section-bg-color: rgba(255,255,255,0);
 }
 
 /* CSS variables for DARK MODE */
 .dark-mode {
-    --body-background: linear-gradient(180deg, rgba(0,55,113,1) 0%, rgba(44,44,44,1) 35%);
+    --body-background: linear-gradient(180deg, rgba(0,55,113,1) 0%, rgba(44,44,44,1) 45%);
     --body-bg-color: rgba(0,55,113,1);
     --card-bg-color: rgba(0,0,0,.2);
     --color: white;
+    --event-div-bg: rgba(0,0,0,.4);
     --input-bg-color: rgba(0,0,0,.8);
     --navbar-bg-color: black;
-    --section-bg-color: rgba(0,0,0,.4)
+    --section-bg-color: rgba(0,0,0,0)
 }
 
 /* CSS animations */
@@ -220,22 +222,22 @@ input, .form-control, input:focus, .form-control:focus {
 }
 
 .event-title-div {
-    background-color: var(--section-bg-color);
+    background-color: var(--event-div-bg);
     font-size: 3rem;
     align-items: center;
     word-wrap: break-word;
 }
 
 .event-tot-div {
-    background-color: var(--section-bg-color);
+    background-color: var(--event-div-bg);
 }
 
 .event-info-div {
-    background-color: var(--section-bg-color);
+    background-color: var(--event-div-bg);
 }
 
 .event-chart-div {
-    background-color: var(--section-bg-color);
+    background-color: var(--event-div-bg);
 }
 
 .card {

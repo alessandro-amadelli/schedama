@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 
 import json
 
+from datetime import datetime
 import schedama.dynamodb_ops as dynamodb_ops
 
 def get_event_data(item_id, item_type="event"):
@@ -63,7 +64,9 @@ def participate_view(request, eventID):
 
     # Removing admin_key from event data before sending to the client for security reasons
     event_data.pop('admin_key', None)
-    print(event_data)
+    # Adding dates so Django can display it in template
+    event_data["dates_formatted"] = [datetime.strptime(d, "%Y-%m-%dT%H:%M") for d in event_data["dates"]]
+    
     context = {
         "event": event_data
     }
