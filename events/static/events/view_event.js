@@ -1,32 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Draw charts
     initializeChartTot();
-
     initializeChartDates();
 
-    // Add participant functionality
-    const btnAddParticipant = document.querySelector("#btnAddParticipant");
-    if (btnAddParticipant) {
-        btnAddParticipant.onclick = () => {
-            addParticipant();
+    // Button to participate event (shows modal)
+    const btnParticipate = document.querySelector("#btnParticipate");
+    if (btnParticipate) {
+        btnParticipate.onclick = () => {
+            prepareParticipateModal();
         };
     }
 
-    // Cancel add participant functionality
-    const btnCancelAddParticipant = document.querySelector("#btnCancelAddParticipant");
-    if (btnCancelAddParticipant) {
-        btnCancelAddParticipant.onclick = () => {
-            cancelAddParticipant();
+    // Button to confirm participation
+    const btnConfirmParticipate = document.querySelector("#btnConfirmParticipate");
+    if (btnConfirmParticipate) {
+        btnConfirmParticipate.onclick = () => {
+            sendParticipationToServer();
         };
     }
 
-    // Save added participants
-    const btnSaveParticipants = document.querySelector("#btnSaveParticipants");
-    if (btnSaveParticipants) {
-        btnSaveParticipants.onclick = () => {
-            addParticipants();
-        };
-    }
-
+    // Transform location in a Google Maps link
     const locationLink = document.querySelector("#eventLocation");
     if (locationLink) {
         locationLink.setAttribute("href", "https://www.google.com/maps/search/?api=1&query=" + encodeURI(locationLink.innerText));
@@ -176,109 +169,84 @@ function initializeChartDates() {
     );
 }
 
-function addParticipant() {
-    // Check if new participants' name are filled before adding new one
-    let isValidated = validateAddParticipants(true);
-    if (!isValidated) {
+function prepareParticipateModal() {
+    const modalParticipate = document.querySelector("#modalParticipate");
+    const partName = modalParticipate.querySelector("#newPartName");
+    
+    // Empty input with participant name
+    partName.value = "";
+
+    // Removing old dates
+    modalParticipate.querySelectorAll(".modal-date").forEach((date) => {
+        date.remove();
+    });
+
+    // Adding dates with switch
+    const dateFormatted = document.querySelectorAll(".date-formatted");
+    dates.forEach((date, i) => {
+        const newDiv = document.createElement("div");
+        newDiv.classList.add("form-check","form-switch", "modal-date");
+
+        const newDateSwitch= document.createElement("input");
+        newDateSwitch.setAttribute("type", "checkbox");
+        newDateSwitch.setAttribute("role", "switch");
+        newDateSwitch.setAttribute("value", date);
+        newDateSwitch.setAttribute("name", "switchAddParticipant");
+        newDateSwitch.classList.add("form-check-input");
+
+        const newLabel = document.createElement("label");
+        newLabel.setAttribute("for","switchAddParticipant");
+        newLabel.classList.add("form-check-label");
+
+        // Display label text in a readable format
+        let formattedText = dateFormatted[i].querySelector(".formattedDate").innerText + " h." + dateFormatted[i].querySelector(".formattedTime").innerText;
+        newLabel.innerText = formattedText;
+
+        // Append new elements
+        newDiv.appendChild(newDateSwitch);
+        newDiv.appendChild(newLabel);
+        modalParticipate.querySelector(".modal-body").appendChild(newDiv);
+    });
+}
+
+function validateParticipateModal() {
+    const partName = document.querySelector("#newPartName");
+    if (partName.value == "") {
+        setInvalid(partName, true);
+        return false;
+    }
+    setInvalid(partName, false);
+    return true;
+}
+
+async function sendParticipationToServer() {
+
+    // Modal validation (check if name is empty)
+    isValid = validateParticipateModal();
+    if (!isValid) {
         return false;
     }
 
-    const tableParticipants = document.querySelector("#tableParticipants").querySelector("tbody");
-    const newTr = document.createElement("tr");
-    const nameTd = document.createElement("td");
-    const nameInp = document.createElement("input");
-    nameInp.setAttribute("class", "form-control new-participant");
-    nameInp.setAttribute("type", "text");
-    nameTd.appendChild(nameInp);
-    newTr.appendChild(nameTd);
-    dates.forEach((date) => {
-        let newTd = document.createElement("td");
-        let newInp = document.createElement("input");
-        newInp.setAttribute("class","form-check-input");
-        newInp.setAttribute("type","checkbox");
-        newInp.setAttribute("value",date);
-        newTd.appendChild(newInp);
-        newTr.appendChild(newTd);
-    });
+    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
 
-    // Append new row to table before first row
-    tableParticipants.prepend(newTr);
-    nameInp.focus();
-}
-
-function cancelAddParticipant() {
-    document.querySelectorAll(".new-participant").forEach((item) => {
-        item.parentElement.parentElement.remove();
-    });
-}
-
-function validateAddParticipants(admitEmpty=false) {
-    let isValidated = true;
-    const newParticipants = document.querySelectorAll(".new-participant");
-
-    // If there is no new participant, return value of admitEmpty {true, false}
-    if (newParticipants.length == 0) {
-        return admitEmpty;
-    }
-
-    newParticipants.forEach((participant) => {
-        if (participant.value == "") {
-            isValidated = false;
-            participant.classList.remove("shaking");
-            void participant.offsetWidth; // Necessary for shake animation restart
-            participant.classList.add("is-invalid", "shaking");
-        } else {
-            participant.classList.remove("is-invalid");
+    // New participant data
+    const newPartName = document.querySelector("#newPartName").value;
+    let newPartDates = [];
+    document.querySelector("#modalParticipate").querySelectorAll("input[type=checkbox]").forEach((check) => {
+        if (check.checked) {
+            newPartDates.push(check.value);
         }
     });
 
-    return isValidated;
-}
-
-function addParticipants() {
-
-    // Check if new participants' name are filled
-    let isValidated = validateAddParticipants();
-    if (!isValidated) {
-        return false;
-    }
-
-    // Create a dict with new participants data
-    const newParticipants = document.querySelectorAll(".new-participant");
-    let addedParticipants = [];
-
-    newParticipants.forEach((newP) => {
-        let newPData = {
-            name: newP.value,
-            dates: []
-        };
-        
-        newP.parentElement.parentElement.querySelectorAll("input[type=checkbox]").forEach((date) => {
-            if (date.checked) {
-                newPData.dates.push(date.value);
-            }
-        });
-
-        addedParticipants.push(newPData);
-
-    });
-
-    // Close modal by "clicking" the close button
-    document.querySelector("[data-bs-dismiss=modal]").click();
-
-    showLoading();
-
-    callAddParticipant(addedParticipants);
-
-}
-
-async function callAddParticipant(addedParticipants) {
-    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
-
     const data = {
         item_id: document.querySelector("#item-id").innerText,
-        participants: addedParticipants
+        new_participant: {
+            name: newPartName,
+            dates: newPartDates
+        }
     }
+
+    console.log(data);
 
     let reqHeaders = new Headers();
     reqHeaders.append('Content-type', 'application/json');

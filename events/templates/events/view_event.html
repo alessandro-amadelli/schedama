@@ -42,30 +42,34 @@ Participate
             <!-- Event date and time -->
             <div class="row mb-4">
                 {% for date in event.dates_formatted %}
-                    <div class="col-12 mb-2">
-                        <span class="material-symbols-outlined fs-1 text-success">event</span>{{ date|date:"d N Y"}}
-                        <span class="material-symbols-outlined fs-1 text-success">watch</span>{{ date|time:"G:i"}}
+                    <div class="col-12 mb-2 date-formatted">
+                        <span class="material-symbols-outlined fs-1 text-success">event</span><span class="formattedDate">{{ date|date:"d N Y"}}</span>
+                        <span class="material-symbols-outlined fs-1 text-success">watch</span><span class="formattedTime">{{ date|time:"G:i"}}</span>
                     </div>
                 {% endfor %}
             </div>
             
             <!-- Event participants -->
             <div class="row mb-4">
-                <div class="col mb-4">
-                    <span class="material-symbols-outlined fs-1 text-warning">group</span> {{ event.participants|length }}
+                <div class="col-4 mb-4">
+                    <span class="material-symbols-outlined fs-1 text-warning">group</span> 
+                    {{ event.participants|length }}
                 </div>
                 <div class="w-100"></div>
-                <div class="col">
-                    <button type="button" class="btn btn-light fs-1" data-bs-target="#modalParticipate" data-bs-toggle="modal">
-                        {% if event.settings.add_participant %}
-                            <span class="material-symbols-outlined fs-1">person_add</span>
-                            Participate
-                        {% else %}
-                            <span class="material-symbols-outlined fs-1">group</span>
-                            Participants
-                        {% endif %}
+                <div class="d-grid col-6 col-lg-5 p-1 mx-auto">
+                    <button type="button" class="btn btn-light btn-lg" data-bs-target="#modalList" data-bs-toggle="modal">
+                        <span class="material-symbols-outlined">list_alt</span>
+                        {% translate "List" %}
                     </button>
                 </div>
+                {% if event.settings.add_participant %}
+                    <div class="d-grid col-6 col-lg-5 p-1 mx-auto">
+                        <button type="button" class="btn btn-light btn-lg" data-bs-target="#modalParticipate" data-bs-toggle="modal" id="btnParticipate">
+                            <span class="material-symbols-outlined">person_add</span>
+                            {% translate "Participate" %}
+                        </button>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -84,27 +88,19 @@ Participate
         </div>
     </div>
 
-    <!-- Modal to participate in the event and see participants -->
-    <div class="modal modal-xl fade" id="modalParticipate" tabindex="-1">
+    <!-- Modal to see participant list -->
+    <div class="modal modal-xl fade" id="modalList" tabindex="-1">
         <div class="modal-dialog rounded">
             <div class="modal-content">
                 <div class="modal-header">
                 <h4 class="modal-title">
                     <span class="material-symbols-outlined">group</span>
-                     {% if event.settings.add_participant %}Join the event{% else %}See participants{% endif %}
+                     {% translate "Participant list" %}
                 </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {% if event.settings.add_participant %}
-                        <div class="row mb-3">
-                            <div class="col">
-                                <button class="btn btn-light" id="btnAddParticipant"><span class="material-symbols-outlined">person_add</span> Add participant</button>
-                            </div>
-                        </div>
-                    {% endif %}
                     <div class="row overflow-auto">
-                        <h4>Participants</h4>
                         <table class="table table-striped" id="tableParticipants">
                             <thead>
                                 <tr>
@@ -120,7 +116,7 @@ Participate
                                         <td>{{ participant.name }}</td>
                                         {% for date in event.dates %}
                                             <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %} 
-                                                {% if not event.edit_participant %}disabled{% endif %}></td>
+                                                {% if not event.settings.edit_participant %}disabled{% endif %}></td>
                                         {% endfor %}
                                     </tr>
                                 {% endfor %}
@@ -130,20 +126,48 @@ Participate
                     
                 </div>
                 <div class="modal-footer">
-                    {% if event.settings.add_participant %}
+                    {% if event.settings.edit_participant %}
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelAddParticipant">
-                            <span class="material-symbols-outlined">delete</span> Cancel
+                            <span class="material-symbols-outlined">delete</span> {% translate "Cancel" %}
                         </button>
                         <button type="button" class="btn btn-primary" id="btnSaveParticipants">
-                            <span class="material-symbols-outlined">person_add</span> Join
+                            <span class="material-symbols-outlined">save</span> {% translate "Save" %}
                         </button>
                     {% else %}
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
+    {% if event.settings.add_participant %}
+        <!-- Modal to add a new participant -->
+        <div class="modal fade" id="modalParticipate" tabindex="-1">
+            <div class="modal-dialog rounded">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><span class="material-symbols-outlined">person_add</span> {% translate "Join event" %}</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="newPartName" maxlength="30" autocomplete="off" required>
+                            <label for="newPartName">{% translate "Name" %}</label>
+                        </div>
+                        <h4>{% translate "Preferences" %}</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <span class="material-symbols-outlined">delete</span> {% translate "Cancel" %}
+                        </button>
+                        <button type="button" class="btn btn-light" id="btnConfirmParticipate">
+                            <span class="material-symbols-outlined">person_add</span> {% translate "Join" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock %}

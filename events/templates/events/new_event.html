@@ -22,12 +22,6 @@
           <span class="material-symbols-outlined">settings</span>
         </button>
       </div>
-      <div class="col-6">
-        <button type="button" class="btn btn-success float-end visually-hidden" id="btnSaveEvent" disabled>
-          <span class="material-symbols-outlined">save</span>
-          {% translate "Save" %}
-        </button>
-      </div>
     </div>
 
     <!-- Event title -->
@@ -95,6 +89,14 @@
       <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
         <span class="material-symbols-outlined fs-1 cursor-pointer" placeholder="Participant's name" id="add-participant">person_add</span>
       </div>
+    </div>
+
+    <!-- Save event button -->
+    <div class="d-grid col-6 col-lg-4 mx-auto">
+      <button type="button" class="btn btn-success btn-lg visually-hidden" id="btnSaveEvent" disabled>
+        <span class="material-symbols-outlined">save</span>
+        {% translate "Save" %}
+      </button>
     </div>
 
   </div>

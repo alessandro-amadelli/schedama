@@ -38,6 +38,9 @@ def save_event_view(request):
         }
         return JsonResponse(response)
 
+    # Order event dates
+    event_data["dates"].sort()
+
     try:
         new_event = dynamodb_ops.insert_record(event_data)
     except:
@@ -79,7 +82,7 @@ def add_participant_view(request):
     
     request_data = json.loads(request.body)
     item_id = request_data.get("item_id")
-    added_participants = request_data.get("participants")
+    new_participant = request_data.get("new_participant")
     admin_key = request_data.get("admin_key", None)
 
     # Event data retrieved from database
@@ -105,9 +108,23 @@ def add_participant_view(request):
         return JsonResponse(response)
     ### ###
     
-    # Adding new participants to the event
-    event_data["participants"] += added_participants
+    # Adding new participant to the event (after checking correct format)
+    name_ok = new_participant.get("name", "")
+    if name_ok == "":
+        response = {
+            "status": "ERROR",
+            "description": _("An error has occurred.")
+        }
+        return JsonResponse(response)
 
+    new_participant_ok = {
+        "name": name_ok[:30],
+        "dates": new_participant.get("dates", [])
+    }
+
+    event_data["participants"].append(new_participant_ok)
+
+    # Saving updated event data
     dynamodb_ops.insert_record(event_data)
     
     response = {
@@ -173,6 +190,7 @@ def update_event_view(request):
         event_data["has_location"] = request_data.get("has_location", False)
         event_data["location"] = request_data.get("location", "")
         event_data["dates"] = request_data.get("dates", [])
+        event_data["dates"].sort() # Order event dates
         event_data["participants"] = request_data.get("participants", [])
         event_data["settings"]["add_participant"] = request_data["settings"].get("add_participant", False)
         event_data["settings"]["remove_participant"] = request_data["settings"].get("remove_participant", False)
