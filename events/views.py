@@ -162,7 +162,7 @@ def update_event_view(request):
 
     #Retrieve request data
     request_data = json.loads(request.body)
-    print(request_data)
+ 
     item_id = request_data.get("item_id", "")
     admin_key = request_data.get("admin_key", "")
 

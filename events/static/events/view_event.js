@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Draw charts
-    initializeChartTot();
-    initializeChartDates();
+    if (participants.length > 0) {
+        initializeChartTot();
+        initializeChartDates();
+    } else {
+        displayNoData();
+    }
 
     // Button to participate event (shows modal)
     const btnParticipate = document.querySelector("#btnParticipate");
@@ -26,6 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+function displayNoData() {
+    
+    const chartDiv = document.querySelector("#chartAreaDiv");
+    chartDiv.innerHTML = `<div class="col-12">
+    <span class="material-symbols-outlined">data_usage</span> No data
+    </div>
+    `;
+    chartDiv.classList.add("text-center");
+    return false;
+
+}
 
 function initializeChartTot() {
     let confirmed = 0;
@@ -245,8 +261,6 @@ async function sendParticipationToServer() {
             dates: newPartDates
         }
     }
-
-    console.log(data);
 
     let reqHeaders = new Headers();
     reqHeaders.append('Content-type', 'application/json');

@@ -395,51 +395,6 @@ async function sendEventToServer() {
         });
 }
 
-function generateShareBtn(contentURL) {
-    const text = gettext("Hey, check out this amazing event on Schedama.com!");
-    const btnDiv = document.createElement("div");
-    btnDiv.classList.add("btn-group");
-    
-    const btn = document.createElement("button");
-    btn.setAttribute("type","button");
-    btn.setAttribute("data-bs-toggle","dropdown");
-    btn.setAttribute("aria-expanded","false");
-    btn.classList.add("btn","btn-secondary", "dropdown-toggle");
-    btn.innerHTML = `<span class="material-symbols-outlined">share</span>`;
-
-    const btnUl = document.createElement("ul");
-    btnUl.classList.add("dropdown-menu");
-    
-    const telegramLi = document.createElement("li");
-    telegramLi.innerHTML = `<a class="dropdown-item" href="https://telegram.me/share/url?url=` + contentURL + `&text=` + text + `" target="_blank"><span class="material-symbols-outlined">send</span> Telegram </a>`;
-    const whatsappLi = document.createElement("li");
-    whatsappLi.innerHTML = `<a class="dropdown-item" href="https://api.whatsapp.com/send?text=` + text + ` ` + contentURL + `" data-action="share/whatsapp/share" target="_blank"><span class="material-symbols-outlined">chat</span> Whatsapp </a>`;
-    const emailLi = document.createElement("li");
-    emailLi.innerHTML = `<a class="dropdown-item" href="mailto:?subject='Schedama Event'&body=` + text + ` ` + contentURL + `" target="_blank"><span class="material-symbols-outlined">email</span> e-mail</a>`;
-    const dividerLi = document.createElement("li");
-    dividerLi.innerHTML = `<hr class="dropdown-divider">`;
-    const copyLi = document.createElement("li");
-    copyLi.innerHTML = `<a class="dropdown-item" href=""><span class="material-symbols-outlined">content_copy</span> ` + gettext("Copy to clipboard") + `</a>`;
-    copyLi.querySelector("a").addEventListener("click", (e) => {
-        const copyContent = async () => {
-            await navigator.clipboard.writeText(contentURL);
-        }
-        copyContent();
-        e.preventDefault();
-    }, false);
-
-    // Append elements
-    btnDiv.appendChild(btn);
-    btnDiv.appendChild(btnUl);
-    btnUl.appendChild(telegramLi);
-    btnUl.appendChild(whatsappLi);
-    btnUl.appendChild(emailLi);
-    btnUl.appendChild(dividerLi);
-    btnUl.appendChild(copyLi);
-
-    return btnDiv
-}
-
 function eventCreatedSuccessfully(data) {
     // Saving title of the event (to display it after)
     const eventTitle = document.querySelector("#eventTitle").value;
