@@ -23,7 +23,17 @@ Participate
 
     <!-- Title row -->
     <div class="row mb-3 justify-content-center">
-        <div class="col-12 event-title-div text-center rounded shadow">{{ event.title }}</div>
+        <div class="col-12 event-title-div text-center rounded shadow p-3">{{ event.title }}</div>
+    </div>
+
+    <!-- Countdown row -->
+    <div class="row mb-3">
+        <div class="col-12 mx-auto event-clock-div text-center rounded shadow display-5 p-3" id="clockDiv">
+            <span class="clockDays">-</span>d 
+            <span class="clockHours">--</span>h 
+            <span class="clockMins">--</span>m 
+            <span class="clockSecs">--</span>s
+        </div>
     </div>
 
     <!-- Event info row -->

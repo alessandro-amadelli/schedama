@@ -29,7 +29,59 @@ document.addEventListener('DOMContentLoaded', () => {
         locationLink.setAttribute("href", "https://www.google.com/maps/search/?api=1&query=" + encodeURI(locationLink.innerText));
     }
 
+    // Start countdown
+    const deadline = new Date(dates[0]);
+    updateClock(deadline);
+    updateInterval = setInterval(() => {updateClock(deadline)},1000); 
+
 });
+var updateInterval = "";
+
+function getRemainingTime(deadline) {
+    const today = new Date();
+    const delta = deadline - today;
+    
+    const days = Math.floor( delta/(1000*60*60*24) );
+    const hours = Math.floor( (delta/(1000*60*60)) % 24 );
+    const minutes = Math.floor( (delta/1000/60) % 60 );
+    const seconds = Math.floor( (delta/1000) % 60 );
+
+    return {
+        delta,
+        days,
+        hours,
+        minutes,
+        seconds
+    }
+}
+
+function updateClock(deadline) {
+    const timer = document.querySelector("#clockDiv");
+    const days = timer.querySelector(".clockDays");
+    const hours = timer.querySelector(".clockHours");
+    const mins = timer.querySelector(".clockMins");
+    const secs = timer.querySelector(".clockSecs");
+
+    const t = getRemainingTime(deadline);
+    
+    // Remaining time values
+    days.innerText = t.days;
+    hours.innerText = ('0' + t.hours).slice(-2);
+    mins.innerText = ('0' + t.minutes).slice(-2);
+    secs.innerText = ('0' + t.seconds).slice(-2);
+
+    // Background color
+    const perc = (t.seconds * 100) / 60;
+    timer.style.background = "linear-gradient(to right, rgba(0,0,0,.1) " + perc + "%, rgba(255,2555,255,.3) " + (perc + 2)  +"%";
+    
+    if (t.delta <= 0) {
+        days.innerText = "0";
+        hours.innerText = "0";
+        mins.innerText = "0";
+        secs.innerText = "0";
+        clearInterval(updateInterval);
+    } 
+}
 
 function displayNoData() {
     

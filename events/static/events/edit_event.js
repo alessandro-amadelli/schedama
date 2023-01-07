@@ -124,16 +124,6 @@ function createNewDate() {
     setInvalid(firstDate, false);
 }
 
-function setInvalid(element, isInvalid) {
-    element.classList.remove("shaking");
-    if (isInvalid){
-        void element.offsetWidth; // Necessary for shake animation restart
-        element.classList.add("is-invalid", "shaking");
-    } else {
-        element.classList.remove("is-invalid");
-    }
-}
-
 function updateParticipantsNum() {
     document.querySelector("#participantsNum").innerText = document.querySelectorAll("input[name=participantName]").length;
 }
