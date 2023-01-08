@@ -10,11 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Button to add a new date to the event
-    const btnAddDate = document.querySelector("#btnAddDate");
-    btnAddDate.onclick = () => {
+    // // Button to add a new date to the event
+    // const btnAddDate = document.querySelector("#btnAddDate");
+    // btnAddDate.onclick = () => {
+    //     createNewDate();
+    // }
+
+    // Add new date on input date change instead of clicking to add date
+    document.querySelector("#dateInp").addEventListener('change', () => {
         createNewDate();
-    }
+    });
 
     // Initialize remove dates buttons (if present)
     document.querySelectorAll(".remove-date").forEach((btn) => {

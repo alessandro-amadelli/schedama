@@ -6,6 +6,7 @@
     --color: black;
     --event-div-bg: rgba(255,255,255,.4);
     --input-bg-color: rgba(255,255,255,.8);
+    --moving-bg-color: rgba(0,0,0,.1);
     --navbar-bg-color: white;
     --section-bg-color: rgba(255,255,255,0);
 }
@@ -18,6 +19,7 @@
     --color: white;
     --event-div-bg: rgba(0,0,0,.4);
     --input-bg-color: rgba(0,0,0,.8);
+    --moving-bg-color: rgba(255,255,255,.1);
     --navbar-bg-color: black;
     --section-bg-color: rgba(0,0,0,0)
 }
@@ -55,6 +57,19 @@
     100% {
         display: block;
         opacity: 1;
+    }
+}
+
+@keyframes timerAnimation {
+    0% {
+        transform: translateX(25%);
+    }
+    50% {
+        transform: translateX(0%);
+
+    }
+    100% {
+        transform: translateX(-25%);
     }
 }
 
@@ -229,8 +244,27 @@ input, .form-control, input:focus, .form-control:focus {
 }
 
 .event-clock-div {
-    /* background-color: var(--event-div-bg); */
     user-select: none;
+    overflow: hidden;
+    /* background-color: var(--event-div-bg); */
+}
+
+.event-clock-div::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 150%;
+    top: -25%;
+    left: -50%;
+    z-index: -1;
+    background: linear-gradient(90deg, var(--event-div-bg), var(--event-div-bg) 30%, var(--moving-bg-color) 50%, var(--event-div-bg) 70%, var(--event-div-bg));
+    animation-name: timerAnimation;
+    animation-duration: 5s;
+    animation-fill-mode:forwards;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
 }
 
 .event-tot-div {

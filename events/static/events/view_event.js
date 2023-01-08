@@ -72,7 +72,7 @@ function updateClock(deadline) {
 
     // Background color
     const perc = (t.seconds * 100) / 60;
-    timer.style.background = "linear-gradient(to right, rgba(0,0,0,.1) " + perc + "%, rgba(255,2555,255,.3) " + (perc + 2)  +"%";
+    // timer.style.backgroundImage = "linear-gradient(90deg, rgba(0,0,0,.1), rgba(255,2555,255,.3) " + perc +"%, rgba(0,0,0,.1)";
     
     if (t.delta <= 0) {
         days.innerText = "0";
@@ -260,6 +260,7 @@ function prepareParticipateModal() {
         newDateSwitch.setAttribute("role", "switch");
         newDateSwitch.setAttribute("value", date);
         newDateSwitch.setAttribute("name", "switchAddParticipant");
+        newDateSwitch.setAttribute("checked", "true");
         newDateSwitch.classList.add("form-check-input");
 
         const newLabel = document.createElement("label");

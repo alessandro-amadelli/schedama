@@ -17,18 +17,12 @@
     <input type="text" id="admin-key" value="{{ event.admin_key }}" hidden>
 
     <div class="section p-2">
-        <div class="row entering-2">
-            <div class="col-6">
-                <button type="button" class="btn btn-light float-start" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
-                <span class="material-symbols-outlined">settings</span>
-                </button>
-            </div>
-            <div class="col-6">
-                <button type="button" class="btn btn-success float-end visually-hidden" id="btnSaveEvent" disabled>
-                <span class="material-symbols-outlined">save</span>
-                {% translate "Save" %}
-                </button>
-            </div>
+        <div class="row">
+          <div class="col-6">
+            <button type="button" class="btn btn-light float-start" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+          </div>
         </div>
       
         <!-- Event title -->
@@ -77,7 +71,7 @@
                 </div>
             </div>
             <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
-                <span class="material-symbols-outlined fs-1 cursor-pointer" id="btnAddDate">add_circle</span>
+                <span class="material-symbols-outlined fs-1" id="btnAddDate">add_circle</span>
             </div>
             {% for date in event.dates %}
                 <div class="w-100"></div>
@@ -130,6 +124,14 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <!-- Save event button -->
+        <div class="d-grid col-6 col-lg-4 mx-auto">
+            <button type="button" class="btn btn-success btn-lg visually-hidden" id="btnSaveEvent" disabled>
+                <span class="material-symbols-outlined">save</span>
+                {% translate "Save" %}
+            </button>
         </div>
     </div>
 
