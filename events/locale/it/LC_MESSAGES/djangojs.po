@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-07 12:06+0100\n"
+"POT-Creation-Date: 2023-01-08 14:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,35 +18,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\events\static\events\edit_event.js:96
+#: .\events\static\events\edit_event.js:95
 msgid "Event Date"
 msgstr "Data evento"
 
-#: .\events\static\events\edit_event.js:320
-#: .\events\static\events\new_event.js:393
-#: .\events\static\events\view_event.js:270
+#: .\events\static\events\edit_event.js:126
+#: .\events\static\events\new_event.js:175
+msgid "Date added"
+msgstr "Data aggiunta"
+
+#: .\events\static\events\edit_event.js:313
+#: .\events\static\events\new_event.js:395
+#: .\events\static\events\view_event.js:337
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
-#: .\events\static\events\new_event.js:399
-#: .\events\static\events\utilities.js:163
-msgid "Hey, check out this amazing event on Schedama.com!"
-msgstr "Ehi, dai un occhio a questo fantastico evento su Schedama.com!"
-
-#: .\events\static\events\new_event.js:422
-#: .\events\static\events\utilities.js:186
-msgid "Copy to clipboard"
-msgstr "Copia negli appunti"
-
-#: .\events\static\events\new_event.js:456
+#: .\events\static\events\new_event.js:413
 msgid "Event created"
 msgstr "Evento creato"
 
-#: .\events\static\events\new_event.js:457
+#: .\events\static\events\new_event.js:414
 msgid "Your event has been successfully created"
 msgstr "Il tuo evento è stato creato con successo"
 
-#: .\events\static\events\new_event.js:498
+#: .\events\static\events\new_event.js:455
 msgid ""
 "<span class=\"material-symbols-outlined\">warning</span> \n"
 "    IMPORTANT: before leaving the page make sure to save this link, it's the "
@@ -62,18 +57,26 @@ msgstr ""
 msgid "Loading, please wait."
 msgstr "Caricamento, attendere per favore."
 
-#: .\events\static\events\view_event.js:42
+#: .\events\static\events\utilities.js:198
+msgid "Hey, check out this amazing event on Schedama.com!"
+msgstr "Ehi, dai un occhio a questo fantastico evento su Schedama.com!"
+
+#: .\events\static\events\utilities.js:221
+msgid "Copy to clipboard"
+msgstr "Copia negli appunti"
+
+#: .\events\static\events\view_event.js:110
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\events\static\events\view_event.js:42
+#: .\events\static\events\view_event.js:110
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\events\static\events\view_event.js:115
+#: .\events\static\events\view_event.js:183
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\events\static\events\view_event.js:130
+#: .\events\static\events\view_event.js:198
 msgid "Preferences"
 msgstr "Preferenze"

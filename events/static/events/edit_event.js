@@ -9,12 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-    
-    // // Button to add a new date to the event
-    // const btnAddDate = document.querySelector("#btnAddDate");
-    // btnAddDate.onclick = () => {
-    //     createNewDate();
-    // }
 
     // Add new date on input date change instead of clicking to add date
     document.querySelector("#dateInp").addEventListener('change', () => {
@@ -127,6 +121,9 @@ function createNewDate() {
     newDateInp.value = firstDate.value;
     firstDate.value = "";
     setInvalid(firstDate, false);
+
+    // Show notification for the added date
+    notify(gettext("Date added"));
 }
 
 function updateParticipantsNum() {
@@ -155,6 +152,7 @@ function prepareModalAddPart() {
         newDateSwitch.setAttribute("role", "switch");
         newDateSwitch.setAttribute("value", date.value);
         newDateSwitch.setAttribute("name", "switchAddParticipant");
+        newDateSwitch.setAttribute("checked", "true");
         newDateSwitch.classList.add("form-check-input");
 
         const newLabel = document.createElement("label");

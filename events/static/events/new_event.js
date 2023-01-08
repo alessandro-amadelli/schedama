@@ -9,13 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // // Button to add a new date to the event
-    // const btnAddDate = document.querySelector("#add-date");
-    // btnAddDate.onclick = () => {
-    //     createNewDate();
-    //     saveLocally();
-    // }
-
     // Add new date on input date change instead of clicking to add date
     document.querySelector("#dateInp").addEventListener('change', () => {
         createNewDate();
@@ -177,6 +170,9 @@ function createNewDate() {
     newDateInp.value = firstDate.value;
     firstDate.value = "";
     setInvalid(firstDate, false);
+
+    // Show notification for the added date
+    notify(gettext("Date added"));
 }
 
 function createNewParticipant() {

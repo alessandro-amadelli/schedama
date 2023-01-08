@@ -158,6 +158,41 @@ function showPageMsg(msgClass, msgContent) {
     window.scroll(0,0);
 }
 
+function notify(text) {
+    //Deletion of pre-existing toasts
+    let toastList = document.querySelectorAll(".toast");
+    toastList.forEach((toast, i) => {
+      toast.remove();
+    });
+  
+    let divAlign = document.createElement("div");
+    divAlign.setAttribute("class", "position-fixed bottom-0 end-0 p-3");
+    divAlign.style = "z-index:5;color:black;";
+  
+    let toast = document.createElement("div");
+    toast.setAttribute("class", "toast fade");
+    toast.setAttribute("role", "alert");
+    toast.setAttribute("aria-live", "assertive");
+    toast.setAttribute("aria-atomic", "true");
+  
+    let body = document.createElement("div");
+    body.setAttribute("class", "toast-body");
+    body.innerHTML = text;
+  
+    toast.appendChild(body);
+    divAlign.appendChild(toast);
+    document.querySelector("body").appendChild(divAlign);
+
+    // Initialize toast to show message
+    toast = new bootstrap.Toast(toast, {
+        animation: true,
+        autohide: true,
+        delay: 3000
+        });
+    toast.show();
+  
+  }
+
 function generateShareBtn(contentURL) {
     // Generates a share dropdown button with links
     const text = gettext("Hey, check out this amazing event on Schedama.com!");
