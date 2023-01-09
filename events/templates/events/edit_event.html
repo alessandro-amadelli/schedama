@@ -112,7 +112,7 @@
                                 <td style="min-width: 20em;">
                                     <div class="row">
                                         <div class="col-1"><span class="material-symbols-outlined cursor-pointer remove-participant text-danger">delete</span></div>
-                                        <div class="col-11"><input type="text" class="form-control" name="participantName" value="{{ participant.name }}" maxlength="30"></div>
+                                        <div class="col-11"><input type="text" class="form-control" name="participantName" value="{{ participant.name }}" data-partuid="{{ participant.uid }}" maxlength="30"></div>
                                     </div>
                                     
                                 </td>
@@ -125,6 +125,18 @@
                 </table>
             </div>
         </div>
+
+        {% if event.event_bin|length > 0 %}
+            <div class="row p-3 mb-3 entering-4 d-flex" id="eventBin">
+                <h4>{% translate "Removed participants" %}</h4>
+                <div class="w-100"></div>
+                {% for p in event.event_bin %}
+                    <div class="col p-2 rounded shadow">
+                        <span class="removed-participant">{{ p.name }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <!-- Save event button -->
         <div class="d-grid col-6 col-lg-4 mx-auto">
@@ -145,21 +157,25 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                    <h5>{% translate "Choose what participants are allowed to do" %}</h5>
-                    <div class="mb-3">
-                        <div class="form-check form-switch fs-4">
-                        <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" {% if event.settings.add_participant %}checked{% endif %}>
-                        <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
+                        <h5>{% translate "Choose what participants are allowed to do" %}</h5>
+                        <div class="mb-3">
+                            <div class="form-check form-switch fs-4">
+                            <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" {% if event.settings.add_participant %}checked{% endif %}>
+                            <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
+                            </div>
                         </div>
-                    </div>
-                    {% comment %}
-                    <div class="mb-3">
-                        <div class="form-check form-switch fs-4">
-                        <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant" {% if event.settings.remove_participant %}checked{% endif %}>
-                        <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
+                        <div class="mb-3">
+                            <div class="form-check form-switch fs-4">
+                            <input class="form-check-input" type="checkbox" role="switch" id="switchEditParticipant" {% if event.settings.edit_participant %}checked{% endif %}>
+                            <label class="form-check-label" for="switchRemoveParticipant">{% translate "Edit participants" %}</label>
+                            </div>
                         </div>
-                    </div>
-                    {% endcomment %}
+                        <div class="mb-3">
+                            <div class="form-check form-switch fs-4">
+                            <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant" {% if event.settings.remove_participant %}checked{% endif %}>
+                            <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

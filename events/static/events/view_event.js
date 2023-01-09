@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // On page load, delete previous modifications from localStorage
+    localStorage.removeItem("modifications");
+
     // Draw charts
     if (participants.length > 0) {
         initializeChartTot();
@@ -22,6 +25,39 @@ document.addEventListener('DOMContentLoaded', () => {
             sendParticipationToServer();
         };
     }
+
+    // Event listener for modifications on participants (if authorized)
+    document.querySelector("#tableParticipants").querySelectorAll("input[type=checkbox]").forEach((check) => {
+        check.addEventListener('change', ()  => {
+            const tr = check.parentElement.parentElement;
+            saveModificationsLocally(tr);
+        });
+    });
+
+    // Buttons to remove participant (if authorized)
+    document.querySelectorAll("span[name=btnDeleteRow]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const partUID = btn.parentElement.parentElement.querySelector(".participant-name-td").dataset.partuid;
+            btn.parentElement.parentElement.remove();
+            saveDeletionLocally(partUID);
+        });
+    });
+
+    // Button to edit or remove participants (if authorized)
+    const btnSaveParticipants = document.querySelector("#btnSaveParticipants");
+    if (btnSaveParticipants) {
+        btnSaveParticipants.onclick = () => {
+            sendModificationsToServer();
+        }
+    }
+
+    // Button to cancel participants modifications
+    document.querySelector("#btnCancelSaveParticipants").onclick = () => {
+        // Cancel button reloads the page (if there is any modification) so data is restored
+        if (localStorage.getItem("modifications")) {
+            window.location.reload();
+        }
+    };
 
     // Transform location in a Google Maps link
     const locationLink = document.querySelector("#eventLocation");
@@ -340,6 +376,119 @@ async function sendParticipationToServer() {
 }
 
 function participantAddedSuccessfully(data) {
+    if (data.status == "OK") {
+        window.location.reload();
+    } else {
+        showPageMsg("alert-danger", data.description);
+        removeLoading();
+    }
+}
+
+function saveModificationsLocally(tr) {
+    // When a participant is modified, this function receives the table row
+    // and extracts information to register the modification
+    const partUID = tr.querySelector(".participant-name-td").dataset.partuid;
+    const partName = tr.querySelector(".participant-name-td").innerText;
+    let partDates = [];
+    tr.querySelectorAll("input[type=checkbox]").forEach((check) => {
+        if (check.checked) {
+            partDates.push(check.value);
+        }
+    });
+
+    // Get old modifications
+    let oldMods = localStorage.getItem("modifications");
+    if (oldMods) {
+        oldMods = JSON.parse(oldMods);
+    } else {
+        oldMods = {
+            edited: {},
+            deleted: []
+        }
+    }
+
+    // Add modified participant to modifications
+    oldMods["edited"][partUID] = {
+        uid: partUID,
+        name: partName,
+        dates: partDates
+    }
+
+    // Save modifications
+    localStorage.setItem("modifications", JSON.stringify(oldMods));
+
+    // Abilitate modal button
+    const btnSave = document.querySelector("#btnSaveParticipants");
+    if (btnSave) {
+        btnSave.disabled = false;
+    }
+}
+
+function saveDeletionLocally(partUID) {
+    oldMods = localStorage.getItem("modifications");
+    if (oldMods) {
+        oldMods = JSON.parse(oldMods);
+    } else {
+        oldMods = {
+            edited: {},
+            deleted: []
+        }
+    }
+
+    if (!oldMods["deleted"].includes(partUID)) {
+        oldMods["deleted"].push(partUID);
+        // Save modifications
+        localStorage.setItem("modifications", JSON.stringify(oldMods));
+    }
+
+    // Abilitate modal button
+    const btnSave = document.querySelector("#btnSaveParticipants");
+    if (btnSave) {
+        btnSave.disabled = false;
+    }
+}
+
+async function sendModificationsToServer() {
+    document.querySelector("#modalList").querySelector(".btn-close").click();
+    showLoading();
+
+    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+
+    const modifications = localStorage.getItem("modifications");
+    if (!modifications) {
+        return false;
+    }
+    const data = {
+        item_id: document.querySelector("#item-id").innerText,
+        modifications: JSON.parse(modifications)
+    }
+
+    let reqHeaders = new Headers();
+    reqHeaders.append('Content-type', 'application/json');
+    reqHeaders.append('X-CSRFToken', csrftoken);
+
+    let initObject = {
+        method: 'POST',
+        headers: reqHeaders,
+        body: JSON.stringify(data),
+        credentials: 'include',
+    };
+
+    await fetch('/modify-participants/', initObject)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            modificationSentSuccessfully(data);
+        })
+        .catch(function (err) {
+            showPageMsg("alert-danger", gettext("An error has occurred. Please try again later."));
+            removeLoading();
+        });
+
+}
+
+function modificationSentSuccessfully(data) {
     if (data.status == "OK") {
         window.location.reload();
     } else {

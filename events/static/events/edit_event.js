@@ -259,11 +259,17 @@ function getEventData() {
             name: partName,
             dates: partDates
         }
+        // Participant's unique ID
+        uid = participant.dataset.partuid;
+        if (uid) {
+            partData["uid"] = uid;
+        }
         eventParticipants.push(partData);
     });
 
     const eventAddParticipant = document.querySelector("#switchAddParticipant").checked;
-    // const eventRemoveParticipant = document.querySelector("#switchRemoveParticipant").checked;
+    const eventEditParticipant = document.querySelector("#switchEditParticipant").checked;
+    const eventRemoveParticipant = document.querySelector("#switchRemoveParticipant").checked;
 
     const itemID = document.querySelector("#item-id").value;
     const adminKey = document.querySelector("#admin-key").value;
@@ -278,7 +284,8 @@ function getEventData() {
         participants: eventParticipants,
         settings: {
             add_participant: eventAddParticipant,
-            // remove_participant: eventRemoveParticipant
+            edit_participant: eventEditParticipant,
+            remove_participant: eventRemoveParticipant
         }
     };
 

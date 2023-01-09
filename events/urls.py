@@ -11,6 +11,7 @@ urlpatterns = [
     path('add-participant/', views.add_participant_view, name='add_participant_view'),
     path('edit-event/<str:eventID>', views.edit_event_view, name='edit_event_view'),
     path('update-event/', views.update_event_view, name='update_event_view'),
+    path('modify-participants/', views.modify_participants_view, name='modify_participants_view'),
     path('about-us/', views.about_us_view, name='about_us_view'),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 ]

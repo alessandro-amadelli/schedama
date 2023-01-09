@@ -114,6 +114,9 @@ Participate
                         <table class="table table-striped" id="tableParticipants">
                             <thead>
                                 <tr>
+                                    {% if event.settings.remove_participant %}
+                                        <th><span class="material-symbols-outlined">delete</span></th>
+                                    {% endif %}
                                     <th><span class="material-symbols-outlined">person</span></th>
                                     {% for date in event.dates %}
                                         <th>{{ date }}</th>
@@ -123,7 +126,10 @@ Participate
                             <tbody>
                                 {% for participant in event.participants %}
                                     <tr>
-                                        <td>{{ participant.name }}</td>
+                                        {% if event.settings.remove_participant %}
+                                            <td><span class="material-symbols-outlined cursor-pointer text-danger" name="btnDeleteRow">delete</span></td>
+                                        {% endif %}
+                                        <td class="participant-name-td" data-partuid="{{ participant.uid }}">{{ participant.name }}</td>
                                         {% for date in event.dates %}
                                             <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %} 
                                                 {% if not event.settings.edit_participant %}disabled{% endif %}></td>
@@ -136,11 +142,11 @@ Participate
                     
                 </div>
                 <div class="modal-footer">
-                    {% if event.settings.edit_participant %}
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelAddParticipant">
+                    {% if event.settings.edit_participant or event.settings.remove_participant%}
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelSaveParticipants">
                             <span class="material-symbols-outlined">delete</span> {% translate "Cancel" %}
                         </button>
-                        <button type="button" class="btn btn-primary" id="btnSaveParticipants">
+                        <button type="button" class="btn btn-primary" id="btnSaveParticipants" disabled>
                             <span class="material-symbols-outlined">save</span> {% translate "Save" %}
                         </button>
                     {% else %}

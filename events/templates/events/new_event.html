@@ -142,14 +142,18 @@
                 <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
               </div>
             </div>
-            {% comment %}
+            <div class="mb-3">
+              <div class="form-check form-switch fs-4">
+              <input class="form-check-input" type="checkbox" role="switch" id="switchEditParticipant" checked>
+              <label class="form-check-label" for="switchRemoveParticipant">{% translate "Edit participants" %}</label>
+              </div>
+            </div>
             <div class="mb-3">
               <div class="form-check form-switch fs-4">
                 <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant">
                 <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
               </div>
             </div>
-            {% endcomment %}
           </form>
         </div>
         <div class="modal-footer">

@@ -246,7 +246,6 @@ input, .form-control, input:focus, .form-control:focus {
 .event-clock-div {
     user-select: none;
     overflow: hidden;
-    /* background-color: var(--event-div-bg); */
 }
 
 .event-clock-div::before {
@@ -257,7 +256,7 @@ input, .form-control, input:focus, .form-control:focus {
     top: -25%;
     left: -50%;
     z-index: -1;
-    background: linear-gradient(90deg, var(--event-div-bg), var(--event-div-bg) 30%, var(--moving-bg-color) 50%, var(--event-div-bg) 70%, var(--event-div-bg));
+    background: linear-gradient(90deg, var(--event-div-bg), var(--event-div-bg) 35%, var(--moving-bg-color) 40%, var(--moving-bg-color) 60%, var(--event-div-bg) 65%, var(--event-div-bg));
     animation-name: timerAnimation;
     animation-duration: 5s;
     animation-fill-mode:forwards;

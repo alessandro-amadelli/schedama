@@ -58,6 +58,18 @@ def generate_admin_key():
     KEY_LENGTH = 32
     return secrets.token_urlsafe(KEY_LENGTH)
 
+def generate_participant_id(participant_ids):
+    """
+    This function generates a unique ID for each participant.
+    The ID must be unique in the event scope so the function
+    receives a list of all existing UIDs
+    """
+    UID_LENGTH = 6
+    while True:
+        uid = secrets.token_urlsafe(UID_LENGTH)
+        if uid not in participant_ids:
+            return uid
+
 def insert_record(record_data):
     # Check if it's an insert or update operation based on item_id presence
     if "item_id" not in record_data.keys():
@@ -76,6 +88,20 @@ def insert_record(record_data):
         # Adding creation_date field
         timestamp = datetime.now().strftime("%Y-%m-%d h.%H:%M:%S.%f")
         record_data["creation_date"] = timestamp
+
+    # Managing participant UIDs
+    # List that contain all participant UIDs to check univocity
+    participant_ids = [p.get("uid", None) for p in record_data["participants"]]
+
+    for p in record_data["participants"]:
+        # Get participant's UID
+        pid = p.get("uid", None)
+        if not pid:
+            # Participant is without ID, so a new ID is generated and assigned to participant
+            pid = generate_participant_id(participant_ids)
+            p["uid"] = pid
+            # New participant's id is appended to the list
+            participant_ids.append(pid)
 
     # Updating last modification date
     record_data["last_modified"] = datetime.now().strftime("%Y-%m-%d h.%H:%M:%S.%f")

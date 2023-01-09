@@ -293,7 +293,8 @@ function restorePreviousData() {
 
     // Event settings
     document.querySelector("#switchAddParticipant").checked = unsavedEvent.settings.add_participant;
-    // document.querySelector("#switchRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
+    document.querySelector("#switchEditParticipant").checked = unsavedEvent.settings.edit_participant;
+    document.querySelector("#switchRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
 
     // Event title
     document.querySelector("#eventTitle").value = unsavedEvent.title;
@@ -332,7 +333,8 @@ function saveLocally() {
 
     // Settings
     const addParticipant = document.querySelector("#switchAddParticipant").checked;
-    // const removeParticipant = document.querySelector("#switchRemoveParticipant").checked;
+    const editParticipant = document.querySelector("#switchAddParticipant").checked;
+    const removeParticipant = document.querySelector("#switchRemoveParticipant").checked;
     
     // Populating date list
     let dateList = [];
@@ -358,7 +360,8 @@ function saveLocally() {
         participants: participantList,
         settings: {
             add_participant: addParticipant,
-            // remove_participant: removeParticipant
+            edit_participant: editParticipant,
+            remove_participant: removeParticipant
         }
     }
 

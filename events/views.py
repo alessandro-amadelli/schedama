@@ -162,7 +162,9 @@ def update_event_view(request):
 
     #Retrieve request data
     request_data = json.loads(request.body)
- 
+    
+    print(request_data)
+
     item_id = request_data.get("item_id", "")
     admin_key = request_data.get("admin_key", "")
 
@@ -193,16 +195,79 @@ def update_event_view(request):
         event_data["dates"].sort() # Order event dates
         event_data["participants"] = request_data.get("participants", [])
         event_data["settings"]["add_participant"] = request_data["settings"].get("add_participant", False)
+        event_data["settings"]["edit_participant"] = request_data["settings"].get("edit_participant", False)
         event_data["settings"]["remove_participant"] = request_data["settings"].get("remove_participant", False)
     
-    # Saving new event's info
-    dynamodb_ops.insert_record(event_data)
+        # Saving new event's info
+        dynamodb_ops.insert_record(event_data)
 
     response = {
         "status": "OK"
     }
 
     return JsonResponse(response)
+
+def modify_participants_view(request):
+    if request.method != 'POST':
+        return redirect("index")
+
+    # Retrieve request data
+    request_data = json.loads(request.body)
+
+    item_id = request_data["item_id"]
+    to_modify = request_data["modifications"].get("edited", {})
+    to_delete = request_data["modifications"].get("deleted", [])
+
+    # If there are no modifications then returns "OK"
+    if len(to_modify) + len(to_delete) == 0:
+        response = {
+            "status": "OK"
+        }
+        return JsonResponse(response)
+    
+    # Retrieve event's data
+    event_data = get_event_data(item_id, "event")
+    if event_data == []:
+        response = {
+            "status": "ERROR",
+            "description": _("An error has occurred.")
+        }
+        return JsonResponse(response)
+    
+    # Event' settings
+    event_settings = event_data["settings"]
+    edit_participant = event_settings.get("edit_participant", False)
+    remove_participant = event_settings.get("remove_participant", False)
+
+    # If the setting that allows for participants modification is true
+    if edit_participant:
+        # Applying modifications
+        for p in event_data["participants"]:
+            uid = p.get("uid","")
+            if uid in to_modify.keys():
+                p = to_modify[uid]
+
+    # If the setting that allows for participants removal is true
+    if remove_participant:
+        event_data["event_bin"] = event_data.get("event_bin", [])
+        # Deleting participants
+        for p in event_data["participants"]:
+            uid = p.get("uid", "")
+            if uid in to_delete:
+                event_data["event_bin"].append(p)
+                try:
+                    event_data["participants"].remove(p)
+                except ValueError:
+                    pass
+
+    # Saving data to database
+    dynamodb_ops.insert_record(event_data)
+    
+    response = {
+        "status": "OK"
+    }
+    return JsonResponse(response)
+
 
 def error404_view(request, exception):
     
