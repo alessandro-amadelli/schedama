@@ -52,10 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Button to cancel participants modifications
-    document.querySelector("#btnCancelSaveParticipants").onclick = () => {
-        // Cancel button reloads the page (if there is any modification) so data is restored
-        if (localStorage.getItem("modifications")) {
-            window.location.reload();
+    const btnCancelSavePart = document.querySelector("#btnCancelSaveParticipants");
+    if (btnCancelSavePart) {
+        btnCancelSavePart.onclick = () => {
+            // Cancel button reloads the page (if there is any modification) so data is restored
+            if (localStorage.getItem("modifications")) {
+                window.location.reload();
+            }
         }
     };
 
