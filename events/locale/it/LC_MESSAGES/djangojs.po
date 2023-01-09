@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-08 14:12+0100\n"
+"POT-Creation-Date: 2023-01-09 17:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,21 +27,22 @@ msgstr "Data evento"
 msgid "Date added"
 msgstr "Data aggiunta"
 
-#: .\events\static\events\edit_event.js:313
-#: .\events\static\events\new_event.js:395
-#: .\events\static\events\view_event.js:337
+#: .\events\static\events\edit_event.js:320
+#: .\events\static\events\new_event.js:398
+#: .\events\static\events\view_event.js:376
+#: .\events\static\events\view_event.js:488
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
-#: .\events\static\events\new_event.js:413
+#: .\events\static\events\new_event.js:416
 msgid "Event created"
 msgstr "Evento creato"
 
-#: .\events\static\events\new_event.js:414
+#: .\events\static\events\new_event.js:417
 msgid "Your event has been successfully created"
 msgstr "Il tuo evento è stato creato con successo"
 
-#: .\events\static\events\new_event.js:455
+#: .\events\static\events\new_event.js:458
 msgid ""
 "<span class=\"material-symbols-outlined\">warning</span> \n"
 "    IMPORTANT: before leaving the page make sure to save this link, it's the "
@@ -65,18 +66,18 @@ msgstr "Ehi, dai un occhio a questo fantastico evento su Schedama.com!"
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: .\events\static\events\view_event.js:110
+#: .\events\static\events\view_event.js:149
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\events\static\events\view_event.js:110
+#: .\events\static\events\view_event.js:149
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\events\static\events\view_event.js:183
+#: .\events\static\events\view_event.js:222
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\events\static\events\view_event.js:198
+#: .\events\static\events\view_event.js:237
 msgid "Preferences"
 msgstr "Preferenze"

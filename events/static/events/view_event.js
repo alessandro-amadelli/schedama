@@ -111,13 +111,13 @@ function updateClock(deadline) {
 
     // Background color
     const perc = (t.seconds * 100) / 60;
-    // timer.style.backgroundImage = "linear-gradient(90deg, rgba(0,0,0,.1), rgba(255,2555,255,.3) " + perc +"%, rgba(0,0,0,.1)";
     
     if (t.delta <= 0) {
         days.innerText = "0";
         hours.innerText = "0";
         mins.innerText = "0";
         secs.innerText = "0";
+        timer.style.display = "none";
         clearInterval(updateInterval);
     } 
 }

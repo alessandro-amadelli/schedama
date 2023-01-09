@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-08 14:12+0100\n"
+"POT-Creation-Date: 2023-01-09 17:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,43 +67,57 @@ msgid "Participants"
 msgstr "Partecipanti"
 
 #: .\events\templates\events\edit_event.html:96
-#: .\events\templates\events\edit_event.html:178
+#: .\events\templates\events\edit_event.html:193
 msgid "Add participant"
 msgstr "Aggiungi partecipante"
 
-#: .\events\templates\events\edit_event.html:133
+#: .\events\templates\events\edit_event.html:131
+msgid "Removed participants"
+msgstr "Partecipanti rimossi"
+
+#: .\events\templates\events\edit_event.html:145
 #: .\events\templates\events\new_event.html:98
-#: .\events\templates\events\view_event.html:144
+#: .\events\templates\events\view_event.html:150
 msgid "Save"
 msgstr "Salva"
 
-#: .\events\templates\events\edit_event.html:143
+#: .\events\templates\events\edit_event.html:155
 #: .\events\templates\events\new_event.html:133
 msgid "Event settings"
 msgstr "Impostazioni evento"
 
-#: .\events\templates\events\edit_event.html:148
+#: .\events\templates\events\edit_event.html:160
 #: .\events\templates\events\new_event.html:138
 msgid "Choose what participants are allowed to do"
 msgstr "Scegli cosa possono fare i partecipanti"
 
-#: .\events\templates\events\edit_event.html:152
+#: .\events\templates\events\edit_event.html:164
 #: .\events\templates\events\new_event.html:80
 #: .\events\templates\events\new_event.html:142
 msgid "Add participants"
 msgstr "Aggiungi partecipanti"
 
-#: .\events\templates\events\edit_event.html:184
+#: .\events\templates\events\edit_event.html:170
+#: .\events\templates\events\new_event.html:148
+msgid "Edit participants"
+msgstr "Modifica partecipanti"
+
+#: .\events\templates\events\edit_event.html:176
+#: .\events\templates\events\new_event.html:154
+msgid "Remove participants"
+msgstr "Rimuovi partecipanti"
+
+#: .\events\templates\events\edit_event.html:199
 msgid "Particpant name"
 msgstr "Nome partecipante"
 
-#: .\events\templates\events\edit_event.html:188
-#: .\events\templates\events\view_event.html:141
-#: .\events\templates\events\view_event.html:172
+#: .\events\templates\events\edit_event.html:203
+#: .\events\templates\events\view_event.html:147
+#: .\events\templates\events\view_event.html:178
 msgid "Cancel"
 msgstr "Annulla"
 
-#: .\events\templates\events\edit_event.html:189
+#: .\events\templates\events\edit_event.html:204
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -247,23 +261,23 @@ msgstr "Partecipa"
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:147
+#: .\events\templates\events\view_event.html:153
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:160
+#: .\events\templates\events\view_event.html:166
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:166
+#: .\events\templates\events\view_event.html:172
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:168
+#: .\events\templates\events\view_event.html:174
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:175
+#: .\events\templates\events\view_event.html:181
 msgid "Join"
 msgstr "Partecipa"
 
@@ -277,6 +291,6 @@ msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:116 .\events\views.py:174
+#: .\events\views.py:116 .\events\views.py:176 .\events\views.py:233
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
