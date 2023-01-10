@@ -268,6 +268,9 @@ def modify_participants_view(request):
     }
     return JsonResponse(response)
 
+def history_view(request):
+
+    return render(request, "events/history.html")
 
 def error404_view(request, exception):
     

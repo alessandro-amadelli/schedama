@@ -236,7 +236,7 @@ function generateShareBtn(contentURL) {
     btnUl.appendChild(dividerLi);
     btnUl.appendChild(copyLi);
 
-    return btnDiv
+    return btnDiv;
 }
 
 function setInvalid(element, isInvalid) {
@@ -248,4 +248,50 @@ function setInvalid(element, isInvalid) {
     } else {
         element.classList.remove("is-invalid");
     }
+}
+
+function addToHistory(eventData) {
+    // Adds current visited event to history
+    let history = localStorage.getItem("history");
+    if (!history) {
+        history = "[]";
+    }
+    
+    let historyData = JSON.parse(history);
+
+    // Get item_id of event to save and set last_visited
+    const itemID = eventData.item_id;
+    const now = new Date();
+    const day = ('0' + now.getDate()).slice(-2);
+    const month = ('0' + (now.getMonth() + 1)).slice(-2);
+    const year = now.getFullYear();
+    const hour = ('0' + now.getHours()).slice(-2);
+    const min = ('0' + now.getMinutes()).slice(-2);
+    const sec = ('0' + now.getSeconds()).slice(-2);
+    eventData["last_visited"] = [day, "/", month, "/", year, " h.", hour, ":", min, ":", sec].join('');
+
+    // Iterating history items to see if the same event is already present
+    let present = false;
+    historyData.every((item, i) => {
+        if (item.item_id == itemID) {
+            // Updating already present event (preserving the admin version)
+            if (eventData.hasOwnProperty("admin_link")) {
+                historyData[i] = eventData;
+            } else {
+                item.title = eventData.title;
+                item.participation_link = eventData.participation_link,
+                item.last_visited = eventData.last_visited
+            }
+            present = true;
+        }
+        return !present; // every() stops if the return is false
+    });
+
+    // Append event data to history if not present
+    if (!present) {
+        historyData.push(eventData);
+    }
+
+    // Updating history content in localStorage
+    localStorage.setItem("history", JSON.stringify(historyData));
 }

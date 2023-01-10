@@ -484,6 +484,17 @@ function eventCreatedSuccessfully(data) {
     admRow.appendChild(shareAdmCol);
     shareAdmCol.appendChild(btnShareAdm);
 
+    // Save to history
+    const eventData = {
+        item_id: itemID,
+        title: eventTitle,
+        participation_link: participantURL.innerText,
+        admin_link: adminURL.innerText
+    }
+    addToHistory(eventData);
+
+    notify(gettext("Data saved to history"));
+
     // Remove "unsavedEvent" from local storage
     localStorage.removeItem("unsavedEvent");
 }

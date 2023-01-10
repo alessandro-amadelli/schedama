@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
         addParticipantToTable();
     };
 
+    // Update localStorage history
+    updateHistory();
 });
 
 function removeParticipantRow(btn) {
@@ -329,4 +331,18 @@ function eventUpdated(data) {
         showPageMsg("alert-danger", data.description);
         removeLoading();
     }
+}
+
+function updateHistory() {
+    const eventDataFull = getEventData();
+    const partLink = (window.location.href.slice(0, window.location.href.indexOf("?k="))).replace("edit-event", "participate");
+
+    const eventData = {
+        item_id: eventDataFull.item_id,
+        title: eventDataFull.title,
+        participation_link: partLink,
+        admin_link: window.location.href
+    }
+
+    addToHistory(eventData);
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-09 17:32+0100\n"
+"POT-Creation-Date: 2023-01-10 22:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,6 +130,18 @@ msgstr "Pagina non trovata"
 msgid "This isn't the page you're looking for..."
 msgstr "Questa non è la pagina che stavi cercando..."
 
+#: .\events\templates\events\history.html:13
+msgid "View recently opened events"
+msgstr "Visualizza gli eventi aperti di recente"
+
+#: .\events\templates\events\history.html:16
+msgid ""
+"Here you can see events that you recently opened or created. A good place to "
+"look if you can't find the link..."
+msgstr ""
+"Qui puoi vedere gli eventi che hai aperto o creato recentemente. Un buon posto "
+"dove guardare se non riesci a ritrovare il link..."
+
 #: .\events\templates\events\index.html:10
 msgid "Welcome to Schedama"
 msgstr "Benvenuto su Schedama"
@@ -193,6 +205,10 @@ msgid "Create event"
 msgstr "Crea evento"
 
 #: .\events\templates\events\navbar.html:17
+msgid "History"
+msgstr "Cronologia"
+
+#: .\events\templates\events\navbar.html:20
 msgid "About us"
 msgstr "About us"
 

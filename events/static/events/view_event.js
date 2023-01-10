@@ -73,6 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateClock(deadline);
     updateInterval = setInterval(() => {updateClock(deadline)},1000); 
 
+    // Update localStorage history
+    updateHistory();
+
 });
 var updateInterval = "";
 
@@ -498,4 +501,17 @@ function modificationSentSuccessfully(data) {
         showPageMsg("alert-danger", data.description);
         removeLoading();
     }
+}
+
+function updateHistory() {
+    const itemID = document.querySelector("#item-id").innerText;
+    const eventTitle = document.querySelector("#eventTitle").innerText;
+
+    const eventData = {
+        item_id: itemID,
+        title: eventTitle,
+        participation_link: window.location.href
+    };
+
+    addToHistory(eventData);
 }
