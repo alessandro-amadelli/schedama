@@ -60,7 +60,7 @@ msgstr ""
 
 #: .\events\static\events\new_event.js:496
 msgid "Data saved to history"
-msgstr ""
+msgstr "Dati salvati in cronologia"
 
 #: .\events\static\events\utilities.js:110
 msgid "Loading, please wait."
