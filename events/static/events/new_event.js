@@ -3,10 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Button to save event
     document.querySelector("#btnSaveEvent").onclick = () => {
-        let isValidated = validateEvent();
-        if (isValidated) {
-            sendEventToServer();
-        }
+        sendEventToServer();
     }
 
     // Add new date on input date change instead of clicking to add date
@@ -250,7 +247,7 @@ function validateEvent() {
 
     // Check #1 Title
     const title = document.querySelector("#eventTitle");
-    if (title.value == '') {
+    if (title.value.replaceAll(" ", "").length == 0) {
         setInvalid(title, true);
         validated = false;
     } else {
@@ -261,7 +258,7 @@ function validateEvent() {
     const locSwitch = document.querySelector("#checkEventLocation");
     const location = document.querySelector("#eventLocation");
     if (locSwitch.checked) {
-        if (location.value == '') {
+        if (location.value.replaceAll(" ", "").length == 0) {
             setInvalid(location, true);
             validated = false;
         } else {
@@ -373,6 +370,13 @@ async function sendEventToServer() {
     const data = JSON.parse(localStorage.getItem("unsavedEvent"));
     const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
 
+    const isValidated = validateEvent();
+
+    if (!isValidated) {
+        showPageMsg("alert-danger", gettext("Please, check input fields."));
+        return false;
+    }
+
     let reqHeaders = new Headers();
     reqHeaders.append('Content-type', 'application/json');
     reqHeaders.append('X-CSRFToken', csrftoken);
@@ -401,6 +405,11 @@ async function sendEventToServer() {
 }
 
 function eventCreatedSuccessfully(data) {
+    if (data.status == "ERROR") {
+        showPageMsg("alert-danger", data.description);
+        return false;
+    }
+
     // Saving title of the event (to display it after)
     const eventTitle = document.querySelector("#eventTitle").value;
 

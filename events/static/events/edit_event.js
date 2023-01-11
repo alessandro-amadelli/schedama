@@ -50,6 +50,45 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHistory();
 });
 
+function validateEvent() {
+    validated = true;
+
+    // Check #1 Title
+    const title = document.querySelector("#eventTitle");
+    if (title.value.replaceAll(" ", "").length == 0) {
+        setInvalid(title, true);
+        validated = false;
+    } else {
+        setInvalid(title, false);
+    }
+
+    // Check #2 Location
+    const locSwitch = document.querySelector("#checkEventLocation");
+    const location = document.querySelector("#eventLocation");
+    if (locSwitch.checked) {
+        if (location.value.replaceAll(" ", "").length == 0) {
+            setInvalid(location, true);
+            validated = false;
+        } else {
+            setInvalid(location, false);
+        }
+    } else {
+        setInvalid(location, false);
+    }
+
+    //Check #3 Date and time
+    const firstDate = document.querySelector("#dateInp");
+    const dates = document.querySelectorAll("[name='eventDate']");
+    if (dates.length == 0) {
+        setInvalid(firstDate, true);
+        validated = false;
+    } else {
+        setInvalid(firstDate, false);
+    }
+
+    return validated;
+}
+
 function removeParticipantRow(btn) {
     btn.parentElement.parentElement.parentElement.parentElement.remove();
     updateParticipantsNum();
@@ -296,6 +335,13 @@ function getEventData() {
 
 async function sendUpdateToServer() {
     const data = getEventData();
+
+    const isValidated = validateEvent(data);
+    if (!isValidated) {
+        showPageMsg("alert-danger", gettext("Please, check input fields."));
+        return false;
+    }
+
     const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
 
     let reqHeaders = new Headers();

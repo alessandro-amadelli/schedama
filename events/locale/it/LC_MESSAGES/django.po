@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-10 22:15+0100\n"
+"POT-Creation-Date: 2023-01-11 12:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,8 +139,8 @@ msgid ""
 "Here you can see events that you recently opened or created. A good place to "
 "look if you can't find the link..."
 msgstr ""
-"Qui puoi vedere gli eventi che hai aperto o creato recentemente. Un buon posto "
-"dove guardare se non riesci a ritrovare il link..."
+"Qui puoi vedere gli eventi che hai aperto o creato recentemente. Un buon "
+"posto dove guardare se non riesci a ritrovare il link..."
 
 #: .\events\templates\events\index.html:10
 msgid "Welcome to Schedama"
@@ -297,16 +297,20 @@ msgstr "Preferenze"
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:37 .\events\views.py:106
+#: .\events\views.py:86 .\events\views.py:157
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
-#: .\events\views.py:49
+#: .\events\views.py:100
 msgid "An error has occurred while creating the event. Please try again later."
 msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:116 .\events\views.py:176 .\events\views.py:233
+#: .\events\views.py:167 .\events\views.py:231 .\events\views.py:295
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
+
+#: .\events\views.py:188 .\events\views.py:267 .\events\views.py:335
+msgid "Sorry, submitted data is invalid."
+msgstr "Spiacente, i dati inviati non sono validi."

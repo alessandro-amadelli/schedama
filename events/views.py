@@ -11,6 +11,55 @@ def get_event_data(item_id, item_type="event"):
     # TO-DO: implement cache-first
     return dynamodb_ops.select_record_by_id(item_id, item_type)
 
+def validate_event(event_data):
+    """
+    This function validates the received event.
+    It needs to be called before saving event to server
+    """
+    # Max lengths of event fields
+    TITLE_MAX_LENGTH = 70
+    LOCATION_MAX_LENGTH = 70
+    DATE_MIN = datetime.now().strftime("%Y-%m-%dT%H:%M")
+    PARTICIPANT_NAME_MAX_LENGTH = 30
+
+    is_valid = True
+
+    # Check if title is present and truncate length
+    if (event_data.get("title", "")).replace(" ", "") == "":
+        is_valid = False
+    else:
+        if len(event_data["title"]) > TITLE_MAX_LENGTH:
+            event_data["title"] = event_data["title"][:TITLE_MAX_LENGTH]
+    
+    # Check location and truncate
+    has_location = event_data.get("has_location", False)
+    if has_location and ( len(event_data.get("location", "").replace(" ", "")) == 0 ):
+        is_valid = False
+    if len(event_data.get("location", "")) > LOCATION_MAX_LENGTH:
+        event_data["location"] = event_data["location"][:LOCATION_MAX_LENGTH]
+    
+    # Check event dates
+    # Skip check for the moment because multiple dates could be present
+
+    # Check event participants
+    if len(event_data.get("participants", [])) > 0:
+        for p in event_data["participants"]:
+            if len(p["name"]) > PARTICIPANT_NAME_MAX_LENGTH:
+                p["name"] = p["name"][:PARTICIPANT_NAME_MAX_LENGTH]
+
+    return (is_valid, event_data)
+
+def save_event_to_db(event_data):
+    """
+    This function calls event validation and saves event to the database
+    """
+    is_validated, event_data = validate_event(event_data)
+
+    if not is_validated:
+        return False
+
+    return dynamodb_ops.insert_record(event_data)
+
 def index(request):
     return render(request, "events/index.html")
 
@@ -42,7 +91,9 @@ def save_event_view(request):
     event_data["dates"].sort()
 
     try:
-        new_event = dynamodb_ops.insert_record(event_data)
+        new_event = save_event_to_db(event_data)
+        if not new_event:
+            raise Exception
     except:
         response = {
             "status": "ERROR",
@@ -125,11 +176,17 @@ def add_participant_view(request):
     event_data["participants"].append(new_participant_ok)
 
     # Saving updated event data
-    dynamodb_ops.insert_record(event_data)
-    
-    response = {
-        "status": "OK"
-    }
+    new_event = save_event_to_db(event_data)
+
+    if new_event:
+        response = {
+            "status": "OK"
+        }
+    else:
+        response = {
+            "status": "ERROR",
+            "description": _("Sorry, submitted data is invalid.")
+        }
 
     return JsonResponse(response)
 
@@ -162,8 +219,6 @@ def update_event_view(request):
 
     #Retrieve request data
     request_data = json.loads(request.body)
-    
-    print(request_data)
 
     item_id = request_data.get("item_id", "")
     admin_key = request_data.get("admin_key", "")
@@ -187,6 +242,7 @@ def update_event_view(request):
     ### ###
 
     # Update ADMIN fields of the event
+    new_event = True
     if is_admin:
         event_data["title"] = request_data.get("title", event_data["title"])
         event_data["has_location"] = request_data.get("has_location", False)
@@ -199,11 +255,17 @@ def update_event_view(request):
         event_data["settings"]["remove_participant"] = request_data["settings"].get("remove_participant", False)
     
         # Saving new event's info
-        dynamodb_ops.insert_record(event_data)
+        new_event = save_event_to_db(event_data)
 
-    response = {
-        "status": "OK"
-    }
+    if new_event:
+        response = {
+            "status": "OK"
+        }
+    else:
+         response = {
+            "status": "ERROR",
+            "description": _("Sorry, submitted data is invalid.")
+        }
 
     return JsonResponse(response)
 
@@ -261,11 +323,18 @@ def modify_participants_view(request):
                     pass
 
     # Saving data to database
-    dynamodb_ops.insert_record(event_data)
+    new_event = save_event_to_db(event_data)
     
-    response = {
-        "status": "OK"
-    }
+    if new_event:
+        response = {
+            "status": "OK"
+        }
+    else:
+         response = {
+            "status": "ERROR",
+            "description": _("Sorry, submitted data is invalid.")
+        }
+
     return JsonResponse(response)
 
 def history_view(request):
