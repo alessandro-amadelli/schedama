@@ -304,10 +304,10 @@ def modify_participants_view(request):
     # If the setting that allows for participants modification is true
     if edit_participant:
         # Applying modifications
-        for p in event_data["participants"]:
+        for i, p in enumerate(event_data["participants"]):
             uid = p.get("uid","")
             if uid in to_modify.keys():
-                p = to_modify[uid]
+                event_data["participants"][i] = to_modify[uid]
 
     # If the setting that allows for participants removal is true
     if remove_participant:
@@ -321,7 +321,7 @@ def modify_participants_view(request):
                     event_data["participants"].remove(p)
                 except ValueError:
                     pass
-
+    
     # Saving data to database
     new_event = save_event_to_db(event_data)
     

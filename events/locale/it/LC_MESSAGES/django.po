@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 12:41+0100\n"
+"POT-Creation-Date: 2023-01-11 14:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgid "Event administration"
 msgstr "Amministrazione evento"
 
 #: .\events\templates\events\edit_event.html:13
-#: .\events\templates\events\index.html:56
+#: .\events\templates\events\index.html:58
 msgid "Administrate your event"
 msgstr "Amministra il tuo evento"
 
@@ -163,16 +163,19 @@ msgid "Create an event"
 msgstr "Crea un evento"
 
 #: .\events\templates\events\index.html:21
-msgid "Easily create a new event by clicking on <strong>Create event</strong>"
-msgstr ""
-"Crea un nuovo evento in modo semplice cliccando su <strong>Crea evento</"
-"strong>"
+msgid "Easily create a new event by clicking "
+msgstr "Crea un nuovo evento in modo semplice cliccando "
 
-#: .\events\templates\events\index.html:32
+#: .\events\templates\events\index.html:22
+#: .\events\templates\events\navbar.html:14
+msgid "Create event"
+msgstr "Crea evento"
+
+#: .\events\templates\events\index.html:34
 msgid "Save event links"
 msgstr "Salva i link dell'evento"
 
-#: .\events\templates\events\index.html:33
+#: .\events\templates\events\index.html:35
 msgid ""
 "After event creation, 2 links are generated: <strong>Participation URL</"
 "strong> and <strong>Administration URL</strong>"
@@ -180,11 +183,11 @@ msgstr ""
 "Dopo la creazione dell'evento, vengono generati 2 link: <strong>URL "
 "Partecipante</strong> e <strong>URL Amministrazione</strong>"
 
-#: .\events\templates\events\index.html:44
+#: .\events\templates\events\index.html:46
 msgid "Share event"
 msgstr "Condividi evento"
 
-#: .\events\templates\events\index.html:45
+#: .\events\templates\events\index.html:47
 msgid ""
 "Share the event with whoever you like by sending them the "
 "<strong>Participation URL</strong>"
@@ -192,17 +195,13 @@ msgstr ""
 "Condividi l'evento con chiunque vuoi inviando l'<strong>URL Partecipante</"
 "strong>"
 
-#: .\events\templates\events\index.html:57
+#: .\events\templates\events\index.html:59
 msgid ""
 "You can fully manage your event by visiting the <strong>Administration URL</"
 "strong>."
 msgstr ""
 "Puoi completamente gestire il tuo evento visitando l'<strong>URL "
 "Amministrazione</strong>."
-
-#: .\events\templates\events\navbar.html:14
-msgid "Create event"
-msgstr "Crea evento"
 
 #: .\events\templates\events\navbar.html:17
 msgid "History"

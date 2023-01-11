@@ -18,7 +18,9 @@ Schedama.com
       <div class="card rounded appearing-1">
         <div class="card-body">
           <h2 class="card-title text-center">{% translate "Create an event" %}</h2>
-          <p class="card-text">{% translate "Easily create a new event by clicking on <strong>Create event</strong>" %}</p>
+          <p class="card-text">{% translate "Easily create a new event by clicking " %}
+            <a href="{% url 'new_event_view' %}">{% translate "Create event"%}</a>
+          </p>
         </div>
         <div class="card-footer text-center">
           <h1>1</h1>
