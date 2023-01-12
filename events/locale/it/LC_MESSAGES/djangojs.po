@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 12:41+0100\n"
+"POT-Creation-Date: 2023-01-12 13:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\events\static\events\edit_event.js:136
+#: .\events\static\events\edit_event.js:161
 msgid "Event Date"
 msgstr "Data evento"
 
-#: .\events\static\events\edit_event.js:167
+#: .\events\static\events\edit_event.js:192
 #: .\events\static\events\new_event.js:172
 msgid "Date added"
 msgstr "Data aggiunta"
 
-#: .\events\static\events\edit_event.js:341
+#: .\events\static\events\edit_event.js:366
 #: .\events\static\events\new_event.js:376
 msgid "Please, check input fields."
 msgstr "Per favore, controlla i campi di input."
 
-#: .\events\static\events\edit_event.js:368
+#: .\events\static\events\edit_event.js:393
+#: .\events\static\events\edit_event.js:438
+#: .\events\static\events\edit_event.js:485
 #: .\events\static\events\new_event.js:402
 #: .\events\static\events\view_event.js:379
 #: .\events\static\events\view_event.js:491

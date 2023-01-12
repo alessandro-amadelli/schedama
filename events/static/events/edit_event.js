@@ -4,9 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll("input").forEach((inp) => {
         // Ignore input inside modal (managed differently)
         if (inp.getAttribute("id") != "newPartName") {
-            inp.addEventListener("change", () => {
-                enableSave();
-            });
+            inp.addEventListener("change", enableSave);
         }
     });
 
@@ -45,6 +43,29 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#btnConfirmAdd").onclick = () => {
         addParticipantToTable();
     };
+
+    // Checkbox to confirm event cancelation
+    const checkCancelEvent = document.querySelector("#checkCancelEvent");
+    if (checkCancelEvent) {
+        checkCancelEvent.removeEventListener('change', enableSave);
+        checkCancelEvent.addEventListener('change', enableCancel);
+    }
+
+    // Button to cancel event
+    const btnCancelEvent = document.querySelector("#btnCancelEvent");
+    if (btnCancelEvent) {
+        btnCancelEvent.onclick = () => {
+            sendEventCancellationToServer();
+        }
+    }
+    
+    // Button to reactivate event
+    const btnReactivateEvent = document.querySelector("#btnReactivateEvent");
+    if (btnReactivateEvent) {
+        btnReactivateEvent.onclick = () => {
+            sendEventReactivationToServer();
+        }
+    }
 
     // Update localStorage history
     updateHistory();
@@ -104,6 +125,10 @@ function enableSave() {
         btnSave.disabled = false;
         btnSave.classList.remove("visually-hidden");
     }
+}
+
+function enableCancel() {
+    document.querySelector("#btnCancelEvent").disabled = !document.querySelector("#checkCancelEvent").checked;
 }
 
 function createNewDate() {
@@ -377,6 +402,89 @@ function eventUpdated(data) {
         showPageMsg("alert-danger", data.description);
         removeLoading();
     }
+}
+
+async function sendEventCancellationToServer() {
+    const dataFull = getEventData();
+    
+    const data = {
+        item_id: dataFull.item_id,
+        admin_key: dataFull.admin_key
+    }
+
+    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+
+    let reqHeaders = new Headers();
+    reqHeaders.append('Content-type', 'application/json');
+    reqHeaders.append('X-CSRFToken', csrftoken);
+
+    let initObject = {
+        method: 'POST',
+        headers: reqHeaders,
+        body: JSON.stringify(data),
+        credentials: 'include',
+    };
+
+    showLoading();
+
+    await fetch('/cancel-event/', initObject)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            eventCanceled(data);
+        })
+        .catch(function (err) {
+            showPageMsg("alert-danger", gettext("An error has occurred. Please try again later."));
+            removeLoading();
+        });
+}
+
+function eventCanceled(data) {
+    removeLoading();
+
+    if (data.status == "ERROR") {
+        showPageMsg("alert-danger", data.description);
+        return false;
+    }
+
+    window.location.reload();
+}
+
+async function sendEventReactivationToServer() {
+    const dataFull = getEventData();
+    
+    const data = {
+        item_id: dataFull.item_id,
+        admin_key: dataFull.admin_key
+    }
+
+    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+
+    let reqHeaders = new Headers();
+    reqHeaders.append('Content-type', 'application/json');
+    reqHeaders.append('X-CSRFToken', csrftoken);
+
+    let initObject = {
+        method: 'POST',
+        headers: reqHeaders,
+        body: JSON.stringify(data),
+        credentials: 'include',
+    };
+
+    showLoading();
+
+    await fetch('/reactivate-event/', initObject)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            window.location.reload();
+        })
+        .catch(function (err) {
+            showPageMsg("alert-danger", gettext("An error has occurred. Please try again later."));
+            removeLoading();
+        });
 }
 
 function updateHistory() {

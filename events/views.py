@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 
 import json
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import schedama.dynamodb_ops as dynamodb_ops
 
 def get_event_data(item_id, item_type="event"):
@@ -206,6 +206,10 @@ def edit_event_view(request, eventID):
         return redirect("index")
     ### ###
 
+    # Convert expiration_date to readable format (if present)
+    if event_data.get("expiration_date", False):
+        event_data["expiration_date"] = datetime.fromtimestamp(int(event_data["expiration_date"]))
+
     # All checks are passed
     context = {
         "event": event_data
@@ -336,6 +340,115 @@ def modify_participants_view(request):
         }
 
     return JsonResponse(response)
+
+def cancel_event_view(request):
+    if request.method != 'POST':
+        return redirect("index")
+
+    # Retrieve request data
+    request_data = json.loads(request.body)
+
+    item_id = request_data["item_id"]
+    admin_key = request_data.get("admin_key", "")
+
+    # Only event administrators are authorized - check if admin_key is present
+    if admin_key == "":
+        response = {
+            "status": "ERROR",
+            "description": _("You are not authorized to perform this operation.")
+        }
+        return JsonResponse(response)
+    
+    # Retrieve event data
+    event_data = get_event_data(item_id)
+
+    # Check if admin_key is correct
+    if admin_key != event_data["admin_key"]:
+        response = {
+            "status": "ERROR",
+            "description": _("You are not authorized to perform this operation.")
+        }
+        return JsonResponse(response)
+    
+    # Calculate expiration date and update event
+    # Expiration date in unix timestamp format -> TTL function of dynamoDB will take care of deletion
+    expiration_datetime = datetime.now() + timedelta(days=2)
+    expiration_date = int(expiration_datetime.timestamp())
+    event_data["is_cancelled"] = True
+    event_data["expiration_date"] = expiration_date
+
+    # Change event settings to turn off participants permission
+    event_data["settings"]["add_participant"] = False
+    event_data["settings"]["edit_participant"] = False
+    event_data["settings"]["remove_participant"] = False
+
+    # Save changes to DB
+    new_event = save_event_to_db(event_data)
+
+    if new_event:
+        response = {
+            "status": "OK"
+            # "expiration_date": expiration_datetime
+        }
+    else: 
+         response = {
+            "status": "ERROR",
+            "description": _("An error has occurred.")
+        }
+    return JsonResponse(response)
+
+def reactivate_event_view(request):
+    if request.method != 'POST':
+        return redirect("index")
+
+    # Retrieve request data
+    request_data = json.loads(request.body)
+
+    item_id = request_data["item_id"]
+    admin_key = request_data.get("admin_key", "")
+
+    # Only event administrators are authorized - check if admin_key is present
+    if admin_key == "":
+        response = {
+            "status": "ERROR",
+            "description": _("You are not authorized to perform this operation.")
+        }
+        return JsonResponse(response)
+    
+    # Retrieve event data
+    event_data = get_event_data(item_id)
+
+    # Check if admin_key is correct
+    if admin_key != event_data["admin_key"]:
+        response = {
+            "status": "ERROR",
+            "description": _("You are not authorized to perform this operation.")
+        }
+        return JsonResponse(response)
+    
+    # Removing expiration date and is_cancelled
+    new_event = True
+    if event_data.get("is_cancelled", False):
+        try:
+            del event_data["is_cancelled"]
+            del event_data["expiration_date"]
+        except:
+            pass
+        # Update event data
+        new_event = save_event_to_db(event_data)
+    
+    if new_event:
+        response = {
+            "status": "OK"
+        }
+    else: 
+         response = {
+            "status": "ERROR",
+            "description": _("An error has occurred.")
+        }
+    return JsonResponse(response)
+
+
 
 def history_view(request):
 

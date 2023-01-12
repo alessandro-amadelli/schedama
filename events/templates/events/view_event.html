@@ -21,13 +21,17 @@ Participate
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{% static 'events/view_event.js' %}"></script>
 
+    {% if event.is_cancelled %}
+        <span class="badge text-bg-danger w-100 fs-3 p-3 my-3">{% translate "Event Cancelled" %}</span>
+    {% endif %}
+
     <!-- Title row -->
-    <div class="row mb-3 justify-content-center">
+    <div class="row mb-3 justify-content-center{% if event.is_cancelled %} opacity-50{% endif %}">
         <div class="col-12 event-title-div text-center rounded shadow p-3"><span id="eventTitle">{{ event.title }}</span></div>
     </div>
 
     <!-- Countdown row -->
-    <div class="row mb-3">
+    <div class="row mb-3{% if event.is_cancelled %} opacity-50{% endif %}">
         <div class="col-12 mx-auto event-clock-div text-center rounded shadow display-5 p-3 position-relative" id="clockDiv">
             <span class="clockDays">-</span>d 
             <span class="clockHours">--</span>h 
@@ -37,7 +41,7 @@ Participate
     </div>
 
     <!-- Event info row -->
-    <div class="row mb-4">
+    <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %}">
         <!-- Event location -->
         <div class="col-12 event-info-div display-5 p-3 shadow rounded">
             {% if event.has_location %}
@@ -50,7 +54,7 @@ Participate
             {% endif %}
             
             <!-- Event date and time -->
-            <div class="row mb-4">
+            <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %}">
                 {% for date in event.dates_formatted %}
                     <div class="col-12 mb-2 date-formatted">
                         <span class="material-symbols-outlined fs-1 text-success">event</span><span class="formattedDate">{{ date|date:"d N Y"}}</span>
@@ -60,7 +64,7 @@ Participate
             </div>
             
             <!-- Event participants -->
-            <div class="row mb-4">
+            <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %}">
                 <div class="col-4 mb-4">
                     <span class="material-symbols-outlined fs-1 text-warning">group</span> 
                     {{ event.participants|length }}
@@ -85,7 +89,7 @@ Participate
     </div>
 
     <!-- Chart area  -->
-    <div class="row p-2 mb-3 event-chart-div shadow rounded" id="chartAreaDiv">
+    <div class="row p-2 mb-3 event-chart-div shadow rounded{% if event.is_cancelled %} opacity-50{% endif %}" id="chartAreaDiv">
         <div class="col-12 col-lg-4 p-0 mb-3">
             <div class="position-relative p-4">
                 <canvas id="totChart"></canvas>
