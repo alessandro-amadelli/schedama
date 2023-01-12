@@ -9,7 +9,7 @@ Participate
 {% block body %}
     {% csrf_token %}
     <span id="item-id" hidden>{{ event.item_id }}</span>
-
+    
     <!-- Passing event's data to javascript in a secure way -->
     {{ event.participants|json_script:"participants" }}
     {{ event.dates|json_script:"dates" }}
@@ -32,11 +32,19 @@ Participate
 
     <!-- Countdown row -->
     <div class="row mb-3{% if event.is_cancelled %} opacity-50{% endif %}">
-        <div class="col-12 mx-auto event-clock-div text-center rounded shadow display-5 p-3 position-relative" id="clockDiv">
-            <span class="clockDays">-</span>d 
-            <span class="clockHours">--</span>h 
-            <span class="clockMins">--</span>m 
-            <span class="clockSecs">--</span>s
+        <div class="row mx-auto event-clock-div justify-content-center rounded shadow display-5 p-3 position-relative" id="clockDiv">
+            <div class="col-3 col-lg-2 text-center">
+                <span class="clockDays">-</span>d 
+            </div>
+            <div class="col-3 col-lg-2 text-center">
+                <span class="clockHours">--</span>h 
+            </div>
+            <div class="col-3 col-lg-2 text-center">
+                <span class="clockMins">--</span>m 
+            </div>
+            <div class="col-3 col-lg-2 text-center">
+                <span class="clockSecs">--</span>s
+            </div>
         </div>
     </div>
 

@@ -62,14 +62,10 @@
 
 @keyframes timerAnimation {
     0% {
-        transform: translateX(25%);
-    }
-    50% {
         transform: translateX(0%);
-
     }
     100% {
-        transform: translateX(-25%);
+        transform: translateX(60%);
     }
 }
 
@@ -251,16 +247,16 @@ input, .form-control, input:focus, .form-control:focus {
 .event-clock-div::before {
     content: "";
     position: absolute;
-    width: 200%;
+    width: 250%;
     height: 150%;
     top: -25%;
-    left: -50%;
+    left: -150%;
     z-index: -1;
-    background: linear-gradient(90deg, var(--event-div-bg), var(--event-div-bg) 35%, var(--moving-bg-color) 40%, var(--moving-bg-color) 60%, var(--event-div-bg) 65%, var(--event-div-bg));
+    background: linear-gradient(90deg, var(--event-div-bg), var(--event-div-bg) 45%, var(--moving-bg-color) 50%, var(--event-div-bg) 55%, var(--event-div-bg));
     animation-name: timerAnimation;
-    animation-duration: 5s;
+    animation-duration: 3s;
     animation-fill-mode:forwards;
-    animation-direction: alternate;
+    animation-direction:normal;
     animation-iteration-count: infinite;
     animation-play-state: running;
     animation-timing-function: linear;
