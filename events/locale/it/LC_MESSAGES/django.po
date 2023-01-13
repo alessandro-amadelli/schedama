@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-13 16:00+0100\n"
+"POT-Creation-Date: 2023-01-13 17:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,6 +46,7 @@ msgid "Administrate your event"
 msgstr "Amministra il tuo evento"
 
 #: .\events\templates\events\edit_event.html:33
+#: .\events\templates\events\new_event.html:23
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -55,13 +56,13 @@ msgstr "Pagina partecipante"
 
 #: .\events\templates\events\edit_event.html:47
 #: .\events\templates\events\edit_event.html:53
-#: .\events\templates\events\new_event.html:36
+#: .\events\templates\events\new_event.html:37
 msgid "Event title"
 msgstr "Titolo evento"
 
 #: .\events\templates\events\edit_event.html:61
 #: .\events\templates\events\edit_event.html:72
-#: .\events\templates\events\new_event.html:55
+#: .\events\templates\events\new_event.html:56
 msgid "Event location"
 msgstr "Location evento"
 
@@ -71,7 +72,7 @@ msgstr "Data e ora"
 
 #: .\events\templates\events\edit_event.html:86
 #: .\events\templates\events\edit_event.html:97
-#: .\events\templates\events\new_event.html:69
+#: .\events\templates\events\new_event.html:70
 msgid "Event date"
 msgstr "Data evento"
 
@@ -89,7 +90,7 @@ msgid "Removed participants"
 msgstr "Partecipanti rimossi"
 
 #: .\events\templates\events\edit_event.html:161
-#: .\events\templates\events\new_event.html:98
+#: .\events\templates\events\new_event.html:99
 #: .\events\templates\events\view_event.html:165
 msgid "Save"
 msgstr "Salva"
@@ -193,28 +194,28 @@ msgid "Reactivate event"
 msgstr "Riattiva evento"
 
 #: .\events\templates\events\edit_event.html:228
-#: .\events\templates\events\new_event.html:133
+#: .\events\templates\events\new_event.html:134
 msgid "Event settings"
 msgstr "Impostazioni evento"
 
 #: .\events\templates\events\edit_event.html:233
-#: .\events\templates\events\new_event.html:138
+#: .\events\templates\events\new_event.html:139
 msgid "Choose what participants are allowed to do"
 msgstr "Scegli cosa possono fare i partecipanti"
 
 #: .\events\templates\events\edit_event.html:238
-#: .\events\templates\events\new_event.html:80
-#: .\events\templates\events\new_event.html:142
+#: .\events\templates\events\new_event.html:81
+#: .\events\templates\events\new_event.html:143
 msgid "Add participants"
 msgstr "Aggiungi partecipanti"
 
 #: .\events\templates\events\edit_event.html:245
-#: .\events\templates\events\new_event.html:148
+#: .\events\templates\events\new_event.html:149
 msgid "Edit participants"
 msgstr "Modifica partecipanti"
 
 #: .\events\templates\events\edit_event.html:252
-#: .\events\templates\events\new_event.html:154
+#: .\events\templates\events\new_event.html:155
 msgid "Remove participants"
 msgstr "Rimuovi partecipanti"
 
@@ -327,47 +328,47 @@ msgstr "Editor eventi"
 msgid "Create and customize your event"
 msgstr "Crea e personalizza il tuo evento"
 
-#: .\events\templates\events\new_event.html:30
+#: .\events\templates\events\new_event.html:31
 msgid "Enter a title"
 msgstr "Inserisci un titolo"
 
-#: .\events\templates\events\new_event.html:44
+#: .\events\templates\events\new_event.html:45
 msgid "Choose a location"
 msgstr "Scegli una location"
 
-#: .\events\templates\events\new_event.html:63
+#: .\events\templates\events\new_event.html:64
 msgid "Set a date and time"
 msgstr "Imposta data e ora"
 
-#: .\events\templates\events\new_event.html:63
+#: .\events\templates\events\new_event.html:64
 msgid "you can indicate more than one possible date"
 msgstr "puoi indicare anche più di una data possibile"
 
-#: .\events\templates\events\new_event.html:80
+#: .\events\templates\events\new_event.html:81
 msgid "Optional"
 msgstr "Facoltativo"
 
-#: .\events\templates\events\new_event.html:86
+#: .\events\templates\events\new_event.html:87
 msgid "Enter new participant"
 msgstr "Inserisci un nuovo partecipante"
 
-#: .\events\templates\events\new_event.html:109
+#: .\events\templates\events\new_event.html:110
 msgid "Restore unsaved data"
 msgstr "Ripristina dati non salvati"
 
-#: .\events\templates\events\new_event.html:113
+#: .\events\templates\events\new_event.html:114
 msgid "It seems you have an unsaved event."
 msgstr "Sembra che tu abbia un evento non salvato."
 
-#: .\events\templates\events\new_event.html:114
+#: .\events\templates\events\new_event.html:115
 msgid "Do you wish to reload previous data?"
 msgstr "Vuoi ricaricare i dati precedenti?"
 
-#: .\events\templates\events\new_event.html:118
+#: .\events\templates\events\new_event.html:119
 msgid "Nah, don't care"
 msgstr "Nah, non mi interessa"
 
-#: .\events\templates\events\new_event.html:121
+#: .\events\templates\events\new_event.html:122
 msgid "Restore data"
 msgstr "Ripristina i dati"
 
