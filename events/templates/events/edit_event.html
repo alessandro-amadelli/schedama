@@ -18,7 +18,7 @@
         </span>
     {% endif %}
 
-    <h1 class="entering">{% translate "Event administration" %} <span class="material-symbols-outlined">admin_panel_settings</span></h1>
+    <h1 class="entering">{% translate "Event administration" %} <span class="material-symbols-outlined">badge</span></h1>
     <h2 class="entering-1">{% translate "Administrate your event" %}</h2>
 
     {% csrf_token %}
@@ -27,11 +27,17 @@
 
     <div class="section p-2">
         <div class="row">
-          <div class="col-6">
-            <button type="button" class="btn btn-light float-start" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
+          <div class="col-6 d-flex">
+            <button type="button" class="btn btn-light" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
               <span class="material-symbols-outlined">settings</span>
               {% translate "Settings" %}
             </button>
+          </div>
+          <div class="col-6 d-flex">
+            <a class="btn btn-light" href="{% url 'participate_view' event.item_id %}" target="_blank">
+                <span class="material-symbols-outlined">group</span>
+                {% translate "Participant page" %}
+            </a>
           </div>
         </div>
       

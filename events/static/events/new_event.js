@@ -432,7 +432,7 @@ function eventCreatedSuccessfully(data) {
 
     // Display participant's URL
     const displayPartURL = document.createElement("h3");
-    displayPartURL.innerText = "Participation URL";
+    displayPartURL.innerHTML = `<span class="material-symbols-outlined">group</span> ` + gettext("Participant URL");
     displayPartURL.setAttribute("class", "text-center");
     const partRow = document.createElement("div");
     partRow.classList.add("row");
@@ -447,7 +447,7 @@ function eventCreatedSuccessfully(data) {
 
     // Display administration URL
     const displayAdminURL = document.createElement("h3");
-    displayAdminURL.innerText = "Administration URL";
+    displayAdminURL.innerHTML = `<span class="material-symbols-outlined">badge</span> ` + gettext("Administration URL");
     displayAdminURL.setAttribute("class", "text-center");
     const admRow = document.createElement("div");
     admRow.classList.add("row");
@@ -465,7 +465,7 @@ function eventCreatedSuccessfully(data) {
     warnCol.setAttribute("class", "col-12 text-center mb-2");
     const warn = document.createElement("strong");
     warn.innerHTML = gettext(`<span class="material-symbols-outlined">warning</span> 
-    IMPORTANT: before leaving the page make sure to save this link, it's the only way you'll be able to administrate your event. 
+    IMPORTANT: make sure to keep this link, it's the only way you'll be able to administrate your event. 
     <span class="material-symbols-outlined">warning</span>`);
     warn.setAttribute("class", "text-danger");
 

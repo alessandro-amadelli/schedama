@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // On page load, delete previous modifications from localStorage
     localStorage.removeItem("modifications");
 
+    // Dropdown menu to share event
+    document.querySelector("#shareEventCol").appendChild(generateShareBtn(window.location.href));
+
     // Draw charts
     if (participants.length > 0) {
         initializeChartTot();

@@ -54,7 +54,7 @@ function fillHistory() {
         const partLink = document.createElement("a");
         partLink.setAttribute("class", "card-link");
         partLink.setAttribute("href", item.participation_link);
-        partLink.innerHTML = `<span class="material-symbols-outlined text-muted">person</span>`;
+        partLink.innerHTML = `<span class="material-symbols-outlined text-muted">group</span>`;
 
         // Administration link
         let admLink = null;

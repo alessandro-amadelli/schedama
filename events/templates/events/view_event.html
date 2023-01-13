@@ -50,9 +50,12 @@ Participate
 
     <!-- Event info row -->
     <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %}">
-        <!-- Event location -->
         <div class="col-12 event-info-div display-5 p-3 shadow rounded">
+            <div class="row mb-2">
+                <div class="col" id="shareEventCol"></div>
+            </div>
             {% if event.has_location %}
+                <!-- Event location -->
                 <div class="row mb-4">
                     <div class="col">
                         <span class="material-symbols-outlined fs-1 text-danger">location_on</span> 

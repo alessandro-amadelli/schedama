@@ -193,9 +193,11 @@ function notify(text) {
   
   }
 
-function generateShareBtn(contentURL) {
+function generateShareBtn(contentURL, text="") {
     // Generates a share dropdown button with links
-    const text = gettext("Hey, check out this amazing event on Schedama.com!");
+    if (text == "") {
+        text = gettext("Hey, check out this amazing event created with Schedama");
+    }
     const btnDiv = document.createElement("div");
     btnDiv.classList.add("btn-group");
     
@@ -203,7 +205,7 @@ function generateShareBtn(contentURL) {
     btn.setAttribute("type","button");
     btn.setAttribute("data-bs-toggle","dropdown");
     btn.setAttribute("aria-expanded","false");
-    btn.classList.add("btn","btn-secondary", "dropdown-toggle");
+    btn.classList.add("btn","btn-light", "dropdown-toggle", "p-2");
     btn.innerHTML = `<span class="material-symbols-outlined">share</span>`;
 
     const btnUl = document.createElement("ul");
