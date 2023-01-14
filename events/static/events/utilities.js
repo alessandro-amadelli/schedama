@@ -297,3 +297,26 @@ function addToHistory(eventData) {
     // Updating history content in localStorage
     localStorage.setItem("history", JSON.stringify(historyData));
 }
+
+function removeFromHistory(eventID) {
+    let history = localStorage.getItem("history");
+    if (!history) {
+        return false;
+    }
+
+    // Parse history data into JSON format
+    history = JSON.parse(history);
+
+    let historyData = [];
+
+    history.forEach((item) => {
+        if (item.item_id != eventID) {
+            console.log("non rimosso: " + item.item_id);
+            historyData.push(item);
+        }
+    });
+
+    // Updating history content in localStorage
+    localStorage.setItem("history", JSON.stringify(historyData));
+    
+}

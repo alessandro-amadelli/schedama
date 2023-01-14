@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
+from django.http import JsonResponse, Http404
+from django.core.exceptions import PermissionDenied
 from django.utils.translation import gettext as _
 
 import json
@@ -113,8 +114,10 @@ def participate_view(request, eventID):
     # Retrieving event data
     event_data = get_event_data(eventID, "event")
 
+    # Return page not found
     if event_data == []:
-        return redirect("index")
+        # raise Http404
+        return error404_view(request, None, eventID)
 
     # Removing admin_key from event data before sending to the client for security reasons
     event_data.pop('admin_key', None)
@@ -201,9 +204,14 @@ def edit_event_view(request, eventID):
     # Get event data (only if the admin key is present)
     event_data = get_event_data(eventID, "event")
 
+    # Return page not found
+    if event_data == []:
+        return error404_view(request, None, eventID)
+
     # Check if the admin key provided as URL parameter correspond with the one associated with the event
     if admin_key != event_data["admin_key"]:
-        return redirect("index")
+        # Return permission denied HTTP 403
+        raise PermissionDenied
     ### ###
 
     # Convert expiration_date to readable format (if present)
@@ -448,12 +456,15 @@ def reactivate_event_view(request):
         }
     return JsonResponse(response)
 
-
-
 def history_view(request):
 
     return render(request, "events/history.html")
 
-def error404_view(request, exception):
-    
-    return render(request, "events/error404.html")
+def error404_view(request, exception, eventID=""):
+    context = {}
+
+    # If eventID is passed, pass down the value to template so it can be removed from user's history
+    if eventID != "":
+        context["item_id"] = eventID
+
+    return render(request, "events/error404.html", context)

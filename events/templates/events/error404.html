@@ -11,12 +11,33 @@
 
     <div class="section p-2">
         <div class="row mb-3">
-            <div class="col" style="font-size: 15em; user-select: none;">
+            <div class="col" style="font-size: 12em; user-select: none;">
                 404
             </div>
         </div>
     
         <h2>{% translate "This isn't the page you're looking for..." %}</h2>
+
+        {% if item_id %}
+
+        <script src="{% static 'events/error404.js' %}"></script>
+
+        <p>
+           {% translate "It looks like you were looking for and event" %} (ID: <span id="eventID">{{ item_id }}</span>) {% translate "but something went wrong." %}
+           <br>
+           {% translate "Here some possible explanations, from the most likely:" %}
+           <ul class="list-group">
+            <li class="list-group-item list-group-item-info">{% translate "The event URL is incorrect" %}</li>
+            <li class="list-group-item list-group-item-info">{% translate "The event was deleted and it's no longer available in our systems" %}</li>
+            <li class="list-group-item list-group-item-info">{% translate "The event never existed" %}</li>
+            <li class="list-group-item list-group-item-info">{% translate "A cat, not necessarily yours, walked on your keyboard (you never know)" %}</li>
+            <li class="list-group-item list-group-item-info">{% translate "The server is grumpy and stopped cooperating (ok, not likely)" %}</li>
+            <li class="list-group-item list-group-item-info">{% translate "The server exploded (well...maybe not this one)" %}</li>
+           </ul>
+        </p>
+        {% endif %}
+
     </div>
+    
     
 {% endblock %}
