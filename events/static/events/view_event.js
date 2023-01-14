@@ -154,7 +154,7 @@ function initializeChartTot() {
     let data = {
         labels: [gettext("Confirmed"),gettext("Not confirmed")],
         datasets: [{
-            backgroundColor: ["#00cc99", "#6f7372"],
+            backgroundColor: ["#06d6a0", "#6f7372"],
             data: [confirmed, notConfirmed],
             hoverOffset: 10,
             borderWidth: 0,
@@ -231,9 +231,9 @@ function initializeChartDates() {
     // Set color of bars (with max bars colored differently)
     values.forEach((val) => {
         if (val == Math.max(...values)) {
-            color.push("#00cc99");
+            color.push("#06d6a0"); // Color of preferred date
         } else {
-            color.push("#006699");
+            color.push("#118ab2");
         }
     });
 
