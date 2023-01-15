@@ -1,7 +1,7 @@
 /* CSS variables for LIGHT MODE */
 :root {
-    --body-background: linear-gradient(180deg, rgba(0,105,158,1) 0%, #62b5e5 30%);
-    --body-bg-color: #62b5e5;
+    --body-background: linear-gradient(180deg, rgba(0,105,158,1) 0%, #118ab2 30%);
+    --body-bg-color: #118ab2;
     --card-bg-color: rgba(255,255,255,.7);
     --color: black;
     --event-div-bg: rgba(255,255,255,.4);
@@ -9,11 +9,13 @@
     --moving-bg-color: rgba(0,0,0,.1);
     --navbar-bg-color: white;
     --section-bg-color: rgba(255,255,255,0);
+    --title-bg-color: #ef476f;
+    --title-color: #073b4c;
 }
 
 /* CSS variables for DARK MODE */
 .dark-mode {
-    --body-background: linear-gradient(180deg, #073b4c 0%, rgba(44,44,44,1) 45%);
+    --body-background: linear-gradient(180deg, #073b4c 0%, rgb(37, 37, 37) 45%);
     --body-bg-color: #073b4c;
     --card-bg-color: rgba(0,0,0,.2);
     --color: #fff;
@@ -21,16 +23,18 @@
     --input-bg-color: rgba(0,0,0,.8);
     --moving-bg-color: rgba(255,255,255,.1);
     --navbar-bg-color: black;
-    --section-bg-color: rgba(0,0,0,0)
+    --section-bg-color: rgba(0,0,0,0);
+    --title-bg-color: #ffd166;
+    --title-color: #073b4c;
 }
 
 /*
 Possible color palette
-#ef476f
-#ffd166
-#06d6a0
-#118ab2
-#073b4c
+#ef476f -> pink
+#ffd166 -> yellow
+#06d6a0 -> green
+#118ab2 -> light-blue
+#073b4c -> dark-blue-greenish
 */
 
 /* CSS animations */
@@ -204,6 +208,30 @@ body {
     overflow-x: hidden;
 }
 
+.title-section {
+    position:relative;
+    margin-bottom: 2rem;
+    color: var(--title-color);
+}
+
+.title-section::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 120%;
+    top: -10%;
+    left: -50%;
+    z-index: -1;
+    background-color: var(--title-bg-color);
+    transition: .5s ease-in;
+    border-radius: .5rem;
+}
+
+.card-footer {
+    color: var(--title-bg-color);
+    user-select: none;
+}
+
 .loading-overlay{
     position: fixed;
     height: 100%;
@@ -241,10 +269,9 @@ input, .form-control, input:focus, .form-control:focus {
     background-color: var(--body-bg-color);
 }
 
-.event-title-div {
-    background-color: var(--event-div-bg);
-    font-size: 3rem;
-    align-items: center;
+.event-title {
+    font-size: 3.5rem;
+    text-align: center;
     word-wrap: break-word;
 }
 

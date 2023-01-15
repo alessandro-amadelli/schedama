@@ -21,6 +21,10 @@ function fillHistory() {
     // Parse history data into JSON format
     history = JSON.parse(history);
 
+    // sort history data based on last_visited
+    history.sort(function(a,b) {
+        return b.last_visited_epoch - a.last_visited_epoch;
+    })
     // for every history item, create history card
     history.forEach(item => {
         // Card col

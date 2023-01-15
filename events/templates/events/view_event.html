@@ -25,10 +25,9 @@ Participate
         <span class="badge text-bg-danger w-100 fs-3 p-3 my-3">{% translate "Event Cancelled" %}</span>
     {% endif %}
 
-    <!-- Title row -->
-    <div class="row mb-3 justify-content-center{% if event.is_cancelled %} opacity-50{% endif %}">
-        <div class="col-12 event-title-div text-center rounded shadow p-3"><span id="eventTitle">{{ event.title }}</span></div>
-    </div>
+    <div class="title-section{% if event.is_cancelled %} opacity-50{% endif %}">
+        <h1 class="entering event-title"><span id="eventTitle">{{ event.title }}</span></h1>
+      </div>
 
     <!-- Countdown row -->
     <div class="row mb-3{% if event.is_cancelled %} opacity-50{% endif %}">

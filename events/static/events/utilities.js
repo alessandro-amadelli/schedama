@@ -263,6 +263,7 @@ function addToHistory(eventData) {
 
     // Get item_id of event to save and set last_visited
     const itemID = eventData.item_id;
+    const epoch = Date.now();
     const now = new Date();
     const day = ('0' + now.getDate()).slice(-2);
     const month = ('0' + (now.getMonth() + 1)).slice(-2);
@@ -270,7 +271,8 @@ function addToHistory(eventData) {
     const hour = ('0' + now.getHours()).slice(-2);
     const min = ('0' + now.getMinutes()).slice(-2);
     const sec = ('0' + now.getSeconds()).slice(-2);
-    eventData["last_visited"] = [day, "/", month, "/", year, " h.", hour, ":", min, ":", sec].join('');
+    eventData["last_visited"] = [day, "/", month, "/", year, " h.", hour, ":", min, ":", sec].join('');    
+    eventData["last_visited_epoch"] = epoch; // For ordering purposes
 
     // Iterating history items to see if the same event is already present
     let present = false;
@@ -283,6 +285,7 @@ function addToHistory(eventData) {
                 item.title = eventData.title;
                 item.participation_link = eventData.participation_link,
                 item.last_visited = eventData.last_visited
+                item.last_visited_epoch = eventData.last_visited_epoch
             }
             present = true;
         }
@@ -311,7 +314,6 @@ function removeFromHistory(eventID) {
 
     history.forEach((item) => {
         if (item.item_id != eventID) {
-            console.log("non rimosso: " + item.item_id);
             historyData.push(item);
         }
     });

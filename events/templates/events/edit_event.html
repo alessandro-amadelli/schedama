@@ -17,16 +17,18 @@
             </a>
         </span>
     {% endif %}
-
-    <h1 class="entering">{% translate "Event administration" %} <span class="material-symbols-outlined">badge</span></h1>
-    <h2 class="entering-1">{% translate "Manage your event" %}</h2>
+    
+    <div class="title-section">
+        <h1 class="entering">{% translate "Event administration" %} <span class="material-symbols-outlined">badge</span></h1>
+        <h2 class="entering-1">{% translate "Manage your event" %}</h2>
+    </div>
 
     {% csrf_token %}
     <input type="text" id="item-id" value="{{ event.item_id }}" hidden>
     <input type="text" id="admin-key" value="{{ event.admin_key }}" hidden>
 
     <div class="section p-2">
-        <div class="row">
+        <div class="row m-3">
           <div class="col-6 d-flex">
             <button type="button" class="btn btn-light" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
               <span class="material-symbols-outlined">settings</span>

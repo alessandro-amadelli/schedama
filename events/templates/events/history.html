@@ -9,8 +9,10 @@ History
 {% block body %}
   <script src="{% static 'events/history.js' %}"></script>
 
-  <h1>History</h1>
-  <h2>{% translate "View recently opened events" %}</h2>
+  <div class="title-section">
+    <h1>{% translate "History" %} <span class="material-symbols-outlined">history</span></h1>
+    <h2>{% translate "View recently opened events" %}</h2>
+  </div>
 
   <div class="section p-2">
     <p class="lead">{% translate "Here you can see events that you recently opened or created. A good place to look if you can't find the link..." %}</p>
