@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 var updateInterval = "";
+var totDoughnutPlot = null;
+var dateBarChart = null;
 
 function getRemainingTime(deadline) {
     const today = new Date();
@@ -141,6 +143,10 @@ function displayNoData() {
 }
 
 function initializeChartTot() {
+    if (totDoughnutPlot) {
+        totDoughnutPlot.destroy();
+    }
+
     let confirmed = 0;
     let notConfirmed = 0;
     participants.forEach(p => {
@@ -197,20 +203,24 @@ function initializeChartTot() {
         }]
     };
 
-    let totDoughnutPlot = new Chart(
+    totDoughnutPlot = new Chart(
         document.querySelector("#totChart"),
         config
     );
 }
 
 function initializeChartDates() {
+    if (dateBarChart) {
+        dateBarChart.destroy();
+    }
+
     let evDates = dates.slice();
     let values = [];
     let noIndic = 0;
     let color = [];
 
     evDates.forEach(d => {
-        datVal = 0;
+        let datVal = 0;
         participants.forEach((p, i) => {
             if (p.dates.includes(d)) {
                 datVal += 1;
@@ -276,7 +286,7 @@ function initializeChartDates() {
         }
     };
 
-    let dateBarChart = new Chart(
+    dateBarChart = new Chart(
         document.querySelector("#datesChart"),
         config
     );
