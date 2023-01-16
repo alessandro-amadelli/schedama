@@ -13,12 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
         saveLocally();
     });
 
-    // Button to add participant to event
-    const btnAddParticipant = document.querySelector("#add-participant");
-    btnAddParticipant.onclick = () => {
+    // Add participant to event
+    document.querySelector("#participantInp").addEventListener('change', () => {
         createNewParticipant();
         saveLocally();
-    }
+    });
 
     // Event listener to save event locally
     document.querySelectorAll('input').forEach((item) => {
@@ -159,7 +158,7 @@ function createNewDate() {
     newDateInp.setAttribute("min", new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":")));
     const newDateLabel = document.createElement("label");
     newDateLabel.setAttribute("for", "eventDate");
-    newDateLabel.innerText = "Event Date";
+    newDateLabel.innerText = gettext("Event Date");
     newFormDiv.appendChild(newDateInp);
     newFormDiv.appendChild(newDateLabel);
     newDateCol.appendChild(newFormDiv);
@@ -201,7 +200,7 @@ function createNewParticipant() {
     const dateRow = document.querySelector("#participantRow");
     const partInp = document.querySelector("#participantInp");
 
-    if (partInp.value == '') {
+    if (partInp.value.replaceAll(" ", "").length == 0) {
         setInvalid(partInp, true);
         return false;
     }
@@ -255,6 +254,8 @@ function createNewParticipant() {
     newParticipantInp.value = partInp.value;
     partInp.value = "";
     setInvalid(partInp, false);
+
+    notify(gettext("Participant added"));
 }
 
 function setInvalid(element, isInvalid) {

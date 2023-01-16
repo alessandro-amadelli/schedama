@@ -44,7 +44,7 @@
     <!-- Event description -->
     <div class="row p-3 mb-3 intro-animated" id ="descriptionRow">
       <div class="col">
-        <h4>{% translate "Describe the event" %} <span class="text-muted">{% translate "(Optional)" %}</span></h4>
+        <h4>{% translate "Describe the event" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col-12">
@@ -85,11 +85,8 @@
       <div class="col-8 col-md-4 mb-3">
         <div class="form-floating mb-3">
           <input type="datetime-local" class="form-control" id="dateInp" min="{% now 'Y-m-d\TH:i' %}">
-          <label for="dateInp">{% translate "Event date" %}</label>
+          <label for="dateInp">{% translate "Enter a date" %}</label>
         </div>
-      </div>
-      <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
-        <span class="material-symbols-outlined fs-1" id="add-date">add_circle</span>
       </div>
     </div>
 
@@ -101,12 +98,9 @@
       <div class="w-100"></div>
       <div class="col-8 col-md-4 mb-3">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="participantInp" maxlength="30">
+          <input type="text" class="form-control" id="participantInp" maxlength="30" placeholder="{% translate 'Enter new participant' %}">
           <label for="participantInp">{% translate "Enter new participant" %}</label>
         </div>
-      </div>
-      <div class="col-4 col-md-8 mb-3 fs-1 align-middle">
-        <span class="material-symbols-outlined fs-1 cursor-pointer" placeholder="Participant's name" id="add-participant">person_add</span>
       </div>
     </div>
 

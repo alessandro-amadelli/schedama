@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-16 14:14+0100\n"
+"POT-Creation-Date: 2023-01-16 14:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,18 +66,19 @@ msgstr "Descrivi l'evento"
 
 #: .\events\templates\events\edit_event.html:63
 #: .\events\templates\events\new_event.html:47
-msgid "(Optional)"
-msgstr "(Facoltativo)"
+#: .\events\templates\events\new_event.html:96
+msgid "Optional"
+msgstr "Facoltativo"
 
 #: .\events\templates\events\edit_event.html:68
 #: .\events\templates\events\new_event.html:52
 msgid "Describe your event here"
-msgstr ""
+msgstr "Descrivi qui il tuo evento"
 
 #: .\events\templates\events\edit_event.html:70
 #: .\events\templates\events\new_event.html:53
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: .\events\templates\events\edit_event.html:79
 #: .\events\templates\events\edit_event.html:90
@@ -91,7 +92,6 @@ msgstr "Data e ora"
 
 #: .\events\templates\events\edit_event.html:104
 #: .\events\templates\events\edit_event.html:115
-#: .\events\templates\events\new_event.html:88
 msgid "Event date"
 msgstr "Data evento"
 
@@ -109,7 +109,7 @@ msgid "Removed participants"
 msgstr "Partecipanti rimossi"
 
 #: .\events\templates\events\edit_event.html:179
-#: .\events\templates\events\new_event.html:117
+#: .\events\templates\events\new_event.html:111
 #: .\events\templates\events\view_event.html:173
 msgid "Save"
 msgstr "Salva"
@@ -213,28 +213,28 @@ msgid "Reactivate event"
 msgstr "Riattiva evento"
 
 #: .\events\templates\events\edit_event.html:246
-#: .\events\templates\events\new_event.html:152
+#: .\events\templates\events\new_event.html:146
 msgid "Event settings"
 msgstr "Impostazioni evento"
 
 #: .\events\templates\events\edit_event.html:251
-#: .\events\templates\events\new_event.html:157
+#: .\events\templates\events\new_event.html:151
 msgid "Choose what participants are allowed to do"
 msgstr "Scegli cosa possono fare i partecipanti"
 
 #: .\events\templates\events\edit_event.html:256
-#: .\events\templates\events\new_event.html:99
-#: .\events\templates\events\new_event.html:161
+#: .\events\templates\events\new_event.html:96
+#: .\events\templates\events\new_event.html:155
 msgid "Add participants"
 msgstr "Aggiungi partecipanti"
 
 #: .\events\templates\events\edit_event.html:263
-#: .\events\templates\events\new_event.html:167
+#: .\events\templates\events\new_event.html:161
 msgid "Edit participants"
 msgstr "Modifica partecipanti"
 
 #: .\events\templates\events\edit_event.html:270
-#: .\events\templates\events\new_event.html:173
+#: .\events\templates\events\new_event.html:167
 msgid "Remove participants"
 msgstr "Rimuovi partecipanti"
 
@@ -406,31 +406,32 @@ msgstr "Imposta data e ora"
 msgid "you can indicate more than one possible date"
 msgstr "puoi indicare anche più di una data possibile"
 
-#: .\events\templates\events\new_event.html:99
-msgid "Optional"
-msgstr "Facoltativo"
+#: .\events\templates\events\new_event.html:88
+msgid "Enter a date"
+msgstr "Inserisci una data"
 
-#: .\events\templates\events\new_event.html:105
+#: .\events\templates\events\new_event.html:101
+#: .\events\templates\events\new_event.html:102
 msgid "Enter new participant"
 msgstr "Inserisci un nuovo partecipante"
 
-#: .\events\templates\events\new_event.html:128
+#: .\events\templates\events\new_event.html:122
 msgid "Restore unsaved data"
 msgstr "Ripristina dati non salvati"
 
-#: .\events\templates\events\new_event.html:132
+#: .\events\templates\events\new_event.html:126
 msgid "It seems you have an unsaved event."
 msgstr "Sembra che tu abbia un evento non salvato."
 
-#: .\events\templates\events\new_event.html:133
+#: .\events\templates\events\new_event.html:127
 msgid "Do you wish to reload previous data?"
 msgstr "Vuoi ricaricare i dati precedenti?"
 
-#: .\events\templates\events\new_event.html:137
+#: .\events\templates\events\new_event.html:131
 msgid "Nah, don't care"
 msgstr "Nah, non mi interessa"
 
-#: .\events\templates\events\new_event.html:140
+#: .\events\templates\events\new_event.html:134
 msgid "Restore data"
 msgstr "Ripristina i dati"
 
