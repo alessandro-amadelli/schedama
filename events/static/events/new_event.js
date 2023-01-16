@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     initializeTitleRow();
+    initializeDescriptionRow();
 
     // Button to save event
     document.querySelector("#btnSaveEvent").onclick = () => {
@@ -49,6 +50,30 @@ function initializeTitleRow() {
     // Event listener to start animation of next input field
     const titleInput = document.querySelector("#eventTitle");
     titleInput.addEventListener('input', initializeLocationRow);
+}
+
+function initializeDescriptionRow() {
+    // Start intro animation in description row
+    const descrRow = document.querySelector("#descriptionRow");
+    descrRow.style.animationPlayState = "running";
+
+    // Event listener to save description data
+    descrRow.addEventListener('change', saveLocally);
+    descrRow.addEventListener('keyup', updateCharCount);
+
+    updateCharCount();
+}
+
+function updateCharCount() {
+    const eventDescription = document.querySelector("#eventDescription");
+    const maxLength = parseInt(eventDescription.getAttribute("maxlength"));
+    const countSpan = document.querySelector("#descrCharCount");
+    
+    let remaining = maxLength - eventDescription.value.length;
+    if (remaining < 0) {
+        remaining = 0;
+    }
+    countSpan.innerText = remaining;
 }
 
 function initializeLocationRow() {
@@ -296,6 +321,10 @@ function restorePreviousData() {
     // Event title
     document.querySelector("#eventTitle").value = unsavedEvent.title;
 
+    // Event description
+    document.querySelector("#eventDescription").value = unsavedEvent.description;
+    updateCharCount();
+
     // Event location
     initializeLocationRow();
     document.querySelector("#eventLocation").value = unsavedEvent.location;
@@ -323,6 +352,7 @@ function clearPreviousData() {
 
 function saveLocally() {
     const eventTitle = document.querySelector("#eventTitle").value;
+    const eventDescription = document.querySelector("#eventDescription").value;
     const eventLocation = document.querySelector("#eventLocation").value;
     const locationActive = document.querySelector("#checkEventLocation").checked;
     const eventDates = document.querySelectorAll("[name='eventDate']");
@@ -350,7 +380,8 @@ function saveLocally() {
 
     // Create unsaved event object
     unsavedEvent = {
-        title: eventTitle,
+        title: eventTitle.trim(),
+        description: eventDescription.trim(),
         location: eventLocation,
         has_location: locationActive,
         dates: dateList,

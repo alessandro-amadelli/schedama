@@ -57,6 +57,22 @@
             </div>
         </div>
 
+        <!-- Event description -->
+        <div class="row m-3 entering-3" id ="descriptionRow">
+            <div class="col">
+              <h4>{% translate "Describe the event" %} <span class="text-muted">{% translate "(Optional)" %}</span></h4>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-12">
+              <div class="form-floating">
+                <textarea class="form-control" id="eventDescription" placeholder="{% translate 'Describe your event here' %}"
+                maxlength="400" style="min-height:6em;">{{ event.description }}</textarea>
+                <label for="eventDescription">{% translate "Description" %}</label>
+              </div>
+              <span id="descrCharCount">0</span>
+            </div>
+        </div>
+
         <!-- Event location -->
         <div class="row m-3 entering-4" id="locationRow">
             <div class="col-8">

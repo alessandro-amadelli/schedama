@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Event listener on description
+    document.querySelector("#eventDescription").addEventListener('change', enableSave);
+    document.querySelector("#eventDescription").addEventListener('keyup', updateCharCount);
+    updateCharCount();
+
     // Add new date on input date change instead of clicking to add date
     document.querySelector("#dateInp").addEventListener('change', () => {
         createNewDate();
@@ -70,6 +75,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update localStorage history
     updateHistory();
 });
+
+function updateCharCount() {
+    const eventDescription = document.querySelector("#eventDescription");
+    const maxLength = parseInt(eventDescription.getAttribute("maxlength"));
+    const countSpan = document.querySelector("#descrCharCount");
+    
+    let remaining = maxLength - eventDescription.value.length;
+    if (remaining < 0) {
+        remaining = 0;
+    }
+    countSpan.innerText = remaining;
+}
 
 function validateEvent() {
     validated = true;
@@ -304,8 +321,10 @@ function addParticipantToTable() {
 
 function getEventData() {
     const eventTitle = document.querySelector("#eventTitle").value;
+    const eventDescription = document.querySelector("#eventDescription").value;
     const hasLocation = document.querySelector("#checkEventLocation").checked;
     const eventLocation = document.querySelector("#eventLocation").value;
+
     let eventDates = [];
     document.querySelectorAll("input[name=eventDate]").forEach((date) => {
         eventDates.push(date.value);
@@ -344,6 +363,7 @@ function getEventData() {
         item_id: itemID,
         admin_key: adminKey,
         title: eventTitle,
+        description: eventDescription,
         has_location: hasLocation,
         location: eventLocation,
         dates: eventDates,

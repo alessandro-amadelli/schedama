@@ -27,7 +27,7 @@ Participate
 
     <div class="title-section{% if event.is_cancelled %} opacity-50{% endif %}">
         <h1 class="entering event-title"><span id="eventTitle">{{ event.title }}</span></h1>
-      </div>
+    </div>
 
     <!-- Countdown row -->
     <div class="row mb-3{% if event.is_cancelled %} opacity-50{% endif %}">
@@ -95,6 +95,15 @@ Participate
                     </div>
                 {% endif %}
             </div>
+            {% if event.description != "" %}
+                <!-- Event description  -->
+                <hr>
+                <div class="row mt-2 mb-4 fs-4{% if event.is_cancelled %} opacity-50{% endif %}">
+                    <div class="col-12">
+                        <span style="white-space: pre-wrap;">{{ event.description }}</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 

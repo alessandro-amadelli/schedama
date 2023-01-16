@@ -11,6 +11,7 @@
     --section-bg-color: rgba(255,255,255,0);
     --title-bg-color: #ef476f;
     --title-color: #073b4c;
+    overflow-x: hidden;
 }
 
 /* CSS variables for DARK MODE */
@@ -203,9 +204,10 @@ body {
     background: var(--body-background);
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100vh;
+    min-height: 100vh;  
     transition: background-color 2s ease;
     overflow-x: hidden;
+    margin: 0;
 }
 
 .title-section {
@@ -217,14 +219,13 @@ body {
 .title-section::before {
     content: "";
     position: absolute;
-    width: 200%;
+    width: 150%;
     height: 120%;
     top: -10%;
-    left: -50%;
-    /* z-index: -1; */
+    left: -25%;
+    z-index: -1;
     background-color: var(--title-bg-color);
     transition: .5s ease-in;
-    border-radius: .5rem;
 }
 
 .card-footer {

@@ -19,6 +19,7 @@ def validate_event(event_data):
     """
     # Max lengths of event fields
     TITLE_MAX_LENGTH = 70
+    DESCRIPTION_MAX_LENGTH = 400
     LOCATION_MAX_LENGTH = 70
     DATE_MIN = datetime.now().strftime("%Y-%m-%dT%H:%M")
     PARTICIPANT_NAME_MAX_LENGTH = 30
@@ -32,6 +33,11 @@ def validate_event(event_data):
         if len(event_data["title"]) > TITLE_MAX_LENGTH:
             event_data["title"] = event_data["title"][:TITLE_MAX_LENGTH]
     
+    # Check description and truncate length
+    description = event_data.get("description", "")
+    if len(description) > DESCRIPTION_MAX_LENGTH:
+        event_data["description"] = event_data["description"][:DESCRIPTION_MAX_LENGTH]
+
     # Check location and truncate
     has_location = event_data.get("has_location", False)
     if has_location and ( len(event_data.get("location", "").replace(" ", "")) == 0 ):
@@ -257,6 +263,7 @@ def update_event_view(request):
     new_event = True
     if is_admin:
         event_data["title"] = request_data.get("title", event_data["title"])
+        event_data["description"] = request_data.get("description", "")
         event_data["has_location"] = request_data.get("has_location", False)
         event_data["location"] = request_data.get("location", "")
         event_data["dates"] = request_data.get("dates", [])
