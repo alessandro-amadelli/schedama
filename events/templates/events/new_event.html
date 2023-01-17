@@ -30,7 +30,7 @@
     <!-- Event title -->
     <div class="row p-3 mb-3 mt-5 intro-animated" id="titleRow">
       <div class="col">
-        <h4>{% translate "Enter a title" %}</h4>
+        <h4><span class="material-symbols-outlined">menu_book</span> {% translate "Enter a title" %} <span class="text-danger">*</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col">
@@ -44,7 +44,7 @@
     <!-- Event description -->
     <div class="row p-3 mb-3 intro-animated" id ="descriptionRow">
       <div class="col">
-        <h4>{% translate "Describe the event" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
+        <h4><span class="material-symbols-outlined">description</span> {% translate "Describe the event" %}</h4>
       </div>
       <div class="w-100"></div>
       <div class="col-12">
@@ -60,7 +60,7 @@
     <!-- Event location -->
     <div class="row p-3 mb-3 intro-animated" id="locationRow">
       <div class="col-8">
-        <h4>{% translate "Choose a location" %}</h4>
+        <h4><span class="material-symbols-outlined">location_on</span> {% translate "Choose a location" %}</h4>
       </div>
       <div class="col-4">
         <div class="form-check form-switch fs-4">
@@ -79,10 +79,10 @@
     <!-- Event date and time -->
     <div class="row p-3 mb-3 intro-animated" id="dateRow">
       <div class="col">
-        <h4>{% translate "Set a date and time" %} <span class="text-muted">({% translate "you can indicate more than one possible date" %})</span></h4>
+        <h4><span class="material-symbols-outlined">event</span> {% translate "Set a date and time" %} <span class="text-danger">*</span> <span class="text-muted">({% translate "you can indicate more than one possible date" %})</span></h4>
       </div>
       <div class="w-100"></div>
-      <div class="col-8 col-md-4 mb-3">
+      <div class="col-12 col-md-4 mb-3">
         <div class="form-floating mb-3">
           <input type="datetime-local" class="form-control" id="dateInp" min="{% now 'Y-m-d\TH:i' %}">
           <label for="dateInp">{% translate "Enter a date" %}</label>
@@ -90,10 +90,33 @@
       </div>
     </div>
 
+    <!-- Event duration -->
+    <div class="row p-3 mb-3 intro-animated" id="durationRow">
+      <div class="col">
+        <h4><span class="material-symbols-outlined">hourglass_empty</span> {% translate "Indicate duration" %} <span class="text-danger">*</span></h4>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-12">
+        <p>{% translate "Event duration" %}: <span class="fs-3" id="durationText">1h</span></p>
+      </div>
+      <div class="col-12 col-lg-4">
+          <label for="durationDays">{% translate "Days" %}</label>
+          <input type="range" class="form-range" id="durationDays" min="0" max="30" step="1" value="0">
+      </div>
+      <div class="col-12 col-lg-4">
+        <label for="durationHours">{% translate "Hours" %}</label>
+        <input type="range" class="form-range" id="durationHours" min="0" max="23" step="1" value="1">
+      </div>
+      <div class="col-12 col-lg-4">
+        <label for="durationMinutes">{% translate "Minutes" %}</label>
+        <input type="range" class="form-range" id="durationMinutes" min="0" max="59" step="1" value="0">
+      </div>
+    </div> 
+
     <!-- Participants -->
     <div class="row p-3 mb-3 intro-animated" id="participantRow">
       <div class="col">
-        <h4>{% translate "Add participants" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
+        <h4><span class="material-symbols-outlined">group</span> {% translate "Add participants" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col-8 col-md-4 mb-3">

@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dropdown menu to share event
     document.querySelector("#shareEventCol").appendChild(generateShareBtn(window.location.href));
 
+    // Display event duration in readable format
+    displayDurationText();
+
     // Draw charts
     if (participants.length > 0) {
         initializeChartTot();
@@ -72,19 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Start countdown
-    const deadline = new Date(dates[0]);
-    updateClock(deadline);
-    updateInterval = setInterval(() => {updateClock(deadline)},1000); 
+    deadline = new Date(dates[0]);
+    updateClock();
+    updateInterval = setInterval(() => {updateClock()},1000); 
 
     // Update localStorage history
     updateHistory();
 
 });
 var updateInterval = "";
+var deadline = "";
+
+var eventStarted = false;
 var totDoughnutPlot = null;
 var dateBarChart = null;
 
-function getRemainingTime(deadline) {
+function getRemainingTime() {
     const today = new Date();
     const delta = deadline - today;
     
@@ -102,32 +108,64 @@ function getRemainingTime(deadline) {
     }
 }
 
-function updateClock(deadline) {
+function updateClock() {
     const timer = document.querySelector("#clockDiv");
     const days = timer.querySelector(".clockDays");
     const hours = timer.querySelector(".clockHours");
     const mins = timer.querySelector(".clockMins");
     const secs = timer.querySelector(".clockSecs");
 
-    const t = getRemainingTime(deadline);
+    const t = getRemainingTime();
     
     // Remaining time values
-    days.innerText = t.days;
-    hours.innerText = ('0' + t.hours).slice(-2);
-    mins.innerText = ('0' + t.minutes).slice(-2);
-    secs.innerText = ('0' + t.seconds).slice(-2);
-
-    // Background color
-    const perc = (t.seconds * 100) / 60;
+    if (t.delta > 0) {
+        days.innerText = t.days;
+        hours.innerText = ('0' + t.hours).slice(-2);
+        mins.innerText = ('0' + t.minutes).slice(-2);
+        secs.innerText = ('0' + t.seconds).slice(-2);
+    }
     
     if (t.delta <= 0) {
-        days.innerText = "0";
-        hours.innerText = "0";
-        mins.innerText = "0";
-        secs.innerText = "0";
-        timer.style.display = "none";
-        clearInterval(updateInterval);
-    } 
+        if (eventStarted) {
+            // Event is finished
+            clearInterval(updateInterval);
+            timer.classList.remove("clock-event-started");
+            timer.classList.add("clock-event-ended");
+            timer.innerHTML = gettext("Ended");
+        } else {
+            // Countdown finished, event is started, set deadline to end of event
+            eventStarted = true;
+            timer.classList.remove("clock-event-not-started");
+            timer.classList.add("clock-event-started");
+            document.querySelector("#clockText").innerText = gettext("In progress");
+            const durationMin = parseInt(document.querySelector("#durationMin").innerText);
+            deadline = new Date(deadline.getTime() + (durationMin * 60000));
+        }
+    }
+}
+
+function displayDurationText() {
+    const durationMin = document.querySelector("#durationMin");
+    const durationText = document.querySelector("#durationText");
+    let duration = parseInt(durationMin.innerText);
+    let text = "";
+
+    if (duration >= (24 * 60)) {
+        let days = parseInt(duration / 60 / 24);
+        text += days + gettext("d") + " ";
+        duration = duration - (days * 60 * 24);
+    }
+    if (duration >= 60) {
+        let hours = parseInt(duration / 60);
+        text += hours + "h" + " ";
+        duration = duration - (hours * 60);
+    }
+
+    if (duration > 0) {
+        text += duration + "min";
+    }
+
+    durationText.innerText = text;
 }
 
 function displayNoData() {

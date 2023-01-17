@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
+    // Event listener for duration change
+    document.querySelectorAll("input[type=range]").forEach((range) => {
+        range.addEventListener('input', updateDuration);
+    });
+
     // Initialize remove participant buttons
     document.querySelectorAll(".remove-participant").forEach((btn) => {
         btn.onclick = () => {
@@ -72,6 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Calculate event duration and update duration ranges accordingly
+    calculateDuration();
+
     // Update localStorage history
     updateHistory();
 });
@@ -86,6 +94,48 @@ function updateCharCount() {
         remaining = 0;
     }
     countSpan.innerText = remaining;
+}
+
+function calculateDuration() {
+    let duration = parseInt(document.querySelector("#durationText").innerText);
+
+    if (duration >= (24 * 60)) {
+        let days = parseInt(duration / 60 / 24);
+        document.querySelector("#durationDays").value = days;
+        duration = duration - (days * 60 * 24);
+    }
+    if (duration >= 60) {
+        let hours = parseInt(duration / 60);
+        document.querySelector("#durationHours").value = hours;
+        duration = duration - (hours * 60);
+    }
+
+    document.querySelector("#durationMinutes").value = duration;
+
+    updateDuration();
+}
+
+function updateDuration() {
+    const durationText = document.querySelector("#durationText");
+    const durationDays = parseInt(document.querySelector("#durationDays").value);
+    const durationHours = parseInt(document.querySelector("#durationHours").value);
+    const durationMinutes = parseInt(document.querySelector("#durationMinutes").value);
+
+    let text = "";
+
+    if (durationDays > 0) {
+        text += durationDays + gettext("d") + " ";
+    }
+
+    if (durationHours > 0) {
+        text += durationHours + "h" + " ";
+    }
+
+    if (durationMinutes > 0) {
+        text += durationMinutes + "min"
+    }
+
+    durationText.innerText = text;
 }
 
 function validateEvent() {
@@ -352,6 +402,12 @@ function getEventData() {
         eventParticipants.push(partData);
     });
 
+    // Event duration
+    const durationDays = parseInt(document.querySelector("#durationDays").value);
+    const durationHours = parseInt(document.querySelector("#durationHours").value);
+    const durationMinutes = parseInt(document.querySelector("#durationMinutes").value);
+    const eventDuration = (durationDays * 24 * 60) + (durationHours * 60) + durationMinutes;
+
     const eventAddParticipant = document.querySelector("#switchAddParticipant").checked;
     const eventEditParticipant = document.querySelector("#switchEditParticipant").checked;
     const eventRemoveParticipant = document.querySelector("#switchRemoveParticipant").checked;
@@ -367,6 +423,7 @@ function getEventData() {
         has_location: hasLocation,
         location: eventLocation,
         dates: eventDates,
+        duration: eventDuration,
         participants: eventParticipants,
         settings: {
             add_participant: eventAddParticipant,

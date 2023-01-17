@@ -26,6 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Event listener for duration
+    document.querySelectorAll("input[type=range]").forEach((range) => {
+        range.addEventListener('input', updateDuration);
+        range.addEventListener('change', saveLocally);
+    });
+
     // Check if a local, unsaved event is available
     const unsavedEvent = localStorage.getItem("unsavedEvent");
     if (unsavedEvent) {
@@ -120,6 +126,10 @@ function initializeDateRow() {
     const dateRow = document.querySelector("#dateRow");
     dateRow.style.animationPlayState = "running";
 
+    // Animation start on duration row
+    const durationRow = document.querySelector("#durationRow");
+    durationRow.style.animationPlayState = "running";
+
     // Initialize participant row
     initializeParticipantRow();
 }
@@ -194,6 +204,29 @@ function createNewDate() {
 
     // Show notification for the added date
     notify(gettext("Date added"));
+}
+
+function updateDuration() {
+    const durationText = document.querySelector("#durationText");
+    const durationDays = parseInt(document.querySelector("#durationDays").value);
+    const durationHours = parseInt(document.querySelector("#durationHours").value);
+    const durationMinutes = parseInt(document.querySelector("#durationMinutes").value);
+
+    let text = "";
+
+    if (durationDays > 0) {
+        text += durationDays + gettext("d") + " ";
+    }
+
+    if (durationHours > 0) {
+        text += durationHours + "h" + " ";
+    }
+
+    if (durationMinutes > 0) {
+        text += durationMinutes + "min"
+    }
+
+    durationText.innerText = text;
 }
 
 function createNewParticipant() {
@@ -357,6 +390,7 @@ function saveLocally() {
     const eventLocation = document.querySelector("#eventLocation").value;
     const locationActive = document.querySelector("#checkEventLocation").checked;
     const eventDates = document.querySelectorAll("[name='eventDate']");
+    let eventDuration = 60; // default duration is 1 hour
     const participants = document.querySelectorAll("[name='participantName']");
 
     // Settings
@@ -379,6 +413,12 @@ function saveLocally() {
         });
     });
 
+    // Event duration
+    const durationDays = parseInt(document.querySelector("#durationDays").value);
+    const durationHours = parseInt(document.querySelector("#durationHours").value);
+    const durationMinutes = parseInt(document.querySelector("#durationMinutes").value);
+    eventDuration = (durationDays * 24 * 60) + (durationHours * 60) + durationMinutes;
+
     // Create unsaved event object
     unsavedEvent = {
         title: eventTitle.trim(),
@@ -386,6 +426,7 @@ function saveLocally() {
         location: eventLocation,
         has_location: locationActive,
         dates: dateList,
+        duration: eventDuration,
         participants: participantList,
         settings: {
             add_participant: addParticipant,

@@ -127,8 +127,12 @@ def participate_view(request, eventID):
 
     # Removing admin_key from event data before sending to the client for security reasons
     event_data.pop('admin_key', None)
+
     # Adding dates so Django can display it in template
     event_data["dates_formatted"] = [datetime.strptime(d, "%Y-%m-%dT%H:%M") for d in event_data["dates"]]
+
+    # Format event duration
+    event_data["duration"] = int(event_data.get("duration", 60))
     
     context = {
         "event": event_data
@@ -224,6 +228,9 @@ def edit_event_view(request, eventID):
     if event_data.get("expiration_date", False):
         event_data["expiration_date"] = datetime.fromtimestamp(int(event_data["expiration_date"]))
 
+    # Event duration in int format (represents duration in minutes)
+    event_data["duration"] = int(event_data.get("duration", 60))
+
     # All checks are passed
     context = {
         "event": event_data
@@ -268,6 +275,7 @@ def update_event_view(request):
         event_data["location"] = request_data.get("location", "")
         event_data["dates"] = request_data.get("dates", [])
         event_data["dates"].sort() # Order event dates
+        event_data["duration"] = request_data.get("duration", 60)
         event_data["participants"] = request_data.get("participants", [])
         event_data["settings"]["add_participant"] = request_data["settings"].get("add_participant", False)
         event_data["settings"]["edit_participant"] = request_data["settings"].get("edit_participant", False)

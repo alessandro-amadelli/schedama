@@ -31,7 +31,8 @@ Participate
 
     <!-- Countdown row -->
     <div class="row mb-3{% if event.is_cancelled %} opacity-50{% endif %}">
-        <div class="row mx-auto event-clock-div justify-content-center rounded shadow display-5 p-3 position-relative" id="clockDiv">
+        <div class="row mx-auto event-clock-div clock-event-not-started justify-content-center rounded shadow display-5 p-3 position-relative" id="clockDiv">
+            <div class="col-12 text-center mb-2" id="clockText">{% translate "Starts in" %}</div>
             <div class="col-3 col-lg-2 text-center">
                 <span class="clockDays">-</span>d 
             </div>
@@ -64,17 +65,26 @@ Participate
             {% endif %}
             
             <!-- Event date and time -->
-            <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %}">
+            <div class="row mb-4">
                 {% for date in event.dates_formatted %}
                     <div class="col-12 mb-2 date-formatted">
-                        <span class="material-symbols-outlined fs-1 text-success">event</span><span class="formattedDate">{{ date|date:"d N Y"}}</span>
-                        <span class="material-symbols-outlined fs-1 text-success">watch</span><span class="formattedTime">{{ date|time:"G:i"}}</span>
+                        <span class="material-symbols-outlined fs-1 text-success">event</span> <span class="formattedDate">{{ date|date:"d N Y"}}</span>
+                        <span class="material-symbols-outlined fs-1 text-success">watch</span> <span class="formattedTime">{{ date|time:"G:i"}}</span>
                     </div>
                 {% endfor %}
             </div>
             
+            <!-- Event duration -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <span class="material-symbols-outlined fs-1 text-primary">timelapse</span>
+                    <span id="durationMin" style="display:none;">{{ event.duration }}</span>
+                    <span id="durationText"></span>
+                </div>
+            </div>
+
             <!-- Event participants -->
-            <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %}">
+            <div class="row mb-4">
                 <div class="col-4 mb-4">
                     <span class="material-symbols-outlined fs-1 text-warning">group</span> 
                     {{ event.participants|length }}
@@ -98,7 +108,7 @@ Participate
             {% if event.description != "" %}
                 <!-- Event description  -->
                 <hr>
-                <div class="row mt-2 mb-4 fs-4{% if event.is_cancelled %} opacity-50{% endif %}">
+                <div class="row mt-2 mb-4 fs-4">
                     <div class="col-12">
                         <span style="white-space: pre-wrap;">{{ event.description }}</span>
                     </div>
