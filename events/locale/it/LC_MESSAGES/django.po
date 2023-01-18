@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-17 20:17+0100\n"
+"POT-Creation-Date: 2023-01-18 19:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -470,6 +470,10 @@ msgstr "Ripristina i dati"
 #: .\events\templates\events\view_event.html:35
 msgid "Starts in"
 msgstr "Inizia tra"
+
+#: .\events\templates\events\view_event.html:37
+msgid "d"
+msgstr "g"
 
 #: .\events\templates\events\view_event.html:96
 msgid "List"

@@ -92,9 +92,6 @@ Color palette
 
 @keyframes timerStartedAnimation {
     0% {
-        transform: scale(2);
-    }
-    50% {
         transform: scale(1);
     }
     100% {
@@ -335,14 +332,14 @@ input, .form-control, input:focus, .form-control:focus {
     top: 0%;
     left: 0%;
     z-index: -1;
-    background: radial-gradient(circle, var(--event-started-bg) 10%, var(--body-bg-color) 90%);
+    background: radial-gradient(circle, var(--event-started-bg) 10%, var(--body-bg-color) 80%);
     animation-name: timerStartedAnimation;
-    animation-duration: 5s;
+    animation-duration: 2s;
     animation-fill-mode:forwards;
-    animation-direction:normal;
+    animation-direction:alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
-    animation-timing-function: linear;
+    animation-timing-function:ease-out;
 }
 
 .clock-event-ended::before {
