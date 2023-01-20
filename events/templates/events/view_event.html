@@ -52,7 +52,12 @@ Participate
     <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %}">
         <div class="col-12 event-info-div display-5 p-3 shadow rounded">
             <div class="row mb-2">
-                <div class="col" id="shareEventCol"></div>
+                <div class="col-2 d-flex" id="shareEventCol"></div>
+                <div class="col d-flex">
+                    <a href="" class="btn btn-light" id="googleCalendarLink"><span class="material-symbols-outlined">event_upcoming</span>
+                        {%translate "Add to Google Calendar" %}
+                    </a>
+                </div>
             </div>
             {% if event.has_location %}
                 <!-- Event location -->
@@ -110,7 +115,7 @@ Participate
                 <hr>
                 <div class="row mt-2 mb-4 fs-4">
                     <div class="col-12">
-                        <span style="white-space: pre-wrap;">{{ event.description }}</span>
+                        <span style="white-space: pre-wrap;" id="descriptionText">{{ event.description }}</span>
                     </div>
                 </div>
             {% endif %}

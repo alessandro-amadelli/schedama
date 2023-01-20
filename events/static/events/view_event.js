@@ -74,6 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         locationLink.setAttribute("href", "https://www.google.com/maps/search/?api=1&query=" + encodeURI(locationLink.innerText));
     }
 
+    // Link to Google Calendar
+    initializeGCalendarLink();
+
     // Start countdown
     deadline = new Date(dates[0]);
     updateClock();
@@ -89,6 +92,39 @@ var deadline = "";
 var eventStarted = false;
 var totDoughnutPlot = null;
 var dateBarChart = null;
+
+function initializeGCalendarLink() {
+    // a element
+    const googleCalendarLink = document.querySelector("#googleCalendarLink");
+    
+    // Relevant event data
+    const eventTitle = document.querySelector("#eventTitle").innerText;
+    const eventDescription = document.querySelector("#descriptionText").innerText;
+    let eventLocation = document.querySelector("#eventLocation");
+    if (eventLocation) {
+        eventLocation = eventLocation.innerText;
+    } else {
+        eventLocation = "";
+    }
+    let startDate = dates[0];
+    const durationMin = parseInt(document.querySelector("#durationMin").innerText);
+    let endDate = new Date(new Date(startDate).getTime() + (durationMin*60000));
+    const eventWebsite = window.location.href;
+
+    startDate = (startDate + "00").replaceAll("-","").replaceAll(":","");
+    endDate = endDate.getFullYear() + ( "0" + (endDate.getMonth() + 1)).slice(-2) + ("0" + endDate.getDate()).slice(-2) + 
+    "T" + ("0" + endDate.getHours()).slice(-2) + ("0" + endDate.getMinutes()).slice(-2) + "00";
+    
+    let url = "https://calendar.google.com/calendar/render?action=TEMPLATE&dates=" + encodeURIComponent(startDate + "/" + endDate) +
+    "&details=" + encodeURIComponent(eventDescription) + "&text=" + encodeURIComponent(eventTitle) +
+    "&sprop=website:" + encodeURIComponent(eventWebsite.replaceAll("https://","").replaceAll("http://","")) + 
+    "&sprop=name:Schedama";
+    if (eventLocation != "") {
+        url += "&location=" + encodeURIComponent(eventLocation);
+    }
+
+    googleCalendarLink.setAttribute("href", url);
+}
 
 function getRemainingTime() {
     const today = new Date();

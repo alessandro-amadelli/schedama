@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-17 20:17+0100\n"
+"POT-Creation-Date: 2023-01-20 15:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: .\events\static\events\edit_event.js:127
 #: .\events\static\events\new_event.js:218
-#: .\events\static\events\view_event.js:155
+#: .\events\static\events\view_event.js:193
 msgid "d"
 msgstr "g"
 
@@ -43,8 +43,8 @@ msgstr "Per favore, controlla i campi di input."
 #: .\events\static\events\edit_event.js:515
 #: .\events\static\events\edit_event.js:562
 #: .\events\static\events\new_event.js:475
-#: .\events\static\events\view_event.js:430
-#: .\events\static\events\view_event.js:542
+#: .\events\static\events\view_event.js:468
+#: .\events\static\events\view_event.js:580
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
@@ -100,26 +100,26 @@ msgstr "Ehi, dai un occhio a questo fantastico evento su Schedama"
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: .\events\static\events\view_event.js:134
+#: .\events\static\events\view_event.js:172
 msgid "Ended"
 msgstr "Concluso"
 
-#: .\events\static\events\view_event.js:140
+#: .\events\static\events\view_event.js:178
 msgid "In progress"
 msgstr "In corso"
 
-#: .\events\static\events\view_event.js:199
+#: .\events\static\events\view_event.js:237
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\events\static\events\view_event.js:199
+#: .\events\static\events\view_event.js:237
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\events\static\events\view_event.js:276
+#: .\events\static\events\view_event.js:314
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\events\static\events\view_event.js:291
+#: .\events\static\events\view_event.js:329
 msgid "Preferences"
 msgstr "Preferenze"

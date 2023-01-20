@@ -4,7 +4,7 @@
     --body-bg-color: #118ab2;
     --card-bg-color: rgba(255,255,255,.7);
     --color: black;
-    --event-div-bg: rgba(255,255,255,.4);
+    --event-div-bg: rgba(255,255,255,.2);
     --event-ended-bg: rgba(255, 0, 0, .5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.8);
@@ -24,7 +24,7 @@
     --body-bg-color: #073b4c;
     --card-bg-color: rgba(0,0,0,.2);
     --color: #fff;
-    --event-div-bg: rgba(0,0,0,.4);
+    --event-div-bg: rgba(0,0,0,.2);
     --event-ended-bg: rgba(255, 0, 0, .3);
     --event-started-bg: #06d69eb2;
     --input-bg-color: rgba(0,0,0,.8);

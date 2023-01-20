@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-18 19:19+0100\n"
+"POT-Creation-Date: 2023-01-20 15:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,7 @@ msgstr "Partecipanti rimossi"
 
 #: .\events\templates\events\edit_event.html:199
 #: .\events\templates\events\new_event.html:134
-#: .\events\templates\events\view_event.html:183
+#: .\events\templates\events\view_event.html:188
 msgid "Save"
 msgstr "Salva"
 
@@ -267,8 +267,8 @@ msgid "Particpant name"
 msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:317
-#: .\events\templates\events\view_event.html:180
-#: .\events\templates\events\view_event.html:211
+#: .\events\templates\events\view_event.html:185
+#: .\events\templates\events\view_event.html:216
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -475,35 +475,39 @@ msgstr "Inizia tra"
 msgid "d"
 msgstr "g"
 
-#: .\events\templates\events\view_event.html:96
+#: .\events\templates\events\view_event.html:58
+msgid "Add to Google Calendar"
+msgstr "Aggiungi a Google Calendar"
+
+#: .\events\templates\events\view_event.html:101
 msgid "List"
 msgstr "Lista"
 
-#: .\events\templates\events\view_event.html:103
+#: .\events\templates\events\view_event.html:108
 msgid "Participate"
 msgstr "Partecipa"
 
-#: .\events\templates\events\view_event.html:141
+#: .\events\templates\events\view_event.html:146
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:186
+#: .\events\templates\events\view_event.html:191
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:199
+#: .\events\templates\events\view_event.html:204
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:205
+#: .\events\templates\events\view_event.html:210
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:207
+#: .\events\templates\events\view_event.html:212
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:214
+#: .\events\templates\events\view_event.html:219
 msgid "Join"
 msgstr "Partecipa"
 
