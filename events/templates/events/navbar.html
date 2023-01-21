@@ -1,7 +1,12 @@
+{% load static %}
 {% load i18n %}
 <nav class="navbar navbar-light navbar-expand-md shadow p-2 mb-5 rounded">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'index' %}">Schedama</a>
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{% static 'events/schedama_logo.png' %}" id="navLogo" alt="Schedama logo" style="width:50px;height:50px;padding:0;margin:0;border-radius:50%;">
+            <img src="{% static 'events/schedama_logo_dark.png' %}" id="navLogoDark" alt="Schedama logo" style="width:50px;height:50px;padding:0;margin:0;border-radius:50%;" class="visually-hidden">
+            schedama
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

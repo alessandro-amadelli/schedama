@@ -34,6 +34,10 @@ function setMode(currentMode) {
         // Applying class to body
         body.classList.remove("dark-mode");
 
+        // Navbar logo
+        document.querySelector("#navLogoDark").classList.add("visually-hidden");
+        document.querySelector("#navLogo").classList.remove("visually-hidden");
+
         // Changing meta tag color-scheme
         document.querySelector('meta[name="color-scheme"]').setAttribute('content', 'light');
 
@@ -60,6 +64,10 @@ function setMode(currentMode) {
         // Applying class to body
         body.classList.add("dark-mode");
 
+        // Navbar logo
+        document.querySelector("#navLogoDark").classList.remove("visually-hidden");
+        document.querySelector("#navLogo").classList.add("visually-hidden");
+
         // Changing meta tag color-scheme
         document.querySelector('meta[name="color-scheme"]').setAttribute('content', 'dark');
 
@@ -85,27 +93,6 @@ function setMode(currentMode) {
 }
 
 function showLoading(message=""){
-    // if (message == "") {
-    //   //If message is empty, choose a random message from the array
-    //   messages = [
-    //     gettext("Throwing some ninja stars..."),
-    //     gettext("Browsing my interesting recipe book..."),
-    //     gettext("Using my ninja techniques..."),
-    //     gettext("Polishing my katana..."),
-    //     gettext("Lunch break...be right back!"),
-    //     gettext("Breaking some boards..."),
-    //     gettext("Practicing with nunchacks..."),
-    //     gettext("Throwing some kunais..."),
-    //     gettext("Hiding somewhere in the shadows..."),
-    //     gettext("Doing laundry..."),
-    //     gettext("Meditating, please wait..."),
-    //     gettext("Doing some top-secret thing...be right back!")
-    //   ]
-  
-    //   let randMsg = Math.floor(Math.random() * messages.length);
-    //   message = messages[randMsg];
-    // }
-
     if (message == "") {
         message = gettext("Loading, please wait.")
     }
