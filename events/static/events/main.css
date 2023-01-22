@@ -105,6 +105,10 @@ nav {
     margin: .5rem;
 }
 
+.round-img {
+    border-radius:50%;
+}
+
 .cursor-pointer {
     cursor: pointer;
 }
@@ -120,7 +124,7 @@ nav {
 .entering {
     animation-name: introAnimation;
     animation-duration: .6s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
 }
@@ -128,7 +132,7 @@ nav {
 .entering-1 {
     animation-name: introAnimation;
     animation-duration: .6s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
     animation-delay: .1s;
@@ -137,7 +141,7 @@ nav {
 .entering-2 {
     animation-name: introAnimation;
     animation-duration: .6s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
     animation-delay: .2s;
@@ -146,7 +150,7 @@ nav {
 .entering-3 {
     animation-name: introAnimation;
     animation-duration: .6s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
     animation-delay: .3s;
@@ -155,7 +159,7 @@ nav {
 .entering-4 {
     animation-name: introAnimation;
     animation-duration: .6s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
     animation-delay: .4s;
@@ -164,7 +168,7 @@ nav {
 .appearing {
     animation-name: fadeInAnimation;
     animation-duration: 1.5s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
 }
@@ -172,7 +176,7 @@ nav {
 .appearing-1 {
     animation-name: fadeInAnimation;
     animation-duration: 1.5s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
     animation-delay: .2s;
@@ -181,7 +185,7 @@ nav {
 .appearing-2 {
     animation-name: fadeInAnimation;
     animation-duration: 1.5s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
     animation-delay: .5s;
@@ -190,7 +194,7 @@ nav {
 .appearing-3 {
     animation-name: fadeInAnimation;
     animation-duration: 1.5s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
     animation-delay: .8s;
@@ -199,7 +203,7 @@ nav {
 .appearing-4 {
     animation-name: fadeInAnimation;
     animation-duration: 1.5s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: running;
     animation-delay: 1.1s;

@@ -38,8 +38,19 @@ function setMode(currentMode) {
         document.querySelector("#navLogoDark").classList.add("visually-hidden");
         document.querySelector("#navLogo").classList.remove("visually-hidden");
 
+        // Page logo
+        const logo = document.querySelector("#schedamaLogo");
+        const logoDark = document.querySelector("#schedamaLogoDark");
+        if (logo) {
+            logo.classList.remove("visually-hidden");
+        }
+        if (logoDark) {
+            logoDark.classList.add("visually-hidden");
+        }
+
         // Changing meta tag color-scheme
         document.querySelector('meta[name="color-scheme"]').setAttribute('content', 'light');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', "#118ab2");
 
         // Navbar class change
         navbar.classList.remove("navbar-dark");
@@ -68,8 +79,19 @@ function setMode(currentMode) {
         document.querySelector("#navLogoDark").classList.remove("visually-hidden");
         document.querySelector("#navLogo").classList.add("visually-hidden");
 
+        // Page logo
+        const logo = document.querySelector("#schedamaLogo");
+        const logoDark = document.querySelector("#schedamaLogoDark");
+        if (logo) {
+            logo.classList.add("visually-hidden");
+        }
+        if (logoDark) {
+            logoDark.classList.remove("visually-hidden");
+        }
+
         // Changing meta tag color-scheme
         document.querySelector('meta[name="color-scheme"]').setAttribute('content', 'dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', "#073b4c");
 
         // Navbar class change
         navbar.classList.add("navbar-dark");

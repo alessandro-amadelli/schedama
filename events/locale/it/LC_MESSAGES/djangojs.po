@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-20 15:31+0100\n"
+"POT-Creation-Date: 2023-01-22 12:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: .\events\static\events\edit_event.js:127
 #: .\events\static\events\new_event.js:218
-#: .\events\static\events\view_event.js:193
+#: .\events\static\events\view_event.js:191
 msgid "d"
 msgstr "g"
 
@@ -43,8 +43,8 @@ msgstr "Per favore, controlla i campi di input."
 #: .\events\static\events\edit_event.js:515
 #: .\events\static\events\edit_event.js:562
 #: .\events\static\events\new_event.js:475
-#: .\events\static\events\view_event.js:468
-#: .\events\static\events\view_event.js:580
+#: .\events\static\events\view_event.js:466
+#: .\events\static\events\view_event.js:578
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
@@ -88,38 +88,38 @@ msgstr ""
 msgid "Data saved to history"
 msgstr "Dati salvati in cronologia"
 
-#: .\events\static\events\utilities.js:110
+#: .\events\static\events\utilities.js:119
 msgid "Loading, please wait."
 msgstr "Caricamento, attendere per favore."
 
-#: .\events\static\events\utilities.js:199
+#: .\events\static\events\utilities.js:208
 msgid "Hey, check out this amazing event created with Schedama"
 msgstr "Ehi, dai un occhio a questo fantastico evento su Schedama"
 
-#: .\events\static\events\utilities.js:223
+#: .\events\static\events\utilities.js:232
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: .\events\static\events\view_event.js:172
+#: .\events\static\events\view_event.js:170
 msgid "Ended"
 msgstr "Concluso"
 
-#: .\events\static\events\view_event.js:178
+#: .\events\static\events\view_event.js:176
 msgid "In progress"
 msgstr "In corso"
 
-#: .\events\static\events\view_event.js:237
+#: .\events\static\events\view_event.js:235
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\events\static\events\view_event.js:237
+#: .\events\static\events\view_event.js:235
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\events\static\events\view_event.js:314
+#: .\events\static\events\view_event.js:312
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\events\static\events\view_event.js:329
+#: .\events\static\events\view_event.js:327
 msgid "Preferences"
 msgstr "Preferenze"

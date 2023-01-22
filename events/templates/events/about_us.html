@@ -7,15 +7,59 @@ About us
 {% endblock %}
 
 {% block body %}
-  <h1>About us</h1>
-  <h2>{% translate "Know Schedama.com" %}</h2>
+<div class="title-section">
+  <h1 class="entering">About us <span class="material-symbols-outlined">face</span></h1>
+  <h2 class="entering-1">{% translate "Know Schedama.com" %}</h2>
+</div>
 
   <div class="section p-2">
-    <p class="lead">{% translate "With Schedama you can easily create an event, set a title, location, date and time and share it using the generated link." %}</p>
-    <p>Upon event creation, you'll have 2 links available</p>
-    <ul>
-      <li>A <b>participation link</b> users can utilize to view event information and register their participation and availability</li>
-      <li>An <b>administration link</b> you can utilize to fully edit the event, change dates or location, remove participants or cancel the event</li>
-    </ul>
+    <div class="row entering-2">
+      <div class="col-12 text-center">
+        <p class="lead">{% translate "With Schedama you can easily create an event, enter all relevant information and share it using the generated link." %}</p>
+      </div>
+    </div>
+
+    <div class="row p-3 my-5 appearing-2">
+      <div class="col-12 text-center">
+        <img class="img-fluid round-img shadow" src="{%static 'events/schedama_logo.png' %}" alt="Schedama logo" id="schedamaLogo">
+        <img class="img-fluid round-img shadow visually-hidden" src="{%static 'events/schedama_logo_dark.png' %}" alt="Schedama logo" id="schedamaLogoDark">
+      </div>
+    </div>
+
+    <hr>
+    
+    <div class="row mb-5 entering-3">
+      <div class="col-12 text-center">
+        <p class="lead">{% translate "Upon event creation Schedama will automatically generate 2 links" %}</p>
+      </div>
+
+      <div class="col-6 text-center">
+        <span class="material-symbols-outlined">group</span>
+        <h5>{% translate "Participant link" %}</h5>
+      </div>
+      <div class="col-6 text-center">
+        <span class="material-symbols-outlined">badge</span>
+        <h5>{% translate "Administration link" %}</h5>
+      </div>
+
+      <div class="col-6 text-center">
+        <p>{% translate "You can share this link with anyone you'd like to invite to the event" %}</p>
+      </div>
+      <div class="col-6 text-center">
+        <p>{% translate "Use this link to manage your event, add and modify information or participants" %}</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row mb-5 entering-4">
+      <div class="col-12 text-center">
+        <p class="lead">
+          {% translate "Click on" %} <a href="{% url 'history_view' %}">{% translate "History" %}</a> 
+          {% translate "to find all the links to events you visited on your device" %}
+        </p>
+      </div>
+    </div>
+
   </div>
 {% endblock %}

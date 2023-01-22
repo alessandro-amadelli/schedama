@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-20 15:30+0100\n"
+"POT-Creation-Date: 2023-01-22 12:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +18,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\events\templates\events\about_us.html:11
+#: .\events\templates\events\about_us.html:12
 msgid "Know Schedama.com"
 msgstr "Conosci Schedama.com"
 
-#: .\events\templates\events\about_us.html:14
+#: .\events\templates\events\about_us.html:18
 msgid ""
-"With Schedama you can easily create an event, set a title, location, date "
-"and time and share it using the generated link."
+"With Schedama you can easily create an event, enter all relevant information "
+"and share it using the generated link."
 msgstr ""
-"Con Schedama puoi facilmente creare un evento, impostare un titolo, "
-"location, data e ora e condividerlo utilizzando il link generato."
+"Con Schedama puoi facilmente creare un evento, inserire tutte le informazioni rilevanti "
+"e condividerlo usando il link generato"
+
+#: .\events\templates\events\about_us.html:33
+msgid "Upon event creation Schedama will automatically generate 2 links"
+msgstr "Alla creazione dell'evento Schedama genererà automaticamente 2 link"
+
+#: .\events\templates\events\about_us.html:38
+#: .\events\templates\events\history.html:25
+msgid "Participant link"
+msgstr "Link partecipante"
+
+#: .\events\templates\events\about_us.html:42
+msgid "Administration link"
+msgstr "Link amministrazione"
+
+#: .\events\templates\events\about_us.html:46
+msgid "You can share this link with anyone you'd like to invite to the event"
+msgstr "Puoi condividere questo link con chiunque tu voglia invitare all'evento"
+
+#: .\events\templates\events\about_us.html:49
+msgid ""
+"Use this link to manage your event, add and modify information or "
+"participants"
+msgstr ""
+"Usa questo link per gestire il tuo evento, aggiungere e modificare informazioni o "
+"partecipanti"
+
+#: .\events\templates\events\about_us.html:58
+msgid "Click on"
+msgstr "Clicca su"
+
+#: .\events\templates\events\about_us.html:58
+#: .\events\templates\events\history.html:13
+#: .\events\templates\events\navbar.html:22
+msgid "History"
+msgstr "Cronologia"
+
+#: .\events\templates\events\about_us.html:59
+msgid "to find all the links to events you visited on your device"
+msgstr "per trovare tutti i link agli eventi che hai visitato sul tuo dispositivo"
 
 #: .\events\templates\events\edit_event.html:6
 #: .\events\templates\events\edit_event.html:22
@@ -323,11 +362,6 @@ msgstr "Il server è scontroso e ha smesso di cooperare (ok, improbabile)"
 msgid "The server exploded (well...maybe not this one)"
 msgstr "Il server è espoloso (beh...magari questo no)"
 
-#: .\events\templates\events\history.html:13
-#: .\events\templates\events\navbar.html:17
-msgid "History"
-msgstr "Cronologia"
-
 #: .\events\templates\events\history.html:14
 msgid "View recently opened events"
 msgstr "Visualizza gli eventi aperti di recente"
@@ -339,6 +373,18 @@ msgid ""
 msgstr ""
 "Qui puoi vedere gli eventi che hai aperto o creato recentemente. Un buon "
 "posto dove guardare se non riesci a ritrovare il link..."
+
+#: .\events\templates\events\history.html:23
+msgid "Legend"
+msgstr "Legenda"
+
+#: .\events\templates\events\history.html:24
+msgid "Last time you opened the event"
+msgstr "Ultima volta in cui hai aperto l'evento"
+
+#: .\events\templates\events\history.html:26
+msgid "Administration link (if present)"
+msgstr "Link amministrazion (se presente)"
 
 #: .\events\templates\events\index.html:11
 msgid "Welcome to Schedama"
@@ -365,7 +411,7 @@ msgid "Easily create a new event by clicking "
 msgstr "Crea un nuovo evento in modo semplice cliccando "
 
 #: .\events\templates\events\index.html:24
-#: .\events\templates\events\navbar.html:14
+#: .\events\templates\events\navbar.html:19
 msgid "Create event"
 msgstr "Crea evento"
 
@@ -404,6 +450,10 @@ msgid ""
 msgstr ""
 "Puoi completamente gestire il tuo evento visitando l'<strong>URL "
 "Amministrazione</strong>."
+
+#: .\events\templates\events\navbar.html:25
+msgid "About us"
+msgstr "About us"
 
 #: .\events\templates\events\new_event.html:6
 #: .\events\templates\events\new_event.html:14
@@ -530,6 +580,3 @@ msgstr "Si è verificato un errore."
 #: .\events\views.py:201 .\events\views.py:294 .\events\views.py:362
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
-
-#~ msgid "About us"
-#~ msgstr "About us"

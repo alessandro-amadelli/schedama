@@ -10,13 +10,22 @@ History
   <script src="{% static 'events/history.js' %}"></script>
 
   <div class="title-section">
-    <h1>{% translate "History" %} <span class="material-symbols-outlined">history</span></h1>
-    <h2>{% translate "View recently opened events" %}</h2>
+    <h1 class="entering">{% translate "History" %} <span class="material-symbols-outlined">history</span></h1>
+    <h2 class="entering-1">{% translate "View recently opened events" %}</h2>
   </div>
 
   <div class="section p-2">
     <p class="lead">{% translate "Here you can see events that you recently opened or created. A good place to look if you can't find the link..." %}</p>
     
-    <div class="history-container row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 mt-5"></div>
+    <div class="history-container row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 mt-5">
+      <div class="col">
+        <p>
+          <h4>{% translate "Legend" %}</h4>
+          <span class="material-symbols-outlined">history</span>: {% translate "Last time you opened the event" %} <br>
+          <span class="material-symbols-outlined">group</span>: {% translate "Participant link" %} <br>
+          <span class="material-symbols-outlined">badge</span>: {% translate "Administration link (if present)" %}
+        </p>
+      </div>
+    </div>
   </div>
 {% endblock %}

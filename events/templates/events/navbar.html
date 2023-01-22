@@ -3,8 +3,8 @@
 <nav class="navbar navbar-light navbar-expand-md shadow p-2 mb-5 rounded">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">
-            <img src="{% static 'events/schedama_logo.png' %}" id="navLogo" alt="Schedama logo" style="width:50px;height:50px;padding:0;margin:0;border-radius:50%;">
-            <img src="{% static 'events/schedama_logo_dark.png' %}" id="navLogoDark" alt="Schedama logo" style="width:50px;height:50px;padding:0;margin:0;border-radius:50%;" class="visually-hidden">
+            <img src="{% static 'events/schedama_logo.png' %}" id="navLogo" alt="Schedama logo" style="width:50px;height:50px;padding:0;margin:0;" class="round-img">
+            <img src="{% static 'events/schedama_logo_dark.png' %}" id="navLogoDark" alt="Schedama logo" style="width:50px;height:50px;padding:0;margin:0;" class="round-img visually-hidden">
             schedama
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,11 +21,9 @@
                 <a class="nav-link {% if request.resolver_match.url_name == 'history_view' %}active{% endif %}" href="{% url 'history_view' %}">
                     <span class="material-symbols-outlined">history</span>{% translate "History" %}
                 </a>
-                {% comment %}
                 <a class="nav-link {% if request.resolver_match.url_name == 'about_us_view' %}active{% endif %}" href="{% url 'about_us_view' %}">
-                    <span class="material-symbols-outlined">info</span>{% translate "About us" %}
+                    <span class="material-symbols-outlined">face</span>{% translate "About us" %}
                 </a>
-                {% endcomment %}
                 <div class="nav-link cursor-pointer" id="darkModeToggle" aria-label="Dark mode toggle">
                     <span class="material-symbols-outlined fs-2 float-end me-0">dark_mode</span>
                 </div>
