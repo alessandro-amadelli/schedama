@@ -1,5 +1,6 @@
 from django.urls import path
 from django.views.i18n import JavaScriptCatalog
+from django.views.generic import TemplateView
 
 from . import views
 
@@ -17,4 +18,5 @@ urlpatterns = [
     path('history/', views.history_view, name='history_view'),
     path('about-us/', views.about_us_view, name='about_us_view'),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('serviceworker.js', (TemplateView.as_view(template_name="serviceworker.js", content_type='application/javascript', )), name='serviceworker.js'),
 ]

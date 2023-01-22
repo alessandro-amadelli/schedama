@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('events.urls')),
+    path('', include('pwa.urls')),
     # path('admin/', admin.site.urls),
 ]
 
