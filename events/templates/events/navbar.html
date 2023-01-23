@@ -18,6 +18,9 @@
                 <a class="nav-link {% if request.resolver_match.url_name == 'new_event_view' %}active{% endif %}" href="{% url 'new_event_view' %}">
                     <span class="material-symbols-outlined">edit_calendar</span>{% translate "Create event" %}
                 </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'open_event_view' %}active{% endif %}" href="{% url 'open_event_view' %}">
+                    <span class="material-symbols-outlined">share</span>{% translate "Open event" %}
+                </a>
                 <a class="nav-link {% if request.resolver_match.url_name == 'history_view' %}active{% endif %}" href="{% url 'history_view' %}">
                     <span class="material-symbols-outlined">history</span>{% translate "History" %}
                 </a>

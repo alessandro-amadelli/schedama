@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('create-event/', views.new_event_view, name='new_event_view'),
     path('save-event/', views.save_event_view, name='save_event_view'),
+    path('open-event/', views.open_event_view, name='open_event_view'),
     path('participate/<str:eventID>', views.participate_view, name='participate_view'),
     path('add-participant/', views.add_participant_view, name='add_participant_view'),
     path('edit-event/<str:eventID>', views.edit_event_view, name='edit_event_view'),

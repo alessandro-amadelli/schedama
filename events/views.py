@@ -116,6 +116,10 @@ def save_event_view(request):
 
     return JsonResponse(response)
 
+def open_event_view(request):
+
+    return render(request, "events/open_event.html")
+
 def participate_view(request, eventID):
     # Retrieving event data
     event_data = get_event_data(eventID, "event")

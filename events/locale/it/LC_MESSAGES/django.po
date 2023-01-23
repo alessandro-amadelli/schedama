@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-22 12:25+0100\n"
+"POT-Creation-Date: 2023-01-23 17:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgid ""
 "With Schedama you can easily create an event, enter all relevant information "
 "and share it using the generated link."
 msgstr ""
-"Con Schedama puoi facilmente creare un evento, inserire tutte le informazioni rilevanti "
-"e condividerlo usando il link generato"
+"Con Schedama puoi facilmente creare un evento, inserire tutte le "
+"informazioni rilevanti e condividerlo usando il link generato"
 
 #: .\events\templates\events\about_us.html:33
 msgid "Upon event creation Schedama will automatically generate 2 links"
@@ -45,15 +45,16 @@ msgstr "Link amministrazione"
 
 #: .\events\templates\events\about_us.html:46
 msgid "You can share this link with anyone you'd like to invite to the event"
-msgstr "Puoi condividere questo link con chiunque tu voglia invitare all'evento"
+msgstr ""
+"Puoi condividere questo link con chiunque tu voglia invitare all'evento"
 
 #: .\events\templates\events\about_us.html:49
 msgid ""
 "Use this link to manage your event, add and modify information or "
 "participants"
 msgstr ""
-"Usa questo link per gestire il tuo evento, aggiungere e modificare informazioni o "
-"partecipanti"
+"Usa questo link per gestire il tuo evento, aggiungere e modificare "
+"informazioni o partecipanti"
 
 #: .\events\templates\events\about_us.html:58
 msgid "Click on"
@@ -61,13 +62,14 @@ msgstr "Clicca su"
 
 #: .\events\templates\events\about_us.html:58
 #: .\events\templates\events\history.html:13
-#: .\events\templates\events\navbar.html:22
+#: .\events\templates\events\navbar.html:25
 msgid "History"
 msgstr "Cronologia"
 
 #: .\events\templates\events\about_us.html:59
 msgid "to find all the links to events you visited on your device"
-msgstr "per trovare tutti i link agli eventi che hai visitato sul tuo dispositivo"
+msgstr ""
+"per trovare tutti i link agli eventi che hai visitato sul tuo dispositivo"
 
 #: .\events\templates\events\edit_event.html:6
 #: .\events\templates\events\edit_event.html:22
@@ -384,7 +386,7 @@ msgstr "Ultima volta in cui hai aperto l'evento"
 
 #: .\events\templates\events\history.html:26
 msgid "Administration link (if present)"
-msgstr "Link amministrazion (se presente)"
+msgstr "Link amministrazione (se presente)"
 
 #: .\events\templates\events\index.html:11
 msgid "Welcome to Schedama"
@@ -451,7 +453,12 @@ msgstr ""
 "Puoi completamente gestire il tuo evento visitando l'<strong>URL "
 "Amministrazione</strong>."
 
-#: .\events\templates\events\navbar.html:25
+#: .\events\templates\events\navbar.html:22
+#: .\events\templates\events\open_event.html:27
+msgid "Open event"
+msgstr "Apri evento"
+
+#: .\events\templates\events\navbar.html:28
 msgid "About us"
 msgstr "About us"
 
@@ -517,6 +524,36 @@ msgstr "Nah, non mi interessa"
 msgid "Restore data"
 msgstr "Ripristina i dati"
 
+#: .\events\templates\events\open_event.html:28
+msgid "Enter event ID to participate"
+msgstr "Inserisci l'ID evento per partecipare"
+
+#: .\events\templates\events\open_event.html:31
+msgid ""
+"You can open the participation page of the event by entering the event ID"
+msgstr ""
+"Puoi aprire la pagina di partecipazione dell'evento inserendo l'ID evento"
+
+#: .\events\templates\events\open_event.html:36
+msgid "Event ID"
+msgstr "ID evento"
+
+#: .\events\templates\events\open_event.html:37
+msgid "Go"
+msgstr "vai"
+
+#: .\events\templates\events\open_event.html:45
+msgid "Event ID is contained in the event participation URL"
+msgstr "L'ID evento è contenuto nell'URL di partecipazione"
+
+#: .\events\templates\events\open_event.html:48
+msgid ""
+"As an example, you can see the event ID is the highlighted text in the "
+"following participant URL"
+msgstr ""
+"Ad esempio, puoi vedere che l'ID evento è la parte di testo evidenziata nel "
+"seguente URL partecipante"
+
 #: .\events\templates\events\view_event.html:35
 msgid "Starts in"
 msgstr "Inizia tra"
@@ -561,8 +598,8 @@ msgstr "Preferenze"
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:93 .\events\views.py:170 .\events\views.py:381
-#: .\events\views.py:392 .\events\views.py:437 .\events\views.py:448
+#: .\events\views.py:93 .\events\views.py:174 .\events\views.py:385
+#: .\events\views.py:396 .\events\views.py:441 .\events\views.py:452
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
@@ -572,11 +609,11 @@ msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:180 .\events\views.py:256 .\events\views.py:322
-#: .\events\views.py:419 .\events\views.py:470
+#: .\events\views.py:184 .\events\views.py:260 .\events\views.py:326
+#: .\events\views.py:423 .\events\views.py:474
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:201 .\events\views.py:294 .\events\views.py:362
+#: .\events\views.py:205 .\events\views.py:298 .\events\views.py:366
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
