@@ -2,9 +2,8 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-History
-{% endblock %}
+{% block title %}{% translate "View events you opened recently - Schedama.com" %}{% endblock %}
+{% block description %}{% translate "Events you visited or created on your device are visible here." %}{% endblock %}
 
 {% block body %}
   <script src="{% static 'events/history.js' %}"></script>

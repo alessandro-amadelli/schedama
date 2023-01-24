@@ -2,9 +2,8 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-Participate
-{% endblock %}
+{% block title %}{% translate "Join the event | Participate to the event - Schedama.com" %}{% endblock %}
+{% block description %}{% translate "You can see event details, register your participation and see other participants." %}{% endblock %}
 
 {% block body %}
     {% csrf_token %}

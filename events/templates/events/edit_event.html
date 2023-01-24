@@ -2,9 +2,8 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-{% translate "Event administration" %}
-{% endblock %}
+{% block title %}{% translate "Manage your event on Schedama.com" %}{% endblock %}
+{% block description %}{% translate "You can fully manage your event, add/remove participant, modify event dates, description, etc." %}{% endblock %}
 
 {% block body %}
     <script src="{% static 'events/edit_event.js' %}"></script>
