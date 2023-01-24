@@ -20,7 +20,7 @@
 
 /* CSS variables for DARK MODE */
 .dark-mode {
-    --body-background: linear-gradient(180deg, #073b4c 0%, rgb(37, 37, 37) 45%);
+    --body-background: linear-gradient(180deg, #073b4c 60%, rgb(37, 37, 37) 100%);
     --body-bg-color: #073b4c;
     --card-bg-color: rgba(0,0,0,.2);
     --color: #fff;
@@ -29,7 +29,7 @@
     --event-started-bg: #06d69eb2;
     --input-bg-color: rgba(0,0,0,.8);
     --moving-bg-color: rgba(255,255,255,.1);
-    --navbar-bg-color: black;
+    --navbar-bg-color: rgba(0,0,0,.5);
     --section-bg-color: rgba(0,0,0,0);
     --text-muted-color: rgb(143, 143, 143);
     --title-bg-color: #ffd166;
