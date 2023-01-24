@@ -43,7 +43,7 @@ function fillHistory() {
 
         // Title
         const cardTitle = document.createElement("h5");
-        cardTitle.setAttribute("class", "card-title");
+        cardTitle.setAttribute("class", "card-title text-truncate");
         cardTitle.innerText = item.title;
 
         // Last visited
@@ -59,7 +59,7 @@ function fillHistory() {
         const partLink = document.createElement("a");
         partLink.setAttribute("class", "card-link");
         partLink.setAttribute("href", item.participation_link);
-        partLink.innerHTML = `<span class="material-symbols-outlined text-muted">group</span>`;
+        partLink.innerHTML = `<span class="material-symbols-outlined text-warning">group</span>`;
 
         // Administration link
         let admLink = null;
@@ -67,7 +67,7 @@ function fillHistory() {
             admLink = document.createElement("a");
             admLink.setAttribute("class", "card-link");
             admLink.setAttribute("href", item.admin_link);
-            admLink.innerHTML = `<span class="material-symbols-outlined text-muted">badge</span>`;
+            admLink.innerHTML = `<span class="material-symbols-outlined text-primary">badge</span>`;
         }
 
         // Append elements

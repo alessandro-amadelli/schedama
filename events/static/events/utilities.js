@@ -69,6 +69,12 @@ function setMode(currentMode) {
             table.classList.remove("table-dark");
         });
 
+        // Change text-bg class
+        document.querySelectorAll(".text-bg-dark").forEach((item) => {
+            item.classList.remove("text-bg-dark");
+            item.classList.add("text-bg-light");
+        });
+
     } else {
         // Activate dark mode
 
@@ -108,6 +114,12 @@ function setMode(currentMode) {
         // Change all tables
         document.querySelectorAll("table").forEach((table) => {
             table.classList.add("table-dark");
+        });
+
+        // Change text-bg class
+        document.querySelectorAll(".text-bg-light").forEach((item) => {
+            item.classList.remove("text-bg-light");
+            item.classList.add("text-bg-dark");
         });
     }
     // Saving new current mode to localStorage
@@ -202,11 +214,21 @@ function notify(text) {
   
   }
 
-function generateShareBtn(contentURL, text="") {
+function generateShareBtn(contentURL, eventTitle="", text="") {
     // Generates a share dropdown button with links
     if (text == "") {
-        text = gettext("Hey, check out this amazing event created with Schedama");
+        text = gettext("You've been invited to an event on Schedama: ");
     }
+
+    if (eventTitle.length > 25) {
+        eventTitle = eventTitle.substring(0,25) + ".."
+    }
+    if (eventTitle != "") {
+        text += eventTitle;
+    }
+
+    text = encodeURIComponent(text);
+
     const btnDiv = document.createElement("div");
     btnDiv.classList.add("btn-group");
     
@@ -223,7 +245,7 @@ function generateShareBtn(contentURL, text="") {
     const telegramLi = document.createElement("li");
     telegramLi.innerHTML = `<a class="dropdown-item" href="https://telegram.me/share/url?url=` + contentURL + `&text=` + text + `" target="_blank"><span class="material-symbols-outlined">send</span> Telegram </a>`;
     const whatsappLi = document.createElement("li");
-    whatsappLi.innerHTML = `<a class="dropdown-item" href="https://api.whatsapp.com/send?text=` + text + ` ` + contentURL + `" data-action="share/whatsapp/share" target="_blank"><span class="material-symbols-outlined">chat</span> Whatsapp </a>`;
+    whatsappLi.innerHTML = `<a class="dropdown-item" href="https://api.whatsapp.com/send?text=` + text + encodeURIComponent("\n") + contentURL + `" data-action="share/whatsapp/share" target="_blank"><span class="material-symbols-outlined">chat</span> Whatsapp </a>`;
     const emailLi = document.createElement("li");
     emailLi.innerHTML = `<a class="dropdown-item" href="mailto:?subject='Schedama Event'&body=` + text + ` ` + contentURL + `" target="_blank"><span class="material-symbols-outlined">email</span> e-mail</a>`;
     const dividerLi = document.createElement("li");

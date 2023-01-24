@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem("modifications");
 
     // Dropdown menu to share event
-    document.querySelector("#shareEventCol").appendChild(generateShareBtn(window.location.href));
+    const evTitle = document.querySelector("#eventTitle").innerText;
+    document.querySelector("#shareEventCol").appendChild(generateShareBtn(window.location.href, evTitle));
 
     // Display event duration in readable format
     displayDurationText();

@@ -516,7 +516,7 @@ function eventCreatedSuccessfully(data) {
     participantURL.setAttribute("id", "partURL");
     const sharePartCol = document.createElement("div");
     sharePartCol.classList.add("col-12", "text-center");
-    const btnSharePart = generateShareBtn(participantURL.innerText);
+    const btnSharePart = generateShareBtn(participantURL.innerText, eventTitle);
 
     // Display administration URL
     const displayAdminURL = document.createElement("h3");
@@ -531,7 +531,7 @@ function eventCreatedSuccessfully(data) {
     adminURL.setAttribute("id", "adminURL");
     const shareAdmCol = document.createElement("div");
     shareAdmCol.classList.add("col-12", "text-center");
-    const btnShareAdm = generateShareBtn(adminURL.innerText);
+    const btnShareAdm = generateShareBtn(adminURL.innerText, eventTitle);
 
     // Warning instructing user to save URLs
     const warnCol = document.createElement("div");

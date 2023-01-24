@@ -17,14 +17,15 @@
     <p class="lead">{% translate "Here you can see events that you recently opened or created. A good place to look if you can't find the link..." %}</p>
     
     <div class="history-container row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 mt-5">
-      <div class="col">
+      <div class="col-12">
         <p>
           <h4>{% translate "Legend" %}</h4>
-          <span class="material-symbols-outlined">history</span>: {% translate "Last time you opened the event" %} <br>
-          <span class="material-symbols-outlined">group</span>: {% translate "Participant link" %} <br>
-          <span class="material-symbols-outlined">badge</span>: {% translate "Administration link (if present)" %}
+          <span class="material-symbols-outlined text-muted text-bg-light p-1 rounded">history</span> {% translate "Last time you opened the event" %} <br>
+          <span class="material-symbols-outlined text-warning text-bg-light p-1 rounded">group</span> {% translate "Participant link" %} <br>
+          <span class="material-symbols-outlined text-primary text-bg-light p-1 rounded">badge</span> {% translate "Administration link (if present)" %}
         </p>
       </div>
+      <div class="w-100"></div>
     </div>
   </div>
 {% endblock %}
