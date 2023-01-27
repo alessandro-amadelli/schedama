@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pwa',
+    # 'pwa',
 ]
 
 MIDDLEWARE = [
@@ -132,7 +132,6 @@ STATIC_URL = '/static/'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Service worker for PWA functionalities
-# PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'events', 'templates', 'events', 'sw.js')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 if os.environ["SCHEDAMA_ENVIRONMENT"] == "PRODUCTION":
