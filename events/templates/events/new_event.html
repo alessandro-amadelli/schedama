@@ -40,6 +40,21 @@
       </div>
     </div>
 
+    <!-- Add description row -->
+    <div class="row mb-3 intro-animated" id="addDescriptionRow">
+      <div class="col-12">
+        <h4>{% translate "Do you wish to add a description?" %} <span class="text-danger">*</span></h4>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrY" value="Y">
+          <label class="form-check-label" for="addDescrY">{% translate "Yes" %}</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrN" value="N">
+          <label class="form-check-label" for="addDescrN">{% translate "No" %}</label>
+        </div>
+      </div>
+    </div>
+
     <!-- Event description -->
     <div class="row p-3 mb-3 intro-animated" id ="descriptionRow">
       <div class="col">
@@ -55,16 +70,25 @@
       </div>
     </div>
 
+    <!-- Add location row -->
+    <div class="row mb-3 intro-animated" id="addLocationRow">
+      <div class="col-12">
+        <h4>{% translate "Do you wish to add a location?" %} <span class="text-danger">*</span></h4>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocY" value="Y">
+          <label class="form-check-label" for="addLocY">{% translate "Yes" %}</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocN" value="N">
+          <label class="form-check-label" for="addLocN">{% translate "No" %}</label>
+        </div>
+      </div>
+    </div>
 
     <!-- Event location -->
     <div class="row p-3 mb-3 intro-animated" id="locationRow">
-      <div class="col-8">
+      <div class="col">
         <h4><span class="material-symbols-outlined">location_on</span> {% translate "Choose a location" %}</h4>
-      </div>
-      <div class="col-4">
-        <div class="form-check form-switch fs-4">
-          <input class="form-check-input" type="checkbox" role="switch" id="checkEventLocation" checked>
-        </div> 
       </div>
       <div class="w-100"></div>
       <div class="col" id="locationCol">

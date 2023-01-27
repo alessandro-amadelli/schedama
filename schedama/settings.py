@@ -116,7 +116,6 @@ LANGUAGES = [
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, "events\locale"),
-    # os.path.join(BASE_DIR, "locale"),
     )
 
 TIME_ZONE = 'UTC'
@@ -134,7 +133,7 @@ STATIC_URL = '/static/'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Service worker for PWA functionalities
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'templates', 'events', 'serviceworker.js')
+# PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'events', 'templates', 'events', 'sw.js')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 if os.environ["SCHEDAMA_ENVIRONMENT"] == "PRODUCTION":

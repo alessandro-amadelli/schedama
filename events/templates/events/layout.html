@@ -5,11 +5,26 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Manifest -->
-    <link rel="manifest" href="{% static 'events/manifest.json' %}">
+    
+  <!-- Manifest -->
+  <link rel="manifest" href="{% static 'events/manifest.webmanifest' %}">
 
-    <!-- Service worker registration -->
-    <script src="{% static 'events/app.js' %}"></script>
+  <!-- Service worker registration -->
+  <script>
+    registerSW();
+
+    async function registerSW() {
+      if ('serviceWorker' in navigator) {
+        try {
+          await navigator.serviceWorker.register('{% url "sw" %}', {
+            scope: "/"
+        });
+        } catch(err) {
+          console.log('SW registration failed: ', err);
+        }
+      }
+    }
+  </script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

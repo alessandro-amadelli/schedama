@@ -2,11 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse, Http404
 from django.core.exceptions import PermissionDenied
 from django.utils.translation import gettext as _
+from django.views.generic.base import TemplateView
 
 import json
 
 from datetime import datetime, timedelta
 import schedama.dynamodb_ops as dynamodb_ops
+
+class ServiceWorker(TemplateView):
+    template_name="events/sw.js"
+    content_type="application/javascript"
 
 def get_event_data(item_id, item_type="event"):
     # TO-DO: implement cache-first

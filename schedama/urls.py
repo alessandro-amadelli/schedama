@@ -15,10 +15,11 @@ Including another URLconf
 """
 # from django.contrib import admins
 from django.urls import path, include
+from events.views import ServiceWorker
 
 urlpatterns = [
     path('', include('events.urls')),
-    path('', include('pwa.urls')),
+    # path('', include('pwa.urls')),
     # path('admin/', admin.site.urls),
 ]
 

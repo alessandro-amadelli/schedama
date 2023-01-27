@@ -2,6 +2,7 @@
  "name": "Schedama",
  "short_name": "schedama",
   "start_url": "/",
+  "id": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#073b4c",
@@ -43,5 +44,28 @@
    "type": "image\/png",
    "density": "4.0"
   }
+ ],
+ "shortcuts": [
+    {
+        "name": "Create a new event",
+        "short_name": "New event",
+        "description": "Create a new event on Schedama.com",
+        "url": "/create-event",
+        "icons": [{"src": "./android-icon-96x96.png", "sizes": "96x96"}]
+    },
+    {
+        "name": "Open event",
+        "short_name": "Open event",
+        "description": "Open a shared event",
+        "url": "/open-event",
+        "icons": [{"src": "./android-icon-96x96.png", "sizes": "96x96"}]
+    },
+    {
+        "name": "History",
+        "short_name": "History",
+        "description": "View visited events",
+        "url": "/history",
+        "icons": [{"src": "./android-icon-96x96.png", "sizes": "96x96"}]
+    }
  ]
 }

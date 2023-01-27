@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     initializeTitleRow();
-    initializeDescriptionRow();
+    // initializeDescriptionRow();
 
     // Button to save event
     document.querySelector("#btnSaveEvent").onclick = () => {
@@ -54,7 +54,33 @@ function initializeTitleRow() {
     
     // Event listener to start animation of next input field
     const titleInput = document.querySelector("#eventTitle");
-    titleInput.addEventListener('input', initializeLocationRow);
+    titleInput.addEventListener('input', initializeAddDescriptionRow);
+}
+
+function initializeAddDescriptionRow() {
+    // Intro animation start
+    const addDescriptionRow = document.querySelector("#addDescriptionRow");
+    addDescriptionRow.style.animationPlayState = "running";
+
+    // Remove event listener from previous field
+    document.querySelector("#eventTitle").removeEventListener('input', initializeAddDescriptionRow);
+
+    // Event listener to start animation of next input field
+    document.querySelectorAll("input[name=addDescriptionRadio]").forEach((radio) => {
+        radio.addEventListener('click', () => {
+            showDescriptionRow(radio.value == 'Y');
+        })
+    });
+}
+
+function showDescriptionRow(toShow) {
+    if (toShow) {
+        document.querySelector("#descriptionRow").style.display = "block";
+        initializeDescriptionRow();
+    } else {
+        document.querySelector("#descriptionRow").style.display = "none";
+        initializeAddLocationRow();
+    }
 }
 
 function initializeDescriptionRow() {
@@ -63,10 +89,14 @@ function initializeDescriptionRow() {
     descrRow.style.animationPlayState = "running";
 
     // Event listener to save description data
-    descrRow.addEventListener('change', saveLocally);
-    descrRow.addEventListener('keyup', updateCharCount);
-
+    const descrInp = document.querySelector("#eventDescription");
+    descrInp.addEventListener('change', saveLocally);
+    descrInp.addEventListener('keyup', updateCharCount);
+    
     updateCharCount();
+    
+    // Event listener to initialize location row
+    descrInp.addEventListener('input', initializeAddLocationRow);
 }
 
 function updateCharCount() {
@@ -81,10 +111,36 @@ function updateCharCount() {
     countSpan.innerText = remaining;
 }
 
+function initializeAddLocationRow() {
+    // Intro animation start
+    const addLocationRow = document.querySelector("#addLocationRow");
+    addLocationRow.style.animationPlayState = "running";
+
+    // Remove event listener from previous field
+    document.querySelector("#eventDescription").removeEventListener('input', initializeAddLocationRow);
+
+    // Event listener to start animation of next input field
+    document.querySelectorAll("input[name=addLocationRadio]").forEach((radio) => {
+        radio.addEventListener('click', () => {
+            showLocationRow(radio.value == 'Y');
+        })
+    });
+}
+
+function showLocationRow(toShow) {
+    if (toShow) {
+        document.querySelector("#locationRow").style.display = "block";
+        initializeLocationRow();
+    } else {
+        document.querySelector("#locationRow").style.display = "none";
+        initializeDateRow();
+    }
+}
+
 function initializeLocationRow() {
     // Remove of event listener on previous input field
-    const titleInput = document.querySelector("#eventTitle");
-    titleInput.removeEventListener('input', initializeLocationRow);
+    const eventDescription = document.querySelector("#eventDescription");
+    eventDescription.removeEventListener('input', initializeAddLocationRow);
 
     // Intro animation start
     const locationRow = document.querySelector("#locationRow");
@@ -92,35 +148,29 @@ function initializeLocationRow() {
 
     // Event listener to start animation of next input field
     const locationInput = document.querySelector("#eventLocation");
-    const locationSwitch = document.querySelector("#checkEventLocation");
+    // const locationSwitch = document.querySelector("#checkEventLocation");
     locationInput.addEventListener('input', initializeDateRow);
-    locationSwitch.addEventListener('change', initializeDateRow);
-
-    // Event listener to toggle location input
-    locationSwitch.addEventListener('change', toggleLocationInput);
 }
 
-function toggleLocationInput() {
-    const locationSwitch = document.querySelector("#checkEventLocation");
-    const locationRow = document.querySelector("#locationRow");
-    const locationInput = document.querySelector("#eventLocation");
-    const locationCol = document.querySelector("#locationCol");
-    locationInput.disabled = !locationSwitch.checked;
-    if (locationInput.disabled) {
-        locationRow.classList.add("text-muted");
-        locationCol.style.display = "none";
-    } else {
-        locationRow.classList.remove("text-muted");
-        locationCol.style.display = "block";
-    }
-}
+// function toggleLocationInput() {
+//     const locationSwitch = document.querySelector("#checkEventLocation");
+//     const locationRow = document.querySelector("#locationRow");
+//     const locationInput = document.querySelector("#eventLocation");
+//     const locationCol = document.querySelector("#locationCol");
+//     locationInput.disabled = !locationSwitch.checked;
+//     if (locationInput.disabled) {
+//         locationRow.classList.add("text-muted");
+//         locationCol.style.display = "none";
+//     } else {
+//         locationRow.classList.remove("text-muted");
+//         locationCol.style.display = "block";
+//     }
+// }
 
 function initializeDateRow() {
     // Remove of event listener on previous input fields
     const locationInput = document.querySelector("#eventLocation");
     locationInput.removeEventListener('input', initializeDateRow);
-    const locationSwitch = document.querySelector("#checkEventLocation");
-    locationSwitch.removeEventListener('change', initializeDateRow);
 
     // Intro animation start
     const dateRow = document.querySelector("#dateRow");
@@ -314,7 +364,7 @@ function validateEvent() {
     }
 
     // Check #2 Location
-    const locSwitch = document.querySelector("#checkEventLocation");
+    const locSwitch = document.querySelector("#addLocY");
     const location = document.querySelector("#eventLocation");
     if (locSwitch.checked) {
         if (location.value.replaceAll(" ", "").length == 0) {
@@ -388,7 +438,7 @@ function saveLocally() {
     const eventTitle = document.querySelector("#eventTitle").value;
     const eventDescription = document.querySelector("#eventDescription").value;
     const eventLocation = document.querySelector("#eventLocation").value;
-    const locationActive = document.querySelector("#checkEventLocation").checked;
+    const locationActive = document.querySelector("#addLocY").checked;
     const eventDates = document.querySelectorAll("[name='eventDate']");
     let eventDuration = 60; // default duration is 1 hour
     const participants = document.querySelectorAll("[name='participantName']");
@@ -448,6 +498,11 @@ async function sendEventToServer() {
     if (!isValidated) {
         showPageMsg("alert-danger", gettext("Please, check input fields."));
         return false;
+    }
+
+    // Check if description is not active
+    if (document.querySelector("#addDescrN").checked) {
+        data.description = "";
     }
 
     let reqHeaders = new Headers();

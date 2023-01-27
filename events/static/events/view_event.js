@@ -100,7 +100,10 @@ function initializeGCalendarLink() {
     
     // Relevant event data
     const eventTitle = document.querySelector("#eventTitle").innerText;
-    const eventDescription = document.querySelector("#descriptionText").innerText;
+    let eventDescription = document.querySelector("#descriptionText");
+    if (eventDescription) {
+        eventDescription = eventDescription.innerText;
+    }
     let eventLocation = document.querySelector("#eventLocation");
     if (eventLocation) {
         eventLocation = eventLocation.innerText;
