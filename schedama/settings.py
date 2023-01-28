@@ -147,15 +147,15 @@ if os.environ.get("SCHEDAMA_ENVIRONMENT","TEST") == "PRODUCTION":
         },
     }
 
-    CACHES = {
-        "default": {
-            "BACKEND": "django.core.cache.backends.redis.RedisCache",
-            "LOCATION": os.environ.get("SCHEDAMA_REDIS_URL", ""),
-            "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient"
-            }
-        }
-    }
+    # CACHES = {
+    #     "default": {
+    #         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+    #         "LOCATION": os.environ.get("SCHEDAMA_REDIS_URL", ""),
+    #         "OPTIONS": {
+    #             "CLIENT_CLASS": "django_redis.client.DefaultClient"
+    #         }
+    #     }
+    # }
 else:
     # Dummy cache in development
     CACHES = {
