@@ -134,12 +134,34 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Service worker for PWA functionalities
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-if os.environ["SCHEDAMA_ENVIRONMENT"] == "PRODUCTION":
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+# Default cache TTLs values
+CACHE_TTL = 60 * 15 # for entire views
+CACHE_DB_TTL = 60 * 60 * 24 * 2 # for database records (eg.: events)
+
+# If production environment
+if os.environ.get("SCHEDAMA_ENVIRONMENT","TEST") == "PRODUCTION":
     STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.environ.get("SCHEDAMA_REDIS_URL", ""),
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient"
+            }
+        }
+    }
+else:
+    # Dummy cache in development
+    CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
 }
 
 # Default primary key field type

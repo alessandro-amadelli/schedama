@@ -1,21 +1,35 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse
 from django.core.exceptions import PermissionDenied
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
+
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 
 import json
 
 from datetime import datetime, timedelta
 import schedama.dynamodb_ops as dynamodb_ops
+from schedama.settings import CACHE_TTL, CACHE_DB_TTL
 
 class ServiceWorker(TemplateView):
     template_name="events/sw.js"
     content_type="application/javascript"
 
 def get_event_data(item_id, item_type="event"):
-    # TO-DO: implement cache-first
-    return dynamodb_ops.select_record_by_id(item_id, item_type)
+    """
+    Retrieves saved event's data with a cache-first logic.
+    """
+    cache_key = item_type + "_" + item_id
+    
+    event_data = cache.get(cache_key)
+    if not event_data:
+        event_data = dynamodb_ops.select_record_by_id(item_id, item_type)
+        cache.set(cache_key, event_data, CACHE_DB_TTL)
+
+    # return dynamodb_ops.select_record_by_id(item_id, item_type)
+    return event_data
 
 def validate_event(event_data):
     """
@@ -70,17 +84,25 @@ def save_event_to_db(event_data):
     if not is_validated:
         return False
 
-    return dynamodb_ops.insert_record(event_data)
+    # Save event to database
+    db_event = dynamodb_ops.insert_record(event_data)
 
+    # Saving event_data to cache (or update value if already present)
+    cache_key = db_event["item_type"] + "_" + db_event["item_id"]
+    cache.set(cache_key, event_data, CACHE_DB_TTL)
+
+    return event_data
+
+@cache_page(CACHE_TTL)
 def index(request):
     return render(request, "events/index.html")
 
+@cache_page(CACHE_TTL)
 def new_event_view(request):
-
     return render(request, "events/new_event.html")
 
+@cache_page(CACHE_TTL)
 def about_us_view(request):
-
     return render(request, "events/about_us.html")
 
 def save_event_view(request):
@@ -121,8 +143,8 @@ def save_event_view(request):
 
     return JsonResponse(response)
 
+@cache_page(CACHE_TTL)
 def open_event_view(request):
-
     return render(request, "events/open_event.html")
 
 def participate_view(request, eventID):
@@ -481,9 +503,9 @@ def reactivate_event_view(request):
     return JsonResponse(response)
 
 def history_view(request):
-
     return render(request, "events/history.html")
 
+@cache_page(CACHE_TTL)
 def error404_view(request, exception, eventID=""):
     context = {}
 

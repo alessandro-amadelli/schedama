@@ -86,7 +86,12 @@ function showDescriptionRow(toShow) {
 function initializeDescriptionRow() {
     // Start intro animation in description row
     const descrRow = document.querySelector("#descriptionRow");
-    descrRow.style.animationPlayState = "running";
+    
+    if (document.querySelector("#addDescrY").checked) {
+        descrRow.style.animationPlayState = "running";
+    } else {
+        descrRow.style.display = 'none';
+    }
 
     // Event listener to save description data
     const descrInp = document.querySelector("#eventDescription");
@@ -144,28 +149,18 @@ function initializeLocationRow() {
 
     // Intro animation start
     const locationRow = document.querySelector("#locationRow");
-    locationRow.style.animationPlayState = "running";
+
+    if (document.querySelector("#addLocY").checked) {
+        locationRow.style.animationPlayState = "running";
+    } else {
+        locationRow.style.display = "none";
+    }
 
     // Event listener to start animation of next input field
     const locationInput = document.querySelector("#eventLocation");
     // const locationSwitch = document.querySelector("#checkEventLocation");
     locationInput.addEventListener('input', initializeDateRow);
 }
-
-// function toggleLocationInput() {
-//     const locationSwitch = document.querySelector("#checkEventLocation");
-//     const locationRow = document.querySelector("#locationRow");
-//     const locationInput = document.querySelector("#eventLocation");
-//     const locationCol = document.querySelector("#locationCol");
-//     locationInput.disabled = !locationSwitch.checked;
-//     if (locationInput.disabled) {
-//         locationRow.classList.add("text-muted");
-//         locationCol.style.display = "none";
-//     } else {
-//         locationRow.classList.remove("text-muted");
-//         locationCol.style.display = "block";
-//     }
-// }
 
 function initializeDateRow() {
     // Remove of event listener on previous input fields
@@ -409,11 +404,24 @@ function restorePreviousData() {
     document.querySelector("#eventDescription").value = unsavedEvent.description;
     updateCharCount();
 
+    if (unsavedEvent.description != "") {
+        document.querySelector("#addDescrY").checked = true;
+    } else {
+        document.querySelector("#addDescrN").checked = true;
+    }
+
+    initializeAddDescriptionRow();
+    initializeDescriptionRow();
+
     // Event location
+    initializeAddLocationRow();
     initializeLocationRow();
     document.querySelector("#eventLocation").value = unsavedEvent.location;
-    document.querySelector("#checkEventLocation").checked = unsavedEvent.has_location;
-    toggleLocationInput();
+    if (unsavedEvent.has_location) {
+        document.querySelector("#addLocY").checked = true;
+    } else {
+        document.querySelector("#addLocN").checked = true;
+    }
 
     // Event dates
     initializeDateRow();
