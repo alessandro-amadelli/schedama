@@ -45,9 +45,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'events/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'events/favicon-96x96.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'events/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'events/manifest.json' %}">
-    <meta name="msapplication-TileColor" content="#073b4c">
+    <link rel="icon" type="image/x-icon" href="{% static 'events/favicon.ico' %}">
     <meta name="msapplication-TileImage" content="{% static 'events/ms-icon-144x144.png' %}">
+
+    <!-- Manifest -->
+    <meta name="msapplication-TileColor" content="#073b4c">
+    <link rel="manifest" href="{% static 'events/manifest.json' %}">
 
     <title>{% block title %}{% endblock %}</title>
     <meta name="description" content="{% block description %}{% endblock %}">

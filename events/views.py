@@ -21,16 +21,15 @@ def get_event_data(item_id, item_type="event"):
     """
     Retrieves saved event's data with a cache-first logic.
     """
-    # cache_key = item_type + "_" + item_id
+    cache_key = item_type + "_" + item_id
     
-    # event_data = cache.get(cache_key)
-    # if not event_data:
-    #     event_data = dynamodb_ops.select_record_by_id(item_id, item_type)
-    #     cache.set(cache_key, event_data, CACHE_DB_TTL)
+    event_data = cache.get(cache_key)
+    if not event_data:
+        event_data = dynamodb_ops.select_record_by_id(item_id, item_type)
+        cache.set(cache_key, event_data, CACHE_DB_TTL)
 
     event_data = dynamodb_ops.select_record_by_id(item_id, item_type)
 
-    # return dynamodb_ops.select_record_by_id(item_id, item_type)
     return event_data
 
 def validate_event(event_data):
@@ -90,20 +89,20 @@ def save_event_to_db(event_data):
     db_event = dynamodb_ops.insert_record(event_data)
 
     # Saving event_data to cache (or update value if already present)
-    # cache_key = db_event["item_type"] + "_" + db_event["item_id"]
-    # cache.set(cache_key, event_data, CACHE_DB_TTL)
+    cache_key = db_event["item_type"] + "_" + db_event["item_id"]
+    cache.set(cache_key, event_data, CACHE_DB_TTL)
 
     return event_data
 
-# @cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def index(request):
     return render(request, "events/index.html")
 
-# @cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def new_event_view(request):
     return render(request, "events/new_event.html")
 
-# @cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def about_us_view(request):
     return render(request, "events/about_us.html")
 
@@ -145,7 +144,7 @@ def save_event_view(request):
 
     return JsonResponse(response)
 
-# @cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def open_event_view(request):
     return render(request, "events/open_event.html")
 
@@ -507,7 +506,7 @@ def reactivate_event_view(request):
 def history_view(request):
     return render(request, "events/history.html")
 
-# @cache_page(CACHE_TTL)
+@cache_page(CACHE_TTL)
 def error404_view(request, exception, eventID=""):
     context = {}
 
