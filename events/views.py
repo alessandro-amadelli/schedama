@@ -42,6 +42,7 @@ def validate_event(event_data):
     DESCRIPTION_MAX_LENGTH = 400
     LOCATION_MAX_LENGTH = 70
     DATE_MIN = datetime.now().strftime("%Y-%m-%dT%H:%M")
+    DURATION_MAX = (60 * 24 * 30) + (60 * 23) + 59
     PARTICIPANT_NAME_MAX_LENGTH = 30
 
     is_valid = True
@@ -67,6 +68,19 @@ def validate_event(event_data):
     
     # Check event dates
     # Skip check for the moment because multiple dates could be present
+
+    # Check duration and set default if missing or wrong format
+    event_data["duration"] = event_data.get("duration", 60)
+    try:
+        event_data["duration"] = int(event_data["duration"])
+    except:
+        event_data["duration"] = 60
+
+    if event_data["duration"] == 0:
+        event_data["duration"] = 60
+
+    if event_data["duration"] > DURATION_MAX:
+        event_data["duratino"] = DURATION_MAX
 
     # Check event participants
     if len(event_data.get("participants", [])) > 0:

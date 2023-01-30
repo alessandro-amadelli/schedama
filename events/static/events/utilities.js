@@ -236,7 +236,11 @@ function generateShareBtn(contentURL, eventTitle="", text="") {
     btn.setAttribute("type","button");
     btn.setAttribute("data-bs-toggle","dropdown");
     btn.setAttribute("aria-expanded","false");
-    btn.classList.add("btn","btn-light", "dropdown-toggle", "p-2");
+    let btnLightDark = "btn-light";
+    if (document.body.classList.contains("dark-mode")) {
+        btnLightDark = "btn-dark";
+    }
+    btn.classList.add("btn", btnLightDark, "dropdown-toggle", "p-2");
     btn.innerHTML = `<span class="material-symbols-outlined">share</span>`;
 
     const btnUl = document.createElement("ul");
