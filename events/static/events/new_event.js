@@ -566,6 +566,12 @@ function eventCreatedSuccessfully(data) {
     displayName.innerText = eventTitle;
     displayName.setAttribute("class", "text-center mb-5");
 
+    // Dark or light class for btn
+    let darkLightClass = "btn-light";
+    if (document.body.classList.contains("dark-mode")) {
+        darkLightClass = "btn-dark";
+    }
+
     // Display participant's URL
     const displayPartURL = document.createElement("h3");
     displayPartURL.innerHTML = `<span class="material-symbols-outlined">group</span> ` + gettext("Participant URL");
@@ -573,13 +579,17 @@ function eventCreatedSuccessfully(data) {
     const partRow = document.createElement("div");
     partRow.classList.add("row");
     const partCol1 = document.createElement("div");
-    partCol1.setAttribute("class", "col-12 mb-5 text-center display-6");
+    partCol1.setAttribute("class", "col-12 mb-5 text-center display-6 border rounded shadow py-2");
     const participantURL = document.createElement("strong");
     participantURL.innerText = window.location.href.replace("create-event/", "participate/"+itemID);
     participantURL.setAttribute("id", "partURL");
     const sharePartCol = document.createElement("div");
     sharePartCol.classList.add("col-12", "text-center");
     const btnSharePart = generateShareBtn(participantURL.innerText, eventTitle);
+    const btnOpenPart = document.createElement("a");
+    btnOpenPart.setAttribute("href", participantURL.innerText);
+    btnOpenPart.setAttribute("class","btn " + darkLightClass + " m-2");
+    btnOpenPart.innerHTML = `<span class="material-symbols-outlined">group</span> ` + gettext("Participant page");
 
     // Display administration URL
     const displayAdminURL = document.createElement("h3");
@@ -588,13 +598,17 @@ function eventCreatedSuccessfully(data) {
     const admRow = document.createElement("div");
     admRow.classList.add("row");
     const admCol1 = document.createElement("div");
-    admCol1.setAttribute("class", "col-12 mb-5 text-center display-6");
+    admCol1.setAttribute("class", "col-12 mb-5 text-center display-6 border rounded shadow py-2");
     const adminURL = document.createElement("strong");
     adminURL.innerText = window.location.href.replace("create-event/", "edit-event/"+itemID+"?k="+adminKey);
     adminURL.setAttribute("id", "adminURL");
     const shareAdmCol = document.createElement("div");
     shareAdmCol.classList.add("col-12", "text-center");
     const btnShareAdm = generateShareBtn(adminURL.innerText, eventTitle);
+    const btnOpenAdm = document.createElement("a");
+    btnOpenAdm.setAttribute("href", adminURL.innerText);
+    btnOpenAdm.setAttribute("class","btn " + darkLightClass + " m-2");
+    btnOpenAdm.innerHTML = `<span class="material-symbols-outlined">badge</span> ` + gettext("Administration page");
 
     // Warning instructing user to save URLs
     const warnCol = document.createElement("div");
@@ -617,17 +631,19 @@ function eventCreatedSuccessfully(data) {
     partCol1.appendChild(participantURL);
     partRow.appendChild(sharePartCol);
     sharePartCol.appendChild(btnSharePart);
+    sharePartCol.appendChild(btnOpenPart);
 
     section.appendChild(newHr);
 
-    section.appendChild(displayAdminURL);
     section.appendChild(admRow);
     admRow.appendChild(warnCol);
     warnCol.appendChild(warn);
+    admRow.appendChild(displayAdminURL);
     admRow.appendChild(admCol1);
     admCol1.appendChild(adminURL);
     admRow.appendChild(shareAdmCol);
     shareAdmCol.appendChild(btnShareAdm);
+    shareAdmCol.appendChild(btnOpenAdm);
 
     // Save to history
     const eventData = {

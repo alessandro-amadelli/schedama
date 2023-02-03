@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-27 16:19+0100\n"
+"POT-Creation-Date: 2023-02-03 14:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -695,22 +695,22 @@ msgstr "Preferenze"
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:98 .\events\views.py:179 .\events\views.py:390
-#: .\events\views.py:401 .\events\views.py:446 .\events\views.py:457
+#: .\events\views.py:135 .\events\views.py:216 .\events\views.py:427
+#: .\events\views.py:438 .\events\views.py:483 .\events\views.py:494
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
-#: .\events\views.py:112
+#: .\events\views.py:149
 msgid "An error has occurred while creating the event. Please try again later."
 msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:189 .\events\views.py:265 .\events\views.py:331
-#: .\events\views.py:428 .\events\views.py:479
+#: .\events\views.py:226 .\events\views.py:302 .\events\views.py:368
+#: .\events\views.py:465 .\events\views.py:516
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:210 .\events\views.py:303 .\events\views.py:371
+#: .\events\views.py:247 .\events\views.py:340 .\events\views.py:408
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
