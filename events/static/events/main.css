@@ -224,7 +224,8 @@ body {
     background: var(--body-background);
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100vh;  
+    min-height: 100vh;
+    min-height: 100svh;
     transition: background-color 2s ease;
     overflow-x: hidden;
     margin: 0;
