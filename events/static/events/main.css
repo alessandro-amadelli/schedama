@@ -99,6 +99,14 @@ Color palette
     }
 }
 
+::selection {
+    background-color: #06d6a0;
+}
+
+::-moz-selection {
+    background-color: #06d6a0;
+}
+
 nav {
     background-color: var(--navbar-bg-color);
     transition: background-color 1s ease;
