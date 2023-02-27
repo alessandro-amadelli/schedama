@@ -17,15 +17,6 @@
   {% csrf_token %}
 
   <div class="section p-2">
-    <div class="row">
-      <div class="col-6">
-        <button type="button" class="btn btn-light float-start" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
-          <span class="material-symbols-outlined">settings</span>
-          {% translate "Settings" %}
-        </button>
-      </div>
-    </div>
-
     <!-- Event title -->
     <div class="row p-3 mb-3 mt-5 intro-animated" id="titleRow">
       <div class="col">
@@ -123,16 +114,16 @@
         <p>{% translate "Event duration" %}: <span class="fs-3" id="durationText">1h</span></p>
       </div>
       <div class="col-12 col-lg-4">
-          <label for="durationDays">{% translate "Days" %}</label>
-          <input type="range" class="form-range" id="durationDays" min="0" max="30" step="1" value="0">
+        <label for="durationMinutes">{% translate "Minutes" %}</label>
+        <input type="range" class="form-range" id="durationMinutes" min="0" max="59" step="1" value="0">
       </div>
       <div class="col-12 col-lg-4">
         <label for="durationHours">{% translate "Hours" %}</label>
         <input type="range" class="form-range" id="durationHours" min="0" max="23" step="1" value="1">
       </div>
       <div class="col-12 col-lg-4">
-        <label for="durationMinutes">{% translate "Minutes" %}</label>
-        <input type="range" class="form-range" id="durationMinutes" min="0" max="59" step="1" value="0">
+        <label for="durationDays">{% translate "Days" %}</label>
+        <input type="range" class="form-range" id="durationDays" min="0" max="30" step="1" value="0">
       </div>
     </div> 
 
@@ -147,6 +138,37 @@
           <input type="text" class="form-control" id="participantInp" maxlength="30" placeholder="{% translate 'Enter new participant' %}">
           <label for="participantInp">{% translate "Enter new participant" %}</label>
         </div>
+      </div>
+    </div>
+
+    <!-- Event settings -->
+    <div class="row p-3 mb-3 intro-animated" id="settingsRow">
+      <div class="col">
+        <h4><span class="material-symbols-outlined">build</span> {% translate "Configure Settings" %}</h4>
+      </div>
+      <div class="w-100"></div>
+      <div class="mb-3">
+        <form>
+          <h5>{% translate "Choose what participants are allowed to do" %}</h5>
+          <div class="mb-3">
+            <div class="form-check form-switch fs-4">
+              <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" checked>
+              <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check form-switch fs-4">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchEditParticipant" checked>
+            <label class="form-check-label" for="switchRemoveParticipant">{% translate "Edit participants" %}</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check form-switch fs-4">
+              <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant">
+              <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -179,44 +201,6 @@
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btnRestoreData">
             <span class="material-symbols-outlined">restore_page</span> {% translate "Restore data" %}
           </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal to configure event options -->
-  <div class="modal fade" id="modalEventSettings" tabindex="-1">
-    <div class="modal-dialog rounded">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"><span class="material-symbols-outlined">build</span> {% translate "Event settings" %}</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <h5>{% translate "Choose what participants are allowed to do" %}</h5>
-            <div class="mb-3">
-              <div class="form-check form-switch fs-4">
-                <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" checked>
-                <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
-              </div>
-            </div>
-            <div class="mb-3">
-              <div class="form-check form-switch fs-4">
-              <input class="form-check-input" type="checkbox" role="switch" id="switchEditParticipant" checked>
-              <label class="form-check-label" for="switchRemoveParticipant">{% translate "Edit participants" %}</label>
-              </div>
-            </div>
-            <div class="mb-3">
-              <div class="form-check form-switch fs-4">
-                <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant">
-                <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Ok</button>
         </div>
       </div>
     </div>

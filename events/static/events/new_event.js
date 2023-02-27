@@ -21,15 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener to save event locally
     document.querySelectorAll('input').forEach((item) => {
-        item.addEventListener('change', ()=> {
-            saveLocally();
-        });
+        item.addEventListener('change', saveLocally);
     });
 
     // Event listener for duration
     document.querySelectorAll("input[type=range]").forEach((range) => {
         range.addEventListener('input', updateDuration);
-        range.addEventListener('change', saveLocally);
+        // range.addEventListener('change', saveLocally);
     });
 
     // Check if a local, unsaved event is available
@@ -177,11 +175,20 @@ function initializeDateRow() {
 
     // Initialize participant row
     initializeParticipantRow();
+
+    // Initialize settings row
+    initializeSettingsRow();
 }
 
 function initializeParticipantRow() {
     const participantRow = document.querySelector("#participantRow");
     participantRow.style.animationPlayState = "running";
+
+}
+
+function initializeSettingsRow() {
+    const settingsRow = document.querySelector("#settingsRow");
+    settingsRow.style.animationPlayState = "running";
 }
 
 function createNewDate() {
@@ -430,12 +437,42 @@ function restorePreviousData() {
         createNewDate();
     });
 
+    // Restoring event duration
+    const durationMinutes = document.querySelector("#durationMinutes");
+    const durationHours = document.querySelector("#durationHours");
+    const durationDays = document.querySelector("#durationDays");
+    let eventDuration = unsavedEvent.duration;
+    if (!eventDuration) {
+        eventDuration = 60;
+    }
+    // Days
+    durationDays.value = 0;
+    if (eventDuration >= (24 * 60) ) {
+        let days = Math.floor(eventDuration/(24*60));
+        durationDays.value = days;
+        eventDuration = eventDuration - (days * 24 * 60);
+    }
+    // Hours
+    durationHours.value = 0;
+    if (eventDuration >= 60) {
+        let hours = Math.floor(eventDuration/60);
+        durationHours.value = hours;
+        eventDuration = eventDuration - (hours * 60);
+    }
+    // Minutes
+    durationMinutes.value = eventDuration;
+    // Duration text
+    updateDuration();
+
     // Participants
     initializeParticipantRow();
     unsavedEvent.participants.forEach((participant) => {
         document.querySelector("#participantInp"). value = participant.name;
         createNewParticipant();
     });
+
+    // Settings
+    initializeSettingsRow();
 }
 
 function clearPreviousData() {
@@ -453,7 +490,7 @@ function saveLocally() {
 
     // Settings
     const addParticipant = document.querySelector("#switchAddParticipant").checked;
-    const editParticipant = document.querySelector("#switchAddParticipant").checked;
+    const editParticipant = document.querySelector("#switchEditParticipant").checked;
     const removeParticipant = document.querySelector("#switchRemoveParticipant").checked;
     
     // Populating date list
