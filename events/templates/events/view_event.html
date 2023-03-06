@@ -71,9 +71,13 @@
             <!-- Event date and time -->
             <div class="row mb-4">
                 {% for date in event.dates_formatted %}
-                    <div class="col-12 mb-2 date-formatted">
-                        <span class="material-symbols-outlined fs-1 text-success">event</span> <span class="formattedDate">{{ date|date:"d N Y"}}</span>
-                        <span class="material-symbols-outlined fs-1 text-success">watch</span> <span class="formattedTime">{{ date|time:"G:i"}}</span>
+                    <div class="row mb-2 date-formatted">
+                        <div class="col-12 col-md mb-0">
+                            <span class="material-symbols-outlined fs-1 text-success">event</span> <span class="formattedDate">{{ date|date:"d N Y"}}</span>
+                        </div>
+                        <div class="col-12 col-md mb-0">
+                            <span class="material-symbols-outlined fs-1 text-success">watch</span> <span class="formattedTime">{{ date|time:"G:i"}}</span>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
