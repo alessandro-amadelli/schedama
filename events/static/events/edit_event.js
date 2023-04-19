@@ -82,7 +82,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update localStorage history
     updateHistory();
+
+    // Event listener for theme thumbnails
+    document.querySelectorAll(".theme-thumbnail").forEach((item) => {
+        item.addEventListener('click', () => {selectEventTheme(item)});
+    });
 });
+
+function selectEventTheme(clickedItem) {
+    if (clickedItem.classList.contains("thumbnail-selected")) {
+        return true;
+    }
+
+    document.querySelectorAll(".thumbnail-selected").forEach((element) => {
+        element.classList.remove("thumbnail-selected");
+    })
+    clickedItem.classList.add("thumbnail-selected");
+
+    enableSave();
+}
 
 function updateCharCount() {
     const eventDescription = document.querySelector("#eventDescription");
@@ -415,6 +433,11 @@ function getEventData() {
     const itemID = document.querySelector("#item-id").value;
     const adminKey = document.querySelector("#admin-key").value;
 
+    let eventTheme = document.querySelector(".thumbnail-selected").dataset.theme;
+    if (!eventTheme) {
+        eventTheme = "";
+    }
+
     const eventData = {
         item_id: itemID,
         admin_key: adminKey,
@@ -424,6 +447,7 @@ function getEventData() {
         location: eventLocation,
         dates: eventDates,
         duration: eventDuration,
+        event_theme: eventTheme,
         participants: eventParticipants,
         settings: {
             add_participant: eventAddParticipant,

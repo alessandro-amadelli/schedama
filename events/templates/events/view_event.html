@@ -48,8 +48,8 @@
     </div>
 
     <!-- Event info row -->
-    <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %}">
-        <div class="col-12 event-info-div display-5 p-3 shadow rounded">
+    <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %} info-section">
+        <div class="col-12 event-info-div display-5 p-3 shadow rounded"{% if event.event_theme %} data-theme="{{ event.event_theme }}"{% endif %}>
             <div class="row mb-2">
                 <div class="col-2 d-flex" id="shareEventCol"></div>
                 <div class="col d-flex">

@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener for duration
     document.querySelectorAll("input[type=range]").forEach((range) => {
         range.addEventListener('input', updateDuration);
-        // range.addEventListener('change', saveLocally);
     });
 
     // Check if a local, unsaved event is available
@@ -36,7 +35,22 @@ document.addEventListener('DOMContentLoaded', () => {
         showModalRestoreData();
     }
 
+    // Event listener for theme thumbnails
+    document.querySelectorAll(".theme-thumbnail").forEach((item) => {
+        item.addEventListener('click', () => {selectEventTheme(item)});
+    });
 });
+
+function selectEventTheme(clickedItem) {
+    if (clickedItem.classList.contains("thumbnail-selected")) {
+        return true;
+    }
+
+    document.querySelectorAll(".thumbnail-selected").forEach((element) => {
+        element.classList.remove("thumbnail-selected");
+    })
+    clickedItem.classList.add("thumbnail-selected");
+}
 
 function showModalRestoreData() {
     document.querySelector("#btnRestoreData").onclick = () => {restorePreviousData();};
@@ -178,6 +192,9 @@ function initializeDateRow() {
 
     // Initialize settings row
     initializeSettingsRow();
+
+    // Initialize theme row with thumbnails
+    initializeThemeRow();
 }
 
 function initializeParticipantRow() {
@@ -189,6 +206,11 @@ function initializeParticipantRow() {
 function initializeSettingsRow() {
     const settingsRow = document.querySelector("#settingsRow");
     settingsRow.style.animationPlayState = "running";
+}
+
+function initializeThemeRow() {
+    const themeRow = document.querySelector("#themeRow");
+    themeRow.style.animationPlayState = "running";
 }
 
 function createNewDate() {
@@ -548,6 +570,14 @@ async function sendEventToServer() {
     // Check if description is not active
     if (document.querySelector("#addDescrN").checked) {
         data.description = "";
+    }
+
+    // Set event theme
+    const selectedTheme = document.querySelector(".thumbnail-selected").dataset.theme;
+    if (selectedTheme) {
+        data["event_theme"] = selectedTheme;
+    } else {
+        data["event_theme"] = "";
     }
 
     let reqHeaders = new Headers();

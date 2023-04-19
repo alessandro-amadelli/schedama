@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    initializeEntirePage();
+});
+
+var updateInterval = "";
+var deadline = "";
+
+var eventStarted = false;
+var totDoughnutPlot = null;
+var dateBarChart = null;
+
+function initializeEntirePage() {
     // On page load, delete previous modifications from localStorage
     localStorage.removeItem("modifications");
 
@@ -86,13 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update localStorage history
     updateHistory();
 
-});
-var updateInterval = "";
-var deadline = "";
-
-var eventStarted = false;
-var totDoughnutPlot = null;
-var dateBarChart = null;
+}
 
 function initializeGCalendarLink() {
     // a element

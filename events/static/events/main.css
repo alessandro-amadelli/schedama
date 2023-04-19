@@ -10,7 +10,8 @@
     --input-bg-color: rgba(255,255,255,.8);
     --moving-bg-color: rgba(0,0,0,.1);
     --navbar-bg-color: white;
-    --section-bg-color: rgba(255,255,255,0);
+    --section-bg-color: rgba(0, 102, 255, 0);
+    --selected-border: #ef476f;
     --text-muted-color: rgb(98, 98, 98);
     --title-bg-color: #ef476f;
     --title-color: #073b4c;
@@ -31,6 +32,7 @@
     --moving-bg-color: rgba(255,255,255,.1);
     --navbar-bg-color: rgba(0,0,0,.5);
     --section-bg-color: rgba(0,0,0,0);
+    --selected-border: #ffd166;
     --text-muted-color: rgb(143, 143, 143);
     --title-bg-color: #ffd166;
     --title-color: #073b4c;
@@ -111,6 +113,7 @@ nav {
     background-color: var(--navbar-bg-color);
     transition: background-color 1s ease;
     margin: .5rem;
+    z-index: 99;
 }
 
 .round-img {
@@ -299,6 +302,12 @@ input, .form-control, input:focus, .form-control:focus {
     background-color: var(--input-bg-color);
 }
 
+select, option {
+    color: var(--color) !important;
+    border-color: transparent !important;
+    background-color: var(--input-bg-color) !important;
+}
+
 .modal-open {
     padding-right: 0 !important;
 }
@@ -380,4 +389,106 @@ input, .form-control, input:focus, .form-control:focus {
 
 .card {
     background-color: var(--card-bg-color);
+}
+
+.thumbnail-row {
+    height: 15em;
+    overflow-y: auto;
+}
+
+.theme-thumbnail {
+    background-color: rgba(0,0,0,0);
+    color: #fff;
+    width: 18rem;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.theme-thumbnail:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.theme-thumbnail:hover::before {
+    opacity: 1;
+}
+
+.thumbnail-selected {
+    border: solid medium var(--selected-border);
+}
+
+.thumbnail-selected::before {
+    opacity: 1 !important;
+}
+
+/* Event theme */
+div[data-theme] {
+    position: relative;
+}
+
+div[data-theme]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+div[data-theme="beach"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/beach.jpg');
+    opacity: .3;
+}
+
+div[data-theme="birthday"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/birthday.jpg');
+    opacity: .3;
+}
+
+div[data-theme="forest"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/forest.jpg');
+    opacity: .3;
+}
+
+div[data-theme="match"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/match.jpg');
+    opacity: .3;
+}
+
+div[data-theme="meeting"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/meeting.jpg');
+    opacity: .3;
+}
+
+div[data-theme="mountain"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/mountain.jpg');
+    opacity: .3;
+}
+
+div[data-theme="music"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/music.jpg');
+    opacity: .25;
+}
+
+div[data-theme="pizza"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/pizza.jpg');
+    opacity: .4;
+}
+
+div[data-theme="popcorn"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/popcorn.jpg');
+    opacity: .3;
+}
+
+div[data-theme="relax"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/relax.jpg');
+    opacity: .3;
+}
+
+div[data-theme="ticket"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/ticket.jpg');
+    opacity: .3;
 }

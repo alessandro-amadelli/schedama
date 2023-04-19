@@ -44,6 +44,7 @@ def validate_event(event_data):
     DATE_MIN = datetime.now().strftime("%Y-%m-%dT%H:%M")
     DURATION_MAX = (60 * 24 * 30) + (60 * 23) + 59
     PARTICIPANT_NAME_MAX_LENGTH = 30
+    THEME_MAX_LENGTH = 20
 
     is_valid = True
 
@@ -80,13 +81,20 @@ def validate_event(event_data):
         event_data["duration"] = 60
 
     if event_data["duration"] > DURATION_MAX:
-        event_data["duratino"] = DURATION_MAX
+        event_data["duration"] = DURATION_MAX
 
     # Check event participants
     if len(event_data.get("participants", [])) > 0:
         for p in event_data["participants"]:
             if len(p["name"]) > PARTICIPANT_NAME_MAX_LENGTH:
                 p["name"] = p["name"][:PARTICIPANT_NAME_MAX_LENGTH]
+
+    # Check event_theme
+    event_theme = event_data.get("event_theme", "")
+    if event_theme:
+        if len(event_theme) > THEME_MAX_LENGTH:
+            event_theme = event_theme[:THEME_MAX_LENGTH]
+            event_data["event_theme"] = event_theme
 
     return (is_valid, event_data)
 
@@ -322,6 +330,9 @@ def update_event_view(request):
         event_data["dates"] = request_data.get("dates", [])
         event_data["dates"].sort() # Order event dates
         event_data["duration"] = request_data.get("duration", 60)
+        event_theme = request_data.get("event_theme", "")
+        if event_theme:
+            event_data["event_theme"] = event_theme
         event_data["participants"] = request_data.get("participants", [])
         event_data["settings"]["add_participant"] = request_data["settings"].get("add_participant", False)
         event_data["settings"]["edit_participant"] = request_data["settings"].get("edit_participant", False)
