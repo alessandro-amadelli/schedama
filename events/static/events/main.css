@@ -1,6 +1,6 @@
 /* CSS variables for LIGHT MODE */
 :root {
-    --body-background: linear-gradient(180deg, rgba(0,105,158,1) 0%, #118ab2 30%);
+    --body-background: linear-gradient(180deg, rgb(0,105,158) 0%, #118ab2 30%);
     --body-bg-color: #118ab2;
     --card-bg-color: rgba(255,255,255,.7);
     --color: black;
@@ -397,7 +397,7 @@ select, option {
 }
 
 .theme-thumbnail {
-    background-color: rgba(0,0,0,0);
+    background-color: var(--body-background);
     color: #fff;
     width: 18rem;
     cursor: pointer;
@@ -407,10 +407,12 @@ select, option {
 .theme-thumbnail:hover {
     opacity: 1;
     transform: scale(1.2);
+    z-index: 10;
 }
 
 .theme-thumbnail:hover::before {
     opacity: 1;
+    z-index: 10;
 }
 
 .thumbnail-selected {
@@ -448,8 +450,18 @@ div[data-theme="birthday"]::before {
     opacity: .3;
 }
 
+div[data-theme="drink"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/drink.jpg');
+    opacity: .3; 
+}
+
 div[data-theme="forest"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/forest.jpg');
+    opacity: .3;
+}
+
+div[data-theme="graduation"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/graduation.jpg');
     opacity: .3;
 }
 
@@ -490,5 +502,10 @@ div[data-theme="relax"]::before {
 
 div[data-theme="ticket"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/ticket.jpg');
+    opacity: .3;
+}
+
+div[data-theme="travel"]::before {
+    background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/travel.jpg');
     opacity: .3;
 }

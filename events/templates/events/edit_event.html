@@ -143,46 +143,55 @@
         <!-- Event theme -->
         <div class="row p-3 mb-3 entering-4" id="themeRow">
             <div class="col">
-            <h4><span class="material-symbols-outlined">palette</span> {% translate "Choose a theme" %}</h4>
+                <h4><span class="material-symbols-outlined">palette</span> {% translate "Choose a theme" %}</h4>
             </div>
             <div class="w-100"></div>
             <div class="row row-cols-1 row-cols-md-4 thumbnail-row">
-            <div class="card col theme-thumbnail{% if not event.event_theme %} thumbnail-selected{% endif %}">
-                <div class="card-body">{% translate "Default" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'beach' %} thumbnail-selected{% endif %}" data-theme="beach">
-                <div class="card-body">{% translate "Beach" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'birthday' %} thumbnail-selected{% endif %}" data-theme="birthday">
-                <div class="card-body">{% translate "Birthday party" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'forest' %} thumbnail-selected{% endif %}" data-theme="forest">
-                <div class="card-body">{% translate "Forest" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'match' %} thumbnail-selected{% endif %}" data-theme="match">
-                <div class="card-body">{% translate "Match" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'meeting' %} thumbnail-selected{% endif %}" data-theme="meeting">
-                <div class="card-body">{% translate "Meeting" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'mountain' %} thumbnail-selected{% endif %}" data-theme="mountain">
-                <div class="card-body">{% translate "Mountain" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'music' %} thumbnail-selected{% endif %}" data-theme="music">
-                <div class="card-body">{% translate "Music" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'pizza' %} thumbnail-selected{% endif %}" data-theme="pizza">
-                <div class="card-body">{% translate "Pizza" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'popcorn' %} thumbnail-selected{% endif %}" data-theme="popcorn">
-                <div class="card-body">{% translate "Movie" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'relax' %} thumbnail-selected{% endif %}" data-theme="relax">
-                <div class="card-body">{% translate "Relax" %}</div>
-            </div>
-            <div class="card col theme-thumbnail{% if event.event_theme == 'ticket' %} thumbnail-selected{% endif %}" data-theme="ticket">
-                <div class="card-body">{% translate "Event" %}</div>
-            </div>
+                <div class="card col theme-thumbnail{% if not event.event_theme %} thumbnail-selected{% endif %}">
+                    <div class="card-body">{% translate "Default" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'beach' %} thumbnail-selected{% endif %}" data-theme="beach">
+                    <div class="card-body">{% translate "Beach" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'birthday' %} thumbnail-selected{% endif %}" data-theme="birthday">
+                    <div class="card-body">{% translate "Birthday party" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'drink' %} thumbnail-selected{% endif %}" data-theme="drink">
+                    <div class="card-body">{% translate "Drink" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'forest' %} thumbnail-selected{% endif %}" data-theme="forest">
+                    <div class="card-body">{% translate "Forest" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'graduation' %} thumbnail-selected{% endif %}" data-theme="graduation">
+                    <div class="card-body">{% translate "Graduation" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'match' %} thumbnail-selected{% endif %}" data-theme="match">
+                    <div class="card-body">{% translate "Match" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'meeting' %} thumbnail-selected{% endif %}" data-theme="meeting">
+                    <div class="card-body">{% translate "Meeting" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'mountain' %} thumbnail-selected{% endif %}" data-theme="mountain">
+                    <div class="card-body">{% translate "Mountain" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'music' %} thumbnail-selected{% endif %}" data-theme="music">
+                    <div class="card-body">{% translate "Music" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'pizza' %} thumbnail-selected{% endif %}" data-theme="pizza">
+                    <div class="card-body">{% translate "Pizza" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'popcorn' %} thumbnail-selected{% endif %}" data-theme="popcorn">
+                    <div class="card-body">{% translate "Movie" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'relax' %} thumbnail-selected{% endif %}" data-theme="relax">
+                    <div class="card-body">{% translate "Relax" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'ticket' %} thumbnail-selected{% endif %}" data-theme="ticket">
+                    <div class="card-body">{% translate "Event" %}</div>
+                </div>
+                <div class="card col theme-thumbnail{% if event.event_theme == 'travel' %} thumbnail-selected{% endif %}" data-theme="travel">
+                    <div class="card-body">{% translate "Travel" %}</div>
+                </div>
             </div>
         </div>
 
