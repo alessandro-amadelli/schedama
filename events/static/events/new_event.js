@@ -37,11 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener for theme thumbnails
     document.querySelectorAll(".theme-thumbnail").forEach((item) => {
-        item.addEventListener('click', () => {selectEventTheme(item)});
+        item.addEventListener('click', () => {
+            selectEventTheme(item);
+            saveLocally();
+        });
     });
 });
 
 function selectEventTheme(clickedItem) {
+    if (!clickedItem) {
+        return false;
+    }
     if (clickedItem.classList.contains("thumbnail-selected")) {
         return true;
     }
@@ -486,6 +492,11 @@ function restorePreviousData() {
     // Duration text
     updateDuration();
 
+    // Event theme
+    if (unsavedEvent.event_theme) {
+        selectEventTheme(document.querySelector(".theme-thumbnail[data-theme='" + unsavedEvent.event_theme + "']"));
+    }
+
     // Participants
     initializeParticipantRow();
     unsavedEvent.participants.forEach((participant) => {
@@ -536,6 +547,12 @@ function saveLocally() {
     const durationMinutes = parseInt(document.querySelector("#durationMinutes").value);
     eventDuration = (durationDays * 24 * 60) + (durationHours * 60) + durationMinutes;
 
+    // Set event theme
+    let selectedTheme = document.querySelector(".thumbnail-selected").dataset.theme;
+    if (!selectedTheme) {
+        selectedTheme = "";
+    }
+
     // Create unsaved event object
     unsavedEvent = {
         title: eventTitle.trim(),
@@ -545,6 +562,7 @@ function saveLocally() {
         dates: dateList,
         duration: eventDuration,
         participants: participantList,
+        event_theme: selectedTheme,
         settings: {
             add_participant: addParticipant,
             edit_participant: editParticipant,

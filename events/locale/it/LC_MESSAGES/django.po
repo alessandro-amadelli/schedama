@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-22 16:01+0200\n"
+"POT-Creation-Date: 2023-04-23 13:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -664,8 +664,8 @@ msgid "Restore unsaved data"
 msgstr "Ripristina dati non salvati"
 
 #: .\events\templates\events\new_event.html:249
-msgid "It seems you have an unsaved event."
-msgstr "Sembra che tu abbia un evento non salvato."
+msgid "It seems you have worked on a new event without saving."
+msgstr "Sembra che tu abbia lavorato ad un nuovo evento senza salvare."
 
 #: .\events\templates\events\new_event.html:250
 msgid "Do you wish to reload previous data?"

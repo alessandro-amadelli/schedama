@@ -392,14 +392,14 @@ select, option {
 }
 
 .thumbnail-row {
-    height: 15em;
+    height: 20em;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .theme-thumbnail {
     background-color: var(--body-background);
     color: #fff;
-    width: 18rem;
     cursor: pointer;
     transition: all .5s;
 }
@@ -423,7 +423,7 @@ select, option {
     opacity: 1 !important;
 }
 
-/* Event theme */
+/* Event themes */
 div[data-theme] {
     position: relative;
 }
