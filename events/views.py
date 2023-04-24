@@ -330,9 +330,7 @@ def update_event_view(request):
         event_data["dates"] = request_data.get("dates", [])
         event_data["dates"].sort() # Order event dates
         event_data["duration"] = request_data.get("duration", 60)
-        event_theme = request_data.get("event_theme", "")
-        if event_theme:
-            event_data["event_theme"] = event_theme
+        event_data["event_theme"] = request_data.get("event_theme", "")
         event_data["participants"] = request_data.get("participants", [])
         event_data["settings"]["add_participant"] = request_data["settings"].get("add_participant", False)
         event_data["settings"]["edit_participant"] = request_data["settings"].get("edit_participant", False)

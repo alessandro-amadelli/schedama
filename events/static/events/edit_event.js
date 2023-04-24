@@ -432,8 +432,13 @@ function getEventData() {
 
     const itemID = document.querySelector("#item-id").value;
     const adminKey = document.querySelector("#admin-key").value;
-
-    let eventTheme = document.querySelector(".thumbnail-selected").dataset.theme;
+    
+    let selectedTheme = document.querySelector(".thumbnail-selected");
+    if (!selectedTheme) {
+        document.querySelector(".theme-thumbnail").classList.add("thumbnail-selected");
+        selectedTheme = document.querySelector(".thumbnail-selected");
+    }
+    let eventTheme = selectedTheme.dataset.theme;
     if (!eventTheme) {
         eventTheme = "";
     }

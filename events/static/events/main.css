@@ -426,6 +426,7 @@ select, option {
 /* Event themes */
 div[data-theme] {
     position: relative;
+    background-color: rgba(0,0,0,.1);
 }
 
 div[data-theme]::before {
