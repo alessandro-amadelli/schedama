@@ -185,7 +185,7 @@
                 <div class="modal-footer">
                     {% if event.settings.edit_participant or event.settings.remove_participant%}
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelSaveParticipants">
-                            <span class="material-symbols-outlined">delete</span> {% translate "Cancel" %}
+                            <span class="material-symbols-outlined">cancel</span> {% translate "Cancel" %}
                         </button>
                         <button type="button" class="btn btn-primary" id="btnSaveParticipants" disabled>
                             <span class="material-symbols-outlined">save</span> {% translate "Save" %}
@@ -216,7 +216,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            <span class="material-symbols-outlined">delete</span> {% translate "Cancel" %}
+                            <span class="material-symbols-outlined">cancel</span> {% translate "Cancel" %}
                         </button>
                         <button type="button" class="btn btn-light" id="btnConfirmParticipate">
                             <span class="material-symbols-outlined">person_add</span> {% translate "Join" %}
