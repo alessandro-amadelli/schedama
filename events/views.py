@@ -13,6 +13,8 @@ from datetime import datetime, timedelta
 import schedama.dynamodb_ops as dynamodb_ops
 from schedama.settings import CACHE_TTL, CACHE_DB_TTL
 
+from collections import Counter
+
 class ServiceWorker(TemplateView):
     template_name="events/sw.js"
     content_type="application/javascript"
@@ -187,7 +189,23 @@ def participate_view(request, eventID):
 
     # Format event duration
     event_data["duration"] = int(event_data.get("duration", 60))
-    
+
+    # Selecting best date for the event (if event has multiple dates and at least 1 participant)
+    if len(event_data["dates"]) > 1 and len(event_data["participants"]) > 0:
+        max_participants_per_date = 0
+        best_date = ""
+
+        # Convoluted but elegant way to obtain a total list of dates inserted by every participant
+        participants_dates = Counter([d for dp in (p["dates"] for p in event_data["participants"]) for d in dp])
+
+        # Best date as the first date with maximum number of participants
+        for d in event_data["dates"]:
+            if participants_dates[d] > max_participants_per_date:
+                best_date = d
+                max_participants_per_date = participants_dates[d]
+        event_data["best_date"] = best_date
+        event_data["best_date_formatted"] = datetime.strptime(best_date, "%Y-%m-%dT%H:%M")        
+
     context = {
         "event": event_data
     }

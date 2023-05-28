@@ -264,6 +264,10 @@ body {
     transition: .5s ease-in;
 }
 
+/* .best-date {
+    color: var(--selected-border);
+} */
+
 .card-footer {
     color: var(--title-bg-color);
     user-select: none;

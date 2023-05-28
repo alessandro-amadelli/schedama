@@ -12,6 +12,12 @@
     <!-- Passing event's data to javascript in a secure way -->
     {{ event.participants|json_script:"participants" }}
     {{ event.dates|json_script:"dates" }}
+    {% if event.best_date %}
+        {{ event.best_date|json_script:"bestDate" }}
+        <script>
+            const bestDate = JSON.parse(document.getElementById('bestDate').textContent);
+        </script>
+    {% endif %}
     <script>
         const participants = JSON.parse(document.getElementById('participants').textContent);
         const dates = JSON.parse(document.getElementById('dates').textContent);
@@ -71,9 +77,14 @@
             <!-- Event date and time -->
             <div class="row mb-4">
                 {% for date in event.dates_formatted %}
-                    <div class="row mb-2 date-formatted">
+                    <div class="row mb-2 date-formatted{% if event.best_date_formatted and date != event.best_date_formatted %} text-muted{% endif %}">
                         <div class="col-12 col-md mb-0">
-                            <span class="material-symbols-outlined fs-1 text-success">event</span> <span class="formattedDate">{{ date|date:"d N Y"}}</span>
+                            {% if date == event.best_date_formatted %}
+                            <span class="material-symbols-outlined fs-1 text-success">verified</span>
+                            {% else %}
+                            <span class="material-symbols-outlined fs-1 text-success">event</span>
+                            {% endif %}
+                             <span class="formattedDate">{{ date|date:"d N Y"}}</span>
                         </div>
                         <div class="col-12 col-md mb-0">
                             <span class="material-symbols-outlined fs-1 text-success">watch</span> <span class="formattedTime">{{ date|time:"G:i"}}</span>

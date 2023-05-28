@@ -89,8 +89,15 @@ function initializeEntirePage() {
     // Link to Google Calendar
     initializeGCalendarLink();
 
+    // Set countdown deadline as the best date (if present)
+    if (typeof bestDate === 'undefined' || !bestDate) {
+        deadline = new Date(dates[0]);
+    } else {
+        deadline = new Date(bestDate);
+
+    }
+
     // Start countdown
-    deadline = new Date(dates[0]);
     updateClock();
     updateInterval = setInterval(() => {updateClock()},1000); 
 
