@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-23 13:55+0200\n"
+"POT-Creation-Date: 2023-06-02 15:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,7 +96,7 @@ msgstr ""
 "modificare le date, la descrizione, ecc."
 
 #: .\events\templates\events\edit_event.html:13
-#: .\events\templates\events\view_event.html:24
+#: .\events\templates\events\view_event.html:30
 msgid "Event Cancelled"
 msgstr "Evento Annullato"
 
@@ -277,7 +277,7 @@ msgstr "Partecipanti rimossi"
 
 #: .\events\templates\events\edit_event.html:253
 #: .\events\templates\events\new_event.html:234
-#: .\events\templates\events\view_event.html:191
+#: .\events\templates\events\view_event.html:209
 msgid "Save"
 msgstr "Salva"
 
@@ -409,8 +409,8 @@ msgid "Particpant name"
 msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:371
-#: .\events\templates\events\view_event.html:188
-#: .\events\templates\events\view_event.html:219
+#: .\events\templates\events\view_event.html:206
+#: .\events\templates\events\view_event.html:237
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -733,66 +733,74 @@ msgstr ""
 "Puoi vedere i dettagli dell'evento, registrare la tua partecipazione e "
 "vedere gli altri partecipanti."
 
-#: .\events\templates\events\view_event.html:34
+#: .\events\templates\events\view_event.html:40
 msgid "Starts in"
 msgstr "Inizia tra"
 
-#: .\events\templates\events\view_event.html:36
+#: .\events\templates\events\view_event.html:42
 msgid "d"
 msgstr "g"
 
-#: .\events\templates\events\view_event.html:57
+#: .\events\templates\events\view_event.html:63
 msgid "Add to Google Calendar"
 msgstr "Aggiungi a Google Calendar"
 
-#: .\events\templates\events\view_event.html:104
+#: .\events\templates\events\view_event.html:94
+msgid ""
+"Best date automatically selected based on attendance. The effective date may "
+"vary as participants enter new confirmations."
+msgstr ""
+"Miglior data selezionata automaticamente in base alla partecipazione. La data effettiva può "
+"variare man mano che i partecipanti inseriscono nuove conferme."
+
+#: .\events\templates\events\view_event.html:122
 msgid "List"
 msgstr "Lista"
 
-#: .\events\templates\events\view_event.html:111
+#: .\events\templates\events\view_event.html:129
 msgid "Participate"
 msgstr "Partecipa"
 
-#: .\events\templates\events\view_event.html:149
+#: .\events\templates\events\view_event.html:167
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:194
+#: .\events\templates\events\view_event.html:212
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:207
+#: .\events\templates\events\view_event.html:225
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:213
+#: .\events\templates\events\view_event.html:231
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:215
+#: .\events\templates\events\view_event.html:233
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:222
+#: .\events\templates\events\view_event.html:240
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:143 .\events\views.py:224 .\events\views.py:438
-#: .\events\views.py:449 .\events\views.py:494 .\events\views.py:505
+#: .\events\views.py:145 .\events\views.py:246 .\events\views.py:458
+#: .\events\views.py:469 .\events\views.py:514 .\events\views.py:525
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
-#: .\events\views.py:157
+#: .\events\views.py:159
 msgid "An error has occurred while creating the event. Please try again later."
 msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:234 .\events\views.py:310 .\events\views.py:379
-#: .\events\views.py:476 .\events\views.py:527
+#: .\events\views.py:256 .\events\views.py:332 .\events\views.py:399
+#: .\events\views.py:496 .\events\views.py:547
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:255 .\events\views.py:351 .\events\views.py:419
+#: .\events\views.py:277 .\events\views.py:371 .\events\views.py:439
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."

@@ -10,6 +10,10 @@ var totDoughnutPlot = null;
 var dateBarChart = null;
 
 function initializeEntirePage() {
+    // Tooltip initialization
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
     // On page load, delete previous modifications from localStorage
     localStorage.removeItem("modifications");
 

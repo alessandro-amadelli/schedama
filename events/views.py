@@ -203,8 +203,12 @@ def participate_view(request, eventID):
             if participants_dates[d] > max_participants_per_date:
                 best_date = d
                 max_participants_per_date = participants_dates[d]
-        event_data["best_date"] = best_date
-        event_data["best_date_formatted"] = datetime.strptime(best_date, "%Y-%m-%dT%H:%M")        
+        
+        try:
+            event_data["best_date"] = best_date
+            event_data["best_date_formatted"] = datetime.strptime(best_date, "%Y-%m-%dT%H:%M")
+        except ValueError:
+            pass
 
     context = {
         "event": event_data

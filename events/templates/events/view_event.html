@@ -79,15 +79,22 @@
                 {% for date in event.dates_formatted %}
                     <div class="row mb-2 date-formatted{% if event.best_date_formatted and date != event.best_date_formatted %} text-muted{% endif %}">
                         <div class="col-12 col-md mb-0">
-                            {% if date == event.best_date_formatted %}
-                            <span class="material-symbols-outlined fs-1 text-success">verified</span>
+                            <span class="material-symbols-outlined fs-1 text-success">event</span>
+                            <!-- {% if date == event.best_date_formatted %}
+                            <span class="material-symbols-outlined fs-1 text-success">event</span>
                             {% else %}
                             <span class="material-symbols-outlined fs-1 text-success">event</span>
-                            {% endif %}
+                            {% endif %} -->
                              <span class="formattedDate">{{ date|date:"d N Y"}}</span>
                         </div>
                         <div class="col-12 col-md mb-0">
                             <span class="material-symbols-outlined fs-1 text-success">watch</span> <span class="formattedTime">{{ date|time:"G:i"}}</span>
+                            {% if date == event.best_date_formatted %}
+                                <span class="material-symbols-outlined" data-bs-toggle="tooltip" 
+                                data-bs-title="{% translate 'Best date automatically selected based on attendance. The effective date may vary as participants enter new confirmations.' %}">
+                                    check_circle
+                                </span>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
