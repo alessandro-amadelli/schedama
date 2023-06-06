@@ -21,7 +21,8 @@ function toggleMode() {
 
 function setMode(currentMode) {
     if (!currentMode) {
-        currentMode = "light";
+        // Default theme mode set to dark
+        currentMode = "dark";
     }
 
     // DOM Elements
