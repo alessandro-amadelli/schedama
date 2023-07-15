@@ -307,6 +307,9 @@ def edit_event_view(request, eventID):
     # Event duration in int format (represents duration in minutes)
     event_data["duration"] = int(event_data.get("duration", 60))
 
+    # Adding dates so Django can display it in template
+    event_data["dates_formatted"] = [datetime.strptime(d, "%Y-%m-%dT%H:%M") for d in event_data["dates"]]
+
     # All checks are passed
     context = {
         "event": event_data

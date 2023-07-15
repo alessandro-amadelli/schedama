@@ -209,8 +209,8 @@
                     <thead>
                         <tr>
                             <th><span class="material-symbols-outlined">person</span></th>
-                            {% for date in event.dates %}
-                                <th>{{ date }}</th>
+                            {% for date in event.dates_formatted %}
+                                <th>{{ date|date:"D d/m"}} h.{{ date|date:"H:i"}}</th>
                             {% endfor %}
                         </tr>
                     </thead>

@@ -329,7 +329,14 @@ function initializeChartDates() {
         }
     });
 
-    evDates.push(gettext("No Indications"));
+    // Chart labels (in "dd/mm HH:MM" format)
+    let labels = [];
+    evDates.forEach(d => {
+        let s = d.substring(8,10) + "/" + d.substring(5,7) + " " + d.substring(11);
+        labels.push(s);
+    });
+    labels.push(gettext("No Indications"));
+    
     values.push(noIndic);
 
     // Set color of bars (with max bars colored differently)
@@ -342,7 +349,7 @@ function initializeChartDates() {
     });
 
     let data = {
-        labels: evDates,
+        labels: labels,
         datasets: [{
             label: gettext("Preferences"),
             data: values,

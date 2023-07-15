@@ -256,17 +256,12 @@ body {
     content: "";
     position: absolute;
     width: 150%;
-    height: 120%;
-    top: -10%;
+    height: 100%;
     left: -25%;
     z-index: -1;
     background-color: var(--title-bg-color);
     transition: .5s ease-in;
 }
-
-/* .best-date {
-    color: var(--selected-border);
-} */
 
 .card-footer {
     color: var(--title-bg-color);
