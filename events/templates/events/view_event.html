@@ -35,7 +35,7 @@
     </div>
 
     <!-- Countdown row -->
-    <div class="row mb-3{% if event.is_cancelled %} opacity-50{% endif %}">
+    <div class="row mt-3 mb-3{% if event.is_cancelled %} opacity-50{% endif %}">
         <div class="row mx-auto event-clock-div clock-event-not-started justify-content-center rounded shadow display-5 p-3 position-relative" id="clockDiv">
             <div class="col-12 text-center mb-2" id="clockText">{% translate "Starts in" %}</div>
             <div class="col-3 col-lg-2 text-center">
@@ -80,11 +80,6 @@
                     <div class="row mb-2 date-formatted{% if event.best_date_formatted and date != event.best_date_formatted %} text-muted{% endif %}">
                         <div class="col-12 col-md mb-0">
                             <span class="material-symbols-outlined fs-1 text-success">event</span>
-                            <!-- {% if date == event.best_date_formatted %}
-                            <span class="material-symbols-outlined fs-1 text-success">event</span>
-                            {% else %}
-                            <span class="material-symbols-outlined fs-1 text-success">event</span>
-                            {% endif %} -->
                              <span class="formattedDate">{{ date|date:"d N Y"}}</span>
                         </div>
                         <div class="col-12 col-md mb-0">

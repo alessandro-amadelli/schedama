@@ -385,6 +385,7 @@ select, option {
 
 .event-info-div {
     background-color: var(--event-div-bg);
+    word-wrap: break-word;
 }
 
 .event-chart-div {

@@ -50,7 +50,7 @@
             <div class="w-100"></div>
             <div class="col">
                 <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="eventTitle" placeholder="Event title" value="{{ event.title }}" maxlength="70">
+                <input type="text" class="form-control" id="eventTitle" placeholder="Event title" value="{{ event.title }}" maxlength="150">
                 <label for="eventTitle">{% translate "Event title" %}</label>
                 </div>
             </div>
@@ -85,7 +85,7 @@
             <div class="w-100"></div>
             <div class="col" id="locationCol">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="eventLocation" value="{{ event.location }}" placeholder="Event location" maxlength="70">
+                    <input type="text" class="form-control" id="eventLocation" value="{{ event.location }}" placeholder="Event location" maxlength="100">
                     <label for="eventLocation">{% translate "Event location" %}</label>
                 </div>
             </div>

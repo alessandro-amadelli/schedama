@@ -40,9 +40,9 @@ def validate_event(event_data):
     It needs to be called before saving event to server
     """
     # Max lengths of event fields
-    TITLE_MAX_LENGTH = 70
+    TITLE_MAX_LENGTH = 150
     DESCRIPTION_MAX_LENGTH = 400
-    LOCATION_MAX_LENGTH = 70
+    LOCATION_MAX_LENGTH = 100
     DATE_MIN = datetime.now().strftime("%Y-%m-%dT%H:%M")
     DURATION_MAX = (60 * 24 * 30) + (60 * 23) + 59
     PARTICIPANT_NAME_MAX_LENGTH = 30
