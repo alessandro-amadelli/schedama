@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 10:47+0200\n"
+"POT-Creation-Date: 2023-07-16 12:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -276,7 +276,7 @@ msgid "Removed participants"
 msgstr "Partecipanti rimossi"
 
 #: .\events\templates\events\edit_event.html:253
-#: .\events\templates\events\new_event.html:234
+#: .\events\templates\events\new_event.html:242
 #: .\events\templates\events\view_event.html:204
 msgid "Save"
 msgstr "Salva"
@@ -659,23 +659,41 @@ msgstr "Inserisci un nuovo partecipante"
 msgid "Configure Settings"
 msgstr "Configura Impostazioni"
 
-#: .\events\templates\events\new_event.html:245
+#: .\events\templates\events\new_event.html:228
+msgid "Current settings"
+msgstr "Impostazioni correnti"
+
+#: .\events\templates\events\new_event.html:230
+msgid "Add one ore more names to the participant list"
+msgstr "Aggiungere uno o più nomi alla lista partecipanti"
+
+#: .\events\templates\events\new_event.html:231
+msgid ""
+"Change preferences and availability on dates for participants in the list"
+msgstr ""
+"Modificare preferenze e disponibilità sulle date per i partecipanti in lista"
+
+#: .\events\templates\events\new_event.html:232
+msgid "Remove one or more names from the participant list"
+msgstr "Rimuovere uno o più nomi dalla lista partecipanti"
+
+#: .\events\templates\events\new_event.html:253
 msgid "Restore unsaved data"
 msgstr "Ripristina dati non salvati"
 
-#: .\events\templates\events\new_event.html:249
+#: .\events\templates\events\new_event.html:257
 msgid "It seems you have worked on a new event without saving."
 msgstr "Sembra che tu abbia lavorato ad un nuovo evento senza salvare."
 
-#: .\events\templates\events\new_event.html:250
+#: .\events\templates\events\new_event.html:258
 msgid "Do you wish to reload previous data?"
 msgstr "Vuoi ricaricare i dati precedenti?"
 
-#: .\events\templates\events\new_event.html:254
+#: .\events\templates\events\new_event.html:262
 msgid "Nah, don't care"
 msgstr "Nah, non mi interessa"
 
-#: .\events\templates\events\new_event.html:257
+#: .\events\templates\events\new_event.html:265
 msgid "Restore data"
 msgstr "Ripristina i dati"
 

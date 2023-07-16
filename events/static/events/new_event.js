@@ -42,7 +42,59 @@ document.addEventListener('DOMContentLoaded', () => {
             saveLocally();
         });
     });
+
+    document.querySelector("#settingsRow").querySelectorAll("input[type='checkbox']").forEach(element => {
+        element.addEventListener('change', updatePermissionDescriptions);
+    });
 });
+
+function updatePermissionDescriptions() {
+    const switchAddParticipant = document.querySelector("#switchAddParticipant").checked;
+    const switchEditParticipant = document.querySelector("#switchEditParticipant").checked;
+    const switchRemoveParticipant = document.querySelector("#switchRemoveParticipant").checked;
+
+    const whoCanAdd = document.querySelector("#whoCanAdd");
+    const whoCanEdit = document.querySelector("#whoCanEdit");
+    const whoCanRemove = document.querySelector("#whoCanRemove");
+
+    let iconCanAdd = "lock";
+    let iconCanEdit = "lock";
+    let iconCanRemove = "lock";
+    
+    let textCanAdd = gettext("Administrator only");
+    let textCanEdit = gettext("Administrator only");
+    let textCanRemove = gettext("Administrator only");
+    
+    let colorCanAdd = "red";
+    let colorCanEdit = "red";
+    let colorCanRemove = "red";
+    
+    if (switchAddParticipant) {
+        iconCanAdd = "lock_open";
+        textCanAdd = gettext("Anyone");
+        colorCanAdd = "green";
+    }
+
+    if (switchEditParticipant) {
+        iconCanEdit = "lock_open";
+        textCanEdit = gettext("Anyone");
+        colorCanEdit = "green";
+    }
+
+    if (switchRemoveParticipant) {
+        iconCanRemove = "lock_open";
+        textCanRemove = gettext("Anyone");
+        colorCanRemove = "green";
+    }
+    
+    whoCanAdd.innerHTML = `<span class="material-symbols-outlined">` + iconCanAdd + `</span>` + textCanAdd;
+    whoCanAdd.style.color = colorCanAdd;
+    whoCanEdit.innerHTML = `<span class="material-symbols-outlined">` + iconCanEdit + `</span>` + textCanEdit;
+    whoCanEdit.style.color = colorCanEdit;
+    whoCanRemove.innerHTML = `<span class="material-symbols-outlined">` + iconCanRemove + `</span>` + textCanRemove;
+    whoCanRemove.style.color = colorCanRemove;
+
+}
 
 function selectEventTheme(clickedItem) {
     if (!clickedItem) {
@@ -212,6 +264,7 @@ function initializeParticipantRow() {
 function initializeSettingsRow() {
     const settingsRow = document.querySelector("#settingsRow");
     settingsRow.style.animationPlayState = "running";
+    updatePermissionDescriptions();
 }
 
 function initializeThemeRow() {

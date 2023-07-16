@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 10:47+0200\n"
+"POT-Creation-Date: 2023-07-16 12:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\events\static\events\edit_event.js:145
-#: .\events\static\events\new_event.js:298
+#: .\events\static\events\new_event.js:351
 #: .\events\static\events\view_event.js:211
 msgid "d"
 msgstr "g"
@@ -29,24 +29,24 @@ msgid "Participant removed"
 msgstr "Partecipante rimosso"
 
 #: .\events\static\events\edit_event.js:247
-#: .\events\static\events\new_event.js:251
+#: .\events\static\events\new_event.js:304
 msgid "Event Date"
 msgstr "Data evento"
 
 #: .\events\static\events\edit_event.js:278
-#: .\events\static\events\new_event.js:286
+#: .\events\static\events\new_event.js:339
 msgid "Date added"
 msgstr "Data aggiunta"
 
 #: .\events\static\events\edit_event.js:473
-#: .\events\static\events\new_event.js:584
+#: .\events\static\events\new_event.js:637
 msgid "Please, check input fields."
 msgstr "Per favore, controlla i campi di input."
 
 #: .\events\static\events\edit_event.js:500
 #: .\events\static\events\edit_event.js:545
 #: .\events\static\events\edit_event.js:592
-#: .\events\static\events\new_event.js:623
+#: .\events\static\events\new_event.js:676
 #: .\events\static\events\view_event.js:496
 #: .\events\static\events\view_event.js:608
 msgid "An error has occurred. Please try again later."
@@ -56,35 +56,47 @@ msgstr "Si è verificato un errore. Per favore riprova più tardi."
 msgid "Nothing to see here..."
 msgstr "Non c'è niente da vedere qui..."
 
-#: .\events\static\events\new_event.js:371
+#: .\events\static\events\new_event.js:64
+#: .\events\static\events\new_event.js:65
+#: .\events\static\events\new_event.js:66
+msgid "Administrator only"
+msgstr "Solo l'amministratore"
+
+#: .\events\static\events\new_event.js:74
+#: .\events\static\events\new_event.js:80
+#: .\events\static\events\new_event.js:86
+msgid "Anyone"
+msgstr "Chiunque"
+
+#: .\events\static\events\new_event.js:424
 msgid "Participant added"
 msgstr "Partecipante aggiunto"
 
-#: .\events\static\events\new_event.js:646
+#: .\events\static\events\new_event.js:699
 msgid "Event created"
 msgstr "Evento creato"
 
-#: .\events\static\events\new_event.js:647
+#: .\events\static\events\new_event.js:700
 msgid "Your event has been successfully created"
 msgstr "Il tuo evento è stato creato con successo"
 
-#: .\events\static\events\new_event.js:662
+#: .\events\static\events\new_event.js:715
 msgid "Participant URL"
 msgstr "URL partecipante"
 
-#: .\events\static\events\new_event.js:677
+#: .\events\static\events\new_event.js:730
 msgid "Participant page"
 msgstr "Pagina partecipante"
 
-#: .\events\static\events\new_event.js:681
+#: .\events\static\events\new_event.js:734
 msgid "Administration URL"
 msgstr "URL amministrazione"
 
-#: .\events\static\events\new_event.js:696
+#: .\events\static\events\new_event.js:749
 msgid "Administration page"
 msgstr "Pagina amministrazione"
 
-#: .\events\static\events\new_event.js:702
+#: .\events\static\events\new_event.js:755
 msgid ""
 "<span class=\"material-symbols-outlined\">warning</span> \n"
 "    IMPORTANT: make sure to keep this link, it's the only way you'll be able "
@@ -96,7 +108,7 @@ msgstr ""
 "sarai in grado di amministrare il tuo evento. \n"
 "    <span class=\"material-symbols-outlined\">warning</span>"
 
-#: .\events\static\events\new_event.js:742
+#: .\events\static\events\new_event.js:795
 msgid "Data saved to history"
 msgstr "Dati salvati in cronologia"
 
