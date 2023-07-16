@@ -44,7 +44,6 @@ function initializeEntirePage() {
     const btnConfirmParticipate = document.querySelector("#btnConfirmParticipate");
     if (btnConfirmParticipate) {
         btnConfirmParticipate.onclick = () => {
-            btnConfirmParticipate.disabled = true;
             sendParticipationToServer();
         };
     }
@@ -452,6 +451,9 @@ async function sendParticipationToServer() {
     if (!isValid) {
         return false;
     }
+
+    // Disabling button to avoid multiple submissions on slow connections (if a user clicks multiple times before page reloads)
+    document.querySelector("#btnConfirmParticipate").disabled = true;
 
     const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
 
