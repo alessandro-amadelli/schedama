@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-23 13:55+0200\n"
+"POT-Creation-Date: 2023-07-16 10:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,31 +20,35 @@ msgstr ""
 
 #: .\events\static\events\edit_event.js:145
 #: .\events\static\events\new_event.js:298
-#: .\events\static\events\view_event.js:200
+#: .\events\static\events\view_event.js:211
 msgid "d"
 msgstr "g"
 
-#: .\events\static\events\edit_event.js:246
+#: .\events\static\events\edit_event.js:202
+msgid "Participant removed"
+msgstr "Partecipante rimosso"
+
+#: .\events\static\events\edit_event.js:247
 #: .\events\static\events\new_event.js:251
 msgid "Event Date"
 msgstr "Data evento"
 
-#: .\events\static\events\edit_event.js:277
+#: .\events\static\events\edit_event.js:278
 #: .\events\static\events\new_event.js:286
 msgid "Date added"
 msgstr "Data aggiunta"
 
-#: .\events\static\events\edit_event.js:467
+#: .\events\static\events\edit_event.js:473
 #: .\events\static\events\new_event.js:584
 msgid "Please, check input fields."
 msgstr "Per favore, controlla i campi di input."
 
-#: .\events\static\events\edit_event.js:494
-#: .\events\static\events\edit_event.js:539
-#: .\events\static\events\edit_event.js:586
+#: .\events\static\events\edit_event.js:500
+#: .\events\static\events\edit_event.js:545
+#: .\events\static\events\edit_event.js:592
 #: .\events\static\events\new_event.js:623
-#: .\events\static\events\view_event.js:475
-#: .\events\static\events\view_event.js:587
+#: .\events\static\events\view_event.js:496
+#: .\events\static\events\view_event.js:608
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
@@ -96,38 +100,38 @@ msgstr ""
 msgid "Data saved to history"
 msgstr "Dati salvati in cronologia"
 
-#: .\events\static\events\utilities.js:131
+#: .\events\static\events\utilities.js:132
 msgid "Loading, please wait."
 msgstr "Caricamento, attendere per favore."
 
-#: .\events\static\events\utilities.js:220
+#: .\events\static\events\utilities.js:221
 msgid "You've been invited to an event on Schedama: "
 msgstr "Sei stato invitato ad un evento su Schedama: "
 
-#: .\events\static\events\utilities.js:258
+#: .\events\static\events\utilities.js:259
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: .\events\static\events\view_event.js:179
+#: .\events\static\events\view_event.js:190
 msgid "Ended"
 msgstr "Concluso"
 
-#: .\events\static\events\view_event.js:185
+#: .\events\static\events\view_event.js:196
 msgid "In progress"
 msgstr "In corso"
 
-#: .\events\static\events\view_event.js:244
+#: .\events\static\events\view_event.js:255
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\events\static\events\view_event.js:244
+#: .\events\static\events\view_event.js:255
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\events\static\events\view_event.js:321
+#: .\events\static\events\view_event.js:338
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\events\static\events\view_event.js:336
+#: .\events\static\events\view_event.js:354
 msgid "Preferences"
 msgstr "Preferenze"

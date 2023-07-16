@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-02 15:45+0200\n"
+"POT-Creation-Date: 2023-07-16 10:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,7 +277,7 @@ msgstr "Partecipanti rimossi"
 
 #: .\events\templates\events\edit_event.html:253
 #: .\events\templates\events\new_event.html:234
-#: .\events\templates\events\view_event.html:209
+#: .\events\templates\events\view_event.html:204
 msgid "Save"
 msgstr "Salva"
 
@@ -409,8 +409,8 @@ msgid "Particpant name"
 msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:371
-#: .\events\templates\events\view_event.html:206
-#: .\events\templates\events\view_event.html:237
+#: .\events\templates\events\view_event.html:201
+#: .\events\templates\events\view_event.html:232
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -745,48 +745,49 @@ msgstr "g"
 msgid "Add to Google Calendar"
 msgstr "Aggiungi a Google Calendar"
 
-#: .\events\templates\events\view_event.html:94
+#: .\events\templates\events\view_event.html:89
 msgid ""
 "Best date automatically selected based on attendance. The effective date may "
 "vary as participants enter new confirmations."
 msgstr ""
-"Miglior data selezionata automaticamente in base alla partecipazione. La data effettiva può "
-"variare man mano che i partecipanti inseriscono nuove conferme."
+"Miglior data selezionata automaticamente in base alla partecipazione. La "
+"data effettiva può variare man mano che i partecipanti inseriscono nuove "
+"conferme."
 
-#: .\events\templates\events\view_event.html:122
+#: .\events\templates\events\view_event.html:117
 msgid "List"
 msgstr "Lista"
 
-#: .\events\templates\events\view_event.html:129
+#: .\events\templates\events\view_event.html:124
 msgid "Participate"
 msgstr "Partecipa"
 
-#: .\events\templates\events\view_event.html:167
+#: .\events\templates\events\view_event.html:162
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:212
+#: .\events\templates\events\view_event.html:207
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:225
+#: .\events\templates\events\view_event.html:220
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:231
+#: .\events\templates\events\view_event.html:226
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:233
+#: .\events\templates\events\view_event.html:228
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:240
+#: .\events\templates\events\view_event.html:235
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:145 .\events\views.py:246 .\events\views.py:458
-#: .\events\views.py:469 .\events\views.py:514 .\events\views.py:525
+#: .\events\views.py:145 .\events\views.py:246 .\events\views.py:461
+#: .\events\views.py:472 .\events\views.py:517 .\events\views.py:528
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
@@ -796,11 +797,11 @@ msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:256 .\events\views.py:332 .\events\views.py:399
-#: .\events\views.py:496 .\events\views.py:547
+#: .\events\views.py:256 .\events\views.py:335 .\events\views.py:402
+#: .\events\views.py:499 .\events\views.py:550
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:277 .\events\views.py:371 .\events\views.py:439
+#: .\events\views.py:277 .\events\views.py:374 .\events\views.py:442
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."

@@ -199,6 +199,7 @@ function removeParticipantRow(btn) {
     btn.parentElement.parentElement.parentElement.parentElement.remove();
     updateParticipantsNum();
     enableSave();
+    notify(gettext("Participant removed"));
 }
 
 function enableSave() {
