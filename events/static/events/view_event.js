@@ -44,6 +44,7 @@ function initializeEntirePage() {
     const btnConfirmParticipate = document.querySelector("#btnConfirmParticipate");
     if (btnConfirmParticipate) {
         btnConfirmParticipate.onclick = () => {
+            btnConfirmParticipate.disabled = true;
             sendParticipationToServer();
         };
     }
