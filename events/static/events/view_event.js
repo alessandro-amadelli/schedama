@@ -84,6 +84,9 @@ function initializeEntirePage() {
         }
     };
 
+    // Event listener for dropdown on date view modal
+    document.querySelector("#dateViewSelect").addEventListener('change', updateParticipantsListForDate);
+
     // Transform location in a Google Maps link
     const locationLink = document.querySelector("#eventLocation");
     if (locationLink) {
@@ -108,6 +111,35 @@ function initializeEntirePage() {
     // Update localStorage history
     updateHistory();
 
+}
+
+function updateParticipantsListForDate() {
+    const dateViewSelect = document.querySelector("#dateViewSelect");
+    const dateViewList = document.querySelector("#dateViewList");
+    let selectedDate = dates[dateViewSelect.selectedIndex - 1];
+    const dateViewCounter = document.querySelector("#dateViewCounter");
+    let partCount = 0;
+
+    // Remove every element from list
+    dateViewList.querySelectorAll("li").forEach((element) => {
+        element.remove();
+    });
+    dateViewCounter.innerText = partCount;
+
+    if(!selectedDate) {
+        return false;
+    }
+
+    participants.forEach((p) => {
+        if(p.dates.includes(selectedDate)) {
+            let newP = document.createElement("li");
+            newP.setAttribute("class", "list-group-item list-group-item-success");
+            newP.innerText = p.name;
+            dateViewList.appendChild(newP);
+            partCount++;
+        }
+    });
+    dateViewCounter.innerText = partCount;
 }
 
 function initializeGCalendarLink() {

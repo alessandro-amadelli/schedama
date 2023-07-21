@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 12:25+0200\n"
+"POT-Creation-Date: 2023-07-21 17:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,7 +277,7 @@ msgstr "Partecipanti rimossi"
 
 #: .\events\templates\events\edit_event.html:253
 #: .\events\templates\events\new_event.html:242
-#: .\events\templates\events\view_event.html:204
+#: .\events\templates\events\view_event.html:208
 msgid "Save"
 msgstr "Salva"
 
@@ -409,8 +409,8 @@ msgid "Particpant name"
 msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:371
-#: .\events\templates\events\view_event.html:201
-#: .\events\templates\events\view_event.html:232
+#: .\events\templates\events\view_event.html:205
+#: .\events\templates\events\view_event.html:273
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -659,7 +659,7 @@ msgstr "Inserisci un nuovo partecipante"
 msgid "Configure Settings"
 msgstr "Configura Impostazioni"
 
-#: .\events\templates\events\new_event.html:228
+#: .\events\templates\events\new_event.html:229
 msgid "Current settings"
 msgstr "Impostazioni correnti"
 
@@ -784,23 +784,48 @@ msgstr "Partecipa"
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:207
+#: .\events\templates\events\view_event.html:169
+msgid "View by date"
+msgstr "Vedi per data"
+
+#: .\events\templates\events\view_event.html:211
+#: .\events\templates\events\view_event.html:248
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:220
+#: .\events\templates\events\view_event.html:223
+msgid "Date view"
+msgstr "Vista per data"
+
+#: .\events\templates\events\view_event.html:227
+msgid "Select a date to view confirmed participants"
+msgstr "Seleziona una data per vedere i partecipanti confermati"
+
+#: .\events\templates\events\view_event.html:230
+msgid "Choose date"
+msgstr "Scegli una data"
+
+#: .\events\templates\events\view_event.html:242
+msgid "Ok"
+msgstr ""
+
+#: .\events\templates\events\view_event.html:245
+msgid "Back to list"
+msgstr "Torna alla lista"
+
+#: .\events\templates\events\view_event.html:261
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:226
+#: .\events\templates\events\view_event.html:267
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:228
+#: .\events\templates\events\view_event.html:269
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:235
+#: .\events\templates\events\view_event.html:276
 msgid "Join"
 msgstr "Partecipa"
 

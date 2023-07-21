@@ -164,6 +164,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <button type="button" class="btn btn-light btn-lg mb-2" data-bs-target="#modalDateView" data-bs-toggle="modal">
+                        <span class="material-symbols-outlined">event_note</span>
+                        {% translate "View by date" %}
+                    </button>
                     <div class="row overflow-auto">
                         <table class="table table-striped" id="tableParticipants">
                             <thead>
@@ -206,6 +210,43 @@
                     {% else %}
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal with participants grouped by date -->
+    <div class="modal fade" id="modalDateView" tabindex="-1">
+        <div class="modal-dialog rounded">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span class="material-symbols-outlined">event_note</span> {% translate "Date view" %}</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{% translate "Select a date to view confirmed participants" %}</p>
+                    <div class="form-floating mb-2">
+                        <select class="form-select" id="dateViewSelect">
+                            <option selected>{% translate "-" %}</option>
+                            {% for date in event.dates_formatted %}
+                                <option value="">{{ date|date:"D d/m"}} h.{{ date|date:"H:i"}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="row text-center">
+                        <span class="col fs-2 align-self-center" id="dateViewCounter"></span>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <ul class="list-group" id="dateViewList"></ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-target="#modalList" data-bs-toggle="modal">
+                        <span class="material-symbols-outlined">list_alt</span> {% translate "Back to list" %}
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <span class="material-symbols-outlined">cancel</span> {% translate "Close" %}
+                    </button>
                 </div>
             </div>
         </div>
