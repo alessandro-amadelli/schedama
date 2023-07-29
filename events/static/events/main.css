@@ -8,7 +8,7 @@
     --event-ended-bg: rgba(255, 0, 0, .5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.8);
-    --moving-bg-color: rgba(0,0,0,.1);
+    --moving-bg-color: rgba(0,0,0,.2);
     --navbar-bg-color: white;
     --section-bg-color: rgba(0, 102, 255, 0);
     --selected-border: #ef476f;
@@ -29,7 +29,7 @@
     --event-ended-bg: rgba(255, 0, 0, .3);
     --event-started-bg: #06d69eb2;
     --input-bg-color: rgba(0,0,0,.8);
-    --moving-bg-color: rgba(255,255,255,.1);
+    --moving-bg-color: rgba(0, 0, 0, .5);
     --navbar-bg-color: rgba(0,0,0,.5);
     --section-bg-color: rgba(0,0,0,0);
     --selected-border: #ffd166;
@@ -88,7 +88,7 @@ Color palette
         transform: translateX(0%);
     }
     100% {
-        transform: translateX(60%);
+        transform: translateX(50%);
     }
 }
 
@@ -330,14 +330,20 @@ select, option {
 .clock-event-not-started::before {
     content: "";
     position: absolute;
-    width: 250%;
-    height: 150%;
-    top: -25%;
-    left: -150%;
+    width: 200%;
+    height: 100%;
+    top: 0%;
+    left: -100%;
     z-index: -1;
-    background: linear-gradient(90deg, var(--event-div-bg), var(--event-div-bg) 45%, var(--moving-bg-color) 50%, var(--event-div-bg) 55%, var(--event-div-bg));
+    background: linear-gradient(
+        90deg, 
+        var(--moving-bg-color), 
+        var(--moving-bg-color) 50%, 
+        var(--event-div-bg) 51%,
+        var(--event-div-bg)
+    );
     animation-name: timerNotStartedAnimation;
-    animation-duration: 3s;
+    animation-duration: 5s;
     animation-fill-mode:forwards;
     animation-direction:normal;
     animation-iteration-count: infinite;
