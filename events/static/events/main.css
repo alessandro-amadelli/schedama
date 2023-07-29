@@ -97,7 +97,7 @@ Color palette
         transform: scale(1);
     }
     100% {
-        transform: scale(2);
+        transform: scale(3);
     }
 }
 
@@ -359,7 +359,7 @@ select, option {
     top: 0%;
     left: 0%;
     z-index: -1;
-    background: radial-gradient(circle, var(--event-started-bg) 10%, var(--body-bg-color) 80%);
+    background: radial-gradient(circle, var(--event-started-bg) 35%, var(--body-bg-color) 37%);
     animation-name: timerStartedAnimation;
     animation-duration: 2s;
     animation-fill-mode:forwards;
