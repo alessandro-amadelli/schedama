@@ -245,14 +245,16 @@ function initializeDateRow() {
     const durationRow = document.querySelector("#durationRow");
     durationRow.style.animationPlayState = "running";
 
-    // Initialize participant row
-    initializeParticipantRow();
-
-    // Initialize settings row
-    initializeSettingsRow();
-
-    // Initialize theme row with thumbnails
-    initializeThemeRow();
+    document.querySelector("#dateInp").addEventListener('change', ()=> {
+        // Initialize participant row
+        initializeParticipantRow();
+    
+        // Initialize settings row
+        initializeSettingsRow();
+    
+        // Initialize theme row with thumbnails
+        initializeThemeRow();
+    });
 }
 
 function initializeParticipantRow() {
@@ -559,6 +561,9 @@ function restorePreviousData() {
 
     // Settings
     initializeSettingsRow();
+
+    // Initialize theme row with thumbnails
+    initializeThemeRow();
 }
 
 function clearPreviousData() {
