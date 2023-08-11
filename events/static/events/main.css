@@ -12,7 +12,7 @@
     --navbar-bg-color: white;
     --section-bg-color: rgba(0, 102, 255, 0);
     --selected-border: #ef476f;
-    --text-muted-color: rgb(98, 98, 98);
+    --text-muted-color: rgb(92, 92, 92);
     --title-bg-color: #ef476f;
     --title-color: #073b4c;
 
@@ -130,7 +130,7 @@ nav {
 .intro-animated {
     animation-name: introAnimation;
     animation-duration: .6s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
     animation-iteration-count: 1;
     animation-play-state: paused;
 }
@@ -252,6 +252,8 @@ body {
 .title-section {
     position:relative;
     margin-bottom: 2rem;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
     color: var(--title-color);
 }
 

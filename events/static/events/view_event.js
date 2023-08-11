@@ -133,7 +133,7 @@ function updateParticipantsListForDate() {
     participants.forEach((p) => {
         if(p.dates.includes(selectedDate)) {
             let newP = document.createElement("li");
-            newP.setAttribute("class", "list-group-item list-group-item-success");
+            newP.setAttribute("class", "list-group-item list-group-item-success entering");
             newP.innerText = p.name;
             dateViewList.appendChild(newP);
             partCount++;

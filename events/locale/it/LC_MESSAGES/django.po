@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 17:12+0200\n"
+"POT-Creation-Date: 2023-08-11 15:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,6 +82,30 @@ msgstr "Cronologia"
 msgid "to find all the links to events you visited on your device"
 msgstr ""
 "per trovare tutti i link agli eventi che hai visitato sul tuo dispositivo"
+
+#: .\events\templates\events\about_us.html:68
+msgid ""
+"Hi, I'm Alessandro, the developer behind this little project. It's nice to "
+"see you here, I hope you're enjoying this web app."
+msgstr ""
+"Ciao, sono Alessandro, lo sviluppatore dietro questo piccolo progetto. È "
+"bello vederti qui, spero che questa web app ti stia piacendo."
+
+#: .\events\templates\events\about_us.html:69
+msgid ""
+"I know...it not perfect but I'm always trying to learn, improve and add new "
+"features."
+msgstr ""
+"Lo so...non è perfetta ma cerco sempre di imparare, migliorare e aggiungere "
+"nuove funzionalità."
+
+#: .\events\templates\events\about_us.html:70
+msgid ""
+"I work on it in my spare time so if you like it, spread the word and "
+"together we can make Schedama grow."
+msgstr ""
+"Ci lavoro nel mio tempo libero quindi, se ti piace, spargi la voce e insieme "
+"potremo far crescere Schedama."
 
 #: .\events\templates\events\edit_event.html:5
 msgid "Manage your event on Schedama.com"
@@ -802,11 +826,7 @@ msgid "Select a date to view confirmed participants"
 msgstr "Seleziona una data per vedere i partecipanti confermati"
 
 #: .\events\templates\events\view_event.html:230
-msgid "Choose date"
-msgstr "Scegli una data"
-
-#: .\events\templates\events\view_event.html:242
-msgid "Ok"
+msgid "-"
 msgstr ""
 
 #: .\events\templates\events\view_event.html:245
@@ -848,3 +868,6 @@ msgstr "Si è verificato un errore."
 #: .\events\views.py:277 .\events\views.py:374 .\events\views.py:442
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
+
+#~ msgid "Choose date"
+#~ msgstr "Scegli una data"
