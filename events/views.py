@@ -123,6 +123,10 @@ def index(request):
     return render(request, "events/index.html")
 
 @cache_page(CACHE_TTL)
+def robots_view(request):
+    return render(request, "events/robots.txt")
+
+@cache_page(CACHE_TTL)
 def new_event_view(request):
     return render(request, "events/new_event.html")
 
