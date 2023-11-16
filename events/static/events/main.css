@@ -7,7 +7,7 @@
     --event-div-bg: rgba(255,255,255,.2);
     --event-ended-bg: rgba(255, 0, 0, .5);
     --event-started-bg: #06d6a0;
-    --input-bg-color: rgba(255,255,255,.8);
+    --input-bg-color: rgba(255,255,255,.85);
     --moving-bg-color: rgba(0,0,0,.2);
     --navbar-bg-color: white;
     --section-bg-color: rgba(0, 102, 255, 0);
@@ -28,7 +28,7 @@
     --event-div-bg: rgba(0,0,0,.2);
     --event-ended-bg: rgba(255, 0, 0, .3);
     --event-started-bg: #06d69eb2;
-    --input-bg-color: rgba(0,0,0,.8);
+    --input-bg-color: rgba(0,0,0,.5);
     --moving-bg-color: rgba(0, 0, 0, .5);
     --navbar-bg-color: rgba(0,0,0,.5);
     --section-bg-color: rgba(0,0,0,0);
@@ -450,6 +450,7 @@ div[data-theme]::before {
     background-size: cover;
     background-repeat: no-repeat;
     z-index: -1;
+    border-radius: inherit;
 }
 
 div[data-theme="beach"]::before {
