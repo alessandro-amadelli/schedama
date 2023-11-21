@@ -57,9 +57,9 @@ function updatePermissionDescriptions() {
     const whoCanEdit = document.querySelector("#whoCanEdit");
     const whoCanRemove = document.querySelector("#whoCanRemove");
 
-    let iconCanAdd = "lock";
-    let iconCanEdit = "lock";
-    let iconCanRemove = "lock";
+    let iconCanAdd = "lock fa-shake";
+    let iconCanEdit = "lock fa-shake";
+    let iconCanRemove = "lock fa-shake";
     
     let textCanAdd = gettext("Administrator only");
     let textCanEdit = gettext("Administrator only");
@@ -70,28 +70,29 @@ function updatePermissionDescriptions() {
     let colorCanRemove = "red";
     
     if (switchAddParticipant) {
-        iconCanAdd = "lock_open";
+        iconCanAdd = "lock-open";
         textCanAdd = gettext("Anyone");
         colorCanAdd = "green";
     }
 
     if (switchEditParticipant) {
-        iconCanEdit = "lock_open";
+        iconCanEdit = "lock-open";
         textCanEdit = gettext("Anyone");
         colorCanEdit = "green";
     }
 
     if (switchRemoveParticipant) {
-        iconCanRemove = "lock_open";
+        iconCanRemove = "lock-open";
         textCanRemove = gettext("Anyone");
         colorCanRemove = "green";
     }
     
-    whoCanAdd.innerHTML = `<span class="material-symbols-outlined">` + iconCanAdd + `</span>` + textCanAdd;
+    // <i class="fa-solid fa-lock"></i>
+    whoCanAdd.innerHTML = `<i class="fa-solid fa-${iconCanAdd}" style="--fa-animation-iteration-count:2;"></i> ${textCanAdd}`;
     whoCanAdd.style.color = colorCanAdd;
-    whoCanEdit.innerHTML = `<span class="material-symbols-outlined">` + iconCanEdit + `</span>` + textCanEdit;
+    whoCanEdit.innerHTML = `<i class="fa-solid fa-${iconCanEdit}" style="--fa-animation-iteration-count:2;"></i> ${textCanEdit}`;
     whoCanEdit.style.color = colorCanEdit;
-    whoCanRemove.innerHTML = `<span class="material-symbols-outlined">` + iconCanRemove + `</span>` + textCanRemove;
+    whoCanRemove.innerHTML = `<i class="fa-solid fa-${iconCanRemove}" style="--fa-animation-iteration-count:2;"></i> ${textCanRemove}`;
     whoCanRemove.style.color = colorCanRemove;
 
 }
@@ -313,9 +314,8 @@ function createNewDate() {
     newBtnCol.classList.add("col-4", "col-md-8", "mb-3", "fs-1", "align-middle");
 
     // New btn del
-    const newBtnDel = document.createElement("span");
-    newBtnDel.classList.add("material-symbols-outlined", "fs-1", "cursor-pointer", "remove-date", "text-danger");
-    newBtnDel.innerText = "delete";
+    const newBtnDel = document.createElement("i");
+    newBtnDel.classList.add("fa-solid", "fa-trash-can", "fs-1", "cursor-pointer", "remove-date", "text-danger");
     newBtnDel.onclick = () => {
         new100.remove();
         newDateCol.remove();
@@ -399,9 +399,8 @@ function createNewParticipant() {
     newBtnCol.classList.add("col-4", "col-md-8", "mb-3", "fs-1", "align-middle");
 
     // New btn del
-    const newBtnDel = document.createElement("span");
-    newBtnDel.classList.add("material-symbols-outlined", "fs-1", "cursor-pointer", "remove-date", "text-danger");
-    newBtnDel.innerText = "delete";
+    const newBtnDel = document.createElement("i");
+    newBtnDel.classList.add("fa-solid", "fa-trash-can", "fs-1", "cursor-pointer", "remove-date", "text-danger");
     newBtnDel.onclick = () => {
         new100.remove();
         newParticipantCol.remove();
@@ -717,7 +716,7 @@ function eventCreatedSuccessfully(data) {
 
     // Display participant's URL
     const displayPartURL = document.createElement("h3");
-    displayPartURL.innerHTML = `<span class="material-symbols-outlined">group</span> ` + gettext("Participant URL");
+    displayPartURL.innerHTML = `<i class="fa-solid fa-user-group"></i> ${gettext("Participant URL")}`;
     displayPartURL.setAttribute("class", "text-center");
     const partRow = document.createElement("div");
     partRow.classList.add("row");
@@ -732,11 +731,11 @@ function eventCreatedSuccessfully(data) {
     const btnOpenPart = document.createElement("a");
     btnOpenPart.setAttribute("href", participantURL.innerText);
     btnOpenPart.setAttribute("class","btn " + darkLightClass + " m-2");
-    btnOpenPart.innerHTML = `<span class="material-symbols-outlined">group</span> ` + gettext("Participant page");
+    btnOpenPart.innerHTML = `<i class="fa-solid fa-user-group"></i> ${gettext("Participant page")}`;
 
     // Display administration URL
     const displayAdminURL = document.createElement("h3");
-    displayAdminURL.innerHTML = `<span class="material-symbols-outlined">badge</span> ` + gettext("Administration URL");
+    displayAdminURL.innerHTML = `<i class="fa-regular fa-id-card"></i> ${gettext("Administration URL")}`;
     displayAdminURL.setAttribute("class", "text-center");
     const admRow = document.createElement("div");
     admRow.classList.add("row");
@@ -751,15 +750,16 @@ function eventCreatedSuccessfully(data) {
     const btnOpenAdm = document.createElement("a");
     btnOpenAdm.setAttribute("href", adminURL.innerText);
     btnOpenAdm.setAttribute("class","btn " + darkLightClass + " m-2");
-    btnOpenAdm.innerHTML = `<span class="material-symbols-outlined">badge</span> ` + gettext("Administration page");
+    btnOpenAdm.innerHTML = `<i class="fa-regular fa-id-card"></i> ${gettext("Administration page")}`;
 
     // Warning instructing user to save URLs
     const warnCol = document.createElement("div");
     warnCol.setAttribute("class", "col-12 text-center mb-2");
     const warn = document.createElement("strong");
-    warn.innerHTML = gettext(`<span class="material-symbols-outlined">warning</span> 
-    IMPORTANT: make sure to keep this link, it's the only way you'll be able to administrate your event. 
-    <span class="material-symbols-outlined">warning</span>`);
+    warn.innerHTML = `
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    ${gettext("IMPORTANT: make sure to keep this link, it's the only way you'll be able to administrate your event.")}
+    <i class="fa-solid fa-triangle-exclamation"></i>`;
     warn.setAttribute("class", "text-danger");
 
     // hr

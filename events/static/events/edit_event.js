@@ -254,9 +254,8 @@ function createNewDate() {
     newBtnCol.classList.add("col-4", "col-md-8", "mb-3", "fs-1", "align-middle");
 
     // New btn del
-    const newBtnDel = document.createElement("span");
-    newBtnDel.classList.add("material-symbols-outlined", "fs-1", "cursor-pointer", "remove-date", "text-danger");
-    newBtnDel.innerText = "delete";
+    const newBtnDel = document.createElement("i");
+    newBtnDel.classList.add("fa-solid", "fa-trash-can", "fs-1", "cursor-pointer", "remove-date", "text-danger");
     newBtnDel.onclick = () => {
         new100.remove();
         newDateCol.remove();
@@ -341,9 +340,8 @@ function addParticipantToTable() {
     newCol1.classList.add("col-1");
 
     // Button to remove participant
-    const newSpan = document.createElement("span");
-    newSpan.classList.add("material-symbols-outlined","cursor-pointer","remove-participant","text-danger");
-    newSpan.innerText = "delete";
+    const newSpan = document.createElement("i");
+    newSpan.classList.add("fa-solid", "fa-trash-can","cursor-pointer","remove-participant","text-danger");
     newSpan.onclick = () => {
         removeParticipantRow(newSpan);
     };

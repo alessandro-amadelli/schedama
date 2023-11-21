@@ -13,22 +13,22 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
                 <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" aria-current="page" href="{% url 'index' %}">
-                    <span class="material-symbols-outlined">home</span>Home
+                    <i class="fa-solid fa-house"></i>&nbsp;Home
                 </a>
                 <a class="nav-link {% if request.resolver_match.url_name == 'new_event_view' %}active{% endif %}" href="{% url 'new_event_view' %}">
-                    <span class="material-symbols-outlined">calendar_add_on</span>{% translate "Create event" %}
+                    <i class="fa-solid fa-calendar-plus"></i>&nbsp;{% translate "Create event" %}
                 </a>
                 <a class="nav-link {% if request.resolver_match.url_name == 'open_event_view' %}active{% endif %}" href="{% url 'open_event_view' %}">
-                    <span class="material-symbols-outlined">share</span>{% translate "Open event" %}
+                    <i class="fa-solid fa-share-nodes"></i>&nbsp;{% translate "Open event" %}
                 </a>
                 <a class="nav-link {% if request.resolver_match.url_name == 'history_view' %}active{% endif %}" href="{% url 'history_view' %}">
-                    <span class="material-symbols-outlined">history</span>{% translate "History" %}
+                    <i class="fa-solid fa-clock-rotate-left"></i>&nbsp;{% translate "History" %}
                 </a>
                 <a class="nav-link {% if request.resolver_match.url_name == 'about_us_view' %}active{% endif %}" href="{% url 'about_us_view' %}">
-                    <span class="material-symbols-outlined">face</span>{% translate "About us" %}
+                    <i class="fa-solid fa-face-smile"></i>&nbsp;{% translate "About us" %}
                 </a>
                 <div class="nav-link cursor-pointer" id="darkModeToggle" aria-label="Dark mode toggle">
-                    <span class="material-symbols-outlined fs-2 float-end me-0">dark_mode</span>
+                    <i class="fa-solid fa-moon float-end me-0"></i>>
                 </div>
             </div>
         </div>

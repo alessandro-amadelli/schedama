@@ -260,7 +260,7 @@ function displayNoData() {
     
     const chartDiv = document.querySelector("#chartAreaDiv");
     chartDiv.innerHTML = `<div class="col-12">
-    <span class="material-symbols-outlined">data_usage</span> No data
+    <i class="fa-solid fa-chart-pie"></i> No data
     </div>
     `;
     chartDiv.classList.add("text-center");

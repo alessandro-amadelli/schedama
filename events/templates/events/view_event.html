@@ -59,7 +59,7 @@
             <div class="row mb-2">
                 <div class="col-2 d-flex" id="shareEventCol"></div>
                 <div class="col d-flex">
-                    <a href="" class="btn btn-light" id="googleCalendarLink"><span class="material-symbols-outlined">event_upcoming</span>
+                    <a href="" class="btn btn-light" id="googleCalendarLink"><i class="fa-brands fa-google"></i>
                         {%translate "Add to Google Calendar" %}
                     </a>
                 </div>
@@ -68,7 +68,7 @@
                 <!-- Event location -->
                 <div class="row mb-4">
                     <div class="col">
-                        <span class="material-symbols-outlined fs-1 text-danger">location_on</span> 
+                        <i class="fa-solid fa-location-dot fs-1 text-danger"></i>
                         <a href="" id="eventLocation" target="_blank">{{ event.location }}</a>
                     </div>
                 </div>
@@ -79,16 +79,14 @@
                 {% for date in event.dates_formatted %}
                     <div class="row mb-2 date-formatted{% if event.best_date_formatted and date != event.best_date_formatted %} text-muted{% endif %}">
                         <div class="col-12 col-md mb-0">
-                            <span class="material-symbols-outlined fs-1 text-success">event</span>
+                            <i class="fa-solid fa-calendar-day fs-1 text-success"></i>
                              <span class="formattedDate">{{ date|date:"D d-m-Y"}}</span>
                         </div>
                         <div class="col-12 col-md mb-0">
-                            <span class="material-symbols-outlined fs-1 text-success">watch</span> <span class="formattedTime">{{ date|time:"G:i"}}</span>
+                            <i class="fa-solid fa-clock fs-1 text-success"></i>&nbsp;<span class="formattedTime">{{ date|time:"G:i"}}</span>
                             {% if date == event.best_date_formatted %}
-                                <span class="material-symbols-outlined" data-bs-toggle="tooltip" 
-                                data-bs-title="{% translate 'Best date automatically selected based on attendance. The effective date may vary as participants enter new confirmations.' %}">
-                                    check_circle
-                                </span>
+                                <i class="fa-regular fa-circle-check" data-bs-toggle="tooltip" 
+                                data-bs-title="{% translate 'Best date automatically selected based on attendance. The effective date may vary as participants enter new confirmations.' %}"></i>
                             {% endif %}
                         </div>
                     </div>
@@ -98,7 +96,7 @@
             <!-- Event duration -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <span class="material-symbols-outlined fs-1 text-primary">timelapse</span>
+                    <i class="fa-solid fa-stopwatch fs-1 text-primary"></i>
                     <span id="durationMin" style="display:none;">{{ event.duration }}</span>
                     <span id="durationText"></span>
                 </div>
@@ -107,20 +105,20 @@
             <!-- Event participants -->
             <div class="row mb-4">
                 <div class="col-4 mb-4">
-                    <span class="material-symbols-outlined fs-1 text-warning">group</span> 
+                    <i class="fa-solid fa-user-group fs-1 text-warning"></i>
                     {{ event.participants|length }}
                 </div>
                 <div class="w-100"></div>
                 <div class="d-grid col-6 col-lg-5 p-1 mx-auto">
                     <button type="button" class="btn btn-light btn-lg" data-bs-target="#modalList" data-bs-toggle="modal">
-                        <span class="material-symbols-outlined">list_alt</span>
+                        <i class="fa-solid fa-rectangle-list"></i>
                         {% translate "List" %}
                     </button>
                 </div>
                 {% if event.settings.add_participant %}
                     <div class="d-grid col-6 col-lg-5 p-1 mx-auto">
                         <button type="button" class="btn btn-light btn-lg" data-bs-target="#modalParticipate" data-bs-toggle="modal" id="btnParticipate">
-                            <span class="material-symbols-outlined">person_add</span>
+                            <i class="fa-solid fa-user-plus"></i>
                             {% translate "Participate" %}
                         </button>
                     </div>
@@ -158,14 +156,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <h4 class="modal-title">
-                    <span class="material-symbols-outlined">group</span>
+                    <i class="fa-solid fa-user-group"></i>
                      {% translate "Participant list" %}
                 </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <button type="button" class="btn btn-light btn-lg mb-2" data-bs-target="#modalDateView" data-bs-toggle="modal">
-                        <span class="material-symbols-outlined">event_note</span>
+                        <i class="fa-solid fa-calendar-week"></i>
                         {% translate "View by date" %}
                     </button>
                     <div class="row overflow-auto">
@@ -173,9 +171,9 @@
                             <thead>
                                 <tr>
                                     {% if event.settings.remove_participant %}
-                                        <th><span class="material-symbols-outlined">delete</span></th>
+                                        <th><i class="fa-solid fa-trash-can"></i></th>
                                     {% endif %}
-                                    <th><span class="material-symbols-outlined">person</span></th>
+                                    <th><i class="fa-solid fa-user"></i></th>
                                     {% for date in event.dates_formatted %}
                                         <th>{{ date|date:"D d/m"}} h.{{ date|date:"H:i"}}</th>
                                     {% endfor %}
@@ -185,7 +183,7 @@
                                 {% for participant in event.participants %}
                                     <tr>
                                         {% if event.settings.remove_participant %}
-                                            <td><span class="material-symbols-outlined cursor-pointer text-danger" name="btnDeleteRow">delete</span></td>
+                                            <td><i class="fa-solid fa-trash-can cursor-pointer text-danger" name="btnDeleteRow"></i></td>
                                         {% endif %}
                                         <td class="participant-name-td" data-partuid="{{ participant.uid }}">{{ participant.name }}</td>
                                         {% for date in event.dates %}
@@ -202,10 +200,10 @@
                 <div class="modal-footer">
                     {% if event.settings.edit_participant or event.settings.remove_participant%}
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelSaveParticipants">
-                            <span class="material-symbols-outlined">cancel</span> {% translate "Cancel" %}
+                            <i class="fa-solid fa-circle-xmark"></i> {% translate "Cancel" %}
                         </button>
                         <button type="button" class="btn btn-primary" id="btnSaveParticipants" disabled>
-                            <span class="material-symbols-outlined">save</span> {% translate "Save" %}
+                            <i class="fa-solid fa-floppy-disk"></i> {% translate "Save" %}
                         </button>
                     {% else %}
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
@@ -220,7 +218,7 @@
         <div class="modal-dialog rounded">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"><span class="material-symbols-outlined">event_note</span> {% translate "Date view" %}</h4>
+                    <h4 class="modal-title"><i class="fa-solid fa-calendar-week"></i> {% translate "Date view" %}</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -242,10 +240,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-target="#modalList" data-bs-toggle="modal">
-                        <span class="material-symbols-outlined">list_alt</span> {% translate "Back to list" %}
+                        <i class="fa-solid fa-rectangle-list"></i> {% translate "Back to list" %}
                     </button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                        <span class="material-symbols-outlined">cancel</span> {% translate "Close" %}
+                        <i class="fa-solid fa-circle-xmark"></i> {% translate "Close" %}
                     </button>
                 </div>
             </div>
@@ -258,7 +256,7 @@
             <div class="modal-dialog rounded">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title"><span class="material-symbols-outlined">person_add</span> {% translate "Join event" %}</h4>
+                        <h4 class="modal-title"><i class="fa-solid fa-user-plus"></i> {% translate "Join event" %}</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -270,10 +268,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            <span class="material-symbols-outlined">cancel</span> {% translate "Cancel" %}
+                            <i class="fa-solid fa-circle-xmark"></i> {% translate "Cancel" %}
                         </button>
                         <button type="button" class="btn btn-light" id="btnConfirmParticipate">
-                            <span class="material-symbols-outlined">person_add</span> {% translate "Join" %}
+                            <i class="fa-solid fa-user-plus"></i> {% translate "Join" %}
                         </button>
                     </div>
                 </div>

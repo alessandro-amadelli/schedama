@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-11 15:26+0200\n"
+"POT-Creation-Date: 2023-11-21 16:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,7 +301,7 @@ msgstr "Partecipanti rimossi"
 
 #: .\events\templates\events\edit_event.html:253
 #: .\events\templates\events\new_event.html:242
-#: .\events\templates\events\view_event.html:208
+#: .\events\templates\events\view_event.html:206
 msgid "Save"
 msgstr "Salva"
 
@@ -433,8 +433,8 @@ msgid "Particpant name"
 msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:371
-#: .\events\templates\events\view_event.html:205
-#: .\events\templates\events\view_event.html:273
+#: .\events\templates\events\view_event.html:203
+#: .\events\templates\events\view_event.html:271
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -796,78 +796,75 @@ msgstr ""
 "data effettiva può variare man mano che i partecipanti inseriscono nuove "
 "conferme."
 
-#: .\events\templates\events\view_event.html:117
+#: .\events\templates\events\view_event.html:115
 msgid "List"
 msgstr "Lista"
 
-#: .\events\templates\events\view_event.html:124
+#: .\events\templates\events\view_event.html:122
 msgid "Participate"
 msgstr "Partecipa"
 
-#: .\events\templates\events\view_event.html:162
+#: .\events\templates\events\view_event.html:160
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:169
+#: .\events\templates\events\view_event.html:167
 msgid "View by date"
 msgstr "Vedi per data"
 
-#: .\events\templates\events\view_event.html:211
-#: .\events\templates\events\view_event.html:248
+#: .\events\templates\events\view_event.html:209
+#: .\events\templates\events\view_event.html:246
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:223
+#: .\events\templates\events\view_event.html:221
 msgid "Date view"
 msgstr "Vista per data"
 
-#: .\events\templates\events\view_event.html:227
+#: .\events\templates\events\view_event.html:225
 msgid "Select a date to view confirmed participants"
 msgstr "Seleziona una data per vedere i partecipanti confermati"
 
-#: .\events\templates\events\view_event.html:230
+#: .\events\templates\events\view_event.html:228
 msgid "-"
 msgstr ""
 
-#: .\events\templates\events\view_event.html:245
+#: .\events\templates\events\view_event.html:243
 msgid "Back to list"
 msgstr "Torna alla lista"
 
-#: .\events\templates\events\view_event.html:261
+#: .\events\templates\events\view_event.html:259
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:267
+#: .\events\templates\events\view_event.html:265
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:269
+#: .\events\templates\events\view_event.html:267
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:276
+#: .\events\templates\events\view_event.html:274
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:145 .\events\views.py:246 .\events\views.py:461
-#: .\events\views.py:472 .\events\views.py:517 .\events\views.py:528
+#: .\events\views.py:149 .\events\views.py:250 .\events\views.py:465
+#: .\events\views.py:476 .\events\views.py:521 .\events\views.py:532
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
-#: .\events\views.py:159
+#: .\events\views.py:163
 msgid "An error has occurred while creating the event. Please try again later."
 msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:256 .\events\views.py:335 .\events\views.py:402
-#: .\events\views.py:499 .\events\views.py:550
+#: .\events\views.py:260 .\events\views.py:339 .\events\views.py:406
+#: .\events\views.py:503 .\events\views.py:554
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:277 .\events\views.py:374 .\events\views.py:442
+#: .\events\views.py:281 .\events\views.py:378 .\events\views.py:446
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
-
-#~ msgid "Choose date"
-#~ msgstr "Scegli una data"

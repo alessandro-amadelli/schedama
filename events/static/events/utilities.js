@@ -57,7 +57,7 @@ function setMode(currentMode) {
         navbar.classList.remove("navbar-dark");
 
         // Icon of dark mode toggle
-        document.querySelector("#darkModeToggle").querySelector("span").innerText = "dark_mode";
+        document.querySelector("#darkModeToggle").innerHTML = `<i class="fa-solid fa-moon"></i>&nbsp;${gettext("Lights off")}`;
 
         // Change all buttons with btn-dark class
         document.querySelectorAll(".btn-dark").forEach((item) => {
@@ -104,7 +104,8 @@ function setMode(currentMode) {
         navbar.classList.add("navbar-dark");
 
         // Icon of dark mode toggle
-        document.querySelector("#darkModeToggle").querySelector("span").innerText = "light";
+        // document.querySelector("#darkModeToggle").querySelector("span").innerText = "light";
+        document.querySelector("#darkModeToggle").innerHTML = `<i class="fa-solid fa-lightbulb"></i>&nbsp;${gettext("Lights on")}`;
 
         // Change all buttons with btn-light
         document.querySelectorAll(".btn-light").forEach((item) => {
@@ -242,21 +243,21 @@ function generateShareBtn(contentURL, eventTitle="", text="") {
         btnLightDark = "btn-dark";
     }
     btn.classList.add("btn", btnLightDark, "dropdown-toggle", "p-2");
-    btn.innerHTML = `<span class="material-symbols-outlined">share</span>`;
+    btn.innerHTML = `<i class="fa-solid fa-share-nodes"></i>`;
 
     const btnUl = document.createElement("ul");
     btnUl.classList.add("dropdown-menu");
     
     const telegramLi = document.createElement("li");
-    telegramLi.innerHTML = `<a class="dropdown-item" href="https://telegram.me/share/url?url=` + contentURL + `&text=` + text + `" target="_blank"><span class="material-symbols-outlined">send</span> Telegram </a>`;
+    telegramLi.innerHTML = `<a class="dropdown-item" href="https://telegram.me/share/url?url=${contentURL}&text=${text}" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram </a>`;
     const whatsappLi = document.createElement("li");
-    whatsappLi.innerHTML = `<a class="dropdown-item" href="https://api.whatsapp.com/send?text=` + text + encodeURIComponent("\n") + contentURL + `" data-action="share/whatsapp/share" target="_blank"><span class="material-symbols-outlined">chat</span> Whatsapp </a>`;
+    whatsappLi.innerHTML = `<a class="dropdown-item" href="https://api.whatsapp.com/send?text=${text}${encodeURIComponent("\n")}${contentURL}" data-action="share/whatsapp/share" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp </a>`;
     const emailLi = document.createElement("li");
-    emailLi.innerHTML = `<a class="dropdown-item" href="mailto:?subject='Schedama Event'&body=` + text + ` ` + contentURL + `" target="_blank"><span class="material-symbols-outlined">email</span> e-mail</a>`;
+    emailLi.innerHTML = `<a class="dropdown-item" href="mailto:?subject='Schedama Event'&body=${text} ${contentURL}" target="_blank"><i class="fa-solid fa-envelope"></i> e-mail</a>`;
     const dividerLi = document.createElement("li");
     dividerLi.innerHTML = `<hr class="dropdown-divider">`;
     const copyLi = document.createElement("li");
-    copyLi.innerHTML = `<a class="dropdown-item" href=""><span class="material-symbols-outlined">content_copy</span> ` + gettext("Copy to clipboard") + `</a>`;
+    copyLi.innerHTML = `<a class="dropdown-item" href=""><i class="fa-solid fa-copy"></i> ${gettext("Copy to clipboard")}</a>`;
     copyLi.querySelector("a").addEventListener("click", (e) => {
         const copyContent = async () => {
             await navigator.clipboard.writeText(contentURL);

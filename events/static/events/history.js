@@ -14,7 +14,7 @@ function fillHistory() {
     let history = getHistoryData();
     if (!history) {
         historyContainer.classList.add("text-center", "display-5");
-        historyContainer.innerHTML = `<span class="material-symbols-outlined fs-1">block</span>` + gettext("Nothing to see here...");
+        historyContainer.innerHTML = `<i class="fa-solid fa-ban fs-1"></i>` + gettext("Nothing to see here...");
         return false;
     }
 
@@ -49,7 +49,7 @@ function fillHistory() {
         // Last visited
         const cardP = document.createElement("p");
         cardP.setAttribute("class", "card-text");
-        cardP.innerHTML = `<span class="material-symbols-outlined text-muted">history</span> ` + item.last_visited;
+        cardP.innerHTML = `<i class="fa-solid fa-clock-rotate-left text-muted"></i>` + item.last_visited;
 
         // Card footer
         const cardFooter = document.createElement("div");
@@ -65,7 +65,7 @@ function fillHistory() {
         const partLink = document.createElement("a");
         partLink.setAttribute("class", "card-link");
         partLink.setAttribute("href", item.participation_link);
-        partLink.innerHTML = `<span class="material-symbols-outlined text-warning p-1 rounded ` + linkBg + `">group</span>`;
+        partLink.innerHTML = `<i class="fa-solid fa-user-group text-warning p-1 rounded ` + linkBg + `"></i>`;
 
         // Administration link
         let admLink = null;
@@ -73,7 +73,7 @@ function fillHistory() {
             admLink = document.createElement("a");
             admLink.setAttribute("class", "card-link");
             admLink.setAttribute("href", item.admin_link);
-            admLink.innerHTML = `<span class="material-symbols-outlined text-primary p-1 rounded ` + linkBg + `">badge</span>`;
+            admLink.innerHTML = `<i class="fa-regular fa-id-card text-primary p-1 rounded ` + linkBg + `"></i>`;
         }
 
         // Append elements

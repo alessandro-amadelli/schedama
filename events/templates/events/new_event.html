@@ -10,7 +10,7 @@
   <script src="{% static 'events/new_event.js' %}"></script>
 
   <div class="title-section">
-    <h1 class="entering">{% translate "Event editor" %} <span class="material-symbols-outlined">edit_calendar</span></h1>
+    <h1 class="entering">{% translate "Event editor" %} <i class="fa-solid fa-pen-to-square"></i></h1>
     <h2 class="entering-1">{% translate "Create and customize your event" %}</h2>
   </div>
 
@@ -20,7 +20,7 @@
     <!-- Event title -->
     <div class="row p-3 mb-3 mt-5 intro-animated" id="titleRow">
       <div class="col">
-        <h4><span class="material-symbols-outlined">menu_book</span> {% translate "Enter a title" %} <span class="text-danger">*</span></h4>
+        <h4><i class="fa-solid fa-book-open fa-bounce"></i> {% translate "Enter a title" %} <span class="text-danger">*</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col">
@@ -49,7 +49,7 @@
     <!-- Event description -->
     <div class="row p-3 mb-3 intro-animated" id ="descriptionRow">
       <div class="col">
-        <h4><span class="material-symbols-outlined">description</span> {% translate "Describe the event" %}</h4>
+        <h4><i class="fa-solid fa-message fa-bounce"></i> {% translate "Describe the event" %}</h4>
       </div>
       <div class="w-100"></div>
       <div class="col-12">
@@ -79,7 +79,7 @@
     <!-- Event location -->
     <div class="row p-3 mb-3 intro-animated" id="locationRow">
       <div class="col">
-        <h4><span class="material-symbols-outlined">location_on</span> {% translate "Choose a location" %}</h4>
+        <h4><i class="fa-solid fa-location-dot fa-bounce"></i> {% translate "Choose a location" %}</h4>
       </div>
       <div class="w-100"></div>
       <div class="col" id="locationCol">
@@ -93,7 +93,7 @@
     <!-- Event date and time -->
     <div class="row p-3 mb-3 intro-animated" id="dateRow">
       <div class="col">
-        <h4><span class="material-symbols-outlined">event</span> {% translate "Set a date and time" %} <span class="text-danger">*</span> <span class="text-muted">({% translate "you can indicate more than one possible date" %})</span></h4>
+        <h4><i class="fa-solid fa-calendar-day fa-bounce"></i> {% translate "Set a date and time" %} <span class="text-danger">*</span> <span class="text-muted">({% translate "you can indicate more than one possible date" %})</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col-12 col-md-4 mb-3">
@@ -107,7 +107,7 @@
     <!-- Event duration -->
     <div class="row p-3 mb-3 intro-animated" id="durationRow">
       <div class="col">
-        <h4><span class="material-symbols-outlined">hourglass_empty</span> {% translate "Indicate duration" %} <span class="text-danger">*</span></h4>
+        <h4><i class="fa-solid fa-hourglass fa-bounce"></i> {% translate "Indicate duration" %} <span class="text-danger">*</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col-12">
@@ -130,7 +130,7 @@
     <!-- Event theme -->
     <div class="row p-3 mb-3 intro-animated" id="themeRow">
       <div class="col">
-        <h4><span class="material-symbols-outlined">palette</span> {% translate "Choose a theme" %}</h4>
+        <h4><i class="fa-solid fa-palette fa-bounce"></i> {% translate "Choose a theme" %}</h4>
       </div>
       <div class="w-100"></div>
       <div class="row row-cols-1 row-cols-md-4 thumbnail-row">
@@ -185,7 +185,7 @@
     <!-- Participants -->
     <div class="row p-3 mb-3 intro-animated" id="participantRow">
       <div class="col">
-        <h4><span class="material-symbols-outlined">group</span> {% translate "Add participants" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
+        <h4><i class="fa-solid fa-user-group fa-bounce"></i> {% translate "Add participants" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col-8 col-md-4 mb-3">
@@ -199,7 +199,7 @@
     <!-- Event settings -->
     <div class="row p-3 mb-3 intro-animated" id="settingsRow">
       <div class="col">
-        <h4><span class="material-symbols-outlined">build</span> {% translate "Configure Settings" %}</h4>
+        <h4><i class="fa-solid fa-wrench fa-bounce"></i> {% translate "Configure Settings" %}</h4>
       </div>
       <div class="w-100"></div>
       <div class="mb-3">
@@ -238,7 +238,7 @@
     <!-- Save event button -->
     <div class="d-grid col-6 col-lg-4 mx-auto">
       <button type="button" class="btn btn-success btn-lg visually-hidden" id="btnSaveEvent" disabled>
-        <span class="material-symbols-outlined">save</span>
+        <i class="fa-solid fa-floppy-disk"></i>
         {% translate "Save" %}
       </button>
     </div>
@@ -259,10 +259,10 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnClearData">
-            <span class="material-symbols-outlined">delete</span> {% translate "Nah, don't care" %}
+            <i class="fa-solid fa-trash-can"></i> {% translate "Nah, don't care" %}
           </button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btnRestoreData">
-            <span class="material-symbols-outlined">restore_page</span> {% translate "Restore data" %}
+            <i class="fa-solid fa-rotate-left fa-spin fa-spin-reverse"></i>&nbsp;{% translate "Restore data" %}
           </button>
         </div>
       </div>
