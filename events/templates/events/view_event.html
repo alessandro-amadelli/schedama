@@ -80,7 +80,7 @@
                     <div class="row mb-2 date-formatted{% if event.best_date_formatted and date != event.best_date_formatted %} text-muted{% endif %}">
                         <div class="col-12 col-md mb-0">
                             <i class="fa-solid fa-calendar-day fs-1 text-success"></i>
-                             <span class="formattedDate">{{ date|date:"D d-m-Y"}}</span>
+                             <span class="formattedDate">{{ date|date:"D d/m/Y"}}</span>
                         </div>
                         <div class="col-12 col-md mb-0">
                             <i class="fa-solid fa-clock fs-1 text-success"></i>&nbsp;<span class="formattedTime">{{ date|time:"G:i"}}</span>
