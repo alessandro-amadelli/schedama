@@ -70,29 +70,28 @@ function updatePermissionDescriptions() {
     let colorCanRemove = "red";
     
     if (switchAddParticipant) {
-        iconCanAdd = "lock-open";
+        iconCanAdd = "lock-open fa-beat";
         textCanAdd = gettext("Anyone");
         colorCanAdd = "green";
     }
 
     if (switchEditParticipant) {
-        iconCanEdit = "lock-open";
+        iconCanEdit = "lock-open fa-beat";
         textCanEdit = gettext("Anyone");
         colorCanEdit = "green";
     }
 
     if (switchRemoveParticipant) {
-        iconCanRemove = "lock-open";
+        iconCanRemove = "lock-open fa-beat";
         textCanRemove = gettext("Anyone");
         colorCanRemove = "green";
     }
     
-    // <i class="fa-solid fa-lock"></i>
-    whoCanAdd.innerHTML = `<i class="fa-solid fa-${iconCanAdd}" style="--fa-animation-iteration-count:2;"></i> ${textCanAdd}`;
+    whoCanAdd.innerHTML = `<i class="fa-solid fa-${iconCanAdd}" style="--fa-animation-iteration-count:1;"></i> ${textCanAdd}`;
     whoCanAdd.style.color = colorCanAdd;
-    whoCanEdit.innerHTML = `<i class="fa-solid fa-${iconCanEdit}" style="--fa-animation-iteration-count:2;"></i> ${textCanEdit}`;
+    whoCanEdit.innerHTML = `<i class="fa-solid fa-${iconCanEdit}" style="--fa-animation-iteration-count:1;"></i> ${textCanEdit}`;
     whoCanEdit.style.color = colorCanEdit;
-    whoCanRemove.innerHTML = `<i class="fa-solid fa-${iconCanRemove}" style="--fa-animation-iteration-count:2;"></i> ${textCanRemove}`;
+    whoCanRemove.innerHTML = `<i class="fa-solid fa-${iconCanRemove}" style="--fa-animation-iteration-count:1;"></i> ${textCanRemove}`;
     whoCanRemove.style.color = colorCanRemove;
 
 }
@@ -714,6 +713,11 @@ function eventCreatedSuccessfully(data) {
         darkLightClass = "btn-dark";
     }
 
+    // Let user know that event links are automatically saved
+    const linksSavedDisclaimer = document.createElement("h4");
+    linksSavedDisclaimer.innerHTML = `<i class="fa-solid fa-floppy-disk fa-beat"></i><br>${gettext("The following links have been automatically saved to the history page")}`;
+    linksSavedDisclaimer.setAttribute("class", "text-center mb-3");
+
     // Display participant's URL
     const displayPartURL = document.createElement("h3");
     displayPartURL.innerHTML = `<i class="fa-solid fa-user-group"></i> ${gettext("Participant URL")}`;
@@ -754,19 +758,23 @@ function eventCreatedSuccessfully(data) {
 
     // Warning instructing user to save URLs
     const warnCol = document.createElement("div");
-    warnCol.setAttribute("class", "col-12 text-center mb-2");
+    warnCol.setAttribute("class", "alert alert-warning text-center mb-2");
     const warn = document.createElement("strong");
     warn.innerHTML = `
     <i class="fa-solid fa-triangle-exclamation"></i>
     ${gettext("IMPORTANT: make sure to keep this link, it's the only way you'll be able to administrate your event.")}
     <i class="fa-solid fa-triangle-exclamation"></i>`;
-    warn.setAttribute("class", "text-danger");
+    // warn.setAttribute("class", "text-danger");
 
     // hr
     newHr = document.createElement("hr");
+    newHr2 = document.createElement("hr");
 
     // Append elements
     section.appendChild(displayName);
+
+    section.appendChild(linksSavedDisclaimer);
+    section.appendChild(newHr);
 
     section.appendChild(displayPartURL);
     section.appendChild(partRow);
@@ -776,7 +784,7 @@ function eventCreatedSuccessfully(data) {
     sharePartCol.appendChild(btnSharePart);
     sharePartCol.appendChild(btnOpenPart);
 
-    section.appendChild(newHr);
+    section.appendChild(newHr2);
 
     section.appendChild(admRow);
     admRow.appendChild(warnCol);
