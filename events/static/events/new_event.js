@@ -764,7 +764,6 @@ function eventCreatedSuccessfully(data) {
     <i class="fa-solid fa-triangle-exclamation"></i>
     ${gettext("IMPORTANT: make sure to keep this link, it's the only way you'll be able to administrate your event.")}
     <i class="fa-solid fa-triangle-exclamation"></i>`;
-    // warn.setAttribute("class", "text-danger");
 
     // hr
     newHr = document.createElement("hr");
