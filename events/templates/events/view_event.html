@@ -57,8 +57,8 @@
     <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %} info-section">
         <div class="col-12 event-info-div display-5 p-3 shadow rounded"{% if event.event_theme %} data-theme="{{ event.event_theme }}"{% endif %}>
             <div class="row mb-2">
-                <div class="col-2 d-flex" id="shareEventCol"></div>
-                <div class="col d-flex">
+                <div class="col-2" id="shareEventCol"></div>
+                <div class="col">
                     <a href="" class="btn btn-light" id="googleCalendarLink"><i class="fa-brands fa-google"></i>
                         {%translate "Add to Google Calendar" %}
                     </a>
@@ -208,6 +208,17 @@
                     {% else %}
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal with QR Code -->
+    <div class="modal fade" id="modalQR" tabindex="-1">
+        <div class="modal-dialog rounded">
+            <div class="modal-content">
+                <div class="modal-body d-flex justify-content-center">
+                    <div id="qrDiv"></div>
                 </div>
             </div>
         </div>

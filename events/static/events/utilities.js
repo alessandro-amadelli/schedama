@@ -216,6 +216,23 @@ function notify(text) {
   
   }
 
+
+function generateQR(text) {
+    let qrDiv = document.getElementById("qrDiv");
+    let qrModal = document.getElementById("modalQR");
+
+    if (!qrDiv || !qrModal) {
+        return false;
+    }
+
+    var qrcode = new QRCode(document.getElementById("qrDiv"), {
+        text: text,
+        colorDark: "#000000",
+        colorLight: "#ffffff"
+    });
+}
+
+
 function generateShareBtn(contentURL, eventTitle="", text="") {
     // Generates a share dropdown button with links
     if (text == "") {
@@ -247,15 +264,31 @@ function generateShareBtn(contentURL, eventTitle="", text="") {
 
     const btnUl = document.createElement("ul");
     btnUl.classList.add("dropdown-menu");
-    
+
+    // QR code button
+    const modalQR = document.getElementById("modalQR");
+    let qrLi = null;
+    if (modalQR) {
+        qrLi = document.createElement("li");
+        qrLi.innerHTML = `<a class="dropdown-item" data-bs-target="#modalQR" data-bs-toggle="modal"><i class="fa-solid fa-qrcode"></i> QR Code </a>`;
+    }
+
+    // Telegram share
     const telegramLi = document.createElement("li");
     telegramLi.innerHTML = `<a class="dropdown-item" href="https://telegram.me/share/url?url=${contentURL}&text=${text}" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram </a>`;
+    
+    // Whatsapp share
     const whatsappLi = document.createElement("li");
     whatsappLi.innerHTML = `<a class="dropdown-item" href="https://api.whatsapp.com/send?text=${text}${encodeURIComponent("\n")}${contentURL}" data-action="share/whatsapp/share" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp </a>`;
+    
+    // e-mail share
     const emailLi = document.createElement("li");
     emailLi.innerHTML = `<a class="dropdown-item" href="mailto:?subject='Schedama Event'&body=${text} ${contentURL}" target="_blank"><i class="fa-solid fa-envelope"></i> e-mail</a>`;
     const dividerLi = document.createElement("li");
+    
     dividerLi.innerHTML = `<hr class="dropdown-divider">`;
+    
+    // Copy to clipboard
     const copyLi = document.createElement("li");
     copyLi.innerHTML = `<a class="dropdown-item" href=""><i class="fa-solid fa-copy"></i> ${gettext("Copy to clipboard")}</a>`;
     copyLi.querySelector("a").addEventListener("click", (e) => {
@@ -269,6 +302,9 @@ function generateShareBtn(contentURL, eventTitle="", text="") {
     // Append elements
     btnDiv.appendChild(btn);
     btnDiv.appendChild(btnUl);
+    if (qrLi) {
+        btnUl.appendChild(qrLi);
+    }
     btnUl.appendChild(telegramLi);
     btnUl.appendChild(whatsappLi);
     btnUl.appendChild(emailLi);

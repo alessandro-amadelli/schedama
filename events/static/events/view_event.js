@@ -21,6 +21,9 @@ function initializeEntirePage() {
     const evTitle = document.querySelector("#eventTitle").innerText;
     document.querySelector("#shareEventCol").appendChild(generateShareBtn(window.location.href, evTitle));
 
+    // QR code generation
+    generateQR(window.location.href);
+
     // Display event duration in readable format
     displayDurationText();
 
