@@ -270,7 +270,7 @@ function generateShareBtn(contentURL, eventTitle="", text="") {
     let qrLi = null;
     if (modalQR) {
         qrLi = document.createElement("li");
-        qrLi.innerHTML = `<a class="dropdown-item" data-bs-target="#modalQR" data-bs-toggle="modal"><i class="fa-solid fa-qrcode"></i> QR Code </a>`;
+        qrLi.innerHTML = `<a class="cursor-pointer dropdown-item" data-bs-target="#modalQR" data-bs-toggle="modal"><i class="fa-solid fa-qrcode"></i> QR Code </a>`;
     }
 
     // Telegram share
