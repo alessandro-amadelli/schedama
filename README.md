@@ -29,7 +29,7 @@ A countdown is also available showing remaining time until event starts (or ends
 - Add event to Google Calendar
 
 
-#### History page #### 📖
+#### History page ####
 Here you can find all the events created and/or opened from the current device.
 **For each event in history are available**
 - Title
@@ -48,7 +48,7 @@ Yes, you heard it right! You can install Schedama on your device.
 Schedama.com is a PWA (Progressive Web App), that means you should see the option to install it on you device (Android, iOS, Windows, MacOS). Installation is lightweight, quick and convenient making Schedama appearance resemble a real application.
 Search for "How to install a PWA" to see instruction and procedure (ehm, not here...just Google it!).
 
-#### Administration page #### 🔑
+#### Administration page ####
 **From administration page a user can manage all the relevant information and settings of the event, such as**
 - Title
 - Description
@@ -63,13 +63,13 @@ Search for "How to install a PWA" to see instruction and procedure (ehm, not her
 Administration page can be reached via a special link containing a very extra super top-secret(ish) key, that is unique for the event.
 Without the key (don't worry, it's saved in the link so you don't have to memorize it!) it is not possible to reach this page and to manage the event.
 
-### Event administration ### 🔑
+### Event administration ###
 Newly created events will contain an "admin_key" field.
 This key will be generated during event creation and it needs to be added as a parameter to the url in order to be able to open the event in edit mode.
 An user trying to access the administration link without this key, would be redirected to event viewer (same as the participant link).
 
 
-### Costs ### 💰
+### Costs ###
 By using Schedama you agree on paying...ehm nothing 😝
 
 ### User's data ###
