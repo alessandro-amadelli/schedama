@@ -53,9 +53,23 @@
 
     <div class="row mb-5 entering-4">
       <div class="col-12 text-center">
+        <h3>{% translate "Tips" %}
         <p class="lead">
-          {% translate "Click on" %} <a href="{% url 'history_view' %}" class="btn btn-primary">{% translate "History" %}</a> 
+          <i class="fa-solid fa-comment"></i>&nbsp;
+          {% translate "Click on" %}
+          <a href="{% url 'history_view' %}" class="btn btn-primary">
+            {% translate "History" %}
+          </a> 
           {% translate "to find all the links to events you visited on your device" %}
+        </p>
+        <p class="lead">
+          <i class="fa-solid fa-comment"></i>&nbsp;
+          {% translate "When you create an event with multiple dates, the best date for the event is automatically selected based on attendance" %}
+        </p>
+        <p class="lead">
+          <i class="fa-solid fa-comment"></i>&nbsp;
+          {% translate 'Want to fully manage participants list? Check out "Configure Settings" when creating a new event.' %}<br>
+          {% translate "You can also change this setting later from the administration page" %}
         </p>
       </div>
     </div>
@@ -63,9 +77,38 @@
     <hr>
 
     <div class="row mb-5 entering-4">
-      <div class="col-12 text-center">
+      <div class="col-12">
+        <h3>{% translate "Features" %}</h3>
         <p class="lead">
-          {% translate "Hi, I'm Alessandro, the developer behind this little project. It's nice to see you here, I hope you're enjoying this web app." %} <br>
+          {% translate "Participants you invite to an event can see all relevant event information, such as:" %}
+          <ul>
+            <li>{% translate "Title" %}</li>
+            <li>{% translate "Description" %}</li>
+            <li>{% translate "Location" %}</li>
+            <li>{% translate "Date and time" %}</li>
+            <li>{% translate "Duration" %}</li>
+            <li>{% translate "List of participants" %}</li>
+          </ul>
+        </p>
+        <p class="lead">
+          {% translate "Participants to your event can:" %}
+          <ul>
+            <li>{% translate "Indicate preferences and availability for the event" %}</li>
+            <li>{% translate "See other participants and their preferences" %}</li>
+            <li>{% translate "See participation on different proposed dates" %}</li>
+            <li>{% translate "Share event by: displaying QR Code, send link via telegram, whatsapp or email, copy link to clipboard" %}</li>
+            <li>{% translate "Add event to Google Calendar" %}</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row mb-5 entering-4">
+      <div class="col-12">
+        <p class="lead">
+          {% translate "Hi, I'm Alessandro, the developer behind this little project.<br>It's nice to see you here, I hope you're enjoying this web app." %} <br>
           {% translate "I know...it not perfect but I'm always trying to learn, improve and add new features." %} <br>
           {% translate "I work on it in my spare time so if you like it, spread the word and together we can make Schedama grow." %}
         </p>

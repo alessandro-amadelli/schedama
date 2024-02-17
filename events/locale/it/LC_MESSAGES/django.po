@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-21 16:18+0100\n"
+"POT-Creation-Date: 2024-02-17 11:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,30 +68,127 @@ msgstr ""
 "Usa questo link per gestire il tuo evento, aggiungere e modificare "
 "informazioni o partecipanti"
 
-#: .\events\templates\events\about_us.html:57
+#: .\events\templates\events\about_us.html:56
+msgid "Tips"
+msgstr ""
+
+#: .\events\templates\events\about_us.html:59
 msgid "Click on"
 msgstr "Clicca su"
 
-#: .\events\templates\events\about_us.html:57
+#: .\events\templates\events\about_us.html:61
 #: .\events\templates\events\history.html:12
 #: .\events\templates\events\navbar.html:25
 msgid "History"
 msgstr "Cronologia"
 
-#: .\events\templates\events\about_us.html:58
+#: .\events\templates\events\about_us.html:63
 msgid "to find all the links to events you visited on your device"
 msgstr ""
 "per trovare tutti i link agli eventi che hai visitato sul tuo dispositivo"
 
-#: .\events\templates\events\about_us.html:68
+#: .\events\templates\events\about_us.html:67
 msgid ""
-"Hi, I'm Alessandro, the developer behind this little project. It's nice to "
-"see you here, I hope you're enjoying this web app."
+"When you create an event with multiple dates, the best date for the event is "
+"automatically selected based on attendance"
 msgstr ""
-"Ciao, sono Alessandro, lo sviluppatore dietro questo piccolo progetto. È "
+"Quando crei un evento con più date, la data migliore per l'evento è "
+"selezionata automaticamente in base alla partecipazione"
+
+#: .\events\templates\events\about_us.html:71
+msgid ""
+"Want to fully manage participants list? Check out \"Configure Settings\" "
+"when creating a new event."
+msgstr ""
+"Vuoi gestire tu la lista partecipanti? Dai un'occhiata a \"Configura "
+"impostazioni\" quando crei un evento."
+
+#: .\events\templates\events\about_us.html:72
+msgid "You can also change this setting later from the administration page"
+msgstr ""
+"Puoi anche modificare queste impostazioni più avanti dalla pagina di "
+"amministrazione"
+
+#: .\events\templates\events\about_us.html:81
+msgid "Features"
+msgstr "Funzionalità"
+
+#: .\events\templates\events\about_us.html:83
+msgid ""
+"Participants you invite to an event can see all relevant event information, "
+"such as:"
+msgstr ""
+"I partecipanti che inviti a un evento possono vedere tutte le informazioni "
+"fondamentali, come:"
+
+#: .\events\templates\events\about_us.html:85
+#: .\events\templates\events\edit_event.html:48
+msgid "Title"
+msgstr "Titolo"
+
+#: .\events\templates\events\about_us.html:86
+#: .\events\templates\events\edit_event.html:62
+#: .\events\templates\events\edit_event.html:69
+#: .\events\templates\events\new_event.html:58
+msgid "Description"
+msgstr "Descrizione"
+
+#: .\events\templates\events\about_us.html:87
+#: .\events\templates\events\edit_event.html:78
+msgid "Location"
+msgstr "Location"
+
+#: .\events\templates\events\about_us.html:88
+#: .\events\templates\events\edit_event.html:97
+msgid "Date and time"
+msgstr "Data e ora"
+
+#: .\events\templates\events\about_us.html:89
+#: .\events\templates\events\edit_event.html:123
+msgid "Duration"
+msgstr "Durata"
+
+#: .\events\templates\events\about_us.html:90
+msgid "List of participants"
+msgstr "Lista dei partecipanti"
+
+#: .\events\templates\events\about_us.html:94
+msgid "Participants to your event can:"
+msgstr "I partecipanti al tuo evento possono:"
+
+#: .\events\templates\events\about_us.html:96
+msgid "Indicate preferences and availability for the event"
+msgstr "Indicare preferenze e disponibilità per l'evento"
+
+#: .\events\templates\events\about_us.html:97
+msgid "See other participants and their preferences"
+msgstr "Vedere altri partecipanti e le loro preferenze"
+
+#: .\events\templates\events\about_us.html:98
+msgid "See participation on different proposed dates"
+msgstr "Vedere la partecipazione nelle differenti date proposte"
+
+#: .\events\templates\events\about_us.html:99
+msgid ""
+"Share event by: displaying QR Code, send link via telegram, whatsapp or "
+"email, copy link to clipboard"
+msgstr ""
+"Condividere l'evento: mostrando un QR Code, inviando il link su telegram, "
+"whatsapp o via email, copiando il link negli appunti"
+
+#: .\events\templates\events\about_us.html:100
+msgid "Add event to Google Calendar"
+msgstr "Aggiungere l'evento a Google Calendar"
+
+#: .\events\templates\events\about_us.html:111
+msgid ""
+"Hi, I'm Alessandro, the developer behind this little project.<br>It's nice "
+"to see you here, I hope you're enjoying this web app."
+msgstr ""
+"Ciao, sono Alessandro, lo sviluppatore dietro questo piccolo progetto.<br>È "
 "bello vederti qui, spero che questa web app ti stia piacendo."
 
-#: .\events\templates\events\about_us.html:69
+#: .\events\templates\events\about_us.html:112
 msgid ""
 "I know...it not perfect but I'm always trying to learn, improve and add new "
 "features."
@@ -99,7 +196,7 @@ msgstr ""
 "Lo so...non è perfetta ma cerco sempre di imparare, migliorare e aggiungere "
 "nuove funzionalità."
 
-#: .\events\templates\events\about_us.html:70
+#: .\events\templates\events\about_us.html:113
 msgid ""
 "I work on it in my spare time so if you like it, spread the word and "
 "together we can make Schedama grow."
@@ -140,20 +237,10 @@ msgstr "Impostazioni"
 msgid "Participant page"
 msgstr "Pagina partecipante"
 
-#: .\events\templates\events\edit_event.html:48
-msgid "Title"
-msgstr "Titolo"
-
 #: .\events\templates\events\edit_event.html:54
 #: .\events\templates\events\new_event.html:29
 msgid "Event title"
 msgstr "Titolo evento"
-
-#: .\events\templates\events\edit_event.html:62
-#: .\events\templates\events\edit_event.html:69
-#: .\events\templates\events\new_event.html:58
-msgid "Description"
-msgstr "Descrizione"
 
 #: .\events\templates\events\edit_event.html:62
 #: .\events\templates\events\new_event.html:188
@@ -165,18 +252,10 @@ msgstr "Facoltativo"
 msgid "Describe your event here"
 msgstr "Descrivi qui il tuo evento"
 
-#: .\events\templates\events\edit_event.html:78
-msgid "Location"
-msgstr "Location"
-
 #: .\events\templates\events\edit_event.html:89
 #: .\events\templates\events\new_event.html:88
 msgid "Event location"
 msgstr "Location evento"
-
-#: .\events\templates\events\edit_event.html:97
-msgid "Date and time"
-msgstr "Data e ora"
 
 #: .\events\templates\events\edit_event.html:103
 #: .\events\templates\events\new_event.html:102
@@ -186,10 +265,6 @@ msgstr "Inserisci una data"
 #: .\events\templates\events\edit_event.html:111
 msgid "Event date"
 msgstr "Data evento"
-
-#: .\events\templates\events\edit_event.html:123
-msgid "Duration"
-msgstr "Durata"
 
 #: .\events\templates\events\edit_event.html:130
 #: .\events\templates\events\new_event.html:125
@@ -434,7 +509,7 @@ msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:371
 #: .\events\templates\events\view_event.html:203
-#: .\events\templates\events\view_event.html:271
+#: .\events\templates\events\view_event.html:282
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -813,39 +888,39 @@ msgid "View by date"
 msgstr "Vedi per data"
 
 #: .\events\templates\events\view_event.html:209
-#: .\events\templates\events\view_event.html:246
+#: .\events\templates\events\view_event.html:257
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:221
+#: .\events\templates\events\view_event.html:232
 msgid "Date view"
 msgstr "Vista per data"
 
-#: .\events\templates\events\view_event.html:225
+#: .\events\templates\events\view_event.html:236
 msgid "Select a date to view confirmed participants"
 msgstr "Seleziona una data per vedere i partecipanti confermati"
 
-#: .\events\templates\events\view_event.html:228
+#: .\events\templates\events\view_event.html:239
 msgid "-"
 msgstr ""
 
-#: .\events\templates\events\view_event.html:243
+#: .\events\templates\events\view_event.html:254
 msgid "Back to list"
 msgstr "Torna alla lista"
 
-#: .\events\templates\events\view_event.html:259
+#: .\events\templates\events\view_event.html:270
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:265
+#: .\events\templates\events\view_event.html:276
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:267
+#: .\events\templates\events\view_event.html:278
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:274
+#: .\events\templates\events\view_event.html:285
 msgid "Join"
 msgstr "Partecipa"
 

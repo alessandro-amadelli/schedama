@@ -1,7 +1,7 @@
 # Schedama.com #
 ## Create and share your important events ##
 
-### Functionalities ###
+### Features ###
 With Schedama you can create an event, save it and share it with others so they can indicate their participation.
 
 After **event creation**, two distinct links are generated:
