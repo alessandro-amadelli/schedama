@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-17 11:35+0100\n"
+"POT-Creation-Date: 2024-02-17 17:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -366,36 +366,44 @@ msgid "Participants"
 msgstr "Partecipanti"
 
 #: .\events\templates\events\edit_event.html:204
-#: .\events\templates\events\edit_event.html:361
+#: .\events\templates\events\edit_event.html:359
 msgid "Add participant"
 msgstr "Aggiungi partecipante"
 
-#: .\events\templates\events\edit_event.html:239
+#: .\events\templates\events\edit_event.html:238
 msgid "Removed participants"
 msgstr "Partecipanti rimossi"
 
-#: .\events\templates\events\edit_event.html:253
+#: .\events\templates\events\edit_event.html:239
+msgid ""
+"List of participants that have been removed. You can click on participants "
+"you'd like to restore to select them and then save."
+msgstr ""
+"Lista dei partecipanti che sono stati rimossi. Clicca sui partecipanti "
+"che vuoi ripristinare per selezionarli e poi salva."
+
+#: .\events\templates\events\edit_event.html:251
 #: .\events\templates\events\new_event.html:242
 #: .\events\templates\events\view_event.html:206
 msgid "Save"
 msgstr "Salva"
 
-#: .\events\templates\events\edit_event.html:263
+#: .\events\templates\events\edit_event.html:261
 msgid ""
 "By clicking <strong>Cancel event</strong> button you'll cancel this event."
 msgstr ""
 "Cliccando il pulsante <strong>Annulla evento</strong> annullerai questo "
 "evento."
 
-#: .\events\templates\events\edit_event.html:267
+#: .\events\templates\events\edit_event.html:265
 msgid "After clicking the button:"
 msgstr "Dopo aver cliccato il pulsante:"
 
-#: .\events\templates\events\edit_event.html:269
+#: .\events\templates\events\edit_event.html:267
 msgid "The event will be flagged as <strong>Cancelled</strong>"
 msgstr "L'evento verrà segnato come <strong>Annullato</strong>"
 
-#: .\events\templates\events\edit_event.html:270
+#: .\events\templates\events\edit_event.html:268
 msgid ""
 "<strong>Participants</strong> permission will be deactivated so they "
 "<strong>will only be able to view the event</strong>"
@@ -403,7 +411,7 @@ msgstr ""
 "I permessi dei <strong>partecipanti</strong> saranno disattivati quindi "
 "<strong>potranno solamente visualizzare l'evento</strong>"
 
-#: .\events\templates\events\edit_event.html:271
+#: .\events\templates\events\edit_event.html:269
 msgid ""
 "The <strong>event will be forever deleted after 2 days</strong> without "
 "possibility to recover it"
@@ -411,7 +419,7 @@ msgstr ""
 "<strong>L'evento sarà eliminato per sempre dopo 2 giorni</strong> senza "
 "possibilità di recuperarlo"
 
-#: .\events\templates\events\edit_event.html:272
+#: .\events\templates\events\edit_event.html:270
 msgid ""
 "<strong>It will still be possible to undo the cancellation</strong> in the "
 "following 2 days, before the event is deleted"
@@ -419,23 +427,23 @@ msgstr ""
 "<strong>Sarà ancora possibile cancellare l'annullamento</strong> nei "
 "successivi 2 giorni, prima che l'evento sia eliminato"
 
-#: .\events\templates\events\edit_event.html:280
+#: .\events\templates\events\edit_event.html:278
 msgid "I understand"
 msgstr "Capisco"
 
-#: .\events\templates\events\edit_event.html:287
+#: .\events\templates\events\edit_event.html:285
 msgid "Cancel event"
 msgstr "Annulla evento"
 
-#: .\events\templates\events\edit_event.html:291
+#: .\events\templates\events\edit_event.html:289
 msgid "The end is near!"
 msgstr "La fine è vicina!"
 
-#: .\events\templates\events\edit_event.html:292
+#: .\events\templates\events\edit_event.html:290
 msgid "Expiration date:"
 msgstr "Data di scadenza:"
 
-#: .\events\templates\events\edit_event.html:294
+#: .\events\templates\events\edit_event.html:292
 msgid ""
 "Ok, calm down...the event is flagged as <strong>Cancelled</strong> and will "
 "be deleted after the expiration date."
@@ -443,7 +451,7 @@ msgstr ""
 "Ok, calma...l'evento è segnato come <strong>Annullato</strong> e sarà "
 "eliminato dopo la data di scadenza."
 
-#: .\events\templates\events\edit_event.html:295
+#: .\events\templates\events\edit_event.html:293
 msgid ""
 "Sometimes it is useful to let things go...but if you changed your mind, it's "
 "not too late!"
@@ -451,22 +459,22 @@ msgstr ""
 "A volte è utile lasciarsi le cose alle spalle...ma se hai cambiato idea, non "
 "è troppo tardi!"
 
-#: .\events\templates\events\edit_event.html:297
+#: .\events\templates\events\edit_event.html:295
 msgid "To reacivate the event: "
 msgstr "Per riattivare l'evento: "
 
-#: .\events\templates\events\edit_event.html:299
+#: .\events\templates\events\edit_event.html:297
 msgid "Click on <strong>Reactivate event</strong> button below"
 msgstr "Clicca il pulsante <strong>Riattiva evento</strong> che trovi sotto"
 
-#: .\events\templates\events\edit_event.html:300
+#: .\events\templates\events\edit_event.html:298
 msgid ""
 "<strong>Event will be reactivated</strong> and it's deletion will be canceled"
 msgstr ""
 "<strong>L'evento sarà riattivato</strong> e la sua eliminazione sarà "
 "annullata"
 
-#: .\events\templates\events\edit_event.html:301
+#: .\events\templates\events\edit_event.html:299
 msgid ""
 "After reactivation, <strong>check participants permission</strong> "
 "(permissions had been deactivated upon event cancellation)"
@@ -474,46 +482,46 @@ msgstr ""
 "Dopo la riattivazione, <strong>controlla i permessi dei partecipanti</"
 "strong> (i permessi sono stati disattivati con l'annullamento dell'evento)"
 
-#: .\events\templates\events\edit_event.html:308
+#: .\events\templates\events\edit_event.html:306
 msgid "Reactivate event"
 msgstr "Riattiva evento"
 
-#: .\events\templates\events\edit_event.html:320
+#: .\events\templates\events\edit_event.html:318
 msgid "Event settings"
 msgstr "Impostazioni evento"
 
-#: .\events\templates\events\edit_event.html:325
+#: .\events\templates\events\edit_event.html:323
 #: .\events\templates\events\new_event.html:207
 msgid "Choose what participants are allowed to do"
 msgstr "Scegli cosa possono fare i partecipanti"
 
-#: .\events\templates\events\edit_event.html:330
+#: .\events\templates\events\edit_event.html:328
 #: .\events\templates\events\new_event.html:188
 #: .\events\templates\events\new_event.html:211
 msgid "Add participants"
 msgstr "Aggiungi partecipanti"
 
-#: .\events\templates\events\edit_event.html:337
+#: .\events\templates\events\edit_event.html:335
 #: .\events\templates\events\new_event.html:217
 msgid "Edit participants"
 msgstr "Modifica partecipanti"
 
-#: .\events\templates\events\edit_event.html:344
+#: .\events\templates\events\edit_event.html:342
 #: .\events\templates\events\new_event.html:223
 msgid "Remove participants"
 msgstr "Rimuovi partecipanti"
 
-#: .\events\templates\events\edit_event.html:367
+#: .\events\templates\events\edit_event.html:365
 msgid "Particpant name"
 msgstr "Nome partecipante"
 
-#: .\events\templates\events\edit_event.html:371
+#: .\events\templates\events\edit_event.html:369
 #: .\events\templates\events\view_event.html:203
 #: .\events\templates\events\view_event.html:282
 msgid "Cancel"
 msgstr "Annulla"
 
-#: .\events\templates\events\edit_event.html:372
+#: .\events\templates\events\edit_event.html:370
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -924,8 +932,8 @@ msgstr "Preferenze"
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:149 .\events\views.py:250 .\events\views.py:465
-#: .\events\views.py:476 .\events\views.py:521 .\events\views.py:532
+#: .\events\views.py:149 .\events\views.py:250 .\events\views.py:512
+#: .\events\views.py:523 .\events\views.py:568 .\events\views.py:579
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
@@ -935,11 +943,11 @@ msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:260 .\events\views.py:339 .\events\views.py:406
-#: .\events\views.py:503 .\events\views.py:554
+#: .\events\views.py:260 .\events\views.py:339 .\events\views.py:456
+#: .\events\views.py:550 .\events\views.py:601
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:281 .\events\views.py:378 .\events\views.py:446
+#: .\events\views.py:281 .\events\views.py:428 .\events\views.py:493
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."

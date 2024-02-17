@@ -402,6 +402,15 @@ select, option {
     background-color: var(--card-bg-color);
 }
 
+.removed-participant {
+    font-size: 1rem;
+    user-select: none;
+}
+
+.removed-participant:hover {
+    transform: scale(1.2);
+}
+
 .thumbnail-row {
     height: 20em;
     overflow-y: auto;

@@ -87,7 +87,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(".theme-thumbnail").forEach((item) => {
         item.addEventListener('click', () => {selectEventTheme(item)});
     });
+
+    // Event listener for restoring removed participants from event bin
+    document.querySelectorAll(".removed-participant").forEach((item) => {
+        item.addEventListener("click", () => {restoreParticipant(item)});
+    });
 });
+
+var removedParticipantsArray = [];
+var restoredParticipantsArray = [];
+
+function restoreParticipant(item) {
+    const partUID = item.dataset.partuid;
+
+    if (partUID) {
+        let currentMode = localStorage.getItem("currentMode");
+        if (!currentMode) {
+            currentMode = "dark";
+        }
+        if (restoredParticipantsArray.includes(partUID)) {
+            restoredParticipantsArray.splice(restoredParticipantsArray.indexOf(partUID),1);
+            item.classList.add(`text-bg-${currentMode}`);
+
+            item.classList.remove("text-bg-warning");
+        } else {
+            restoredParticipantsArray.push(partUID);
+            item.classList.remove(`text-bg-${currentMode}`);
+            item.classList.add("text-bg-warning");
+        }
+    }
+
+    enableSave();
+}
 
 function selectEventTheme(clickedItem) {
     if (clickedItem.classList.contains("thumbnail-selected")) {
@@ -196,7 +227,12 @@ function validateEvent() {
 }
 
 function removeParticipantRow(btn) {
-    btn.parentElement.parentElement.parentElement.parentElement.remove();
+    const partRow = btn.parentElement.parentElement.parentElement.parentElement;
+    const partUID = partRow.querySelector("input[name='participantName']").dataset.partuid;
+    if (partUID){
+        removedParticipantsArray.push(partUID);
+    }
+    partRow.remove();
     updateParticipantsNum();
     enableSave();
     notify(gettext("Participant removed"));
@@ -453,6 +489,8 @@ function getEventData() {
         duration: eventDuration,
         event_theme: eventTheme,
         participants: eventParticipants,
+        removed_participants: removedParticipantsArray,
+        restored_participants: restoredParticipantsArray,
         settings: {
             add_participant: eventAddParticipant,
             edit_participant: eventEditParticipant,

@@ -60,7 +60,7 @@ function initializeEntirePage() {
     });
 
     // Buttons to remove participant (if authorized)
-    document.querySelectorAll("span[name=btnDeleteRow]").forEach((btn) => {
+    document.querySelectorAll("i[name=btnDeleteRow]").forEach((btn) => {
         btn.addEventListener("click", () => {
             const partUID = btn.parentElement.parentElement.querySelector(".participant-name-td").dataset.partuid;
             btn.parentElement.parentElement.remove();
@@ -599,7 +599,7 @@ function saveDeletionLocally(partUID) {
         localStorage.setItem("modifications", JSON.stringify(oldMods));
     }
 
-    // Abilitate modal button
+    // Enable modal button
     const btnSave = document.querySelector("#btnSaveParticipants");
     if (btnSave) {
         btnSave.disabled = false;

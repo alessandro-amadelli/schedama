@@ -352,6 +352,49 @@ def update_event_view(request):
     # Update ADMIN fields of the event
     new_event = True
     if is_admin:
+        # Handle participants explicitly removed from admin to avoid 
+        # race conditions on participant list
+        admin_participants = request_data.get("participants", [])
+        removed_participants = request_data.get("removed_participants", [])
+        restored_participants = request_data.get("restored_participants", [])
+        event_participants = event_data.get("participants", [])
+        event_bin = event_data.get("event_bin", [])
+        total_participants = []
+
+        # Iteration over admin_participants
+        event_participants_uids = [p["uid"] for p in event_participants]
+        for p in admin_participants:
+            p_uid = p.get("uid")
+            if p_uid:
+                if p_uid in removed_participants:
+                    continue
+                if p_uid in event_participants_uids:
+                    total_participants.append(p)
+            else:
+                total_participants.append(p)
+
+        # Iteration over event_participants
+        total_participants_uids = [
+            p.get("uid") for p in total_participants if p.get("uid")
+        ]
+        for p in event_participants:
+            p_uid = p.get("uid")
+            if p_uid in removed_participants:
+                # Move participant to event_bin
+                event_bin.append(p)
+                continue
+            if p_uid in total_participants_uids:
+                continue
+            total_participants.append(p)
+        
+        # Previously removed participants restored by admin page
+        if restored_participants:
+            for p in list(event_bin):
+                if p["uid"] in restored_participants:
+                    total_participants.append(p)
+                    event_bin.remove(p)
+
+
         event_data["title"] = request_data.get("title", event_data["title"])
         event_data["description"] = request_data.get("description", "")
         event_data["has_location"] = request_data.get("has_location", False)
@@ -360,10 +403,17 @@ def update_event_view(request):
         event_data["dates"].sort() # Order event dates
         event_data["duration"] = request_data.get("duration", 60)
         event_data["event_theme"] = request_data.get("event_theme", "")
-        event_data["participants"] = request_data.get("participants", [])
-        event_data["settings"]["add_participant"] = request_data["settings"].get("add_participant", False)
-        event_data["settings"]["edit_participant"] = request_data["settings"].get("edit_participant", False)
-        event_data["settings"]["remove_participant"] = request_data["settings"].get("remove_participant", False)
+        event_data["participants"] = total_participants
+        event_data["settings"]["add_participant"] = (
+            request_data["settings"].get("add_participant", False)
+        )
+        event_data["settings"]["edit_participant"] = (
+            request_data["settings"].get("edit_participant", False)
+        )
+        event_data["settings"]["remove_participant"] = (
+            request_data["settings"].get("remove_participant", False)
+        )
+        event_data["event_bin"] = event_bin
     
         # Saving new event's info
         new_event = save_event_to_db(event_data)
@@ -424,14 +474,11 @@ def modify_participants_view(request):
     if remove_participant:
         event_data["event_bin"] = event_data.get("event_bin", [])
         # Deleting participants
-        for p in event_data["participants"]:
+        for p in list(event_data["participants"]):
             uid = p.get("uid", "")
             if uid in to_delete:
                 event_data["event_bin"].append(p)
-                try:
-                    event_data["participants"].remove(p)
-                except ValueError:
-                    pass
+                event_data["participants"].remove(p)
     
     # Saving data to database
     new_event = save_event_to_db(event_data)

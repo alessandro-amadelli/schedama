@@ -235,15 +235,13 @@
         </div>
 
         {% if event.event_bin|length > 0 %}
-            <div class="row p-3 mb-3 entering-4 d-flex" id="eventBin">
-                <h4>{% translate "Removed participants" %}</h4>
-                <div class="w-100"></div>
-                {% for p in event.event_bin %}
-                    <div class="col p-2 rounded shadow">
-                        <span class="removed-participant">{{ p.name }}</span>
-                    </div>
-                {% endfor %}
-            </div>
+            <h4>{% translate "Removed participants" %}</h4>
+            <p>{% translate "List of participants that have been removed. You can click on participants you'd like to restore to select them and then save." %}</p>
+            {% for p in event.event_bin %}
+                <span class="removed-participant badge rounded-pill cursor-pointer text-bg-dark p-3 m-2" data-partuid="{{ p.uid }}">
+                    {{ p.name }}
+                </span>
+            {% endfor %}
         {% endif %}
         
         <!-- Save event button -->
