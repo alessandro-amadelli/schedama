@@ -236,7 +236,15 @@
 
         {% if event.event_bin|length > 0 %}
             <h4>{% translate "Removed participants" %}</h4>
-            <p>{% translate "List of participants that have been removed. You can click on participants you'd like to restore to select them and then save." %}</p>
+            {% comment %} <p>{% translate "You can click on participants you'd like to restore to select them and then save." %}</p> {% endcomment %}
+            <p>
+                {% translate "To restore one or more removed participants:" %}
+                <ol>
+                    <li>{% translate "Click on participants' name" %}</li>
+                    <li>{% translate "Selected participants will appear in yellow" %}</li>
+                    <li>{% translate 'Click <strong>Save</strong> to confirm' %}</li>
+                </ol>
+            </p>
             {% for p in event.event_bin %}
                 <span class="removed-participant badge rounded-pill cursor-pointer text-bg-dark p-3 m-2" data-partuid="{{ p.uid }}">
                     {{ p.name }}
