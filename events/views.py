@@ -64,7 +64,9 @@ def validate_event(event_data):
 
     # Check location and truncate
     has_location = event_data.get("has_location", False)
-    if has_location and ( len(event_data.get("location", "").replace(" ", "")) == 0 ):
+    if has_location and (
+        len(event_data.get("location", "").replace(" ", "")) == 0 
+    ):
         is_valid = False
     if len(event_data.get("location", "")) > LOCATION_MAX_LENGTH:
         event_data["location"] = event_data["location"][:LOCATION_MAX_LENGTH]
@@ -142,11 +144,14 @@ def save_event_view(request):
     event_data["item_type"] = "event"
 
     # Check if 'item_id' is included.
-    # It shouldn't be present because this request is only used to create new events, not to edit old ones.
+    # It shouldn't be present because this request is only used to create
+    # new events, not to edit old ones.
     if "item_id" in event_data.keys():
         response = {
             "status": "ERROR",
-            "description": _("You are not authorized to perform this operation.")
+            "description": _(
+                "You are not authorized to perform this operation."
+            )
         }
         return JsonResponse(response)
 
@@ -160,8 +165,11 @@ def save_event_view(request):
     except:
         response = {
             "status": "ERROR",
-            "description": _("An error has occurred while creating the event. Please try again later.")
-            }
+            "description": _(
+                "An error has occurred while creating the event."
+                " Please try again later."
+            )
+        }
         return JsonResponse(response)
 
     response = {
@@ -185,22 +193,32 @@ def participate_view(request, eventID):
         # raise Http404
         return error404_view(request, None, eventID)
 
-    # Removing admin_key from event data before sending to the client for security reasons
+    # Removing admin_key from event data before sending to the client for 
+    # security reasons
     event_data.pop('admin_key', None)
 
     # Adding dates so Django can display it in template
-    event_data["dates_formatted"] = [datetime.strptime(d, "%Y-%m-%dT%H:%M") for d in event_data["dates"]]
+    event_data["dates_formatted"] = [
+        datetime.strptime(d, "%Y-%m-%dT%H:%M") for d in event_data["dates"]
+    ]
 
     # Format event duration
     event_data["duration"] = int(event_data.get("duration", 60))
 
-    # Selecting best date for the event (if event has multiple dates and at least 1 participant)
+    # Selecting best date for the event (if event has multiple dates and
+    # at least 1 participant)
     if len(event_data["dates"]) > 1 and len(event_data["participants"]) > 0:
         max_participants_per_date = 0
         best_date = ""
 
-        # Convoluted but elegant way to obtain a total list of dates inserted by every participant
-        participants_dates = Counter([d for dp in (p["dates"] for p in event_data["participants"]) for d in dp])
+        # Convoluted but elegant way to obtain a total list of dates inserted
+        # by every participant
+        participants_dates = Counter(
+            [d for dp in (
+                    p["dates"] for p in event_data["participants"]
+                ) for d in dp
+            ]
+        )
 
         # Best date as the first date with maximum number of participants
         for d in event_data["dates"]:
@@ -210,7 +228,9 @@ def participate_view(request, eventID):
         
         try:
             event_data["best_date"] = best_date
-            event_data["best_date_formatted"] = datetime.strptime(best_date, "%Y-%m-%dT%H:%M")
+            event_data["best_date_formatted"] = datetime.strptime(
+                best_date, "%Y-%m-%dT%H:%M"
+            )
         except ValueError:
             pass
 
@@ -243,11 +263,14 @@ def add_participant_view(request):
         if admin_key == event_data["admin_key"]:
             is_admin = True
     
-    # If user is not admin and the add_participant permission is false the action is blocked
+    # If user is not admin and the add_participant permission is false the
+    # action is blocked
     if not is_admin and not user_add_participant:
         response = {
             "status": "ERROR",
-            "description": _("You are not authorized to perform this operation.")
+            "description": _(
+                "You are not authorized to perform this operation."
+            )
         }
         return JsonResponse(response)
     ### ###
@@ -298,7 +321,8 @@ def edit_event_view(request, eventID):
     if event_data == []:
         return error404_view(request, None, eventID)
 
-    # Check if the admin key provided as URL parameter correspond with the one associated with the event
+    # Check if the admin key provided as URL parameter correspond with the one
+    # associated with the event
     if admin_key != event_data["admin_key"]:
         # Return permission denied HTTP 403
         raise PermissionDenied
@@ -306,13 +330,17 @@ def edit_event_view(request, eventID):
 
     # Convert expiration_date to readable format (if present)
     if event_data.get("expiration_date", False):
-        event_data["expiration_date"] = datetime.fromtimestamp(int(event_data["expiration_date"]))
+        event_data["expiration_date"] = datetime.fromtimestamp(
+            int(event_data["expiration_date"])
+        )
 
     # Event duration in int format (represents duration in minutes)
     event_data["duration"] = int(event_data.get("duration", 60))
 
     # Adding dates so Django can display it in template
-    event_data["dates_formatted"] = [datetime.strptime(d, "%Y-%m-%dT%H:%M") for d in event_data["dates"]]
+    event_data["dates_formatted"] = [
+        datetime.strptime(d, "%Y-%m-%dT%H:%M") for d in event_data["dates"]
+    ]
 
     # All checks are passed
     context = {
@@ -509,7 +537,9 @@ def cancel_event_view(request):
     if admin_key == "":
         response = {
             "status": "ERROR",
-            "description": _("You are not authorized to perform this operation.")
+            "description": _(
+                "You are not authorized to perform this operation."
+            )
         }
         return JsonResponse(response)
     
@@ -520,12 +550,15 @@ def cancel_event_view(request):
     if admin_key != event_data["admin_key"]:
         response = {
             "status": "ERROR",
-            "description": _("You are not authorized to perform this operation.")
+            "description": _(
+                "You are not authorized to perform this operation."
+            )
         }
         return JsonResponse(response)
     
     # Calculate expiration date and update event
-    # Expiration date in unix timestamp format -> TTL function of dynamoDB will take care of deletion
+    # Expiration date in unix timestamp format -> TTL function of dynamoDB will
+    # take care of deletion
     expiration_datetime = datetime.now() + timedelta(days=2)
     expiration_date = int(expiration_datetime.timestamp())
     event_data["is_cancelled"] = True
@@ -565,7 +598,9 @@ def reactivate_event_view(request):
     if admin_key == "":
         response = {
             "status": "ERROR",
-            "description": _("You are not authorized to perform this operation.")
+            "description": _(
+                "You are not authorized to perform this operation."
+            )
         }
         return JsonResponse(response)
     
@@ -576,7 +611,9 @@ def reactivate_event_view(request):
     if admin_key != event_data["admin_key"]:
         response = {
             "status": "ERROR",
-            "description": _("You are not authorized to perform this operation.")
+            "description": _(
+                "You are not authorized to perform this operation."
+            )
         }
         return JsonResponse(response)
     
@@ -609,7 +646,8 @@ def history_view(request):
 def error404_view(request, exception, eventID=""):
     context = {}
 
-    # If eventID is passed, pass down the value to template so it can be removed from user's history
+    # If eventID is passed, pass down the value to template so it can be
+    # removed from user's history
     if eventID != "":
         context["item_id"] = eventID
 
