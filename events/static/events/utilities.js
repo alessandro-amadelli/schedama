@@ -347,6 +347,9 @@ function addToHistory(eventData) {
     eventData["last_visited"] = [day, "/", month, "/", year, " h.", hour, ":", min, ":", sec].join('');    
     eventData["last_visited_epoch"] = epoch; // For ordering purposes
 
+    // Adding event author (if present)
+    const author = eventData.author;
+
     // Iterating history items to see if the same event is already present
     let present = false;
     historyData.every((item, i) => {
@@ -356,9 +359,10 @@ function addToHistory(eventData) {
                 historyData[i] = eventData;
             } else {
                 item.title = eventData.title;
-                item.participation_link = eventData.participation_link,
-                item.last_visited = eventData.last_visited
-                item.last_visited_epoch = eventData.last_visited_epoch
+                item.participation_link = eventData.participation_link;
+                item.last_visited = eventData.last_visited;
+                item.last_visited_epoch = eventData.last_visited_epoch;
+                item.author = eventData.author;
             }
             present = true;
         }

@@ -49,7 +49,12 @@ function fillHistory() {
         // Last visited
         const cardP = document.createElement("p");
         cardP.setAttribute("class", "card-text");
-        cardP.innerHTML = `<i class="fa-solid fa-clock-rotate-left text-muted"></i>` + item.last_visited;
+        cardP.innerHTML = `<i class="fa-solid fa-clock-rotate-left text-muted"></i>&nbsp;` + item.last_visited;
+
+        // Event author
+        const cardP2 = document.createElement("p");
+        cardP2.setAttribute("class", "card-text");
+        cardP2.innerText = gettext("Author:") + " " + item.author;
 
         // Card footer
         const cardFooter = document.createElement("div");
@@ -81,6 +86,9 @@ function fillHistory() {
         newCard.appendChild(cardBody);
         cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardP);
+        if (item.author) {
+            cardBody.appendChild(cardP2);
+        }
         newCard.appendChild(cardFooter);
         cardFooter.appendChild(partLink);
         if (admLink) {

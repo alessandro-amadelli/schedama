@@ -17,6 +17,24 @@
   {% csrf_token %}
 
   <div class="section p-2">
+    <!-- Event author -->
+    <div class="row p-3 mb-3 mt-5 intro-animated" id="authorRow">
+      <div class="col">
+        <h4><i class="fa-solid fa-id-card fa-bounce"></i> {% translate "What's your name?" %} <span class="text-danger">*</span></h4>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <p>{% translate "This name will be visible as the event author. You will also be automatically added as a participant with this name." %}</p>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="eventAuthor" placeholder="Your name..." maxlength="30">
+          <label for="eventAuthor">{% translate "Event author" %}</label>
+        </div>
+      </div>
+    </div>
+    
     <!-- Event title -->
     <div class="row p-3 mb-3 mt-5 intro-animated" id="titleRow">
       <div class="col">

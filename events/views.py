@@ -40,6 +40,7 @@ def validate_event(event_data):
     It needs to be called before saving event to server
     """
     # Max lengths of event fields
+    AUTHOR_MAX_LENGTH = 30
     TITLE_MAX_LENGTH = 150
     DESCRIPTION_MAX_LENGTH = 400
     LOCATION_MAX_LENGTH = 100
@@ -50,8 +51,14 @@ def validate_event(event_data):
 
     is_valid = True
 
+    # Check if author is present and truncate length
+    author = event_data.get("author", "").replace(" ", "")
+    if len(author) > AUTHOR_MAX_LENGTH:
+        author = author[:AUTHOR_MAX_LENGTH]
+    event_data["author"] = author
+
     # Check if title is present and truncate length
-    if (event_data.get("title", "")).replace(" ", "") == "":
+    if event_data.get("title", "").replace(" ", "") == "":
         is_valid = False
     else:
         if len(event_data["title"]) > TITLE_MAX_LENGTH:
@@ -421,8 +428,10 @@ def update_event_view(request):
                 if p["uid"] in restored_participants:
                     total_participants.append(p)
                     event_bin.remove(p)
-
-
+        
+        request_author = request_data.get("author")
+        if request_author:
+            event_data["author"] = request_author
         event_data["title"] = request_data.get("title", event_data["title"])
         event_data["description"] = request_data.get("description", "")
         event_data["has_location"] = request_data.get("has_location", False)

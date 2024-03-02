@@ -658,11 +658,16 @@ function modificationSentSuccessfully(data) {
 function updateHistory() {
     const itemID = document.querySelector("#item-id").innerText;
     const eventTitle = document.querySelector("#eventTitle").innerText;
+    let eventAuthor = document.getElementById("eventAuthor");
+    if (eventAuthor) {
+        eventAuthor = eventAuthor.innerText;
+    }
 
     const eventData = {
         item_id: itemID,
         title: eventTitle,
-        participation_link: window.location.href
+        participation_link: window.location.href,
+        author: eventAuthor
     };
 
     addToHistory(eventData);

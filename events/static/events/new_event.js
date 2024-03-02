@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    initializeTitleRow();
-    // initializeDescriptionRow();
+    initializeAuthorRow();
 
-    // Button to save event
+    // Save event button
     document.querySelector("#btnSaveEvent").onclick = () => {
         sendEventToServer();
     }
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add participant to event
     document.querySelector("#participantInp").addEventListener('change', () => {
         createNewParticipant();
-        saveLocally();
     });
 
     // Event listener to save event locally
@@ -47,6 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('change', updatePermissionDescriptions);
     });
 });
+
+function showModalRestoreData() {
+    document.querySelector("#btnRestoreData").onclick = () => {restorePreviousData();};
+    document.querySelector("#btnClearData").onclick = () => {clearPreviousData();};
+    modal = new bootstrap.Modal(document.querySelector("#modalRestoreData"));
+    modal.show();
+}
 
 function updatePermissionDescriptions() {
     const switchAddParticipant = document.querySelector("#switchAddParticipant").checked;
@@ -110,11 +115,14 @@ function selectEventTheme(clickedItem) {
     clickedItem.classList.add("thumbnail-selected");
 }
 
-function showModalRestoreData() {
-    document.querySelector("#btnRestoreData").onclick = () => {restorePreviousData();};
-    document.querySelector("#btnClearData").onclick = () => {clearPreviousData();};
-    modal = new bootstrap.Modal(document.querySelector("#modalRestoreData"));
-    modal.show();
+function initializeAuthorRow() {
+    // Intro animation start
+    const authorRow = document.getElementById("authorRow");
+    authorRow.style.animationPlayState = "running";
+
+    // Event listener to start animation of next input field
+    const authorInput = document.getElementById("eventAuthor");
+    authorInput.addEventListener('input', initializeTitleRow);
 }
 
 function initializeTitleRow() {
@@ -363,11 +371,15 @@ function updateDuration() {
     durationText.innerText = text;
 }
 
-function createNewParticipant() {
-    const dateRow = document.querySelector("#participantRow");
+function createNewParticipant(partName=null) {
+    const partRow = document.querySelector("#participantRow");
     const partInp = document.querySelector("#participantInp");
 
-    if (partInp.value.replaceAll(" ", "").length == 0) {
+    if (partName === null) {
+        partName = partInp.value;
+    }
+
+    if (partName.replaceAll(" ", "").length === 0) {
         setInvalid(partInp, true);
         return false;
     }
@@ -409,18 +421,20 @@ function createNewParticipant() {
     newBtnCol.appendChild(newBtnDel);
 
     //Append new children
-    dateRow.appendChild(new100);
-    dateRow.appendChild(newParticipantCol);
-    dateRow.appendChild(newBtnCol);
+    partRow.appendChild(new100);
+    partRow.appendChild(newParticipantCol);
+    partRow.appendChild(newBtnCol);
 
     // Event listener for new input
     newParticipantInp.addEventListener('change', saveLocally);
 
-    // Set new input value to first date and reset first date value
-    newParticipantInp.value = partInp.value;
+    // Set new input value to participant's name
+    newParticipantInp.value = partName;
     partInp.value = "";
     setInvalid(partInp, false);
 
+    // Saving event's data after adding new participant
+    saveLocally();
     notify(gettext("Participant added"));
 }
 
@@ -485,8 +499,12 @@ function restorePreviousData() {
     document.querySelector("#switchEditParticipant").checked = unsavedEvent.settings.edit_participant;
     document.querySelector("#switchRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
 
+    // Event author
+    document.getElementById("eventAuthor").value = unsavedEvent.author;    
+
     // Event title
     document.querySelector("#eventTitle").value = unsavedEvent.title;
+    initializeTitleRow();
 
     // Event description
     document.querySelector("#eventDescription").value = unsavedEvent.description;
@@ -569,6 +587,7 @@ function clearPreviousData() {
 }
 
 function saveLocally() {
+    const author = document.getElementById("eventAuthor").value;
     const eventTitle = document.querySelector("#eventTitle").value;
     const eventDescription = document.querySelector("#eventDescription").value;
     const eventLocation = document.querySelector("#eventLocation").value;
@@ -611,6 +630,7 @@ function saveLocally() {
 
     // Create unsaved event object
     unsavedEvent = {
+        author: author,
         title: eventTitle.trim(),
         description: eventDescription.trim(),
         location: eventLocation,
@@ -640,6 +660,10 @@ async function sendEventToServer() {
         showPageMsg("alert-danger", gettext("Please, check input fields."));
         return false;
     }
+
+    // Adding author to event participants
+    authorPart = [{name: data["author"], dates: []}];
+    data["participants"] = authorPart.concat(data["participants"]);
 
     // Check if description is not active
     if (document.querySelector("#addDescrN").checked) {

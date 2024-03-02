@@ -56,6 +56,15 @@
     <!-- Event info row -->
     <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %} info-section">
         <div class="col-12 event-info-div display-5 p-3 shadow rounded"{% if event.event_theme %} data-theme="{{ event.event_theme }}"{% endif %}>
+            {% if event.author %}
+                <div class="row mb-2 fs-6">
+                    <div class="col">
+                        <i class="fa-solid fa-id-card"></i>
+                        {% translate "Author:" %} 
+                        <span id="eventAuthor">{{ event.author }}</span>
+                    </div>
+                </div>
+            {% endif %}
             <div class="row mb-2">
                 <div class="col-2" id="shareEventCol"></div>
                 <div class="col">

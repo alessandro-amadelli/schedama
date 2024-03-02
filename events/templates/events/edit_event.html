@@ -41,7 +41,21 @@
             </a>
           </div>
         </div>
-      
+        
+        <!-- Event author -->
+        <div class="row m-3 mt-5 entering-3" id="authorRow">
+            <div class="col">
+                <h4>{% translate "Author" %}</h4>
+            </div>
+            <div class="w-100"></div>
+            <div class="col">
+                <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="eventAuthor" placeholder="Event author" value="{{ event.author }}" maxlength="30">
+                <label for="eventAuthor">{% translate "Event author" %}</label>
+                </div>
+            </div>
+        </div>
+
         <!-- Event title -->
         <div class="row m-3 mt-5 entering-3" id="titleRow">
             <div class="col">

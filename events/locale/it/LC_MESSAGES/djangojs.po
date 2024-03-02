@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-11 17:45+0100\n"
+"POT-Creation-Date: 2024-03-02 16:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\events\static\events\edit_event.js:145
-#: .\events\static\events\new_event.js:352
-#: .\events\static\events\view_event.js:243
+#: .\events\static\events\edit_event.js:176
+#: .\events\static\events\new_event.js:360
+#: .\events\static\events\view_event.js:246
 msgid "d"
 msgstr "g"
 
-#: .\events\static\events\edit_event.js:202
+#: .\events\static\events\edit_event.js:238
 msgid "Participant removed"
 msgstr "Partecipante rimosso"
 
-#: .\events\static\events\edit_event.js:247
-#: .\events\static\events\new_event.js:306
+#: .\events\static\events\edit_event.js:283
+#: .\events\static\events\new_event.js:314
 msgid "Event Date"
 msgstr "Data evento"
 
-#: .\events\static\events\edit_event.js:277
-#: .\events\static\events\new_event.js:340
+#: .\events\static\events\edit_event.js:313
+#: .\events\static\events\new_event.js:348
 msgid "Date added"
 msgstr "Data aggiunta"
 
-#: .\events\static\events\edit_event.js:471
-#: .\events\static\events\new_event.js:640
+#: .\events\static\events\edit_event.js:511
+#: .\events\static\events\new_event.js:660
 msgid "Please, check input fields."
 msgstr "Per favore, controlla i campi di input."
 
-#: .\events\static\events\edit_event.js:498
-#: .\events\static\events\edit_event.js:543
-#: .\events\static\events\edit_event.js:590
-#: .\events\static\events\new_event.js:679
-#: .\events\static\events\view_event.js:528
-#: .\events\static\events\view_event.js:640
+#: .\events\static\events\edit_event.js:538
+#: .\events\static\events\edit_event.js:583
+#: .\events\static\events\edit_event.js:630
+#: .\events\static\events\new_event.js:703
+#: .\events\static\events\view_event.js:531
+#: .\events\static\events\view_event.js:643
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
@@ -56,51 +56,56 @@ msgstr "Si è verificato un errore. Per favore riprova più tardi."
 msgid "Nothing to see here..."
 msgstr "Non c'è niente da vedere qui..."
 
-#: .\events\static\events\new_event.js:64
-#: .\events\static\events\new_event.js:65
-#: .\events\static\events\new_event.js:66
+#: .\events\static\events\history.js:57
+msgid "Author:"
+msgstr "Autore:"
+
+#: .\events\static\events\new_event.js:69
+#: .\events\static\events\new_event.js:70
+#: .\events\static\events\new_event.js:71
 msgid "Administrator only"
 msgstr "Solo l'amministratore"
 
-#: .\events\static\events\new_event.js:74
-#: .\events\static\events\new_event.js:80
-#: .\events\static\events\new_event.js:86
+#: .\events\static\events\new_event.js:79
+#: .\events\static\events\new_event.js:85
+#: .\events\static\events\new_event.js:91
 msgid "Anyone"
 msgstr "Chiunque"
 
-#: .\events\static\events\new_event.js:424
+#: .\events\static\events\new_event.js:438
 msgid "Participant added"
 msgstr "Partecipante aggiunto"
 
-#: .\events\static\events\new_event.js:702
+#: .\events\static\events\new_event.js:726
 msgid "Event created"
 msgstr "Evento creato"
 
-#: .\events\static\events\new_event.js:703
+#: .\events\static\events\new_event.js:727
 msgid "Your event has been successfully created"
 msgstr "Il tuo evento è stato creato con successo"
 
-#: .\events\static\events\new_event.js:718
+#: .\events\static\events\new_event.js:742
 msgid "The following links have been automatically saved to the history page"
-msgstr "I seguenti link sono stati automaticamente salvati nella pagina di cronologia"
+msgstr ""
+"I seguenti link sono stati automaticamente salvati nella pagina di cronologia"
 
-#: .\events\static\events\new_event.js:723
+#: .\events\static\events\new_event.js:747
 msgid "Participant URL"
 msgstr "URL partecipante"
 
-#: .\events\static\events\new_event.js:738
+#: .\events\static\events\new_event.js:762
 msgid "Participant page"
 msgstr "Pagina partecipante"
 
-#: .\events\static\events\new_event.js:742
+#: .\events\static\events\new_event.js:766
 msgid "Administration URL"
 msgstr "URL amministrazione"
 
-#: .\events\static\events\new_event.js:757
+#: .\events\static\events\new_event.js:781
 msgid "Administration page"
 msgstr "Pagina amministrazione"
 
-#: .\events\static\events\new_event.js:765
+#: .\events\static\events\new_event.js:789
 msgid ""
 "IMPORTANT: make sure to keep this link, it's the only way you'll be able to "
 "administrate your event."
@@ -108,7 +113,7 @@ msgstr ""
 "IMPORTANTE: assicurati di conservare questo link, è l'unico modo in cui "
 "sarai in grado di amministrare il tuo evento."
 
-#: .\events\static\events\new_event.js:806
+#: .\events\static\events\new_event.js:831
 msgid "Data saved to history"
 msgstr "Dati salvati in cronologia"
 
@@ -124,34 +129,34 @@ msgstr "Accendi la luce"
 msgid "Loading, please wait."
 msgstr "Caricamento, attendere per favore."
 
-#: .\events\static\events\utilities.js:222
+#: .\events\static\events\utilities.js:239
 msgid "You've been invited to an event on Schedama: "
 msgstr "Sei stato invitato ad un evento su Schedama: "
 
-#: .\events\static\events\utilities.js:260
+#: .\events\static\events\utilities.js:293
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: .\events\static\events\view_event.js:222
+#: .\events\static\events\view_event.js:225
 msgid "Ended"
 msgstr "Concluso"
 
-#: .\events\static\events\view_event.js:228
+#: .\events\static\events\view_event.js:231
 msgid "In progress"
 msgstr "In corso"
 
-#: .\events\static\events\view_event.js:287
+#: .\events\static\events\view_event.js:290
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\events\static\events\view_event.js:287
+#: .\events\static\events\view_event.js:290
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\events\static\events\view_event.js:370
+#: .\events\static\events\view_event.js:373
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\events\static\events\view_event.js:386
+#: .\events\static\events\view_event.js:389
 msgid "Preferences"
 msgstr "Preferenze"

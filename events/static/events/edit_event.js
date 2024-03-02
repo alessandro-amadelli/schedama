@@ -423,10 +423,11 @@ function addParticipantToTable() {
 }
 
 function getEventData() {
-    const eventTitle = document.querySelector("#eventTitle").value;
-    const eventDescription = document.querySelector("#eventDescription").value;
-    const hasLocation = document.querySelector("#checkEventLocation").checked;
-    const eventLocation = document.querySelector("#eventLocation").value;
+    const eventAuthor = document.getElementById("eventAuthor").value;
+    const eventTitle = document.getElementById("eventTitle").value;
+    const eventDescription = document.getElementById("eventDescription").value;
+    const hasLocation = document.getElementById("checkEventLocation").checked;
+    const eventLocation = document.getElementById("eventLocation").value;
 
     let eventDates = [];
     document.querySelectorAll("input[name=eventDate]").forEach((date) => {
@@ -481,6 +482,7 @@ function getEventData() {
     const eventData = {
         item_id: itemID,
         admin_key: adminKey,
+        author: eventAuthor,
         title: eventTitle,
         description: eventDescription,
         has_location: hasLocation,
@@ -636,6 +638,7 @@ function updateHistory() {
 
     const eventData = {
         item_id: eventDataFull.item_id,
+        author: eventDataFull.author,
         title: eventDataFull.title,
         participation_link: partLink,
         admin_link: window.location.href
