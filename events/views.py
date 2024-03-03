@@ -8,16 +8,19 @@ from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 
 import json
-
 from datetime import datetime, timedelta
+
 import schedama.dynamodb_ops as dynamodb_ops
 from schedama.settings import CACHE_TTL, CACHE_DB_TTL
+from .forms import EventForm
 
 from collections import Counter
+
 
 class ServiceWorker(TemplateView):
     template_name="events/sw.js"
     content_type="application/javascript"
+
 
 def get_event_data(item_id, item_type="event"):
     """
@@ -34,86 +37,34 @@ def get_event_data(item_id, item_type="event"):
 
     return event_data
 
-def validate_event(event_data):
+
+def validate_event_new(event_data):
     """
-    This function validates the received event.
-    It needs to be called before saving event to server
+    Event is validated through the django form.is_valid() function and fields are cleaned based on
+    EventForm form class
     """
-    # Max lengths of event fields
-    AUTHOR_MAX_LENGTH = 30
-    TITLE_MAX_LENGTH = 150
-    DESCRIPTION_MAX_LENGTH = 400
-    LOCATION_MAX_LENGTH = 100
-    DATE_MIN = datetime.now().strftime("%Y-%m-%dT%H:%M")
-    DURATION_MAX = (60 * 24 * 30) + (60 * 23) + 59
-    PARTICIPANT_NAME_MAX_LENGTH = 30
-    THEME_MAX_LENGTH = 20
+    form = EventForm(event_data)
 
-    is_valid = True
+    if form.is_valid():
+        # Getting cleaned_data values for event fields
+        event_data["author"] = form.cleaned_data["author"]
+        event_data["title"] = form.cleaned_data["title"]
+        event_data["description"] = form.cleaned_data["description"]
+        event_data["location"] = form.cleaned_data["location"]
+        event_data["has_location"] = form.cleaned_data["has_location"]
+        event_data["duration"] = form.cleaned_data["duration"]
+        event_data["event_theme"] = form.cleaned_data["event_theme"]
+        event_data["item_type"] = form.cleaned_data["item_type"]
 
-    # Check if author is present and truncate length
-    author = event_data.get("author", "").replace(" ", "")
-    if len(author) > AUTHOR_MAX_LENGTH:
-        author = author[:AUTHOR_MAX_LENGTH]
-    event_data["author"] = author
+        return True, event_data
+    return False, form.errors
 
-    # Check if title is present and truncate length
-    if event_data.get("title", "").replace(" ", "") == "":
-        is_valid = False
-    else:
-        if len(event_data["title"]) > TITLE_MAX_LENGTH:
-            event_data["title"] = event_data["title"][:TITLE_MAX_LENGTH]
-    
-    # Check description and truncate length
-    description = event_data.get("description", "")
-    if len(description) > DESCRIPTION_MAX_LENGTH:
-        event_data["description"] = event_data["description"][:DESCRIPTION_MAX_LENGTH]
-
-    # Check location and truncate
-    has_location = event_data.get("has_location", False)
-    if has_location and (
-        len(event_data.get("location", "").replace(" ", "")) == 0 
-    ):
-        is_valid = False
-    if len(event_data.get("location", "")) > LOCATION_MAX_LENGTH:
-        event_data["location"] = event_data["location"][:LOCATION_MAX_LENGTH]
-    
-    # Check event dates
-    # Skip check for the moment because multiple dates could be present
-
-    # Check duration and set default if missing or wrong format
-    event_data["duration"] = event_data.get("duration", 60)
-    try:
-        event_data["duration"] = int(event_data["duration"])
-    except:
-        event_data["duration"] = 60
-
-    if event_data["duration"] == 0:
-        event_data["duration"] = 60
-
-    if event_data["duration"] > DURATION_MAX:
-        event_data["duration"] = DURATION_MAX
-
-    # Check event participants
-    if len(event_data.get("participants", [])) > 0:
-        for p in event_data["participants"]:
-            if len(p["name"]) > PARTICIPANT_NAME_MAX_LENGTH:
-                p["name"] = p["name"][:PARTICIPANT_NAME_MAX_LENGTH]
-
-    # Check event_theme
-    event_theme = event_data.get("event_theme", "")
-    if event_theme:
-        if len(event_theme) > THEME_MAX_LENGTH:
-            event_theme = event_theme[:THEME_MAX_LENGTH]
-            event_data["event_theme"] = event_theme
-
-    return (is_valid, event_data)
 
 def save_event_to_db(event_data):
     """
     This function calls event validation and saves event to the database
     """
-    is_validated, event_data = validate_event(event_data)
+    is_validated, event_data = validate_event_new(event_data)
 
     if not is_validated:
         return False
@@ -127,21 +78,26 @@ def save_event_to_db(event_data):
 
     return event_data
 
+
 @cache_page(CACHE_TTL)
 def index(request):
     return render(request, "events/index.html")
+
 
 @cache_page(CACHE_TTL)
 def robots_view(request):
     return render(request, "events/robots.txt")
 
+
 @cache_page(CACHE_TTL)
 def new_event_view(request):
     return render(request, "events/new_event.html")
 
+
 @cache_page(CACHE_TTL)
 def about_us_view(request):
     return render(request, "events/about_us.html")
+
 
 def save_event_view(request):
     if request.method != 'POST':
@@ -169,7 +125,7 @@ def save_event_view(request):
         new_event = save_event_to_db(event_data)
         if not new_event:
             raise Exception
-    except:
+    except Exception as e:
         response = {
             "status": "ERROR",
             "description": _(
@@ -187,16 +143,18 @@ def save_event_view(request):
 
     return JsonResponse(response)
 
+
 @cache_page(CACHE_TTL)
 def open_event_view(request):
     return render(request, "events/open_event.html")
+
 
 def participate_view(request, eventID):
     # Retrieving event data
     event_data = get_event_data(eventID, "event")
 
     # Return page not found
-    if event_data == []:
+    if not event_data:
         # raise Http404
         return error404_view(request, None, eventID)
 
@@ -246,6 +204,7 @@ def participate_view(request, eventID):
     }
 
     return render(request, "events/view_event.html", context)
+
 
 def add_participant_view(request):
     if request.method != 'POST':
@@ -313,6 +272,7 @@ def add_participant_view(request):
 
     return JsonResponse(response)
 
+
 def edit_event_view(request, eventID):
     admin_key = request.GET.get('k','')
     
@@ -356,6 +316,7 @@ def edit_event_view(request, eventID):
 
     return render(request, "events/edit_event.html", context)
 
+
 def update_event_view(request):
     if request.method != 'POST':
         return redirect("index")
@@ -380,8 +341,6 @@ def update_event_view(request):
     ### CHECK AUTHORIZATION ###
     # Check user's and event authorizations
     is_admin = admin_key == event_data["admin_key"]
-    add_participant = event_settings.get("add_participant", False)
-    remove_participant = event_settings.get("remove_participant", False)
     ### ###
 
     # Update ADMIN fields of the event
@@ -437,7 +396,7 @@ def update_event_view(request):
         event_data["has_location"] = request_data.get("has_location", False)
         event_data["location"] = request_data.get("location", "")
         event_data["dates"] = request_data.get("dates", [])
-        event_data["dates"].sort() # Order event dates
+        event_data["dates"].sort()  # Order event dates
         event_data["duration"] = request_data.get("duration", 60)
         event_data["event_theme"] = request_data.get("event_theme", "")
         event_data["participants"] = total_participants
@@ -466,6 +425,7 @@ def update_event_view(request):
         }
 
     return JsonResponse(response)
+
 
 def modify_participants_view(request):
     if request.method != 'POST':
@@ -532,6 +492,7 @@ def modify_participants_view(request):
 
     return JsonResponse(response)
 
+
 def cancel_event_view(request):
     if request.method != 'POST':
         return redirect("index")
@@ -593,6 +554,7 @@ def cancel_event_view(request):
         }
     return JsonResponse(response)
 
+
 def reactivate_event_view(request):
     if request.method != 'POST':
         return redirect("index")
@@ -648,8 +610,10 @@ def reactivate_event_view(request):
         }
     return JsonResponse(response)
 
+
 def history_view(request):
     return render(request, "events/history.html")
+
 
 @cache_page(CACHE_TTL)
 def error404_view(request, exception, eventID=""):
