@@ -66,7 +66,6 @@ class EventForm(forms.Form):
 
     def clean_settings(self):
         settings = self.cleaned_data["settings"]
-        print(settings)
         return settings
 
     def clean_item_type(self):

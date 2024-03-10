@@ -179,7 +179,8 @@ def participate_view(request, eventID):
         # Convoluted but elegant way to obtain a total list of dates inserted
         # by every participant
         participants_dates = Counter(
-            [d for dp in (
+            [
+                d for dp in (
                     p["dates"] for p in event_data["participants"]
                 ) for d in dp
             ]
@@ -285,7 +286,7 @@ def edit_event_view(request, eventID):
     event_data = get_event_data(eventID, "event")
 
     # Return page not found
-    if event_data == []:
+    if not event_data:
         return error404_view(request, None, eventID)
 
     # Check if the admin key provided as URL parameter correspond with the one
@@ -321,7 +322,7 @@ def update_event_view(request):
     if request.method != 'POST':
         return redirect("index")
 
-    #Retrieve request data
+    # Retrieve request data
     request_data = json.loads(request.body)
 
     item_id = request_data.get("item_id", "")
@@ -329,7 +330,7 @@ def update_event_view(request):
 
     # Retrieve event's data
     event_data = get_event_data(item_id, "event")
-    if event_data == []:
+    if not event_data:
         response = {
             "status": "ERROR",
             "description": _("An error has occurred.")
@@ -419,7 +420,7 @@ def update_event_view(request):
             "status": "OK"
         }
     else:
-         response = {
+        response = {
             "status": "ERROR",
             "description": _("Sorry, submitted data is invalid.")
         }
@@ -447,7 +448,7 @@ def modify_participants_view(request):
     
     # Retrieve event's data
     event_data = get_event_data(item_id, "event")
-    if event_data == []:
+    if not event_data:
         response = {
             "status": "ERROR",
             "description": _("An error has occurred.")
@@ -485,7 +486,7 @@ def modify_participants_view(request):
             "status": "OK"
         }
     else:
-         response = {
+        response = {
             "status": "ERROR",
             "description": _("Sorry, submitted data is invalid.")
         }
@@ -545,10 +546,9 @@ def cancel_event_view(request):
     if new_event:
         response = {
             "status": "OK"
-            # "expiration_date": expiration_datetime
         }
-    else: 
-         response = {
+    else:
+        response = {
             "status": "ERROR",
             "description": _("An error has occurred.")
         }
@@ -563,10 +563,10 @@ def reactivate_event_view(request):
     request_data = json.loads(request.body)
 
     item_id = request_data["item_id"]
-    admin_key = request_data.get("admin_key", "")
+    admin_key = request_data.get("admin_key")
 
     # Only event administrators are authorized - check if admin_key is present
-    if admin_key == "":
+    if not admin_key:
         response = {
             "status": "ERROR",
             "description": _(
@@ -588,14 +588,11 @@ def reactivate_event_view(request):
         }
         return JsonResponse(response)
     
-    # Removing expiration date and is_cancelled
     new_event = True
     if event_data.get("is_cancelled", False):
-        try:
-            del event_data["is_cancelled"]
-            del event_data["expiration_date"]
-        except:
-            pass
+        # Removing expiration date and is_cancelled
+        event_data.pop("is_cancelled", None)
+        event_data.pop("expiration_date", None)
         # Update event data
         new_event = save_event_to_db(event_data)
     
@@ -603,8 +600,8 @@ def reactivate_event_view(request):
         response = {
             "status": "OK"
         }
-    else: 
-         response = {
+    else:
+        response = {
             "status": "ERROR",
             "description": _("An error has occurred.")
         }

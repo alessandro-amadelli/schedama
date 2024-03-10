@@ -239,7 +239,7 @@
                                     
                                 </td>
                                 {% for date in event.dates %}
-                                    <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %}></td>
+                                    <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates %} checked {% endif %}></td>
                                 {% endfor %}
                             </tr>
                         {% endfor %}
@@ -250,7 +250,6 @@
 
         {% if event.event_bin|length > 0 %}
             <h4>{% translate "Removed participants" %}</h4>
-            {% comment %} <p>{% translate "You can click on participants you'd like to restore to select them and then save." %}</p> {% endcomment %}
             <p>
                 {% translate "To restore one or more removed participants:" %}
                 <ol>
@@ -276,7 +275,7 @@
 
         <!-- Danger zone -->
         <div class="row danger-zone border border-2 border-danger rounded shadow p-2 mb-3" id="dangerZone">
-            <h4 class="text-danger border-bottom border-danger"><i class="fa-solid fa-circle-radiation fs-3"></i>&nbsp;Danger Zone</h4>
+            <h4 class="text-danger border-bottom border-danger"><i class="fa-solid fa-circle-radiation fa-fade fs-3"></i>&nbsp;Danger Zone</h4>
             {% if not event.is_cancelled %}
                 <div class="col-12">
                     <p>
@@ -314,7 +313,7 @@
                     <p>{% translate "Ok, calm down...the event is flagged as <strong>Cancelled</strong> and will be deleted after the expiration date." %}</p>
                     <p>{% translate "Sometimes it is useful to let things go...but if you changed your mind, it's not too late!" %}</p>
                     <p>
-                        {% translate "To reacivate the event: " %}
+                        {% translate "To reactivate the event: " %}
                         <ul class="list-group list-group-numbered text-start">
                             <li class="list-group-item list-group-item-info">{% translate "Click on <strong>Reactivate event</strong> button below" %}</li>
                             <li class="list-group-item list-group-item-info">{% translate "<strong>Event will be reactivated</strong> and it's deletion will be canceled" %}</li>
@@ -345,8 +344,8 @@
                         <h5>{% translate "Choose what participants are allowed to do" %}</h5>
                         <div class="mb-3">
                             <div class="form-check form-switch fs-4">
-                            <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" 
-                            {% if event.settings.add_participant %}checked{% endif %} {% if event.is_cancelled %} disabled="true"{% endif %}>
+                            <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant"
+                            {% if event.settings.add_participant %} checked {% endif %} {% if event.is_cancelled %} disabled="true"{% endif %}>
                             <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
                             </div>
                         </div>
