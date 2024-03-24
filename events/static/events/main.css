@@ -11,7 +11,6 @@
     --moving-bg-color: rgba(0,0,0,.2);
     --navbar-bg-color: white;
     --section-bg-color: rgba(0, 102, 255, 0);
-    --selected-border: #ef476f;
     --text-muted-color: rgb(92, 92, 92);
     --title-bg-color: #bd415e;
     --title-color: #073b4c;
@@ -32,7 +31,6 @@
     --moving-bg-color: rgba(0, 0, 0, .5);
     --navbar-bg-color: rgba(0,0,0,.5);
     --section-bg-color: rgba(0,0,0,0);
-    --selected-border: #ffd166;
     --text-muted-color: rgb(143, 143, 143);
     --title-bg-color: #ffd166;
     --title-color: #073b4c;
@@ -321,6 +319,10 @@ select, option {
     background-color: var(--body-bg-color);
 }
 
+.selected-border {
+    border: solid medium var(--title-bg-color);
+}
+
 .event-title {
     font-size: 3.5rem;
     text-align: center;
@@ -437,7 +439,7 @@ select, option {
 }
 
 .thumbnail-selected {
-    border: solid medium var(--selected-border);
+    border: solid medium var(--title-bg-color);
 }
 
 .thumbnail-selected::before {

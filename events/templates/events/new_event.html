@@ -128,9 +128,10 @@
         <h4><i class="fa-solid fa-hourglass fa-bounce"></i> {% translate "Indicate duration" %} <span class="text-danger">*</span></h4>
       </div>
       <div class="w-100"></div>
-      <div class="col-12">
-        <p>{% translate "Event duration" %}: <span class="fs-3" id="durationText">1h</span></p>
+      <div class="col-12 col-md-4 py-2 mb-2 text-center rounded selected-border">
+        {% translate "Event duration" %}: <span class="fs-3" id="durationText">1h</span>
       </div>
+      <div class="w-100"></div>
       <div class="col-12 col-lg-4">
         <label for="durationMinutes">{% translate "Minutes" %}</label>
         <input type="range" class="form-range" id="durationMinutes" min="0" max="59" step="1" value="0">
@@ -142,6 +143,10 @@
       <div class="col-12 col-lg-4">
         <label for="durationDays">{% translate "Days" %}</label>
         <input type="range" class="form-range" id="durationDays" min="0" max="30" step="1" value="0">
+      </div>
+       <div class="w-100"></div>
+      <div class="col">
+        <p><i class="fa-solid fa-circle-info"></i>&nbsp;{% translate "Scroll the selectors to change event duration." %}</p>
       </div>
     </div> 
 
