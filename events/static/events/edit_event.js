@@ -120,6 +120,7 @@ function restoreParticipant(item) {
     enableSave();
 }
 
+
 function selectEventTheme(clickedItem) {
     if (clickedItem.classList.contains("thumbnail-selected")) {
         return true;
@@ -133,6 +134,7 @@ function selectEventTheme(clickedItem) {
     enableSave();
 }
 
+
 function updateCharCount() {
     const eventDescription = document.querySelector("#eventDescription");
     const maxLength = parseInt(eventDescription.getAttribute("maxlength"));
@@ -144,6 +146,7 @@ function updateCharCount() {
     }
     countSpan.innerText = remaining;
 }
+
 
 function calculateDuration() {
     let duration = parseInt(document.querySelector("#durationText").innerText);
@@ -163,6 +166,7 @@ function calculateDuration() {
 
     updateDuration();
 }
+
 
 function updateDuration() {
     const durationText = document.querySelector("#durationText");
@@ -187,44 +191,6 @@ function updateDuration() {
     durationText.innerText = text;
 }
 
-function validateEvent() {
-    validated = true;
-
-    // Check #1 Title
-    const title = document.querySelector("#eventTitle");
-    if (title.value.replaceAll(" ", "").length == 0) {
-        setInvalid(title, true);
-        validated = false;
-    } else {
-        setInvalid(title, false);
-    }
-
-    // Check #2 Location
-    const locSwitch = document.querySelector("#checkEventLocation");
-    const location = document.querySelector("#eventLocation");
-    if (locSwitch.checked) {
-        if (location.value.replaceAll(" ", "").length == 0) {
-            setInvalid(location, true);
-            validated = false;
-        } else {
-            setInvalid(location, false);
-        }
-    } else {
-        setInvalid(location, false);
-    }
-
-    //Check #3 Date and time
-    const firstDate = document.querySelector("#dateInp");
-    const dates = document.querySelectorAll("[name='eventDate']");
-    if (dates.length == 0) {
-        setInvalid(firstDate, true);
-        validated = false;
-    } else {
-        setInvalid(firstDate, false);
-    }
-
-    return validated;
-}
 
 function removeParticipantRow(btn) {
     const partRow = btn.parentElement.parentElement.parentElement.parentElement;
@@ -238,6 +204,7 @@ function removeParticipantRow(btn) {
     notify(gettext("Participant removed"));
 }
 
+
 function enableSave() {
     const btnSave = document.querySelector("#btnSaveEvent");
     if (btnSave.disabled) {
@@ -249,9 +216,11 @@ function enableSave() {
     }
 }
 
+
 function enableCancel() {
     document.querySelector("#btnCancelEvent").disabled = !document.querySelector("#checkCancelEvent").checked;
 }
+
 
 function createNewDate() {
     const dateRow = document.querySelector("#dateRow");
@@ -313,9 +282,11 @@ function createNewDate() {
     notify(gettext("Date added"));
 }
 
+
 function updateParticipantsNum() {
     document.querySelector("#participantsNum").innerText = document.querySelectorAll("input[name=participantName]").length;
 }
+
 
 function prepareModalAddPart() {
     const modalAddPart = document.querySelector("#modalAddParticipant");
@@ -353,6 +324,7 @@ function prepareModalAddPart() {
         modalAddPart.querySelector(".modal-body").appendChild(newDiv);
     });
 }
+
 
 function addParticipantToTable() {
     const modalAddPart = document.querySelector("#modalAddParticipant");
@@ -421,6 +393,7 @@ function addParticipantToTable() {
 
     enableSave();
 }
+
 
 function getEventData() {
     const eventAuthor = document.getElementById("eventAuthor").value;
@@ -503,6 +476,7 @@ function getEventData() {
     return eventData;
 }
 
+
 async function sendUpdateToServer() {
     const data = getEventData();
 
@@ -540,6 +514,7 @@ async function sendUpdateToServer() {
         });
 }
 
+
 function eventUpdated(data) {
     if (data.status == "OK") {
         window.location.reload();
@@ -548,6 +523,7 @@ function eventUpdated(data) {
         removeLoading();
     }
 }
+
 
 async function sendEventCancellationToServer() {
     const dataFull = getEventData();
@@ -585,6 +561,7 @@ async function sendEventCancellationToServer() {
         });
 }
 
+
 function eventCanceled(data) {
     removeLoading();
 
@@ -595,6 +572,7 @@ function eventCanceled(data) {
 
     window.location.reload();
 }
+
 
 async function sendEventReactivationToServer() {
     const dataFull = getEventData();
@@ -631,6 +609,7 @@ async function sendEventReactivationToServer() {
             removeLoading();
         });
 }
+
 
 function updateHistory() {
     const eventDataFull = getEventData();

@@ -232,7 +232,7 @@ nav {
 
 body {
     font-family: 'Poppins', sans-serif;
-    color: var(--color);
+    color: var(--color) !important;
     background-color: var(--body-bg-color);
     background: var(--body-background);
     background-repeat: no-repeat;
@@ -300,7 +300,7 @@ body {
 }
 
 input, .form-control, input:focus, .form-control:focus {
-    color: var(--color);
+    color: var(--color) !important;
     border-color: transparent;
     background-color: var(--input-bg-color);
 }
@@ -402,6 +402,7 @@ select, option {
 }
 
 .card {
+    color: var(--color);
     background-color: var(--card-bg-color);
 }
 

@@ -19,13 +19,13 @@ class EventForm(forms.Form):
     has_location = forms.BooleanField(required=False, initial=False)
     dates = forms.JSONField()
     duration = forms.IntegerField(initial=60)
-    participants = forms.JSONField()
+    participants = forms.JSONField(required=False)
     event_theme = forms.CharField(required=False)
     settings = forms.JSONField()
     item_type = forms.CharField(required=False, initial="event")
 
     def clean_author(self):
-        author = self.cleaned_data["author"]
+        author = self.cleaned_data.get("author", "")
         return Truncator(author).chars(AUTHOR_MAX_LENGTH)
 
     def clean_title(self):
@@ -33,11 +33,11 @@ class EventForm(forms.Form):
         return Truncator(title).chars(TITLE_MAX_LENGTH)
 
     def clean_description(self):
-        description = self.cleaned_data["description"]
+        description = self.cleaned_data.get("description", "")
         return Truncator(description).chars(DESCRIPTION_MAX_LENGTH)
 
     def clean_location(self):
-        location = self.cleaned_data["location"]
+        location = self.cleaned_data.get("location", "")
         return Truncator(location).chars(LOCATION_MAX_LENGTH)
 
     def clean_has_location(self):
@@ -55,7 +55,9 @@ class EventForm(forms.Form):
         return duration
 
     def clean_participants(self):
-        participants = self.cleaned_data["participants"]
+        participants = self.cleaned_data.get("participants")
+        if participants is None:
+            participants = []
         for p in participants:
             p["name"] = Truncator(p.get("name" "")).chars(PARTICIPANT_NAME_MAX_LENGTH)
         return participants

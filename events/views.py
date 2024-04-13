@@ -44,6 +44,7 @@ def validate_event_new(event_data):
     EventForm form class
     """
     form = EventForm(event_data)
+    print(event_data)
 
     if form.is_valid():
         # Getting cleaned_data values for event fields
@@ -55,7 +56,6 @@ def validate_event_new(event_data):
         event_data["duration"] = form.cleaned_data["duration"]
         event_data["event_theme"] = form.cleaned_data["event_theme"]
         event_data["item_type"] = form.cleaned_data["item_type"]
-
         return True, event_data
     return False, form.errors
 

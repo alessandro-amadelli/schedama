@@ -17,11 +17,16 @@
 
     <div class="col mb-3 d-flex">
       <div class="card rounded appearing-1">
+        <div class="card-header">
+          <h3 class="text-center"><i class="fa-regular fa-calendar-plus"></i></h3>
+        </div>
         <div class="card-body">
           <h2 class="card-title text-center">{% translate "Create an event" %}</h2>
           <p class="card-text">{% translate "Easily create a new event by clicking " %}
-            <a href="{% url 'new_event_view' %}" class="btn btn-primary p-1">{% translate "Create event"%}</a>
           </p>
+          <div class="d-grid gap-2 col-8 col-md-6 mx-auto">
+            <a href="{% url 'new_event_view' %}" class="btn btn-primary p-2">{% translate "Create event"%}</a>
+          </div>
         </div>
         <div class="card-footer text-center">
           <h1>1</h1>
@@ -31,6 +36,9 @@
       
     <div class="col mb-3 d-flex">
       <div class="card rounded appearing-2">
+        <div class="card-header">
+          <h3 class="text-center"><i class="fa-regular fa-floppy-disk"></i></h3>
+        </div>
         <div class="card-body">
           <h2 class="card-title text-center">{% translate "Save event links" %}</h2>
           <p class="card-text">{% translate "After event creation, 2 links are generated: <strong>Participation URL</strong> and <strong>Administration URL</strong>" %}</p>
@@ -43,6 +51,9 @@
       
     <div class="col mb-3 d-flex">
       <div class="card rounded appearing-3">
+        <div class="card-header">
+          <h3 class="text-center"><i class="fa-solid fa-share"></i></h3>
+        </div>
         <div class="card-body">
           <h2 class="card-title text-center">{% translate "Share event" %}</h2>
           <p class="card-text">{% translate "Share the event with whoever you like by sending them the <strong>Participation URL</strong>" %}</p>
@@ -55,6 +66,9 @@
 
     <div class="col mb-3 d-flex">
       <div class="card rounded appearing-4">
+        <div class="card-header">
+          <h3 class="text-center"><i class="fa-solid fa-id-card"></i></h3>
+        </div>
         <div class="card-body">
           <h2 class="card-title text-center">{% translate "Administrate your event" %}</h2>
           <p class="card-text">{% translate "You can fully manage your event by visiting the <strong>Administration URL</strong>." %}</p>

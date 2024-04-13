@@ -181,6 +181,7 @@ function showPageMsg(msgClass, msgContent) {
     window.scroll(0,0);
 }
 
+
 function notify(text) {
     //Deletion of pre-existing toasts
     let toastList = document.querySelectorAll(".toast");
@@ -314,6 +315,56 @@ function generateShareBtn(contentURL, eventTitle="", text="") {
     return btnDiv;
 }
 
+
+function validateEvent() {
+    validated = true;
+
+    // Check #0 Author
+    const author = document.querySelector("#eventAuthor");
+    if (author.value.replaceAll(" ", "").length == 0) {
+        setInvalid(author, true);
+        validated = false;
+    } else {
+        setInvalid(author, false);
+    }
+
+    // Check #1 Title
+    const title = document.querySelector("#eventTitle");
+    if (title.value.replaceAll(" ", "").length == 0) {
+        setInvalid(title, true);
+        validated = false;
+    } else {
+        setInvalid(title, false);
+    }
+
+    // Check #2 Location
+    const locSwitch = document.querySelector("#checkEventLocation");
+    const location = document.querySelector("#eventLocation");
+    if (locSwitch.checked) {
+        if (location.value.replaceAll(" ", "").length == 0) {
+            setInvalid(location, true);
+            validated = false;
+        } else {
+            setInvalid(location, false);
+        }
+    } else {
+        setInvalid(location, false);
+    }
+
+    //Check #3 Date and time
+    const firstDate = document.querySelector("#dateInp");
+    const dates = document.querySelectorAll("[name='eventDate']");
+    if (dates.length == 0) {
+        setInvalid(firstDate, true);
+        validated = false;
+    } else {
+        setInvalid(firstDate, false);
+    }
+
+    return validated;
+}
+
+
 function setInvalid(element, isInvalid) {
     // Sets an element as invalid (not validated)
     element.classList.remove("shaking");
@@ -324,6 +375,7 @@ function setInvalid(element, isInvalid) {
         element.classList.remove("is-invalid");
     }
 }
+
 
 function addToHistory(eventData) {
     // Adds current visited event to history
@@ -377,6 +429,7 @@ function addToHistory(eventData) {
     // Updating history content in localStorage
     localStorage.setItem("history", JSON.stringify(historyData));
 }
+
 
 function removeFromHistory(eventID) {
     let history = localStorage.getItem("history");
