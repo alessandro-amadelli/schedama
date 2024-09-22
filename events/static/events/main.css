@@ -1,6 +1,7 @@
 /* CSS variables for LIGHT MODE */
 :root {
-    --body-background: linear-gradient(180deg, rgb(0,105,158) 0%, #118ab2 30%);
+    --accent-color: #e5597a;
+    --body-background: linear-gradient(180deg, #cff3fe 0%, #118ab2 85%);
     --body-bg-color: #118ab2;
     --card-bg-color: rgba(255,255,255,.7);
     --color: black;
@@ -12,7 +13,6 @@
     --navbar-bg-color: white;
     --section-bg-color: rgba(0, 102, 255, 0);
     --text-muted-color: rgb(92, 92, 92);
-    --title-bg-color: #bd415e;
     --title-color: #073b4c;
 
     overflow-x: hidden;
@@ -20,6 +20,7 @@
 
 /* CSS variables for DARK MODE */
 .dark-mode {
+    --accent-color: #ffd166;
     --body-background: linear-gradient(180deg, #073b4c 60%, rgb(37, 37, 37) 100%);
     --body-bg-color: #073b4c;
     --card-bg-color: rgba(0,0,0,.2);
@@ -32,17 +33,16 @@
     --navbar-bg-color: rgba(0,0,0,.5);
     --section-bg-color: rgba(0,0,0,0);
     --text-muted-color: rgb(143, 143, 143);
-    --title-bg-color: #ffd166;
     --title-color: #073b4c;
 }
 
 /*
 Color palette
-#ef476f -> pink
+#e5597a -> pink
 #ffd166 -> yellow
-#06d6a0 -> green
 #118ab2 -> light-blue
 #073b4c -> dark-blue-greenish
+#06d6a0 -> green
 */
 
 /* CSS animations */
@@ -244,6 +244,11 @@ body {
     margin: 0;
 }
 
+.bg-accent {
+    background-color: var(--accent-color) !important;
+    color: var(--title-color) !important;
+}
+
 .text-muted {
     color: var(--text-muted-color) !important;
 }
@@ -263,12 +268,12 @@ body {
     height: 100%;
     left: -25%;
     z-index: -1;
-    background-color: var(--title-bg-color);
+    background-color: var(--accent-color);
     transition: .5s ease-in;
 }
 
 .card-footer {
-    color: var(--title-bg-color);
+    color: var(--accent-color);
     user-select: none;
 }
 
@@ -320,7 +325,7 @@ select, option {
 }
 
 .selected-border {
-    border: solid medium var(--title-bg-color);
+    border: solid medium var(--accent-color);
 }
 
 .event-title {
@@ -353,7 +358,7 @@ select, option {
     animation-name: timerNotStartedAnimation;
     animation-duration: 5s;
     animation-fill-mode:forwards;
-    animation-direction:normal;
+    animation-direction:alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
     animation-timing-function: ease-in-out;
@@ -440,7 +445,7 @@ select, option {
 }
 
 .thumbnail-selected {
-    border: solid medium var(--title-bg-color);
+    border: solid medium var(--accent-color);
 }
 
 .thumbnail-selected::before {
@@ -535,3 +540,7 @@ div[data-theme="travel"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/travel.jpg');
     opacity: .3;
 }
+
+.password-form {
+    background-color: var(--event-div-bg);
+ }

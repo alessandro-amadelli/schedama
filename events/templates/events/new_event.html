@@ -258,6 +258,31 @@
       </div>
     </div>
 
+    <!-- Security -->
+    <div class="row p-3 mb-3 intro-animated" id="securityRow">
+      <div class="col">
+        <h4><i class="fa-solid fa-shield fa-bounce"></i> {% translate "Security" %}</h4>
+        <h5>{% translate "You can choose to make your event private, protecting it with a password." %}</h5>
+      </div>
+      <div class="w-100"></div>
+      <div class="mb-3">
+        <div class="form-check form-switch fs-4">
+          <input class="form-check-input" type="checkbox" role="switch" id="switchPrivateEvent">
+          <label class="form-check-label" for="switchPrivateEvent">{% translate "Make event private" %}</label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="form-floating mb-3 password-row intro-animated">
+          <input type="password" class="form-control" id="eventPassword1" maxlength="100">
+          <label for="eventLocation">{% translate "Choose a password" %}</label>
+        </div>
+        <div class="form-floating mb-3 password-row intro-animated">
+          <input type="password" class="form-control" id="eventPassword2" maxlength="100">
+          <label for="eventLocation">{% translate "Repeat password" %}</label>
+        </div>
+      </div>
+    </div>
+
     <!-- Save event button -->
     <div class="d-grid col-6 col-lg-4 mx-auto">
       <button type="button" class="btn btn-success btn-lg visually-hidden" id="btnSaveEvent" disabled>

@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#darkModeToggle").addEventListener('click', () => {
         toggleMode();
     });
+
+    // Tooltip initialization
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
 });
 
 function toggleMode() {
@@ -163,6 +168,11 @@ function showLoading(message=""){
   }
 
 function showPageMsg(msgClass, msgContent) {
+    // Remove previous alerts
+    document.querySelectorAll(".alert-dismissible").forEach((alert) => {
+        alert.remove();
+    });
+
     const newAlert = document.createElement("div");
     newAlert.setAttribute("class", "alert " + msgClass + " alert-dismissible fade show");
     newAlert.setAttribute("role", "alert");
@@ -365,12 +375,21 @@ function validateEvent() {
 }
 
 
-function setInvalid(element, isInvalid) {
+function setInvalid(element, isInvalid, message=null) {
     // Sets an element as invalid (not validated)
     element.classList.remove("shaking");
     if (isInvalid){
         void element.offsetWidth; // Necessary for shake animation restart
         element.classList.add("is-invalid", "shaking");
+        if (message) {
+            let invDiv = element.parentElement.querySelector(".invalid-feedback");
+            if (!invDiv) {
+                invDiv = document.createElement("div");
+                invDiv.classList.add("invalid-feedback");
+                element.parentElement.appendChild(invDiv);
+            }
+            invDiv.innerText = message;
+        }
     } else {
         element.classList.remove("is-invalid");
     }

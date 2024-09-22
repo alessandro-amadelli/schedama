@@ -1,3 +1,8 @@
+import hashlib
+import re
+
+from django.contrib.auth.hashers import make_password, check_password
+from django.core import signing
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core.exceptions import PermissionDenied
@@ -11,15 +16,46 @@ import json
 from datetime import datetime, timedelta
 
 import schedama.dynamodb_ops as dynamodb_ops
-from schedama.settings import CACHE_TTL, CACHE_DB_TTL
-from .forms import EventForm
+from schedama.settings import CACHE_TTL, CACHE_DB_TTL, SECRET_KEY
+from .forms import EventForm, PasswordForm
 
 from collections import Counter
 
 
 class ServiceWorker(TemplateView):
-    template_name="events/sw.js"
-    content_type="application/javascript"
+    template_name = "events/sw.js"
+    content_type = "application/javascript"
+
+
+def generate_cookie_salt(event_id):
+    """
+    Generates a hash to be used as a salt in signing and verification of signed cookies
+    for private events authorization.
+    """
+    # Retrieving event data
+    event_data = get_event_data(event_id, "event")
+    creation_timestamp = event_data.get("creation_date")
+    password = event_data.get("password", "")
+
+    salt_hash = hashlib.sha256(
+        f'{event_id}{creation_timestamp}{SECRET_KEY}{password}'.encode()
+    ).hexdigest()
+    return salt_hash
+
+
+def check_event_authorization(request, event_id):
+    """
+    Check the request signed_cookie to verify if the user is authorized to access the event
+    """
+    try:
+        signed_value = request.get_signed_cookie(
+            f"auth_event_{event_id}", salt=generate_cookie_salt(event_id)
+        )
+        value = signing.loads(signed_value)
+    except (signing.BadSignature, KeyError):
+        return False
+
+    return value.get("authenticated", False)
 
 
 def get_event_data(item_id, item_type="event"):
@@ -38,15 +74,14 @@ def get_event_data(item_id, item_type="event"):
     return event_data
 
 
-def validate_event_new(event_data):
+def validate_event(event_data, custom_validation=False):
     """
     Event is validated through the django form.is_valid() function and fields are cleaned based on
     EventForm form class
     """
-    form = EventForm(event_data)
-    print(event_data)
+    form = EventForm(event_data, custom_validation)
 
-    if form.is_valid():
+    if form.is_valid(custom_validation):
         # Getting cleaned_data values for event fields
         event_data["author"] = form.cleaned_data["author"]
         event_data["title"] = form.cleaned_data["title"]
@@ -56,18 +91,29 @@ def validate_event_new(event_data):
         event_data["duration"] = form.cleaned_data["duration"]
         event_data["event_theme"] = form.cleaned_data["event_theme"]
         event_data["item_type"] = form.cleaned_data["item_type"]
+        event_data["private_event"] = form.cleaned_data.get("private_event", False)
+        # Saving event password
+        if custom_validation and event_data["private_event"]:
+            password = form.cleaned_data.get("password_1", None)
+            if password:
+                password = make_password(password)
+                event_data["password"] = password
+        # Removing password_1, password_2 fields
+        event_data.pop("password_1", None)
+        event_data.pop("password_2", None)
         return True, event_data
     return False, form.errors
 
 
-def save_event_to_db(event_data):
+def save_event_to_db(event_data, custom_validation=False):
     """
     This function calls event validation and saves event to the database
     """
-    is_validated, event_data = validate_event_new(event_data)
+    is_validated, event_data = validate_event(event_data, custom_validation)
 
     if not is_validated:
-        return False
+        error_msg = re.sub(r'\* .*?\n\s*\*', '', (event_data.as_text())).strip()
+        return False, error_msg
 
     # Save event to database
     db_event = dynamodb_ops.insert_record(event_data)
@@ -76,7 +122,7 @@ def save_event_to_db(event_data):
     cache_key = db_event["item_type"] + "_" + db_event["item_id"]
     cache.set(cache_key, event_data, CACHE_DB_TTL)
 
-    return event_data
+    return True, event_data
 
 
 @cache_page(CACHE_TTL)
@@ -121,10 +167,18 @@ def save_event_view(request):
     # Order event dates
     event_data["dates"].sort()
 
+    # Activate form custom validation (for private event settings managing)
+    custom_validation = True
+
     try:
-        new_event = save_event_to_db(event_data)
-        if not new_event:
-            raise Exception
+        result, new_event = save_event_to_db(event_data, custom_validation)
+
+        if not result:
+            response = {
+                "status": "ERROR",
+                "description": new_event
+            }
+            return JsonResponse(response)
     except Exception as e:
         response = {
             "status": "ERROR",
@@ -155,12 +209,16 @@ def participate_view(request, eventID):
 
     # Return page not found
     if not event_data:
-        # raise Http404
         return error404_view(request, None, eventID)
 
-    # Removing admin_key from event data before sending to the client for 
-    # security reasons
+    # Check if event is private and user is authorized
+    if event_data.get("private_event") and not check_event_authorization(request, eventID):
+        return private_event_view(request, eventID)
+
+    # Removing admin_key and event password (if present) from event data before
+    # sending to the client for security reasons
     event_data.pop('admin_key', None)
+    event_data.pop('password', None)
 
     # Adding dates so Django can display it in template
     event_data["dates_formatted"] = [
@@ -220,7 +278,11 @@ def add_participant_view(request):
     event_data = get_event_data(item_id, "event")
     event_settings = event_data["settings"]
 
-    ### AUTHORIZATION CHECK ###
+    ### AUTHORIZATION CHECKS ###
+    # Check if event is private and user is authorized
+    if event_data.get("private_event") and not check_event_authorization(request, item_id):
+        return private_event_view(request, item_id)
+
     # Check if the admin key is present and if it's correct
     is_admin = False
     user_add_participant = event_settings["add_participant"]
@@ -256,12 +318,25 @@ def add_participant_view(request):
         "dates": new_participant.get("dates", [])
     }
 
+    # Adding new participant and cleaning input
     event_data["participants"].append(new_participant_ok)
+    form = EventForm(event_data)
+    part_field = form.fields.get("participants")
 
-    # Saving updated event data
-    new_event = save_event_to_db(event_data)
+    participants = part_field.clean(event_data["participants"])
 
-    if new_event:
+    # Updating event
+    try:
+        dynamodb_ops.update_single_event(
+            event_data["item_id"],
+            event_data["item_type"],
+            {"participants": participants}
+        )
+        result = True
+    except Exception as e:
+        result = False
+
+    if result:
         response = {
             "status": "OK"
         }
@@ -275,11 +350,11 @@ def add_participant_view(request):
 
 
 def edit_event_view(request, eventID):
-    admin_key = request.GET.get('k','')
-    
+    admin_key = request.GET.get('k')
+
     ### CHECK AUTHORIZATION ###
     # Check if the admin key (URL parameter k) is present
-    if admin_key == '':
+    if not admin_key:
         return redirect("participate_view", eventID)
 
     # Get event data (only if the admin key is present)
@@ -288,6 +363,10 @@ def edit_event_view(request, eventID):
     # Return page not found
     if not event_data:
         return error404_view(request, None, eventID)
+
+    # Check if event is private and user is authorized
+    if event_data.get("private_event") and not check_event_authorization(request, eventID):
+        return private_event_view(request, eventID)
 
     # Check if the admin key provided as URL parameter correspond with the one
     # associated with the event
@@ -342,10 +421,15 @@ def update_event_view(request):
     ### CHECK AUTHORIZATION ###
     # Check user's and event authorizations
     is_admin = admin_key == event_data["admin_key"]
+    if event_data.get("private_event") and not check_event_authorization(request, item_id):
+        response = {
+            "status": "ERROR",
+            "description": _("You are not authorized to perform this operation.")
+        }
+        return JsonResponse(response)
     ### ###
 
     # Update ADMIN fields of the event
-    new_event = True
     if is_admin:
         # Handle participants explicitly removed from admin to avoid 
         # race conditions on participant list
@@ -411,20 +495,48 @@ def update_event_view(request):
             request_data["settings"].get("remove_participant", False)
         )
         event_data["event_bin"] = event_bin
-    
+
+        # Check if user has modified security settings
+        custom_validation = False
+        request_private_event = request_data.get("private_event")
+        # Check if private_event flag is present in request data
+        if request_private_event is not None:
+            # Check if private_event flag has been changed
+            if request_private_event != event_data.get("private_event", False):
+                event_data["private_event"] = request_private_event
+                # Check if private_event has been flagged
+                if request_private_event:
+                    custom_validation = True
+                    event_data["password_1"] = request_data.get("password_1", "")
+                    event_data["password_2"] = request_data.get("password_2", "")
+            else:
+                # If private_event flag has not been modified, check if the password has been updated
+                if (
+                        request_private_event and
+                        any([request_data.get("password_1", ""), request_data.get("password_2", "")])
+                ):
+                    custom_validation = True
+                    event_data["password_1"] = request_data.get("password_1", "")
+                    event_data["password_2"] = request_data.get("password_2", "")
+
         # Saving new event's info
-        new_event = save_event_to_db(event_data)
+        result, new_event = save_event_to_db(event_data, custom_validation)
 
-    if new_event:
-        response = {
-            "status": "OK"
-        }
-    else:
-        response = {
-            "status": "ERROR",
-            "description": _("Sorry, submitted data is invalid.")
-        }
+        if result:
+            response = {
+                "status": "OK"
+            }
+        else:
+            response = {
+                "status": "ERROR",
+                "description": new_event
+            }
 
+        return JsonResponse(response)
+    response = {
+        "status": "ERROR",
+        "description": _("You are not authorized to perform this operation.")
+    }
     return JsonResponse(response)
 
 
@@ -454,7 +566,15 @@ def modify_participants_view(request):
             "description": _("An error has occurred.")
         }
         return JsonResponse(response)
-    
+
+    # Check if event is private and user is authorized
+    if event_data.get("private_event") and not check_event_authorization(request, item_id):
+        response = {
+            "status": "ERROR",
+            "description": _("You are not authorized to perform this operation.")
+        }
+        return JsonResponse(response)
+
     # Event' settings
     event_settings = event_data["settings"]
     edit_participant = event_settings.get("edit_participant", False)
@@ -477,11 +597,28 @@ def modify_participants_view(request):
             if uid in to_delete:
                 event_data["event_bin"].append(p)
                 event_data["participants"].remove(p)
-    
-    # Saving data to database
-    new_event = save_event_to_db(event_data)
-    
-    if new_event:
+
+    # Updating event with new participants list
+    form = EventForm(event_data)
+    part_field = form.fields.get("participants")
+
+    participants = part_field.clean(event_data["participants"])
+
+    # Updating event
+    try:
+        dynamodb_ops.update_single_event(
+            event_data["item_id"],
+            event_data["item_type"],
+            {
+                "participants": participants,
+                "event_bin": event_data["event_bin"]
+            }
+        )
+        result = True
+    except Exception as e:
+        result = False
+
+    if result:
         response = {
             "status": "OK"
         }
@@ -541,9 +678,9 @@ def cancel_event_view(request):
     event_data["settings"]["remove_participant"] = False
 
     # Save changes to DB
-    new_event = save_event_to_db(event_data)
+    result, new_event = save_event_to_db(event_data)
 
-    if new_event:
+    if result:
         response = {
             "status": "OK"
         }
@@ -588,15 +725,15 @@ def reactivate_event_view(request):
         }
         return JsonResponse(response)
     
-    new_event = True
+    result = True
     if event_data.get("is_cancelled", False):
         # Removing expiration date and is_cancelled
         event_data.pop("is_cancelled", None)
         event_data.pop("expiration_date", None)
         # Update event data
-        new_event = save_event_to_db(event_data)
+        result, new_event = save_event_to_db(event_data)
     
-    if new_event:
+    if result:
         response = {
             "status": "OK"
         }
@@ -610,6 +747,70 @@ def reactivate_event_view(request):
 
 def history_view(request):
     return render(request, "events/history.html")
+
+
+def private_event_view(request, eventID):
+    admin_key = request.GET.get('k')
+
+    context = {
+        "event_id": eventID,
+        "admin_key": admin_key or ""
+    }
+
+    return render(request, "events/private_event.html", context)
+
+
+def password_check_view(request):
+    if request.method != 'POST':
+        return redirect("index")
+
+    form = PasswordForm(request.POST)
+    if not form.is_valid():
+        return redirect("index")
+
+    event_id = form.cleaned_data["event_id"]
+    password = form.cleaned_data["password"]
+    admin_key = form.cleaned_data.get("admin_key")
+
+    # Retrieve event data
+    event_data = get_event_data(event_id, "event")
+
+    # Return page not found
+    if not event_data:
+        return error404_view(request, None, event_id)
+
+    # Check request password against event password
+    event_password = event_data.get("password")
+
+    # Password check failed
+    if not check_password(password, event_password):
+        form.add_error(
+            "password",
+            _("Wrong password! Ehm...are you sure you're supposed to see this event?")
+        )
+        context = {
+            "event_id": event_id,
+            "form": form
+        }
+        return render(request, "events/private_event.html", context)
+
+    # If admin_key is present, user is trying to access edit event page
+    if admin_key:
+        # Authorise user and redirect to edit_event view
+        response = redirect(f"/edit-event/{event_id}?k={admin_key}")
+        signed_value = signing.dumps({'authenticated': True})
+        response.set_signed_cookie(
+            f"auth_event_{event_id}", signed_value, salt=generate_cookie_salt(event_id)
+        )
+        return response
+
+    # Authorise user and redirect to participant view
+    response = redirect(f'/participate/{event_id}')
+    signed_value = signing.dumps({'authenticated': True})
+    response.set_signed_cookie(
+        f"auth_event_{event_id}", signed_value, salt=generate_cookie_salt(event_id)
+    )
+    return response
 
 
 @cache_page(CACHE_TTL)

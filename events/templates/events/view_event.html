@@ -30,8 +30,20 @@
         <span class="badge text-bg-danger w-100 fs-3 p-3 my-3">{% translate "Event Cancelled" %}</span>
     {% endif %}
 
+    <!-- Event title-->
     <div class="title-section{% if event.is_cancelled %} opacity-50{% endif %} mb-3">
         <h1 class="entering event-title"><span id="eventTitle">{{ event.title }}</span></h1>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            {% if event.private_event %}
+                <span class="badge text-bg-info fs-6" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{% translate 'A password is needed to access this event.' %}">
+                    <i class="fa-solid fa-lock fa-bounce" style="--fa-animation-iteration-count:2;"></i>
+                    {% translate "Private event" %}
+                </span>
+            {% endif %}
+        </div>
     </div>
 
     <!-- Countdown row -->
@@ -290,7 +302,7 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             <i class="fa-solid fa-circle-xmark"></i> {% translate "Cancel" %}
                         </button>
-                        <button type="button" class="btn btn-light" id="btnConfirmParticipate" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-light" id="btnConfirmParticipate">
                             <i class="fa-solid fa-user-plus"></i> {% translate "Join" %}
                         </button>
                     </div>

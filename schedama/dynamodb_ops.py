@@ -10,7 +10,7 @@ from datetime import datetime
 import secrets
 
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Key
 
 # Connection to dynamoDB using TEST or PRODUCTION credentials based on environment
 if os.environ['SCHEDAMA_ENVIRONMENT'] == 'PRODUCTION':
@@ -25,6 +25,7 @@ else:
 
 table = dynamodb.Table('schedama_table')
 
+
 # SELECT OPERATIONS #
 def select_records_by_type(item_type):
     response = table.query(
@@ -32,6 +33,7 @@ def select_records_by_type(item_type):
     KeyConditionExpression=Key('item_type').eq(item_type)
     )
     return response['Items']
+
 
 def select_record_by_id(item_id, item_type):
     response = table.query(
@@ -44,6 +46,7 @@ def select_record_by_id(item_id, item_type):
 
     return []
 
+
 # INSERT OPERATIONS #
 def get_new_item_id(item_type):
     UID_LENGTH = 6
@@ -54,9 +57,11 @@ def get_new_item_id(item_type):
             return new_id
     return False
 
+
 def generate_admin_key():
     KEY_LENGTH = 32
     return secrets.token_urlsafe(KEY_LENGTH)
+
 
 def generate_participant_id(participant_ids):
     """
@@ -69,6 +74,27 @@ def generate_participant_id(participant_ids):
         uid = secrets.token_urlsafe(UID_LENGTH)
         if uid not in participant_ids:
             return uid
+
+
+def check_participants(participants):
+    """
+    Check if each participant has a UID and generates a new one if missing.
+    The function returns the fixed participants list
+    """
+    participant_ids = [p.get("uid", None) for p in participants]
+
+    for p in participants:
+        # Get participant's UID
+        pid = p.get("uid", None)
+        if not pid:
+            # Participant is without ID, so a new ID is generated and assigned to participant
+            pid = generate_participant_id(participant_ids)
+            p["uid"] = pid
+            # New participant's id is appended to the list
+            participant_ids.append(pid)
+        p["dates"] = p.get("dates", [])
+
+    return participants
 
 def insert_record(record_data):
     # Check if it's an insert or update operation based on item_id presence
@@ -89,25 +115,50 @@ def insert_record(record_data):
         timestamp = datetime.now().strftime("%Y-%m-%d h.%H:%M:%S.%f")
         record_data["creation_date"] = timestamp
 
-    # Managing participant UIDs
-    # List that contain all participant UIDs to check univocity
-    participant_ids = [p.get("uid", None) for p in record_data["participants"]]
-
-    for p in record_data["participants"]:
-        # Get participant's UID
-        pid = p.get("uid", None)
-        if not pid:
-            # Participant is without ID, so a new ID is generated and assigned to participant
-            pid = generate_participant_id(participant_ids)
-            p["uid"] = pid
-            # New participant's id is appended to the list
-            participant_ids.append(pid)
+    # Checking and fixing participants
+    record_data["participants"] = check_participants(record_data["participants"])
 
     # Updating last modification date
     record_data["last_modified"] = datetime.now().strftime("%Y-%m-%d h.%H:%M:%S.%f")
 
     table.put_item(Item=record_data)
     return record_data
+
+
+# UPDATE OPERATIONS #
+def update_single_event(item_id, item_type, update_dict=dict()):
+    """
+    Updates values on one or more field of an event record.
+    update_dict is a dictionary with the following format:
+      {"field": "value", ...}
+    """
+    if not update_dict:
+        return False
+
+    if "participants" in update_dict.keys():
+        # Check and fix participants list
+        update_dict["participants"] = check_participants(update_dict["participants"])
+
+    update_expression = "SET"
+    expression_attribute_values = {}
+
+    for i, (k, v) in enumerate(update_dict.items()):
+        if len(update_expression) > 3:
+            update_expression += ","
+        update_expression += f" {k} = :v{i}"
+        expression_attribute_values[f":v{i}"] = v
+
+    response = table.update_item(
+        Key={
+            "item_id": item_id,
+            "item_type": item_type
+        },
+        UpdateExpression=update_expression,
+        ExpressionAttributeValues=expression_attribute_values
+    )
+
+    return response
+
 
 # DELETE OPERATIONS #
 def delete_single_record(item_id, item_type):

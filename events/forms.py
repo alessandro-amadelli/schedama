@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.text import Truncator
+from django.utils.translation import gettext as _
 
 # Max lengths of EventForm fields
 AUTHOR_MAX_LENGTH = 30
@@ -23,6 +24,10 @@ class EventForm(forms.Form):
     event_theme = forms.CharField(required=False)
     settings = forms.JSONField()
     item_type = forms.CharField(required=False, initial="event")
+    private_event = forms.BooleanField(required=False)
+    password_1 = forms.CharField(required=False)
+    password_2 = forms.CharField(required=False)
+    custom_validation = forms.BooleanField(required=False)
 
     def clean_author(self):
         author = self.cleaned_data.get("author", "")
@@ -70,5 +75,40 @@ class EventForm(forms.Form):
         settings = self.cleaned_data["settings"]
         return settings
 
-    def clean_item_type(self):
+    @staticmethod
+    def clean_item_type():
         return "event"
+
+    def clean_private_event(self):
+        private_event = self.cleaned_data["private_event"]
+        if private_event is None:
+            private_event = False
+        return private_event
+
+    def is_valid(self, custom_validation=False):
+        valid = super(EventForm, self).is_valid()
+
+        if not custom_validation:
+            return valid
+
+        if self.cleaned_data.get("private_event"):
+            if not self.cleaned_data.get("password_1") or not self.cleaned_data.get("password_2"):
+                self.add_error(
+                    None,
+                    _("You checked \"Make event private\" option but did not set a password.")
+                )
+                return False
+            if self.cleaned_data.get("password_1") != self.cleaned_data.get("password_2"):
+                self.add_error(
+                    None,
+                    _("The passwords you entered do not match.")
+                )
+                return False
+
+        return valid
+
+
+class PasswordForm(forms.Form):
+    event_id = forms.CharField()
+    password = forms.CharField()
+    admin_key = forms.CharField(required=False)

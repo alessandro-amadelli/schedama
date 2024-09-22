@@ -26,7 +26,18 @@
     <input type="text" id="item-id" value="{{ event.item_id }}" hidden>
     <input type="text" id="admin-key" value="{{ event.admin_key }}" hidden>
 
-    <div class="section p-2">
+
+<div class="section p-2">
+        <div class="row m-3">
+            <div class="col-12">
+                {% if event.private_event %}
+                    <span class="badge text-bg-info fs-6" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{% translate 'A password is needed to access this event.' %}">
+                        <i class="fa-solid fa-lock fa-bounce" style="--fa-animation-iteration-count:2;"></i>
+                        {% translate "Private event" %}
+                    </span>
+                {% endif %}
+            </div>
+        </div>
         <div class="row m-3">
           <div class="col-6 d-flex p-1">
             <button type="button" class="btn btn-light col-12" id="btnEventSettings" data-bs-target="#modalEventSettings" data-bs-toggle="modal">
@@ -331,7 +342,7 @@
         </div>
     </div>
 
-    <!-- Modal to configure event options -->
+    <!-- Modal to configure event settings -->
     <div class="modal fade" id="modalEventSettings" tabindex="-1">
         <div class="modal-dialog rounded">
             <div class="modal-content">
@@ -345,23 +356,43 @@
                         <div class="mb-3">
                             <div class="form-check form-switch fs-4">
                             <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant"
-                            {% if event.settings.add_participant %} checked {% endif %} {% if event.is_cancelled %} disabled="true"{% endif %}>
+                                   {% if event.settings.add_participant %} checked {% endif %} {% if event.is_cancelled %} disabled="disabled" {% endif %}>
                             <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-check form-switch fs-4">
-                            <input class="form-check-input" type="checkbox" role="switch" id="switchEditParticipant" 
-                            {% if event.settings.edit_participant %}checked{% endif %} {% if event.is_cancelled %} disabled="true"{% endif %}>
-                            <label class="form-check-label" for="switchRemoveParticipant">{% translate "Edit participants" %}</label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="switchEditParticipant"
+                                       {% if event.settings.edit_participant %}checked{% endif %} {% if event.is_cancelled %} disabled="disabled" {% endif %}>
+                                <label class="form-check-label" for="switchRemoveParticipant">{% translate "Edit participants" %}</label>
                             </div>
                         </div>
+                        <div class="mb-5">
+                            <div class="form-check form-switch fs-4">
+                                <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant"
+                                       {% if event.settings.remove_participant %}checked{% endif %} {% if event.is_cancelled %} disabled="disabled" {% endif %}>
+                                <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
+                            </div>
+                        </div>
+                        <h5><i class="fa-solid fa-shield"></i> {% translate "Security" %}</h5>
                         <div class="mb-3">
                             <div class="form-check form-switch fs-4">
-                            <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant" 
-                            {% if event.settings.remove_participant %}checked{% endif %} {% if event.is_cancelled %} disabled="true"{% endif %}>
-                            <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="switchPrivateEvent"
+                                       {% if event.private_event %}checked{% endif %} {% if event.is_cancelled %} disabled="disabled" {% endif %}>
+                                <label class="form-check-label" for="switchPrivateEvent">{% translate "Private event" %}</label>
                             </div>
+                        </div>
+                        <div class="mb-3 password-div">
+                            <p class="text-warning">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                {% translate "If you set or change the event password, everyone will need to enter this password to access the event." %}
+                            </p>
+                            <label for="password_1">{% translate "Password" %}</label>
+                            <input type="password" class="form-control" id="password_1" maxlength="100">
+                        </div>
+                        <div class="mb-3 password-div">
+                             <label for="password_2">{% translate "Repeat password" %}</label>
+                            <input type="password" class="form-control" id="password_2" maxlength="100">
                         </div>
                     </form>
                 </div>

@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addParticipantToTable();
     };
 
-    // Checkbox to confirm event cancelation
+    // Checkbox to confirm event cancellation
     const checkCancelEvent = document.querySelector("#checkCancelEvent");
     if (checkCancelEvent) {
         checkCancelEvent.removeEventListener('change', enableSave);
@@ -92,10 +92,31 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(".removed-participant").forEach((item) => {
         item.addEventListener("click", () => {restoreParticipant(item)});
     });
+
+    // Event listener to show password inputs based on private_event flag
+    document.getElementById("switchPrivateEvent").addEventListener('change', togglePasswordVisibility);
+    togglePasswordVisibility();
 });
 
 var removedParticipantsArray = [];
 var restoredParticipantsArray = [];
+
+function togglePasswordVisibility() {
+    const switchPrivateEvent = document.getElementById("switchPrivateEvent");
+    if (switchPrivateEvent) {
+        const passwordDiv = document.querySelectorAll(".password-div");
+        if (switchPrivateEvent.checked) {
+            passwordDiv.forEach((div) => {
+                div.style.display = "block";
+            });
+        } else {
+            passwordDiv.forEach((div) => {
+                div.style.display = "none";
+                div.querySelector("input").value = "";
+            });
+        }
+    }
+}
 
 function restoreParticipant(item) {
     const partUID = item.dataset.partuid;
@@ -452,6 +473,13 @@ function getEventData() {
         eventTheme = "";
     }
 
+    let privateEvent = document.getElementById("switchPrivateEvent") || false;
+    if (privateEvent) {
+        privateEvent = privateEvent.checked;
+    }
+    let password1 = document.getElementById("password_1").value;
+    let password2 = document.getElementById("password_2").value;
+
     const eventData = {
         item_id: itemID,
         admin_key: adminKey,
@@ -466,6 +494,9 @@ function getEventData() {
         participants: eventParticipants,
         removed_participants: removedParticipantsArray,
         restored_participants: restoredParticipantsArray,
+        private_event: privateEvent,
+        password_1: password1,
+        password_2: password2,
         settings: {
             add_participant: eventAddParticipant,
             edit_participant: eventEditParticipant,
@@ -613,7 +644,8 @@ async function sendEventReactivationToServer() {
 
 function updateHistory() {
     const eventDataFull = getEventData();
-    const partLink = (window.location.href.slice(0, window.location.href.indexOf("?k="))).replace("edit-event", "participate");
+    let itemID = eventDataFull.item_id;
+    const partLink = `${window.location.origin}/participate/${itemID}`;
 
     const eventData = {
         item_id: eventDataFull.item_id,

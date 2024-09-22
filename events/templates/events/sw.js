@@ -1,4 +1,4 @@
-const cacheName = 'schedama-cache-v3.5.19';
+const cacheName = 'schedama-cache-v3.5.25';
 
 function precache() {
 	return caches.open('schedama-cache').then(function (cache){

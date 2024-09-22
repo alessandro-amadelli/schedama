@@ -149,6 +149,12 @@ function initializeAddDescriptionRow() {
             showDescriptionRow(radio.value == 'Y');
         })
     });
+
+    // Event listener to show password inputs
+    const switchPrivateEvent = document.querySelector("#switchPrivateEvent");
+    switchPrivateEvent.addEventListener('change', () => {
+        passwordInputVisibility(switchPrivateEvent.checked);
+    });
 }
 
 function showDescriptionRow(toShow) {
@@ -158,6 +164,21 @@ function showDescriptionRow(toShow) {
     } else {
         document.querySelector("#descriptionRow").style.display = "none";
         initializeAddLocationRow();
+    }
+}
+
+function passwordInputVisibility(toShow) {
+    const passwordRows = document.querySelectorAll(".password-row");
+    if (toShow) {
+        passwordRows.forEach((row) => {
+            row.style.display = "block";
+            row.style.animationPlayState = "running";
+        });
+    } else {
+        passwordRows.forEach((row) => {
+            row.style.display = "none";
+            row.querySelector("input").value = "";
+        });
     }
 }
 
@@ -257,11 +278,14 @@ function initializeDateRow() {
         // Initialize participant row
         initializeParticipantRow();
     
-        // Initialize settings row
-        initializeSettingsRow();
-    
         // Initialize theme row with thumbnails
         initializeThemeRow();
+
+        // Initialize settings row
+        initializeSettingsRow();
+
+        // Initialize security row
+        initializeSecurityRow();
     });
 }
 
@@ -282,12 +306,17 @@ function initializeThemeRow() {
     themeRow.style.animationPlayState = "running";
 }
 
+function initializeSecurityRow() {
+    const securityRow = document.querySelector("#securityRow");
+    securityRow.style.animationPlayState = "running";
+}
+
 function createNewDate() {
     const dateRow = document.querySelector("#dateRow");
     const firstDate = dateRow.querySelector("#dateInp"); // First date input field
 
     if (firstDate.value == '') {
-        setInvalid(firstDate, true);
+        setInvalid(firstDate, true, gettext("You have to choose at least one date."));
         return false;
     } else {
         const btnSave = document.querySelector("#btnSaveEvent");
@@ -438,23 +467,13 @@ function createNewParticipant(partName=null) {
     notify(gettext("Participant added"));
 }
 
-function setInvalid(element, isInvalid) {
-    element.classList.remove("shaking");
-    if (isInvalid){
-        void element.offsetWidth; // Necessary for shake animation restart
-        element.classList.add("is-invalid", "shaking");
-    } else {
-        element.classList.remove("is-invalid");
-    }
-}
-
 function validateEvent() {
     validated = true;
 
     // Check #1 Title
     const title = document.querySelector("#eventTitle");
     if (title.value.replaceAll(" ", "").length == 0) {
-        setInvalid(title, true);
+        setInvalid(title, true, gettext("Insert a title for your event."));
         validated = false;
     } else {
         setInvalid(title, false);
@@ -465,7 +484,7 @@ function validateEvent() {
     const location = document.querySelector("#eventLocation");
     if (locSwitch.checked) {
         if (location.value.replaceAll(" ", "").length == 0) {
-            setInvalid(location, true);
+            setInvalid(location, true, gettext("Please enter a location."));
             validated = false;
         } else {
             setInvalid(location, false);
@@ -478,10 +497,19 @@ function validateEvent() {
     const firstDate = document.querySelector("#dateInp");
     const dates = document.querySelectorAll("[name='eventDate']");
     if (dates.length == 0) {
-        setInvalid(firstDate, true);
+        setInvalid(firstDate, true, gettext("You have to choose at least one date."));
         validated = false;
     } else {
         setInvalid(firstDate, false);
+    }
+
+    // Check #4 Private event
+    const privateEvent = document.querySelector("#switchPrivateEvent").checked;
+    const eventPassword1 = document.querySelector("#eventPassword1");
+    const eventPassword2 = document.querySelector("#eventPassword2");
+
+    if (privateEvent) {
+
     }
 
     return validated;
@@ -521,10 +549,10 @@ function restorePreviousData() {
 
     // Event location
     initializeAddLocationRow();
-    initializeLocationRow();
     document.querySelector("#eventLocation").value = unsavedEvent.location;
     if (unsavedEvent.has_location) {
         document.querySelector("#addLocY").checked = true;
+        initializeLocationRow();
     } else {
         document.querySelector("#addLocN").checked = true;
     }
@@ -580,6 +608,9 @@ function restorePreviousData() {
 
     // Initialize theme row with thumbnails
     initializeThemeRow();
+
+    // Initialize security row
+    initializeSecurityRow();
 }
 
 function clearPreviousData() {
@@ -628,6 +659,11 @@ function saveLocally() {
         selectedTheme = "";
     }
 
+    // Security
+    const privateEvent = document.querySelector("#switchPrivateEvent").checked;
+    const password1 = document.querySelector("#eventPassword1").value;
+    const password2 = document.querySelector("#eventPassword2").value;
+
     // Create unsaved event object
     unsavedEvent = {
         author: author,
@@ -643,11 +679,14 @@ function saveLocally() {
             add_participant: addParticipant,
             edit_participant: editParticipant,
             remove_participant: removeParticipant
-        }
+        },
+        private_event: privateEvent,
+        password_1: password1,
+        password_2: password2
     }
 
     // Save event data to local storage
-    localStorage.setItem("unsavedEvent", JSON.stringify(unsavedEvent)); 
+    localStorage.setItem("unsavedEvent", JSON.stringify(unsavedEvent));
 }
 
 async function sendEventToServer() {
