@@ -38,7 +38,7 @@
     <div class="row mb-3">
         <div class="col-12">
             {% if event.private_event %}
-                <span class="badge text-bg-info fs-6" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{% translate 'A password is needed to access this event.' %}">
+                <span class="badge text-bg-info fs-6" id="privateEventBadge" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{% translate 'A password is needed to access this event.' %}">
                     <i class="fa-solid fa-lock fa-bounce" style="--fa-animation-iteration-count:2;"></i>
                     {% translate "Private event" %}
                 </span>

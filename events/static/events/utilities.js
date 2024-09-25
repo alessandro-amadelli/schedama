@@ -436,6 +436,13 @@ function addToHistory(eventData) {
                 item.author = eventData.author;
             }
             present = true;
+            if (eventData.hasOwnProperty("private_event")) {
+                if (eventData.private_event) {
+                    item["private_event"] = true;
+                } else {
+                    item["private_event"] = false;
+                }
+            }
         }
         return !present; // every() stops if the return is false
     });

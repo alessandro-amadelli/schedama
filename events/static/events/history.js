@@ -45,6 +45,11 @@ function fillHistory() {
         const cardTitle = document.createElement("h5");
         cardTitle.setAttribute("class", "card-title text-truncate");
         cardTitle.innerText = item.title;
+        if (item.hasOwnProperty("private_event")) {
+            if (item["private_event"]) {
+                cardTitle.innerHTML = `<i class="fa-solid fa-lock"></i>&nbsp;` + item.title;
+            }
+        }
 
         // Last visited
         const cardP = document.createElement("p");

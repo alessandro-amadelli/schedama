@@ -658,11 +658,19 @@ function updateHistory() {
         eventAuthor = eventAuthor.innerText;
     }
 
+    let privateEventBadge = document.getElementById("privateEventBadge");
+    if (privateEventBadge) {
+        privateEventBadge = true;
+    } else {
+        privateEventBadge = false;
+    }
+
     const eventData = {
         item_id: itemID,
         title: eventTitle,
         participation_link: `${window.location.origin}/participate/${itemID}`,
-        author: eventAuthor
+        author: eventAuthor,
+        private_event: privateEventBadge
     };
 
     addToHistory(eventData);
