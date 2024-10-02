@@ -142,11 +142,17 @@ def update_single_event(item_id, item_type, update_dict=dict()):
     update_expression = "SET"
     expression_attribute_values = {}
 
+    i = 0
     for i, (k, v) in enumerate(update_dict.items()):
         if len(update_expression) > 3:
             update_expression += ","
         update_expression += f" {k} = :v{i}"
         expression_attribute_values[f":v{i}"] = v
+
+    # Updating last_modified timestamp
+    last_modified = datetime.now().strftime("%Y-%m-%d h.%H:%M:%S.%f")
+    update_expression += f", last_modified = :v{i+1}"
+    expression_attribute_values[f":v{i+1}"] = last_modified
 
     response = table.update_item(
         Key={

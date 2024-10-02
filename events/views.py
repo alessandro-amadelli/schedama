@@ -611,7 +611,7 @@ def modify_participants_view(request):
             event_data["item_type"],
             {
                 "participants": participants,
-                "event_bin": event_data["event_bin"]
+                "event_bin": event_data.get("event_bin", [])
             }
         )
         result = True
