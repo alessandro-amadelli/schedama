@@ -6,13 +6,13 @@
     --card-bg-color: rgba(255,255,255,.7);
     --color: black;
     --event-div-bg: rgba(255,255,255,.2);
-    --event-ended-bg: rgba(255, 0, 0, .5);
+    --event-ended-bg: rgba(255,0,0,.5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.85);
     --moving-bg-color: rgba(0,0,0,.2);
     --navbar-bg-color: white;
-    --section-bg-color: rgba(0, 102, 255, 0);
-    --text-muted-color: rgb(92, 92, 92);
+    --section-bg-color: rgba(0,102,255,0);
+    --text-muted-color: rgb(92,92,92);
     --title-color: #073b4c;
 
     overflow-x: hidden;
@@ -134,7 +134,7 @@ nav {
     animation-play-state: paused;
 }
 
-.entering {
+.entering, .entering-1, .entering-2, .entering-3, .entering-4 {
     animation-name: introAnimation;
     animation-duration: .6s;
     animation-fill-mode: backwards;
@@ -143,42 +143,22 @@ nav {
 }
 
 .entering-1 {
-    animation-name: introAnimation;
-    animation-duration: .6s;
-    animation-fill-mode: backwards;
-    animation-iteration-count: 1;
-    animation-play-state: running;
-    animation-delay: .1s;
-}
-
-.entering-2 {
-    animation-name: introAnimation;
-    animation-duration: .6s;
-    animation-fill-mode: backwards;
-    animation-iteration-count: 1;
-    animation-play-state: running;
     animation-delay: .2s;
 }
 
-.entering-3 {
-    animation-name: introAnimation;
-    animation-duration: .6s;
-    animation-fill-mode: backwards;
-    animation-iteration-count: 1;
-    animation-play-state: running;
-    animation-delay: .3s;
-}
-
-.entering-4 {
-    animation-name: introAnimation;
-    animation-duration: .6s;
-    animation-fill-mode: backwards;
-    animation-iteration-count: 1;
-    animation-play-state: running;
+.entering-2 {
     animation-delay: .4s;
 }
 
-.appearing {
+.entering-3 {
+    animation-delay: .6s;
+}
+
+.entering-4 {
+    animation-delay: .8s;
+}
+
+.appearing, .appearing-1, .appearing-2, .appearing-3, .appearing-4 {
     animation-name: fadeInAnimation;
     animation-duration: 1.5s;
     animation-fill-mode: backwards;
@@ -187,38 +167,18 @@ nav {
 }
 
 .appearing-1 {
-    animation-name: fadeInAnimation;
-    animation-duration: 1.5s;
-    animation-fill-mode: backwards;
-    animation-iteration-count: 1;
-    animation-play-state: running;
     animation-delay: .2s;
 }
 
 .appearing-2 {
-    animation-name: fadeInAnimation;
-    animation-duration: 1.5s;
-    animation-fill-mode: backwards;
-    animation-iteration-count: 1;
-    animation-play-state: running;
     animation-delay: .5s;
 }
 
 .appearing-3 {
-    animation-name: fadeInAnimation;
-    animation-duration: 1.5s;
-    animation-fill-mode: backwards;
-    animation-iteration-count: 1;
-    animation-play-state: running;
     animation-delay: .8s;
 }
 
 .appearing-4 {
-    animation-name: fadeInAnimation;
-    animation-duration: 1.5s;
-    animation-fill-mode: backwards;
-    animation-iteration-count: 1;
-    animation-play-state: running;
     animation-delay: 1.1s;
 }
 
@@ -372,7 +332,7 @@ select, option {
     top: 0%;
     left: 0%;
     z-index: -1;
-    background: radial-gradient(circle, var(--event-started-bg) 35%, var(--body-bg-color) 37%);
+    background: radial-gradient(circle, var(--event-started-bg) 35%, var(--event-div-bg) 37%);
     animation-name: timerStartedAnimation;
     animation-duration: 3s;
     animation-fill-mode:forwards;

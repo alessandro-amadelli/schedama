@@ -341,50 +341,58 @@ function initializeChartDates() {
 
     let evDates = dates.slice();
     let values = [];
+    let labels = [];
     let noIndic = 0;
-    let color = [];
+    let colors = [];
 
+    // Build values and labels arrays for chart
     evDates.forEach(d => {
         let datVal = 0;
         participants.forEach((p, i) => {
             if (p.dates.includes(d)) {
                 datVal += 1;
-            } 
+            }
         });
-        values.push(datVal);
+        if (datVal > 0) {
+            values.push(datVal);
+            // Chart labels (in "dd/mm h.HH:MM" format)
+            let s = d.substring(8,10) + "/" + d.substring(5,7) + " h." + d.substring(11);
+            labels.push(s);
+        }
     });
 
+    // Adding bar for no indications
     participants.forEach((p) => {
         if (p.dates.length == 0) {
             noIndic += 1;
         }
     });
-
-    // Chart labels (in "dd/mm HH:MM" format)
-    let labels = [];
-    evDates.forEach(d => {
-        let s = d.substring(8,10) + "/" + d.substring(5,7) + " " + d.substring(11);
-        labels.push(s);
-    });
-    labels.push(gettext("No Indications"));
-    
-    values.push(noIndic);
+    if (noIndic > 0) {
+        labels.push(gettext("No Indications"));
+        values.push(noIndic);
+    }
 
     // Set color of bars (with max bars colored differently)
     values.forEach((val) => {
         if (val == Math.max(...values)) {
-            color.push("#06d6a0"); // Color of preferred date
+            colors.push("#06d6a0"); // Color of preferred date
         } else {
-            color.push("#118ab2");
+            colors.push("#118ab2");
         }
     });
+
+    let labelColor = "#000000";
+     if (document.querySelector("body").classList.contains("dark-mode")) {
+        labelColor = "#ffffff";
+     }
 
     let data = {
         labels: labels,
         datasets: [{
+            axis: 'y',
             label: gettext("Preferences"),
             data: values,
-            backgroundColor: color,
+            backgroundColor: colors,
             barPercentage: 0.4,
             borderRadius: 5
         }],
@@ -394,6 +402,7 @@ function initializeChartDates() {
         type: "bar",
         data,
         options: {
+            indexAxis: 'y',
             plugins: {
                 legend: {
                     display: false
@@ -403,6 +412,9 @@ function initializeChartDates() {
                 x: {
                     grid: {
                         display: false
+                    },
+                    ticks: {
+                        display: false
                     }
                 },
                 y: {
@@ -411,7 +423,7 @@ function initializeChartDates() {
                     },
                     ticks: {
                         stepSize: 1,
-                        display: false
+                        color: labelColor
                     }
                 }
             }
