@@ -1,6 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     initializeEntirePage();
+    document.addEventListener('modeChanged', updateCharts);
 });
+
+function updateCharts() {
+    // Render and update charts
+    document.querySelectorAll("canvas").forEach((element) => {
+        try {
+            // Awful try-catch to make things work because...JS!
+            const ctx = element.getContext('2d');
+            const chart = Chart.getChart(ctx);
+            chart.render();
+            chart.update();
+        } catch {}
+    });
+}
 
 var updateInterval = "";
 var deadline = "";
@@ -381,10 +395,7 @@ function initializeChartDates() {
         }
     });
 
-    let labelColor = "#000000";
-     if (document.querySelector("body").classList.contains("dark-mode")) {
-        labelColor = "#ffffff";
-     }
+
 
     let data = {
         labels: labels,
@@ -422,18 +433,29 @@ function initializeChartDates() {
                         display: false
                     },
                     ticks: {
-                        stepSize: 1,
-                        color: labelColor
+                        stepSize: 1
                     }
                 }
             }
-        }
+        },
+        plugins: [{
+            id: 'changeLabelColor',
+            beforeDraw: (chart) => {
+                let labelColor = "#000000";
+                if (document.querySelector("body").classList.contains("dark-mode")) {
+                    labelColor = "#ffffff";
+                }
+                const ctx = chart.ctx;
+                chart.options.scales.y.ticks.color = labelColor;
+            }
+        }]
     };
 
     dateBarChart = new Chart(
         document.querySelector("#datesChart"),
         config
     );
+
 }
 
 function prepareParticipateModal() {

@@ -131,6 +131,11 @@ function setMode(currentMode) {
     }
     // Saving new current mode to localStorage
     localStorage.setItem("currentMode", currentMode);
+
+    // Generate custom event
+    var modeChanged = new CustomEvent('modeChanged', {});
+    document.dispatchEvent(modeChanged);
+
 }
 
 function showLoading(message=""){
