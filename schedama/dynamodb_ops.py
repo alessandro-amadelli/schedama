@@ -16,8 +16,10 @@ from boto3.dynamodb.conditions import Key
 if os.environ['SCHEDAMA_ENVIRONMENT'] == 'PRODUCTION':
     AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
     AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
-    dynamodb = boto3.resource('dynamodb', region_name='eu-central-1',
-        aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+    dynamodb = boto3.resource(
+        'dynamodb', region_name='eu-central-1',
+        aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+    )
 else:
     AWS_ACCESS_KEY_ID = os.environ["TEST_AWS_ACCESS_KEY_ID"]
     AWS_SECRET_ACCESS_KEY = os.environ["TEST_AWS_SECRET_ACCESS_KEY"]
@@ -29,16 +31,16 @@ table = dynamodb.Table('schedama_table')
 # SELECT OPERATIONS #
 def select_records_by_type(item_type):
     response = table.query(
-    ScanIndexForward=True,
-    KeyConditionExpression=Key('item_type').eq(item_type)
+        ScanIndexForward=True,
+        KeyConditionExpression=Key('item_type').eq(item_type)
     )
     return response['Items']
 
 
 def select_record_by_id(item_id, item_type):
     response = table.query(
-    ScanIndexForward=True,
-    KeyConditionExpression=Key('item_type').eq(item_type) & Key('item_id').eq(item_id)
+        ScanIndexForward=True,
+        KeyConditionExpression=Key('item_type').eq(item_type) & Key('item_id').eq(item_id)
     )
 
     if len(response['Items']) > 0:
@@ -53,7 +55,7 @@ def get_new_item_id(item_type):
 
     for i in range(100):
         new_id = secrets.token_urlsafe(UID_LENGTH)
-        if select_record_by_id(new_id, item_type) == []:
+        if not select_record_by_id(new_id, item_type):
             return new_id
     return False
 
@@ -95,6 +97,7 @@ def check_participants(participants):
         p["dates"] = p.get("dates", [])
 
     return participants
+
 
 def insert_record(record_data):
     # Check if it's an insert or update operation based on item_id presence

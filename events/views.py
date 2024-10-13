@@ -69,8 +69,6 @@ def get_event_data(item_id, item_type="event"):
         event_data = dynamodb_ops.select_record_by_id(item_id, item_type)
         cache.set(cache_key, event_data, CACHE_DB_TTL)
 
-    event_data = dynamodb_ops.select_record_by_id(item_id, item_type)
-
     return event_data
 
 
@@ -817,7 +815,7 @@ def password_check_view(request):
 def error404_view(request, exception, eventID=""):
     context = {}
 
-    # If eventID is passed, pass down the value to template so it can be
+    # If eventID is passed, pass down the value to template, so it can be
     # removed from user's history
     if eventID != "":
         context["item_id"] = eventID
