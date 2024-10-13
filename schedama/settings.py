@@ -136,11 +136,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default cache TTLs values
-CACHE_TTL = 60 * 15 # for entire views
-CACHE_DB_TTL = 60 * 60 * 24 * 2 # for database records (eg.: events)
+CACHE_TTL = 60 * 15  # for entire views
+CACHE_DB_TTL = 60 * 60 * 24 * 2  # for database records (eg.: events)
 
 # If production environment
-if os.environ.get("SCHEDAMA_ENVIRONMENT","TEST") == "PRODUCTION":
+if os.environ.get("SCHEDAMA_ENVIRONMENT", "TEST") == "PRODUCTION":
     STORAGES = {
         "staticfiles": {
             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",

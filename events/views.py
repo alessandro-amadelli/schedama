@@ -33,7 +33,7 @@ def generate_cookie_salt(event_id):
     for private events authorization.
     """
     # Retrieving event data
-    event_data = get_event_data(event_id, "event")
+    event_data = get_event_data(event_id)
     creation_timestamp = event_data.get("creation_date")
     password = event_data.get("password", "")
 
@@ -144,6 +144,9 @@ def about_us_view(request):
 
 
 def save_event_view(request):
+    """
+    This view is called when creating a new event
+    """
     if request.method != 'POST':
         return redirect("index")
 
@@ -203,7 +206,7 @@ def open_event_view(request):
 
 def participate_view(request, eventID):
     # Retrieving event data
-    event_data = get_event_data(eventID, "event")
+    event_data = get_event_data(eventID)
 
     # Return page not found
     if not event_data:
@@ -273,7 +276,7 @@ def add_participant_view(request):
     admin_key = request_data.get("admin_key", None)
 
     # Event data retrieved from database
-    event_data = get_event_data(item_id, "event")
+    event_data = get_event_data(item_id)
     event_settings = event_data["settings"]
 
     ### AUTHORIZATION CHECKS ###
@@ -356,7 +359,7 @@ def edit_event_view(request, eventID):
         return redirect("participate_view", eventID)
 
     # Get event data (only if the admin key is present)
-    event_data = get_event_data(eventID, "event")
+    event_data = get_event_data(eventID)
 
     # Return page not found
     if not event_data:
@@ -406,7 +409,7 @@ def update_event_view(request):
     admin_key = request_data.get("admin_key", "")
 
     # Retrieve event's data
-    event_data = get_event_data(item_id, "event")
+    event_data = get_event_data(item_id)
     if not event_data:
         response = {
             "status": "ERROR",
@@ -557,7 +560,7 @@ def modify_participants_view(request):
         return JsonResponse(response)
     
     # Retrieve event's data
-    event_data = get_event_data(item_id, "event")
+    event_data = get_event_data(item_id)
     if not event_data:
         response = {
             "status": "ERROR",
@@ -637,10 +640,10 @@ def cancel_event_view(request):
     request_data = json.loads(request.body)
 
     item_id = request_data["item_id"]
-    admin_key = request_data.get("admin_key", "")
+    admin_key = request_data.get("admin_key")
 
     # Only event administrators are authorized - check if admin_key is present
-    if admin_key == "":
+    if not admin_key:
         response = {
             "status": "ERROR",
             "description": _(
@@ -663,8 +666,7 @@ def cancel_event_view(request):
         return JsonResponse(response)
     
     # Calculate expiration date and update event
-    # Expiration date in unix timestamp format -> TTL function of dynamoDB will
-    # take care of deletion
+    # Expiration date in unix timestamp format -> TTL function of dynamoDB will take care of deletion
     expiration_datetime = datetime.now() + timedelta(days=2)
     expiration_date = int(expiration_datetime.timestamp())
     event_data["is_cancelled"] = True
@@ -771,7 +773,7 @@ def password_check_view(request):
     admin_key = form.cleaned_data.get("admin_key")
 
     # Retrieve event data
-    event_data = get_event_data(event_id, "event")
+    event_data = get_event_data(event_id)
 
     # Return page not found
     if not event_data:
@@ -779,8 +781,6 @@ def password_check_view(request):
 
     # Check request password against event password
     event_password = event_data.get("password")
-
-    # Password check failed
     if not check_password(password, event_password):
         form.add_error(
             "password",
@@ -788,22 +788,20 @@ def password_check_view(request):
         )
         context = {
             "event_id": event_id,
+            "admin_key": admin_key,
             "form": form
         }
         return render(request, "events/private_event.html", context)
 
-    # If admin_key is present, user is trying to access edit event page
+    # Check if admin_key is present
     if admin_key:
-        # Authorise user and redirect to edit_event view
+        # Direct user to edit_event view
         response = redirect(f"/edit-event/{event_id}?k={admin_key}")
-        signed_value = signing.dumps({'authenticated': True})
-        response.set_signed_cookie(
-            f"auth_event_{event_id}", signed_value, salt=generate_cookie_salt(event_id)
-        )
-        return response
+    else:
+        # Direct user to participate view
+        response = redirect(f'/participate/{event_id}')
 
     # Authorise user and redirect to participant view
-    response = redirect(f'/participate/{event_id}')
     signed_value = signing.dumps({'authenticated': True})
     response.set_signed_cookie(
         f"auth_event_{event_id}", signed_value, salt=generate_cookie_salt(event_id)
@@ -817,7 +815,7 @@ def error404_view(request, exception, eventID=""):
 
     # If eventID is passed, pass down the value to template, so it can be
     # removed from user's history
-    if eventID != "":
+    if eventID:
         context["item_id"] = eventID
 
     return render(request, "events/error404.html", context)
