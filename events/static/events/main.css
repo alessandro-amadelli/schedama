@@ -3,12 +3,13 @@
     --accent-color: #e5597a;
     --body-background: linear-gradient(180deg, #cff3fe 0%, #118ab2 85%);
     --body-bg-color: #118ab2;
-    --card-bg-color: rgba(255,255,255,.7);
+    --card-bg-color: rgba(255,255,255,.3);
     --color: black;
     --event-div-bg: rgba(255,255,255,.2);
     --event-ended-bg: rgba(255,0,0,.5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.85);
+    --modal-bg-color: rgba(17, 138, 178, .2);
     --moving-bg-color: rgba(0,0,0,.2);
     --navbar-bg-color: white;
     --section-bg-color: rgba(0,102,255,0);
@@ -29,6 +30,7 @@
     --event-ended-bg: rgba(255, 0, 0, .3);
     --event-started-bg: #06d69eb2;
     --input-bg-color: rgba(0,0,0,.5);
+    --modal-bg-color: rgba(7, 59, 76, .3);
     --moving-bg-color: rgba(0, 0, 0, .5);
     --navbar-bg-color: rgba(0,0,0,.5);
     --section-bg-color: rgba(0,0,0,0);
@@ -41,7 +43,7 @@ Color palette
 #e5597a -> pink
 #ffd166 -> yellow
 #118ab2 -> light-blue
-#073b4c -> dark-blue-greenish
+#073b4c -> dark-blue-greenish rgb(7, 59, 76)
 #06d6a0 -> green
 */
 
@@ -280,8 +282,9 @@ select, option {
     padding-right: 0 !important;
 }
 
-.modal div {
-    background-color: var(--body-bg-color);
+.modal-content {
+    background-color: var(--modal-bg-color);
+    backdrop-filter: blur(10px);
 }
 
 .selected-border {
