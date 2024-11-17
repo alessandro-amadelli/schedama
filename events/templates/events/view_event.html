@@ -71,9 +71,11 @@
             {% if event.author %}
                 <div class="row mb-2 fs-6">
                     <div class="col">
-                        <i class="fa-solid fa-id-card"></i>
-                        {% translate "Author:" %} 
-                        <span id="eventAuthor">{{ event.author }}</span>
+                        <span class="badge text-bg-info fs-6">
+                            <i class="fa-solid fa-id-card"></i>
+                            {% translate "Author:" %}
+                            <span id="eventAuthor">{{ event.author }}</span>
+                        </span>
                     </div>
                 </div>
             {% endif %}
@@ -85,26 +87,17 @@
                     </a>
                 </div>
             </div>
-            {% if event.has_location %}
-                <!-- Event location -->
-                <div class="row mb-4">
-                    <div class="col">
-                        <i class="fa-solid fa-location-dot fs-1 text-danger"></i>
-                        <a href="" id="eventLocation" target="_blank">{{ event.location }}</a>
-                    </div>
-                </div>
-            {% endif %}
             
             <!-- Event date and time -->
             <div class="row mb-4">
                 {% for date in event.dates_formatted %}
                     <div class="row mb-2 date-formatted{% if event.best_date_formatted and date != event.best_date_formatted %} text-muted{% endif %}">
                         <div class="col-12 col-md mb-0">
-                            <i class="fa-solid fa-calendar-day fs-1 text-success"></i>
+                            <i class="fa-solid fa-calendar-day fs-1 text-green"></i>
                              <span class="formattedDate">{{ date|date:"D d/m/Y"}}</span>
                         </div>
                         <div class="col-12 col-md mb-0">
-                            <i class="fa-solid fa-clock fs-1 text-success"></i>&nbsp;<span class="formattedTime">{{ date|time:"G:i"}}</span>
+                            <i class="fa-solid fa-clock fs-1 text-green"></i>&nbsp;<span class="formattedTime">{{ date|time:"G:i"}}</span>
                             {% if date == event.best_date_formatted %}
                                 <i class="fa-regular fa-circle-check" data-bs-toggle="tooltip" 
                                 data-bs-title="{% translate 'Best date automatically selected based on attendance. The effective date may vary as participants enter new confirmations.' %}"></i>
@@ -113,11 +106,21 @@
                     </div>
                 {% endfor %}
             </div>
-            
+
+            {% if event.has_location %}
+                <!-- Event location -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <i class="fa-solid fa-location-dot fs-1 text-red"></i>
+                        <a href="" id="eventLocation" target="_blank">{{ event.location }}</a>
+                    </div>
+                </div>
+            {% endif %}
+
             <!-- Event duration -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <i class="fa-solid fa-stopwatch fs-1 text-primary"></i>
+                    <i class="fa-solid fa-stopwatch fs-1 text-blue"></i>
                     <span id="durationMin" style="display:none;">{{ event.duration }}</span>
                     <span id="durationText"></span>
                 </div>
@@ -126,7 +129,7 @@
             <!-- Event participants -->
             <div class="row mb-4">
                 <div class="col-4 mb-4">
-                    <i class="fa-solid fa-user-group fs-1 text-warning"></i>
+                    <i class="fa-solid fa-user-group fs-1 text-yellow"></i>
                     {{ event.participants|length }}
                 </div>
                 <div class="w-100"></div>
@@ -148,8 +151,11 @@
             {% if event.description != "" %}
                 <!-- Event description  -->
                 <hr>
-                <div class="row mt-2 mb-4 fs-4">
-                    <div class="col-12">
+                <div class="row blurred">
+                    <div class="col-md-1 col-12 m-0 fs-1">
+                        <i class="fa-solid fa-circle-info text-lightblue"></i>
+                    </div>
+                    <div class="col-12 col-md-11 m-0 fs-4">
                         <span style="white-space: pre-wrap;" id="descriptionText">{{ event.description }}</span>
                     </div>
                 </div>

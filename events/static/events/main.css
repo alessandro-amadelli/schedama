@@ -12,11 +12,13 @@
     --modal-bg-color: rgba(17, 138, 178, .2);
     --moving-bg-color: rgba(0,0,0,.2);
     --navbar-bg-color: white;
-    --section-bg-color: rgba(0,102,255,0);
     --text-muted-color: rgb(92,92,92);
+    --text-blue: #0091c4;
+    --text-green: #06d6a0;
+    --text-lightblue: #02e0ee;
+    --text-red: #d30429;
+    --text-yellow: #e4de20;
     --title-color: #073b4c;
-
-    overflow-x: hidden;
 }
 
 /* CSS variables for DARK MODE */
@@ -33,13 +35,17 @@
     --modal-bg-color: rgba(7, 59, 76, .3);
     --moving-bg-color: rgba(0, 0, 0, .5);
     --navbar-bg-color: rgba(0,0,0,.5);
-    --section-bg-color: rgba(0,0,0,0);
     --text-muted-color: rgb(143, 143, 143);
+    --text-blue: #019ed5;
+    --text-green: #06d6a0;
+    --text-lightblue: #02e0ee;
+    --text-red: #d30429;
+    --text-yellow: #e4de20;
     --title-color: #073b4c;
 }
 
 /*
-Color palette
+Main color palette
 #e5597a -> pink
 #ffd166 -> yellow
 #118ab2 -> light-blue
@@ -215,6 +221,26 @@ body {
     color: var(--text-muted-color) !important;
 }
 
+.text-blue {
+    color: var(--text-blue);
+}
+
+.text-green {
+    color: var(--text-green);
+}
+
+.text-lightblue {
+    color: var(--text-lightblue);
+}
+
+.text-red {
+    color: var(--text-red);
+}
+
+.text-yellow {
+    color: var(--text-yellow);
+}
+
 .title-section {
     position:relative;
     margin-bottom: 2rem;
@@ -260,7 +286,6 @@ body {
   }
 
 .section {
-    background-color: var(--section-bg-color);
     margin-bottom: 1em;
     min-height: 30em;
     word-wrap: break-word;
@@ -285,6 +310,7 @@ select, option {
 .modal-content {
     background-color: var(--modal-bg-color);
     backdrop-filter: blur(10px);
+    color: #fff;
 }
 
 .selected-border {
@@ -363,6 +389,10 @@ select, option {
 .event-info-div {
     background-color: var(--event-div-bg);
     word-wrap: break-word;
+}
+
+.blurred {
+    backdrop-filter: blur(10px);
 }
 
 .event-chart-div {
