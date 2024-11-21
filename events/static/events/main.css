@@ -414,13 +414,13 @@ select, option {
 }
 
 .thumbnail-row {
-    height: 20em;
+    height: 25em;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 .theme-thumbnail {
-    background-color: var(--body-background);
+    background-color: var(--body-bg-color);
     color: #fff;
     cursor: pointer;
     transition: all .5s;
