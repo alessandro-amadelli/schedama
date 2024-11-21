@@ -17,9 +17,9 @@ function updateCharts() {
 }
 
 var updateInterval = "";
-var deadline = "";
+var deadlineStart = "";
+var deadlineEnd = "";
 
-var eventStarted = false;
 var totDoughnutPlot = null;
 var dateBarChart = null;
 
@@ -109,13 +109,14 @@ function initializeEntirePage() {
     // Link to Google Calendar
     initializeGCalendarLink();
 
-    // Set countdown deadline as the best date (if present)
+    // Set countdown deadlines considering best date (if present) or first date
+    const durationMin = parseInt(document.querySelector("#durationMin").innerText);
     if (typeof bestDate === 'undefined' || !bestDate) {
-        deadline = new Date(dates[0]);
+        deadlineStart = new Date(dates[0]);
     } else {
-        deadline = new Date(bestDate);
-
+        deadlineStart = new Date(bestDate);
     }
+    deadlineEnd = new Date(deadlineStart.getTime() + (durationMin * 60000));
 
     // Start countdown
     updateClock();
@@ -191,10 +192,9 @@ function initializeGCalendarLink() {
     googleCalendarLink.setAttribute("href", url);
 }
 
-function getRemainingTime() {
-    const today = new Date();
+function getRemainingTime(today, deadline) {
     const delta = deadline - today;
-    
+
     const days = Math.floor( delta/(1000*60*60*24) );
     const hours = Math.floor( (delta/(1000*60*60)) % 24 );
     const minutes = Math.floor( (delta/1000/60) % 60 );
@@ -216,33 +216,46 @@ function updateClock() {
     const mins = timer.querySelector(".clockMins");
     const secs = timer.querySelector(".clockSecs");
 
-    const t = getRemainingTime();
-    
-    // Remaining time values
-    if (t.delta > 0) {
+    const today = new Date();
+
+    if (today <= deadlineStart) {
+        // Event not started yet
+        var eventStarted = false;
+        var t = getRemainingTime(today, deadlineStart);
+    } else {
+        // Event already started
+        var eventStarted = true;
+        var t = getRemainingTime(today, deadlineEnd);
+    }
+
+    if (!eventStarted) {
+        // Update countdown
         days.innerText = t.days;
         hours.innerText = ('0' + t.hours).slice(-2);
         mins.innerText = ('0' + t.minutes).slice(-2);
         secs.innerText = ('0' + t.seconds).slice(-2);
+        return;
     }
-    
-    if (t.delta <= 0) {
-        if (eventStarted) {
-            // Event is finished
-            clearInterval(updateInterval);
-            timer.classList.remove("clock-event-started");
-            timer.classList.add("clock-event-ended");
-            timer.innerHTML = gettext("Ended");
-        } else {
-            // Countdown finished, event is started, set deadline to end of event
-            eventStarted = true;
-            timer.classList.remove("clock-event-not-started");
-            timer.classList.add("clock-event-started");
-            document.querySelector("#clockText").innerText = gettext("In progress");
-            const durationMin = parseInt(document.querySelector("#durationMin").innerText);
-            deadline = new Date(deadline.getTime() + (durationMin * 60000));
-        }
+
+    if (t.delta < 0) {
+        // Event finished
+        clearInterval(updateInterval);  // Stop timer
+        timer.classList.remove("clock-event-not-started");
+        timer.classList.remove("clock-event-started");
+        timer.classList.add("clock-event-ended");
+        timer.innerHTML = gettext("Ended");
+        return;
     }
+
+    if (!timer.classList.contains("clock-event-started")) {
+        timer.classList.add("clock-event-started");
+        document.querySelector("#clockText").innerText = gettext("In progress");
+    }
+
+    days.innerText = t.days;
+    hours.innerText = ('0' + t.hours).slice(-2);
+    mins.innerText = ('0' + t.minutes).slice(-2);
+    secs.innerText = ('0' + t.seconds).slice(-2);
 }
 
 function displayDurationText() {
