@@ -618,8 +618,6 @@ function clearPreviousData() {
 }
 
 function saveLocally() {
-    console.log("saveLocally");
-    console.trace();
     const author = document.getElementById("eventAuthor").value;
     const eventTitle = document.querySelector("#eventTitle").value;
     const eventDescription = document.querySelector("#eventDescription").value;
