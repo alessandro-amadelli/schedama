@@ -516,8 +516,6 @@ function validateEvent() {
 }
 
 function restorePreviousData() {
-    console.log("restorePreviousData");
-    console.log(localStorage.getItem("unsavedEvent"));
     const unsavedEvent = JSON.parse(localStorage.getItem("unsavedEvent"));
 
     if (!unsavedEvent) {
@@ -616,12 +614,12 @@ function restorePreviousData() {
 }
 
 function clearPreviousData() {
-    console.log("clearPreviousData");
     localStorage.removeItem("unsavedEvent");
 }
 
 function saveLocally() {
     console.log("saveLocally");
+    console.trace();
     const author = document.getElementById("eventAuthor").value;
     const eventTitle = document.querySelector("#eventTitle").value;
     const eventDescription = document.querySelector("#eventDescription").value;
