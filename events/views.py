@@ -123,6 +123,15 @@ def save_event_to_db(event_data, custom_validation=False):
     return True, event_data
 
 
+def update_event_in_db(item_id, item_type, update_dict):
+    dynamodb_ops.update_single_event(
+        item_id,
+        item_type,
+        update_dict
+    )
+    cache_key = f"{item_type}_{item_id}"
+    cache.delete(cache_key)
+
 @cache_page(CACHE_TTL)
 def index(request):
     return render(request, "events/index.html")
@@ -328,7 +337,7 @@ def add_participant_view(request):
 
     # Updating event
     try:
-        dynamodb_ops.update_single_event(
+        update_event_in_db(
             event_data["item_id"],
             event_data["item_type"],
             {"participants": participants}
@@ -607,13 +616,10 @@ def modify_participants_view(request):
 
     # Updating event
     try:
-        dynamodb_ops.update_single_event(
+        update_event_in_db(
             event_data["item_id"],
             event_data["item_type"],
-            {
-                "participants": participants,
-                "event_bin": event_data.get("event_bin", [])
-            }
+            {"participants": participants}
         )
         result = True
     except Exception as e:
