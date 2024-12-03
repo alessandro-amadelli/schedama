@@ -619,7 +619,10 @@ def modify_participants_view(request):
         update_event_in_db(
             event_data["item_id"],
             event_data["item_type"],
-            {"participants": participants}
+            {
+                "participants": participants,
+                "event_bin": event_data.get("event_bin", [])
+            }
         )
         result = True
     except Exception as e:
