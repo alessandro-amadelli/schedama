@@ -175,6 +175,7 @@ function initializeGCalendarLink() {
     let startDate = dates[0];
     if (typeof bestDate !== 'undefined' && bestDate) {
         startDate = bestDate;
+        console.log(typeof bestDate);
     }
     const durationMin = parseInt(document.querySelector("#durationMin").innerText);
     let endDate = new Date(new Date(startDate).getTime() + (durationMin*60000));
@@ -183,7 +184,9 @@ function initializeGCalendarLink() {
     startDate = (startDate + "00").replaceAll("-","").replaceAll(":","");
     endDate = endDate.getFullYear() + ( "0" + (endDate.getMonth() + 1)).slice(-2) + ("0" + endDate.getDate()).slice(-2) + 
     "T" + ("0" + endDate.getHours()).slice(-2) + ("0" + endDate.getMinutes()).slice(-2) + "00";
-    
+    console.log(startDate);
+    console.log(endDate);
+
     let url = "https://calendar.google.com/calendar/render?action=TEMPLATE&dates=" + encodeURIComponent(startDate + "/" + endDate) +
     "&details=" + encodeURIComponent(eventDescription) + "&text=" + encodeURIComponent(eventTitle) +
     "&sprop=website:" + encodeURIComponent(eventWebsite.replaceAll("https://","").replaceAll("http://","")) + 
