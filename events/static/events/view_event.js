@@ -173,6 +173,9 @@ function initializeGCalendarLink() {
         eventLocation = "";
     }
     let startDate = dates[0];
+    if (typeof bestDate !== 'undefined' && bestDate) {
+        startDate = bestDate;
+    }
     const durationMin = parseInt(document.querySelector("#durationMin").innerText);
     let endDate = new Date(new Date(startDate).getTime() + (durationMin*60000));
     const eventWebsite = window.location.href;
