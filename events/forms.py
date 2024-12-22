@@ -41,6 +41,10 @@ class EventForm(forms.Form):
         description = self.cleaned_data.get("description", "")
         return Truncator(description).chars(DESCRIPTION_MAX_LENGTH)
 
+    def clean_dates(self):
+        dates = self.cleaned_data.get("dates", [])
+        return list(set(dates))
+
     def clean_location(self):
         location = self.cleaned_data.get("location", "")
         return Truncator(location).chars(LOCATION_MAX_LENGTH)

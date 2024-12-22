@@ -132,6 +132,7 @@ def update_event_in_db(item_id, item_type, update_dict):
     cache_key = f"{item_type}_{item_id}"
     cache.delete(cache_key)
 
+
 @cache_page(CACHE_TTL)
 def index(request):
     return render(request, "events/index.html")
@@ -413,6 +414,14 @@ def update_event_view(request):
 
     # Retrieve request data
     request_data = json.loads(request.body)
+    form = EventForm(request_data)
+
+    if not form.is_valid():
+        response = {
+            "status": "ERROR",
+            "description": _("Sorry, submitted data is invalid.")
+        }
+        return JsonResponse(response)
 
     item_id = request_data.get("item_id", "")
     admin_key = request_data.get("admin_key", "")
@@ -443,7 +452,7 @@ def update_event_view(request):
     if is_admin:
         # Handle participants explicitly removed from admin to avoid 
         # race conditions on participant list
-        admin_participants = request_data.get("participants", [])
+        admin_participants = form.cleaned_data.get("participants", [])
         removed_participants = request_data.get("removed_participants", [])
         restored_participants = request_data.get("restored_participants", [])
         event_participants = event_data.get("participants", [])
@@ -483,26 +492,26 @@ def update_event_view(request):
                     total_participants.append(p)
                     event_bin.remove(p)
         
-        request_author = request_data.get("author")
+        request_author = form.cleaned_data.get("author")
         if request_author:
             event_data["author"] = request_author
-        event_data["title"] = request_data.get("title", event_data["title"])
-        event_data["description"] = request_data.get("description", "")
-        event_data["has_location"] = request_data.get("has_location", False)
-        event_data["location"] = request_data.get("location", "")
-        event_data["dates"] = request_data.get("dates", [])
+        event_data["title"] = form.cleaned_data.get("title", event_data["title"])
+        event_data["description"] = form.cleaned_data.get("description", "")
+        event_data["has_location"] = form.cleaned_data.get("has_location", False)
+        event_data["location"] = form.cleaned_data.get("location", "")
+        event_data["dates"] = form.cleaned_data.get("dates", [])
         event_data["dates"].sort()  # Order event dates
-        event_data["duration"] = request_data.get("duration", 60)
-        event_data["event_theme"] = request_data.get("event_theme", "")
+        event_data["duration"] = form.cleaned_data.get("duration", 60)
+        event_data["event_theme"] = form.cleaned_data.get("event_theme", "")
         event_data["participants"] = total_participants
         event_data["settings"]["add_participant"] = (
-            request_data["settings"].get("add_participant", False)
+            form.cleaned_data["settings"].get("add_participant", False)
         )
         event_data["settings"]["edit_participant"] = (
-            request_data["settings"].get("edit_participant", False)
+            form.cleaned_data["settings"].get("edit_participant", False)
         )
         event_data["settings"]["remove_participant"] = (
-            request_data["settings"].get("remove_participant", False)
+            form.cleaned_data["settings"].get("remove_participant", False)
         )
         event_data["event_bin"] = event_bin
 
@@ -594,7 +603,7 @@ def modify_participants_view(request):
     if edit_participant:
         # Applying modifications
         for i, p in enumerate(event_data["participants"]):
-            uid = p.get("uid","")
+            uid = p.get("uid", "")
             if uid in to_modify.keys():
                 event_data["participants"][i] = to_modify[uid]
 
