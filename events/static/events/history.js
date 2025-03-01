@@ -47,19 +47,19 @@ function fillHistory() {
         cardTitle.innerText = item.title;
         if (item.hasOwnProperty("private_event")) {
             if (item["private_event"]) {
-                cardTitle.innerHTML = `<i class="fa-solid fa-lock"></i>&nbsp;` + item.title;
+                cardTitle.innerHTML = `<i class="fa-solid fa-lock"></i>&nbsp;${item.title}`;
             }
         }
 
         // Last visited
         const cardP = document.createElement("p");
         cardP.setAttribute("class", "card-text");
-        cardP.innerHTML = `<i class="fa-solid fa-clock-rotate-left text-muted"></i>&nbsp;` + item.last_visited;
+        cardP.innerHTML = `<i class="fa-solid fa-clock-rotate-left text-muted"></i>&nbsp;${item.last_visited}`;
 
         // Event author
         const cardP2 = document.createElement("p");
         cardP2.setAttribute("class", "card-text");
-        cardP2.innerText = gettext("Author:") + " " + item.author;
+        cardP2.innerText = gettext("Author:") + ` ${item.author}`;
 
         // Card footer
         const cardFooter = document.createElement("div");
