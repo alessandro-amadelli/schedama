@@ -11,7 +11,7 @@
     --input-bg-color: rgba(255,255,255,.85);
     --modal-bg-color: rgba(17, 138, 178, .2);
     --moving-bg-color: rgba(0,0,0,.2);
-    --navbar-bg-color: white;
+    --navbar-bg-color: #fff;
     --text-muted-color: rgb(92,92,92);
     --text-blue: #0091c4;
     --text-green: #06d6a0;
@@ -34,7 +34,7 @@
     --input-bg-color: rgba(0,0,0,.5);
     --modal-bg-color: rgba(7, 59, 76, .3);
     --moving-bg-color: rgba(0, 0, 0, .5);
-    --navbar-bg-color: rgba(0,0,0,.5);
+    --navbar-bg-color: #000;
     --text-muted-color: rgb(143, 143, 143);
     --text-blue: #019ed5;
     --text-green: #06d6a0;

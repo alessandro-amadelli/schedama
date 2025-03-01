@@ -45,12 +45,12 @@ function initializeEntirePage() {
         displayNoData();
     }
 
-    // Button to participate event (shows modal)
-    const btnParticipate = document.querySelector("#btnParticipate");
-    if (btnParticipate) {
-        btnParticipate.onclick = () => {
-            prepareParticipateModal();
-        };
+    // Button to cancel participation
+    const btnCancelParticipate = document.querySelector("#btnCancelParticipate");
+    if (btnCancelParticipate) {
+        btnCancelParticipate.onclick = () => {
+            clearParticipateModal();
+        }
     }
 
     // Button to confirm participation
@@ -411,8 +411,6 @@ function initializeChartDates() {
         }
     });
 
-
-
     let data = {
         labels: labels,
         datasets: [{
@@ -471,49 +469,17 @@ function initializeChartDates() {
         document.querySelector("#datesChart"),
         config
     );
-
 }
 
-function prepareParticipateModal() {
-    const modalParticipate = document.querySelector("#modalParticipate");
-    const partName = modalParticipate.querySelector("#newPartName");
-    
-    // Empty input with participant name
+
+function clearParticipateModal() {
+    const partName = document.querySelector("#newPartName");
     partName.value = "";
-
-    // Removing old dates
-    modalParticipate.querySelectorAll(".modal-date").forEach((date) => {
-        date.remove();
-    });
-
-    // Adding dates with switch
-    const dateFormatted = document.querySelectorAll(".date-formatted");
-    dates.forEach((date, i) => {
-        const newDiv = document.createElement("div");
-        newDiv.classList.add("form-check","form-switch", "modal-date");
-
-        const newDateSwitch= document.createElement("input");
-        newDateSwitch.setAttribute("type", "checkbox");
-        newDateSwitch.setAttribute("role", "switch");
-        newDateSwitch.setAttribute("value", date);
-        newDateSwitch.setAttribute("name", "switchAddParticipant");
-        newDateSwitch.setAttribute("checked", "true");
-        newDateSwitch.classList.add("form-check-input");
-
-        const newLabel = document.createElement("label");
-        newLabel.setAttribute("for","switchAddParticipant");
-        newLabel.classList.add("form-check-label");
-
-        // Display label text in a readable format
-        let formattedText = dateFormatted[i].querySelector(".formattedDate").innerText + " h." + dateFormatted[i].querySelector(".formattedTime").innerText;
-        newLabel.innerText = formattedText;
-
-        // Append new elements
-        newDiv.appendChild(newDateSwitch);
-        newDiv.appendChild(newLabel);
-        modalParticipate.querySelector(".modal-body").appendChild(newDiv);
+    document.querySelector("#modalParticipate").querySelectorAll("input[type=checkbox]").forEach((check) => {
+        check.checked = true;
     });
 }
+
 
 function validateParticipateModal() {
     const partName = document.querySelector("#newPartName");
