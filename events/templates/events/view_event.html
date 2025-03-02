@@ -307,7 +307,7 @@
                             {% for date in event.dates_formatted %}
                                 <div class="col-12 col-md-6 mb-2">
                                     <input type="checkbox" class="btn-check" value="{{ date|date:'c'|slice:'-3' }}" name="switchAddParticipant" id="check{{ forloop.counter0 }}" checked>
-                                    <label class="btn btn-outline-info w-100" for="check{{ forloop.counter0 }}">{{ date|date:"D d/m/Y"}} h.{{ date|date:"H:i"}}</label>
+                                    <label class="btn btn-outline-info w-100 check-label" for="check{{ forloop.counter0 }}">{{ date|date:"D d/m/Y"}} h.{{ date|date:"H:i"}}</label>
                                 </div>
                             {% endfor %}
                         </div>

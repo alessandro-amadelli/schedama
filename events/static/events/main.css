@@ -441,6 +441,14 @@ select, option {
     opacity: 1 !important;
 }
 
+.btn-check + label {
+    text-decoration: line-through;
+}
+
+.btn-check:checked + label {
+    text-decoration: none;
+}
+
 /* Event themes */
 div[data-theme] {
     position: relative;
