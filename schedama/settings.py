@@ -165,3 +165,9 @@ else:
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Api token
+SCHEDAMA_API_TOKEN = os.environ.get(
+    "SCHEDAMA_API_TOKEN",
+    "tFT9OQDZV8cyQu50mkIdJsSgasx6UetM0N5lxgNI_quNPRBpacTQY3JVkszkb50j04DtXU7AHrAkV9x9YESvfg"
+)

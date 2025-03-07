@@ -19,8 +19,7 @@ from events.views import ServiceWorker
 
 urlpatterns = [
     path('', include('events.urls')),
-    # path('', include('pwa.urls')),
-    # path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
 ]
 
 handler404 = 'events.views.error404_view'
