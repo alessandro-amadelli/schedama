@@ -1,9 +1,11 @@
 from django.http import JsonResponse
+from django_ratelimit.decorators import ratelimit
 
 from schedama.dynamodb_ops import select_records_by_type
 from schedama.settings import SCHEDAMA_API_TOKEN
 
 
+@ratelimit(key='ip', rate='10/m', method='GET', block=True)
 def get_total_db_elements(request):
     response = {}
 
@@ -20,7 +22,7 @@ def get_total_db_elements(request):
         # Invalid token provided
         response["result"] = "Error"
         response["description"] = (
-            "I don't remember the token to be like this! The correct token would be 'AScn9MMu#J3e3@ddSuC4s...' "
+            "I don't remember the token to be like this! The correct token would be 'AScn9MMu#J3e3@ddSuC4...' "
             "oh wait...I shouldn't help you with that!")
         return JsonResponse(response, status=403)
 
