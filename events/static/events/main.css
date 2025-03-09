@@ -500,7 +500,7 @@ div[data-theme="match"]::before {
 
 div[data-theme="meeting"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/meeting.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="mountain"]::before {
