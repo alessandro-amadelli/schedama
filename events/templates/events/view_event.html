@@ -9,7 +9,7 @@
     {% csrf_token %}
     <span id="item-id" hidden>{{ event.item_id }}</span>
     
-    <!-- Passing event's data to javascript in a secure way -->
+    {# Passing event's data to javascript in a secure way #}
     {{ event.participants|json_script:"participants" }}
     {{ event.dates|json_script:"dates" }}
     {% if event.best_date %}

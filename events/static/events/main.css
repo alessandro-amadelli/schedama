@@ -462,6 +462,7 @@ div[data-theme]::before {
     top:0;
     width: 100%;
     height: 100%;
+    background-color: var(--navbar-bg-color);
     background-size: cover;
     background-repeat: no-repeat;
     z-index: -1;
@@ -470,47 +471,47 @@ div[data-theme]::before {
 
 div[data-theme="beach"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/beach.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="birthday"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/birthday.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="drink"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/drink.jpg');
-    opacity: .3; 
+    opacity: .4;
 }
 
 div[data-theme="forest"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/forest.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="graduation"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/graduation.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="match"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/match.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="meeting"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/meeting.jpg');
-    opacity: .4;
+    opacity: .5;
 }
 
 div[data-theme="mountain"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/mountain.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="music"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/music.jpg');
-    opacity: .25;
+    opacity: .4;
 }
 
 div[data-theme="pizza"]::before {
@@ -520,22 +521,22 @@ div[data-theme="pizza"]::before {
 
 div[data-theme="popcorn"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/popcorn.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="relax"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/relax.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="ticket"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/ticket.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 div[data-theme="travel"]::before {
     background-image: url('https://schedama-assets.s3.eu-central-1.amazonaws.com/img/travel.jpg');
-    opacity: .3;
+    opacity: .4;
 }
 
 .password-form {
