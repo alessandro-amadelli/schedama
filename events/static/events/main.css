@@ -3,9 +3,9 @@
     --accent-color: #e5597a;
     --body-background: linear-gradient(180deg, #cff3fe 0%, #118ab2 85%);
     --body-bg-color: #118ab2;
-    --card-bg-color: rgba(255,255,255,.3);
+    --card-bg-color: #fff;
     --color: black;
-    --event-div-bg: rgba(255,255,255,.2);
+    --event-div-bg: rgba(255,255,255,.9);
     --event-ended-bg: rgba(255,0,0,.5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.85);

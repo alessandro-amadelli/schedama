@@ -65,9 +65,9 @@ function setMode(currentMode) {
         document.querySelector("#darkModeToggle").innerHTML = `<i class="fa-solid fa-moon"></i>&nbsp;${gettext("Lights off")}`;
 
         // Change all buttons with btn-dark class
-        document.querySelectorAll(".btn-dark").forEach((item) => {
-            item.classList.remove("btn-dark");
-            item.classList.add("btn-light");
+        document.querySelectorAll(".btn-light").forEach((item) => {
+            item.classList.remove("btn-light");
+            item.classList.add("btn-dark");
         });
 
         // Change all tables
@@ -113,9 +113,9 @@ function setMode(currentMode) {
         document.querySelector("#darkModeToggle").innerHTML = `<i class="fa-solid fa-lightbulb"></i>&nbsp;${gettext("Lights on")}`;
 
         // Change all buttons with btn-light
-        document.querySelectorAll(".btn-light").forEach((item) => {
-            item.classList.remove("btn-light");
-            item.classList.add("btn-dark");
+        document.querySelectorAll(".btn-dark").forEach((item) => {
+            item.classList.remove("btn-dark");
+            item.classList.add("btn-light");
         });
 
         // Change all tables
@@ -271,9 +271,9 @@ function generateShareBtn(contentURL, eventTitle="", text="") {
     btn.setAttribute("type","button");
     btn.setAttribute("data-bs-toggle","dropdown");
     btn.setAttribute("aria-expanded","false");
-    let btnLightDark = "btn-light";
+    let btnLightDark = "btn-dark";
     if (document.body.classList.contains("dark-mode")) {
-        btnLightDark = "btn-dark";
+        btnLightDark = "btn-light";
     }
     btn.classList.add("btn", btnLightDark, "dropdown-toggle", "p-2");
     btn.innerHTML = `<i class="fa-solid fa-share-nodes"></i>`;
