@@ -286,7 +286,6 @@ function displayDurationText() {
 }
 
 function displayNoData() {
-    
     const chartDiv = document.querySelector("#chartAreaDiv");
     chartDiv.innerHTML = `<div class="col-12">
     <i class="fa-solid fa-chart-pie"></i> No data
@@ -294,7 +293,6 @@ function displayNoData() {
     `;
     chartDiv.classList.add("text-center");
     return false;
-
 }
 
 function initializeChartTot() {
@@ -419,7 +417,7 @@ function initializeChartDates() {
             data: values,
             backgroundColor: colors,
             barPercentage: 0.4,
-            borderRadius: 5
+            borderRadius: 6,
         }],
     };
 
@@ -492,7 +490,6 @@ function validateParticipateModal() {
 }
 
 async function sendParticipationToServer() {
-
     // Modal validation (check if name is empty)
     isValid = validateParticipateModal();
     if (!isValid) {
