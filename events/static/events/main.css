@@ -99,12 +99,11 @@ Main color palette
 @keyframes timerStartedAnimation {
     0% {
         transform: scale(1);
-    }
-    80% {
-        transform: scale(3);
+        filter: blur(0);
     }
     100% {
-        transform: scale(3);
+        transform: scale(2.8);
+        filter: blur(5px);
     }
 }
 
@@ -361,7 +360,7 @@ select, option {
     animation-direction:alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
-    animation-timing-function:ease-in-out;
+    animation-timing-function: ease-in-out;
 }
 
 .clock-event-ended::before {
