@@ -1,11 +1,11 @@
 /* CSS variables for LIGHT MODE */
 :root {
     --accent-color: #e5597a;
-    --body-background: linear-gradient(180deg, #cff3fe 0%, #118ab2 85%);
+    --body-background: linear-gradient(180deg, #118ab2 0%, #cff3fe 50%);
     --body-bg-color: #118ab2;
     --card-bg-color: #fff;
     --color: black;
-    --event-div-bg: rgba(255,255,255,.6);
+    --event-div-bg: rgba(255,255,255, 1);
     --event-ended-bg: rgba(255,0,0,.5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.85);
@@ -28,7 +28,7 @@
     --body-bg-color: #073b4c;
     --card-bg-color: rgba(0,0,0,.2);
     --color: #fff;
-    --event-div-bg: rgba(0,0,0,.2);
+    --event-div-bg: rgba(0,0,0,.4);
     --event-ended-bg: rgba(255, 0, 0, .3);
     --event-started-bg: #06d69eb2;
     --input-bg-color: rgba(0,0,0,.5);
@@ -57,6 +57,7 @@ Main color palette
 @keyframes introAnimation {
     0% {
         opacity: 0;
+        display: none;
         position: relative;
         left: -50%;
     }
@@ -203,7 +204,7 @@ body {
     background-size: cover;
     min-height: 100vh;
     min-height: 100svh;
-    transition: background-color 2s ease;
+    transition: background-color 1s ease, background 1s ease;
     overflow-x: hidden;
     margin: 0;
 }
@@ -243,6 +244,7 @@ body {
     padding-top: .2rem;
     padding-bottom: .2rem;
     color: var(--title-color);
+    transition: background-color 1s ease;
 }
 
 .title-section::before {
@@ -254,11 +256,6 @@ body {
     z-index: -1;
     background-color: var(--accent-color);
     transition: .5s ease-in;
-}
-
-.card-footer {
-    color: var(--accent-color);
-    user-select: none;
 }
 
 .loading-overlay{
@@ -380,10 +377,12 @@ select, option {
 
 .event-tot-div {
     background-color: var(--event-div-bg);
+    transition: background-color 1s ease;
 }
 
 .event-info-div {
     background-color: var(--event-div-bg);
+    transition: background-color 1s ease;
     word-wrap: break-word;
 }
 
@@ -393,11 +392,17 @@ select, option {
 
 .event-chart-div {
     background-color: var(--event-div-bg);
+    transition: background-color 1s ease;
 }
 
 .card {
     color: var(--color);
     background-color: var(--card-bg-color);
+}
+
+.card-footer {
+    color: var(--accent-color);
+    user-select: none;
 }
 
 .removed-participant {
