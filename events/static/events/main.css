@@ -10,7 +10,7 @@
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.85);
     --modal-bg-color: rgba(17, 138, 178, .2);
-    --moving-bg-color: #dbdbdb;
+    --moving-bg-color: #d5d5d5;
     --navbar-bg-color: #fff;
     --text-muted-color: rgb(92,92,92);
     --text-blue: #0091c4;
@@ -326,21 +326,20 @@ select, option {
     position: absolute;
     width: 200%;
     height: 100%;
-    top: 0%;
+    top: 0;
     left: -100%;
     z-index: -1;
     background: linear-gradient(
-        90deg, 
-        var(--moving-bg-color), 
-        var(--moving-bg-color) 50%, 
+        90deg,
+        var(--moving-bg-color) 0%,
+        var(--moving-bg-color) 49%,
         var(--event-div-bg) 51%,
-        var(--event-div-bg)
+        var(--event-div-bg) 100%
     );
     animation-name: timerNotStartedAnimation;
     animation-duration: 5s;
-    animation-fill-mode:forwards;
-    animation-direction:alternate;
     animation-iteration-count: infinite;
+    animation-direction: alternate;
     animation-play-state: running;
     animation-timing-function: cubic-bezier(.7,.2,.3,.8);
 }
