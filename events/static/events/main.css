@@ -10,7 +10,7 @@
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.85);
     --modal-bg-color: rgba(17, 138, 178, .2);
-    --moving-bg-color: rgba(0,0,0,.2);
+    --moving-bg-color: #dbdbdb;
     --navbar-bg-color: #fff;
     --text-muted-color: rgb(92,92,92);
     --text-blue: #0091c4;
@@ -33,7 +33,7 @@
     --event-started-bg: #06d69eb2;
     --input-bg-color: rgba(0,0,0,.5);
     --modal-bg-color: rgba(7, 59, 76, .3);
-    --moving-bg-color: rgba(0, 0, 0, .5);
+    --moving-bg-color: rgba(0, 0, 0, .8);
     --navbar-bg-color: #000;
     --text-muted-color: rgb(143, 143, 143);
     --text-blue: #019ed5;
@@ -343,7 +343,7 @@ select, option {
     animation-direction:alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: cubic-bezier(.7,.2,.3,.8);
 }
 
 .clock-event-started::before {
