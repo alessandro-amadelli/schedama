@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     initializeEntirePage();
     document.addEventListener('modeChanged', updateCharts);
+
+    // Event listeners for modals to reset body padding when opening a second modal
+    document.getElementById('modalDateView').addEventListener('show.bs.modal', function () {
+        document.body.style.paddingRight = '0';
+    });
+    document.getElementById('modalList').addEventListener('show.bs.modal', function () {
+        document.body.style.paddingRight = '0';
+    });
+
 });
 
 function updateCharts() {
