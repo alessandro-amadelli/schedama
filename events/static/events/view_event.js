@@ -259,6 +259,10 @@ function updateClock() {
         return;
     }
 
+    // Event started
+    if (timer.classList.contains("clock-event-not-started")) {
+        timer.classList.remove("clock-event-not-started");
+    }
     if (!timer.classList.contains("clock-event-started")) {
         timer.classList.add("clock-event-started");
         document.querySelector("#clockText").innerText = gettext("In progress");

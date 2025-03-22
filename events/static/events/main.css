@@ -5,13 +5,15 @@
     --body-bg-color: #118ab2;
     --card-bg-color: #fff;
     --color: black;
-    --event-div-bg: rgba(255,255,255, 1);
+    --event-div-bg: #fff;
     --event-ended-bg: rgba(255,0,0,.5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(255,255,255,.85);
     --modal-bg-color: rgba(17, 138, 178, .2);
     --moving-bg-color: #d5d5d5;
     --navbar-bg-color: #fff;
+    --shimmer-color: rgba(255,255,255,.8);
+    --shimmer-color: #09ffbf;
     --text-muted-color: rgb(92,92,92);
     --text-blue: #0091c4;
     --text-green: #06d6a0;
@@ -35,6 +37,8 @@
     --modal-bg-color: rgba(7, 59, 76, .3);
     --moving-bg-color: #118ab2;
     --navbar-bg-color: #000;
+    --shimmer-color: rgba(255,255,255,.7);
+    --shimmer-color: #09ffbf;
     --text-muted-color: rgb(143, 143, 143);
     --text-blue: #019ed5;
     --text-green: #06d6a0;
@@ -96,14 +100,15 @@ Main color palette
     }
 }
 
-@keyframes timerStartedAnimation {
+@keyframes shimmerEffect {
     0% {
-        transform: scale(1);
-        filter: blur(0);
+        background-position: 330% 0;
+    }
+    70% {
+        background-position: -35% 0;
     }
     100% {
-        transform: scale(2.8);
-        filter: blur(5px);
+        background-position: -35% 0;
     }
 }
 
@@ -352,14 +357,17 @@ select, option {
     top: 0%;
     left: 0%;
     z-index: -1;
-    background: radial-gradient(circle, var(--event-started-bg) 35%, var(--event-div-bg) 37%);
-    animation-name: timerStartedAnimation;
-    animation-duration: 3s;
-    animation-fill-mode:forwards;
-    animation-direction:alternate;
+    background: linear-gradient(110deg,
+        var(--event-started-bg) 35%,
+        var(--shimmer-color) 50%,
+        var(--event-started-bg) 65%);
+    background-size: 200% 100%;
+    animation-name: shimmerEffect;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
     animation-iteration-count: infinite;
-    animation-play-state: running;
     animation-timing-function: ease-in-out;
+    animation-direction: normal;
 }
 
 .clock-event-ended::before {
