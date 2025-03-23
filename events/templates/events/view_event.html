@@ -215,8 +215,10 @@
                                         {% endif %}
                                         <td class="participant-name-td" data-partuid="{{ participant.uid }}">{{ participant.name }}</td>
                                         {% for date in event.dates %}
-                                            <td><input class="form-check-input" type="checkbox" value="{{date}}" {% if date in participant.dates%} checked {% endif %} 
-                                                {% if not event.settings.edit_participant %}disabled{% endif %}></td>
+                                            <td>
+                                                <input class="form-check-input" type="checkbox" value="{{date}}"{% if date in participant.dates%} checked {% endif %}
+                                                {% if not event.settings.edit_participant %}disabled{% endif %}>
+                                            </td>
                                         {% endfor %}
                                     </tr>
                                 {% endfor %}
