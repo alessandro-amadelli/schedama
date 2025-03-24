@@ -228,23 +228,17 @@
       <div class="mb-3">
         <form>
           <h5>{% translate "Choose what participants are allowed to do" %}</h5>
-          <div class="mb-3">
-            <div class="form-check form-switch fs-4">
-              <input class="form-check-input" type="checkbox" role="switch" id="switchAddParticipant" checked>
-              <label class="form-check-label" for="switchAddParticipant">{% translate "Add participants" %}</label>
-            </div>
+          <div class="mb-3 fs-4">
+            <input class="form-check-input" type="checkbox" id="checkAddParticipant" checked>
+            <label class="form-check-label" for="checkAddParticipant">{% translate "Add participants" %}</label>
           </div>
-          <div class="mb-3">
-            <div class="form-check form-switch fs-4">
-            <input class="form-check-input" type="checkbox" role="switch" id="switchEditParticipant" checked>
-            <label class="form-check-label" for="switchRemoveParticipant">{% translate "Edit participants" %}</label>
-            </div>
+          <div class="mb-3 fs-4">
+            <input class="form-check-input" type="checkbox" id="checkEditParticipant" checked>
+            <label class="form-check-label" for="checkEditParticipant">{% translate "Edit participants" %}</label>
           </div>
-          <div class="mb-3">
-            <div class="form-check form-switch fs-4">
-              <input class="form-check-input" type="checkbox" role="switch" id="switchRemoveParticipant">
-              <label class="form-check-label" for="switchRemoveParticipant">{% translate "Remove participants" %}</label>
-            </div>
+          <div class="mb-3 fs-4">
+            <input class="form-check-input" type="checkbox" id="checkRemoveParticipant">
+            <label class="form-check-label" for="checkRemoveParticipant">{% translate "Remove participants" %}</label>
           </div>
         </form>
         <p>
@@ -266,10 +260,8 @@
       </div>
       <div class="w-100"></div>
       <div class="mb-3">
-        <div class="form-check form-switch fs-4">
-          <input class="form-check-input" type="checkbox" role="switch" id="switchPrivateEvent">
-          <label class="form-check-label" for="switchPrivateEvent">{% translate "Make event private" %}</label>
-        </div>
+        <input class="form-check-input" type="checkbox" id="checkPrivateEvent">
+        <label class="form-check-label" for="checkPrivateEvent">{% translate "Make event private" %}</label>
       </div>
       <div class="mb-3">
         <div class="form-floating mb-3 password-row intro-animated">

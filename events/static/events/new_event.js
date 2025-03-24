@@ -54,9 +54,9 @@ function showModalRestoreData() {
 }
 
 function updatePermissionDescriptions() {
-    const switchAddParticipant = document.querySelector("#switchAddParticipant").checked;
-    const switchEditParticipant = document.querySelector("#switchEditParticipant").checked;
-    const switchRemoveParticipant = document.querySelector("#switchRemoveParticipant").checked;
+    const checkAddParticipant = document.querySelector("#checkAddParticipant").checked;
+    const checkEditParticipant = document.querySelector("#checkEditParticipant").checked;
+    const checkRemoveParticipant = document.querySelector("#checkRemoveParticipant").checked;
 
     const whoCanAdd = document.querySelector("#whoCanAdd");
     const whoCanEdit = document.querySelector("#whoCanEdit");
@@ -74,19 +74,19 @@ function updatePermissionDescriptions() {
     let colorCanEdit = "red";
     let colorCanRemove = "red";
     
-    if (switchAddParticipant) {
+    if (checkAddParticipant) {
         iconCanAdd = "lock-open fa-beat";
         textCanAdd = gettext("Anyone");
         colorCanAdd = "green";
     }
 
-    if (switchEditParticipant) {
+    if (checkEditParticipant) {
         iconCanEdit = "lock-open fa-beat";
         textCanEdit = gettext("Anyone");
         colorCanEdit = "green";
     }
 
-    if (switchRemoveParticipant) {
+    if (checkRemoveParticipant) {
         iconCanRemove = "lock-open fa-beat";
         textCanRemove = gettext("Anyone");
         colorCanRemove = "green";
@@ -151,9 +151,9 @@ function initializeAddDescriptionRow() {
     });
 
     // Event listener to show password inputs
-    const switchPrivateEvent = document.querySelector("#switchPrivateEvent");
-    switchPrivateEvent.addEventListener('change', () => {
-        passwordInputVisibility(switchPrivateEvent.checked);
+    const checkPrivateEvent = document.querySelector("#checkPrivateEvent");
+    checkPrivateEvent.addEventListener('change', () => {
+        passwordInputVisibility(checkPrivateEvent.checked);
     });
 }
 
@@ -257,7 +257,6 @@ function initializeLocationRow() {
 
     // Event listener to start animation of next input field
     const locationInput = document.querySelector("#eventLocation");
-    // const locationSwitch = document.querySelector("#checkEventLocation");
     locationInput.addEventListener('input', initializeDateRow);
 }
 
@@ -504,7 +503,7 @@ function validateEvent() {
     }
 
     // Check #4 Private event
-    const privateEvent = document.querySelector("#switchPrivateEvent").checked;
+    const privateEvent = document.querySelector("#checkPrivateEvent").checked;
     const eventPassword1 = document.querySelector("#eventPassword1");
     const eventPassword2 = document.querySelector("#eventPassword2");
 
@@ -523,9 +522,9 @@ function restorePreviousData() {
     }
 
     // Event settings
-    document.querySelector("#switchAddParticipant").checked = unsavedEvent.settings.add_participant;
-    document.querySelector("#switchEditParticipant").checked = unsavedEvent.settings.edit_participant;
-    document.querySelector("#switchRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
+    document.querySelector("#checkAddParticipant").checked = unsavedEvent.settings.add_participant;
+    document.querySelector("#checkEditParticipant").checked = unsavedEvent.settings.edit_participant;
+    document.querySelector("#checkRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
 
     // Event author
     document.getElementById("eventAuthor").value = unsavedEvent.author;    
@@ -628,9 +627,9 @@ function saveLocally() {
     const participants = document.querySelectorAll("[name='participantName']");
 
     // Settings
-    const addParticipant = document.querySelector("#switchAddParticipant").checked;
-    const editParticipant = document.querySelector("#switchEditParticipant").checked;
-    const removeParticipant = document.querySelector("#switchRemoveParticipant").checked;
+    const addParticipant = document.querySelector("#checkAddParticipant").checked;
+    const editParticipant = document.querySelector("#checkEditParticipant").checked;
+    const removeParticipant = document.querySelector("#checkRemoveParticipant").checked;
     
     // Populating date list
     let dateList = [];
@@ -660,7 +659,7 @@ function saveLocally() {
     }
 
     // Security
-    const privateEvent = document.querySelector("#switchPrivateEvent").checked;
+    const privateEvent = document.querySelector("#checkPrivateEvent").checked;
     const password1 = document.querySelector("#eventPassword1").value;
     const password2 = document.querySelector("#eventPassword2").value;
 
