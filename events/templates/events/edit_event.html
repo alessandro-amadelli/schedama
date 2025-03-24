@@ -361,7 +361,7 @@
                         <div class="mb-3 fs-4">
                             <input class="form-check-input" type="checkbox" id="switchEditParticipant"
                                    {% if event.settings.edit_participant %}checked{% endif %} {% if event.is_cancelled %} disabled="disabled" {% endif %}>
-                            <label class="form-check-label" for="switchRemoveParticipant">{% translate "Edit participants" %}</label>
+                            <label class="form-check-label" for="switchEditParticipant">{% translate "Edit participants" %}</label>
                         </div>
                         <div class="mb-5 fs-4">
                             <input class="form-check-input" type="checkbox" id="switchRemoveParticipant"{% if event.settings.remove_participant %} checked{% endif %}{% if event.is_cancelled %} disabled="disabled"{% endif %}>
