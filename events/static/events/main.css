@@ -303,14 +303,14 @@ input[type="checkbox"], input[type="checkbox"]:focus, input[type="checkbox"]:act
     cursor: pointer;
 }
 
-input[type="checkbox"]::before {
+input[type="checkbox"]:not(.btn-check)::before {
     content: "\f057";
     font-family: FontAwesome;
     color: var(--text-red);
     font-size: 1.2rem;
 }
 
-input[type="checkbox"]:checked::before {
+input[type="checkbox"]:not(.btn-check):checked::before {
     content: "\f058";
     font-family: FontAwesome;
     color: var(--text-green);
