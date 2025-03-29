@@ -38,7 +38,8 @@ function initializeEntirePage() {
 
     // Dropdown menu to share event
     const evTitle = document.querySelector("#eventTitle").innerText;
-    document.querySelector("#shareEventCol").appendChild(generateShareBtn(window.location.href, evTitle));
+    const eventID = document.querySelector("#item-id").innerText;
+    document.querySelector("#shareEventCol").appendChild(generateShareBtn(window.location.href, evTitle, eventID));
 
     // QR code generation
     generateQR(window.location.href);

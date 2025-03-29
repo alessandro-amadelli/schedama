@@ -743,18 +743,15 @@ async function sendEventToServer() {
         });
 }
 
+
 function eventCreatedSuccessfully(data) {
-    if (data.status == "ERROR") {
+   if (data.status == "ERROR") {
         showPageMsg("alert-danger", data.description);
         return false;
     }
 
-    // Saving title of the event (to display it after)
+    // Salvare il titolo dell'evento
     const eventTitle = document.querySelector("#eventTitle").value;
-
-    // Created event data
-    const itemID = data.item_id;
-    const adminKey = data.admin_key;
 
     // Delete page content
     const section = document.querySelector(".section");
@@ -764,110 +761,84 @@ function eventCreatedSuccessfully(data) {
     document.querySelector("h1").innerText = gettext("Event created");
     document.querySelector("h2").innerText = gettext("Your event has been successfully created");
 
-    // Display event title
-    const displayName = document.createElement("h1");
-    displayName.innerText = eventTitle;
-    displayName.setAttribute("class", "text-center mb-5");
+    // Dati dell'evento creato
+    const itemID = data.item_id;
+    const adminKey = data.admin_key;
 
-    // Dark or light class for btn
-    let darkLightClass = "btn-light";
-    if (document.body.classList.contains("dark-mode")) {
-        darkLightClass = "btn-dark";
-    }
+    // Determinare classe pulsante per tema scuro o chiaro
+    const darkLightClass = document.body.classList.contains("dark-mode") ? "btn-light" : "btn-dark";
 
-    // Let user know that event links are automatically saved
-    const linksSavedDisclaimer = document.createElement("h4");
-    linksSavedDisclaimer.innerHTML = `<i class="fa-solid fa-floppy-disk fa-beat"></i><br>${gettext("The following links have been automatically saved to the history page")}`;
-    linksSavedDisclaimer.setAttribute("class", "text-center mb-3");
+    const newHTMLContent = `
+        <h1><i class="fa-solid fa-book-open"></i>&nbsp;${eventTitle}</h1>
+        <hr>
 
-    // Display participant's URL
-    const displayPartURL = document.createElement("h3");
-    displayPartURL.innerHTML = `<i class="fa-solid fa-user-group"></i> ${gettext("Participant URL")}`;
-    displayPartURL.setAttribute("class", "text-center");
-    const partRow = document.createElement("div");
-    partRow.classList.add("row");
-    const partCol1 = document.createElement("div");
-    partCol1.setAttribute("class", "col-12 mb-5 text-center display-6 border rounded shadow py-2");
-    const participantURL = document.createElement("strong");
-    participantURL.innerText = window.location.href.replace("create-event/", "participate/"+itemID);
-    participantURL.setAttribute("id", "partURL");
-    const sharePartCol = document.createElement("div");
-    sharePartCol.classList.add("col-12", "text-center");
-    const btnSharePart = generateShareBtn(participantURL.innerText, eventTitle);
-    const btnOpenPart = document.createElement("a");
-    btnOpenPart.setAttribute("href", participantURL.innerText);
-    btnOpenPart.setAttribute("class","btn " + darkLightClass + " m-2");
-    btnOpenPart.innerHTML = `<i class="fa-solid fa-user-group"></i> ${gettext("Participant page")}`;
+        <div class="alert alert-info mb-3">
+            <i class="fa-solid fa-floppy-disk fa-beat"></i>
+            ${gettext("The following links have been automatically saved to the history page")}
+        </div>
 
-    // Display administration URL
-    const displayAdminURL = document.createElement("h3");
-    displayAdminURL.innerHTML = `<i class="fa-regular fa-id-card"></i> ${gettext("Administration URL")}`;
-    displayAdminURL.setAttribute("class", "text-center");
-    const admRow = document.createElement("div");
-    admRow.classList.add("row");
-    const admCol1 = document.createElement("div");
-    admCol1.setAttribute("class", "col-12 mb-5 text-center display-6 border rounded shadow py-2");
-    const adminURL = document.createElement("strong");
-    adminURL.innerText = window.location.href.replace("create-event/", "edit-event/"+itemID+"?k="+adminKey);
-    adminURL.setAttribute("id", "adminURL");
-    const shareAdmCol = document.createElement("div");
-    shareAdmCol.classList.add("col-12", "text-center");
-    const btnShareAdm = generateShareBtn(adminURL.innerText, eventTitle);
-    const btnOpenAdm = document.createElement("a");
-    btnOpenAdm.setAttribute("href", adminURL.innerText);
-    btnOpenAdm.setAttribute("class","btn " + darkLightClass + " m-2");
-    btnOpenAdm.innerHTML = `<i class="fa-regular fa-id-card"></i> ${gettext("Administration page")}`;
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2">
+            <div class="col mb-3 d-flex">
+                <div class="card rounded shadow w-100">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa-solid fa-user-group"></i> ${gettext("Participant URL")}</h3>
+                        <h4 class="card-text">
+                            <details>
+                                <summary><i class="fa-solid fa-link"></i> ${gettext("View URL")}</summary>
+                                <strong id="partURL">${window.location.href.replace("create-event/", "participate/" + itemID)}</strong>
+                            </details>
+                        </h4>
+                    </div>
+                    <div class="card-footer">
+                        ${generateShareBtn(window.location.href.replace("create-event/", "participate/" + itemID), eventTitle, itemID).innerHTML}
+                        <a href="${window.location.href.replace("create-event/", "participate/" + itemID)}" class="btn ${darkLightClass} m-2">
+                            <i class="fa-solid fa-user-group"></i> ${gettext("Participant page")}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-3 d-flex">
+                <div class="card rounded shadow w-100">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa-regular fa-id-card"></i> ${gettext("Administration URL")}</h3>
+                        <h4 class="card-text">
+                            <details>
+                                <summary><i class="fa-solid fa-link"></i> ${gettext("View URL")}</summary>
+                                <strong id="adminURL">${window.location.href.replace("create-event/", "edit-event/" + itemID + "?k=" + adminKey)}</strong>
+                            </details>
+                        </h4>
+                        <div class="alert alert-warning text-center mb-2">
+                            <strong>
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                ${gettext("IMPORTANT: make sure to keep this link, it's the only way you'll be able to administrate your event.")}
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        ${generateShareBtn(window.location.href.replace("create-event/", "edit-event/" + itemID + "?k=" + adminKey), eventTitle, itemID).innerHTML}
+                        <a href="${window.location.href.replace("create-event/", "edit-event/" + itemID + "?k=" + adminKey)}" class="btn ${darkLightClass} m-2">
+                            <i class="fa-regular fa-id-card"></i> ${gettext("Administration page")}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 
-    // Warning instructing user to save URLs
-    const warnCol = document.createElement("div");
-    warnCol.setAttribute("class", "alert alert-warning text-center mb-2");
-    const warn = document.createElement("strong");
-    warn.innerHTML = `
-    <i class="fa-solid fa-triangle-exclamation"></i>
-    ${gettext("IMPORTANT: make sure to keep this link, it's the only way you'll be able to administrate your event.")}
-    <i class="fa-solid fa-triangle-exclamation"></i>`;
-
-    // hr
-    newHr = document.createElement("hr");
-    newHr2 = document.createElement("hr");
-
-    // Append elements
-    section.appendChild(displayName);
-
-    section.appendChild(linksSavedDisclaimer);
-    section.appendChild(newHr);
-
-    section.appendChild(displayPartURL);
-    section.appendChild(partRow);
-    partRow.appendChild(partCol1);
-    partCol1.appendChild(participantURL);
-    partRow.appendChild(sharePartCol);
-    sharePartCol.appendChild(btnSharePart);
-    sharePartCol.appendChild(btnOpenPart);
-
-    section.appendChild(newHr2);
-
-    section.appendChild(admRow);
-    admRow.appendChild(warnCol);
-    warnCol.appendChild(warn);
-    admRow.appendChild(displayAdminURL);
-    admRow.appendChild(admCol1);
-    admCol1.appendChild(adminURL);
-    admRow.appendChild(shareAdmCol);
-    shareAdmCol.appendChild(btnShareAdm);
-    shareAdmCol.appendChild(btnOpenAdm);
-
-    // Save to history
+    // Salva i dati nella cronologia
     const eventData = {
         item_id: itemID,
         title: eventTitle,
-        participation_link: participantURL.innerText,
-        admin_link: adminURL.innerText
-    }
+        participation_link: window.location.href.replace("create-event/", "participate/" + itemID),
+        admin_link: window.location.href.replace("create-event/", "edit-event/" + itemID + "?k=" + adminKey)
+    };
     addToHistory(eventData);
 
     notify(gettext("Data saved to history"));
 
-    // Remove "unsavedEvent" from local storage
+    // Rimuovi l'evento non salvato dalla memoria locale
     localStorage.removeItem("unsavedEvent");
+
+    section.innerHTML = newHTMLContent;
 }

@@ -249,7 +249,7 @@ function generateQR(text) {
 }
 
 
-function generateShareBtn(contentURL, eventTitle="", text="") {
+function generateShareBtn(contentURL, eventTitle="", eventID="", text="") {
     // Generates a share dropdown button with links
     if (text == "") {
         text = gettext("You've been invited to an event on Schedama: ");
@@ -264,68 +264,43 @@ function generateShareBtn(contentURL, eventTitle="", text="") {
 
     text = encodeURIComponent(text);
 
-    const btnDiv = document.createElement("div");
-    btnDiv.classList.add("btn-group");
-    
-    const btn = document.createElement("button");
-    btn.setAttribute("type","button");
-    btn.setAttribute("data-bs-toggle","dropdown");
-    btn.setAttribute("aria-expanded","false");
+    // Light/dark class for btn
     let btnLightDark = "btn-dark";
     if (document.body.classList.contains("dark-mode")) {
         btnLightDark = "btn-light";
     }
-    btn.classList.add("btn", btnLightDark, "dropdown-toggle", "p-2");
-    btn.innerHTML = `<i class="fa-solid fa-share-nodes"></i>`;
 
-    const btnUl = document.createElement("ul");
-    btnUl.classList.add("dropdown-menu");
+    // Event ID
+    eventIDHTML = "";
+    if (eventID != "") {
+        eventIDHTML = `<li class="text-center"><span>ID: ${eventID}<div></li><li><hr class="dropdown-divider"></li>`;
+    }
 
     // QR code button
     const modalQR = document.getElementById("modalQR");
-    let qrLi = null;
+    let qrLiHTML = "";
     if (modalQR) {
-        qrLi = document.createElement("li");
-        qrLi.innerHTML = `<a class="cursor-pointer dropdown-item" data-bs-target="#modalQR" data-bs-toggle="modal"><i class="fa-solid fa-qrcode"></i> QR Code </a>`;
+        qrLiHTML = `<li><a class="cursor-pointer dropdown-item" data-bs-target="#modalQR" data-bs-toggle="modal"><i class="fa-solid fa-qrcode"></i> QR Code </a></li>`;
     }
 
-    // Telegram share
-    const telegramLi = document.createElement("li");
-    telegramLi.innerHTML = `<a class="dropdown-item" href="https://telegram.me/share/url?url=${contentURL}&text=${text}" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram </a>`;
-    
-    // Whatsapp share
-    const whatsappLi = document.createElement("li");
-    whatsappLi.innerHTML = `<a class="dropdown-item" href="https://api.whatsapp.com/send?text=${text}${encodeURIComponent("\n")}${contentURL}" data-action="share/whatsapp/share" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp </a>`;
-    
-    // e-mail share
-    const emailLi = document.createElement("li");
-    emailLi.innerHTML = `<a class="dropdown-item" href="mailto:?subject='Schedama Event'&body=${text} ${contentURL}" target="_blank"><i class="fa-solid fa-envelope"></i> e-mail</a>`;
-    const dividerLi = document.createElement("li");
-    
-    dividerLi.innerHTML = `<hr class="dropdown-divider">`;
-    
-    // Copy to clipboard
-    const copyLi = document.createElement("li");
-    copyLi.innerHTML = `<a class="dropdown-item" href=""><i class="fa-solid fa-copy"></i> ${gettext("Copy to clipboard")}</a>`;
-    copyLi.querySelector("a").addEventListener("click", (e) => {
-        const copyContent = async () => {
-            await navigator.clipboard.writeText(contentURL);
-        }
-        copyContent();
-        e.preventDefault();
-    }, false);
+    const btnDiv = document.createElement("div");
+    btnDiv.classList.add("btn-group", "p2");
 
-    // Append elements
-    btnDiv.appendChild(btn);
-    btnDiv.appendChild(btnUl);
-    if (qrLi) {
-        btnUl.appendChild(qrLi);
-    }
-    btnUl.appendChild(telegramLi);
-    btnUl.appendChild(whatsappLi);
-    btnUl.appendChild(emailLi);
-    btnUl.appendChild(dividerLi);
-    btnUl.appendChild(copyLi);
+    btnDiv.innerHTML = `
+        <button type="button" class="btn ${btnLightDark} dropdown-toggle p2" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-share-nodes"></i>
+        </button>
+        <ul class="dropdown-menu">
+            ${eventIDHTML}
+            ${qrLiHTML}
+            <li><a class="dropdown-item" href="https://telegram.me/share/url?url=${contentURL}&text=${text}" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram </a></li>
+            <li><a class="dropdown-item" href="https://api.whatsapp.com/send?text=${text}${encodeURIComponent("\n")}${contentURL}" data-action="share/whatsapp/share" target="_blank"><i class="fa-brands fa-whatsapp"></i> Whatsapp </a></li>
+            <li><a class="dropdown-item" href="mailto:?subject='Schedama Event'&body=${text} ${contentURL}" target="_blank"><i class="fa-solid fa-envelope"></i> e-mail</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="" onclick="event.preventDefault(); (async () => { await navigator.clipboard.writeText('${contentURL}'); })();"><i class="fa-solid fa-copy"></i> ${gettext("Copy url")}</a></li>
+        </ul>
+        <div class="dropdown-menu dropdown-menu-end">
+    `
 
     return btnDiv;
 }
