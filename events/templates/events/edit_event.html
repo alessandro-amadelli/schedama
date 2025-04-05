@@ -99,13 +99,10 @@
 
         <!-- Event location -->
         <div class="row m-3 entering-4" id="locationRow">
-            <div class="col-8">
-                <h4>{% translate "Location" %}</h4>
-            </div>
-            <div class="col-4">
-                <div class="form-check form-switch fs-4">
+            <div class="col-12">
+                <h4>{% translate "Location" %}
                     <input class="form-check-input" type="checkbox" role="switch" id="checkEventLocation" {% if event.has_location %}checked{% endif %}>
-                </div> 
+                </h4>
             </div>
             <div class="w-100"></div>
             <div class="col" id="locationCol">

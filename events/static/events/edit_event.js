@@ -647,12 +647,7 @@ function updateHistory() {
     let itemID = eventDataFull.item_id;
     const partLink = `${window.location.origin}/participate/${itemID}`;
 
-    let privateEventBadge = document.getElementById("privateEventBadge");
-    if (privateEventBadge) {
-        privateEventBadge = true;
-    } else {
-        privateEventBadge = false;
-    }
+    let privateEventBadge = !!document.getElementById("privateEventBadge");
 
     const eventData = {
         item_id: eventDataFull.item_id,
