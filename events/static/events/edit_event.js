@@ -96,7 +96,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener to show password inputs based on private_event flag
     document.getElementById("switchPrivateEvent").addEventListener('change', togglePasswordVisibility);
     togglePasswordVisibility();
-});
+
+    document.querySelector("#btnSettingsOk").onclick = () => {
+        const btnSaveEvent = document.querySelector("#btnSaveEvent");
+        if (btnSaveEvent && !btnSaveEvent.classList.contains("visually-hidden")) {
+            setTimeout(() => {
+                    btnSaveEvent.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+            }, 400);
+        }
+    }
+    });
 
 var removedParticipantsArray = [];
 var restoredParticipantsArray = [];
@@ -281,7 +293,7 @@ function createNewDate() {
 
     // New btn del
     const newBtnDel = document.createElement("i");
-    newBtnDel.classList.add("fa-solid", "fa-trash-can", "fs-1", "cursor-pointer", "remove-date", "text-danger");
+    newBtnDel.classList.add("fa-solid", "fa-trash-can", "fs-2", "cursor-pointer", "remove-date", "text-danger");
     newBtnDel.onclick = () => {
         new100.remove();
         newDateCol.remove();
@@ -322,22 +334,26 @@ function prepareModalAddPart() {
     });
 
     // Adding date switch for each available date to modal
-    document.querySelectorAll("input[name=eventDate]").forEach((date) => {
+    document.querySelectorAll("input[name=eventDate]").forEach((date, indx) => {
         const newDiv = document.createElement("div");
-        newDiv.classList.add("form-check","form-switch", "modal-date");
+        //newDiv.classList.add("form-check","form-switch", "modal-date");
+        newDiv.classList.add("modal-date", "col-12", "col-md-6", "mb-2");
 
         const newDateSwitch= document.createElement("input");
+        const newInpID = "checkDateParticipant" + indx;
+        newDateSwitch.setAttribute("id", newInpID);
         newDateSwitch.setAttribute("type", "checkbox");
-        newDateSwitch.setAttribute("role", "switch");
+        //newDateSwitch.setAttribute("role", "switch");
         newDateSwitch.setAttribute("value", date.value);
         newDateSwitch.setAttribute("name", "switchAddParticipant");
         newDateSwitch.setAttribute("checked", "true");
-        newDateSwitch.classList.add("form-check-input");
+        //newDateSwitch.classList.add("form-check-input");
+        newDateSwitch.classList.add("btn-check");
 
         const newLabel = document.createElement("label");
-        newLabel.setAttribute("for","switchAddParticipant");
-        newLabel.classList.add("form-check-label");
-        newLabel.innerText = date.value;
+        newLabel.setAttribute("for", newInpID);
+        newLabel.classList.add("btn", "btn-outline-info", "w-100", "check-label");
+        newLabel.innerText = formatDateString(date.value);
 
         // Append new elements
         newDiv.appendChild(newDateSwitch);
@@ -659,4 +675,18 @@ function updateHistory() {
     }
 
     addToHistory(eventData);
+}
+
+function formatDateString(dateStr) {
+    // Takes an ISO date string and returns a formatted date string
+    const date = new Date(dateStr);
+    const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    const formattedDate = date.toLocaleString('it-IT', options);
+    return formattedDate.replace(",", "");
 }

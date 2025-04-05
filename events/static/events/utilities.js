@@ -456,5 +456,4 @@ function removeFromHistory(eventID) {
 
     // Updating history content in localStorage
     localStorage.setItem("history", JSON.stringify(historyData));
-    
 }
