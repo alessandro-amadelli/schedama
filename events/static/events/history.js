@@ -34,7 +34,7 @@ function fillHistory() {
 
         const cardTemplate = `
             <div class="col d-flex appearing">
-                <div class="card shadow" style="width: 18rem;">
+                <div class="card shadow w-100" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title text-truncate">
                             ${item.private_event ? `<i class="fa-solid fa-lock"></i>&nbsp;` : ''}${item.title}
