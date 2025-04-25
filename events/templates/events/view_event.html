@@ -36,17 +36,6 @@
         <h1 class="entering event-title"><span id="eventTitle">{{ event.title }}</span></h1>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-12">
-            {% if event.private_event %}
-                <span class="badge text-bg-info fs-6" id="privateEventBadge" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{% translate 'A password is needed to access this event.' %}">
-                    <i class="fa-solid fa-lock fa-bounce" style="--fa-animation-iteration-count:2;"></i>
-                    {% translate "Private event" %}
-                </span>
-            {% endif %}
-        </div>
-    </div>
-
     <!-- Countdown row -->
     <div class="row mb-3{% if event.is_cancelled %} opacity-50{% endif %}">
         <div class="row mx-auto event-clock-div clock-event-not-started justify-content-center rounded shadow display-5 p-3 position-relative" id="clockDiv">
@@ -69,14 +58,22 @@
     <!-- Event info row -->
     <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %} info-section">
         <div class="col-12 event-info-div display-5 p-3 shadow rounded"{% if event.event_theme %} data-theme="{{ event.event_theme }}"{% endif %}>
-            {% if event.author %}
+            {% if event.author or event.private_event %}
                 <div class="row mb-2 fs-6">
                     <div class="col">
-                        <span class="badge text-bg-info fs-6">
-                            <i class="fa-solid fa-id-card"></i>
-                            {% translate "Author:" %}
-                            <span id="eventAuthor">{{ event.author }}</span>
-                        </span>
+                        {% if event.private_event %}
+                            <span class="badge text-bg-info fs-6 p-2" id="privateEventBadge" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{% translate 'A password is needed to access this event.' %}">
+                                <i class="fa-solid fa-lock fa-bounce" style="--fa-animation-iteration-count:2;"></i>
+                                {% translate "Private event" %}
+                            </span>
+                        {% endif %}
+                        {% if event.author %}
+                            <span class="badge text-bg-info fs-6 p-2">
+                                <i class="fa-solid fa-id-card"></i>
+                                {% translate "Author:" %}
+                                <span id="eventAuthor">{{ event.author }}</span>
+                            </span>
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}
