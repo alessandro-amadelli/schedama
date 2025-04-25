@@ -794,7 +794,7 @@ msgstr "Crea e personalizza il tuo evento"
 
 #: .\events\templates\events\new_event.html:22
 msgid "If you have any doubt concerning your data, please check our"
-msgstr "In caso di dubbi riguardo i tuoi dati, controlla la nostra"
+msgstr "In caso di dubbi riguardo ai tuoi dati, controlla la nostra"
 
 #: .\events\templates\events\new_event.html:23
 msgid "Privacy policy"

@@ -1,4 +1,4 @@
-const cacheName = 'schedama-cache-v3.5.57';
+const cacheName = 'schedama-cache-v3.5.58';
 
 function precache() {
 	return caches.open('schedama-cache').then(function (cache){
@@ -8,6 +8,7 @@ function precache() {
 			"{% url 'open_event_view' %}",
 			"{% url 'history_view' %}",
 			"{% url 'about_us_view' %}",
+			"{% url 'privacy_view' %}",
 		]);
 	});
 }
