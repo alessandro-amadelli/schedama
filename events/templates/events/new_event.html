@@ -17,10 +17,16 @@
   {% csrf_token %}
 
   <div class="section p-2">
+
+    <p class="fst-italic">
+      {% translate "If you have any doubt concerning your data, please check our" %}
+        <a href="{% url 'privacy_view' %}" class="btn btn-link">{% translate "Privacy policy" %}</a>
+    </p>
+
     <!-- Event author -->
     <div class="row p-3 mb-3 mt-5 intro-animated" id="authorRow">
       <div class="col">
-        <h4><i class="fa-solid fa-id-card fa-bounce"></i> {% translate "What's your name?" %} <span class="text-danger">*</span></h4>
+        <h4><i class="fa-solid fa-id-card fa-bounce"></i> {% translate "Your nickname" %} <span class="text-danger">*</span></h4>
       </div>
       <div class="w-100"></div>
       <div class="col">

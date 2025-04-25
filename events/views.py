@@ -153,6 +153,11 @@ def about_us_view(request):
     return render(request, "events/about_us.html")
 
 
+@cache_page(CACHE_TTL)
+def privacy_view(request):
+    return render(request, "events/privacy.html")
+
+
 def save_event_view(request):
     """
     This view is called when creating a new event

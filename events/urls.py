@@ -20,6 +20,7 @@ urlpatterns = [
     path('password-check', views.password_check_view, name="password_check"),
     path('history/', views.history_view, name='history_view'),
     path('about-us/', views.about_us_view, name='about_us_view'),
+    path('privacy/', views.privacy_view, name='privacy_view'),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path(
         'sw', (TemplateView.as_view(template_name="events/sw.js", content_type='application/javascript', )), name='sw'

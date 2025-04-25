@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-29 17:37+0100\n"
+"POT-Creation-Date: 2025-04-25 15:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,6 +89,7 @@ msgstr "Clicca su"
 #: .\events\templates\events\about_us.html:59
 #: .\events\templates\events\history.html:12
 #: .\events\templates\events\navbar.html:25
+#: .\events\templates\events\privacy.html:71
 msgid "History"
 msgstr "Cronologia"
 
@@ -139,7 +140,7 @@ msgstr "Titolo"
 #: .\events\templates\events\about_us.html:83
 #: .\events\templates\events\edit_event.html:87
 #: .\events\templates\events\edit_event.html:94
-#: .\events\templates\events\new_event.html:76
+#: .\events\templates\events\new_event.html:82
 msgid "Description"
 msgstr "Descrizione"
 
@@ -149,16 +150,17 @@ msgid "Location"
 msgstr "Location"
 
 #: .\events\templates\events\about_us.html:85
-#: .\events\templates\events\edit_event.html:122
+#: .\events\templates\events\edit_event.html:119
 msgid "Date and time"
 msgstr "Data e ora"
 
 #: .\events\templates\events\about_us.html:86
-#: .\events\templates\events\edit_event.html:148
+#: .\events\templates\events\edit_event.html:145
 msgid "Duration"
 msgstr "Durata"
 
 #: .\events\templates\events\about_us.html:87
+#: .\events\templates\events\privacy.html:35
 msgid "List of participants"
 msgstr "Lista dei partecipanti"
 
@@ -256,14 +258,14 @@ msgid "Manage your event"
 msgstr "Gestisci il tuo evento"
 
 #: .\events\templates\events\edit_event.html:34
-#: .\events\templates\events\view_event.html:42
+#: .\events\templates\events\view_event.html:65
 msgid "A password is needed to access this event."
 msgstr "È necessaria una password per accedere a questo evento."
 
 #: .\events\templates\events\edit_event.html:36
-#: .\events\templates\events\edit_event.html:374
+#: .\events\templates\events\edit_event.html:369
 #: .\events\templates\events\private_event.html:9
-#: .\events\templates\events\view_event.html:44
+#: .\events\templates\events\view_event.html:67
 msgid "Private event"
 msgstr "Evento privato"
 
@@ -280,186 +282,186 @@ msgid "Author"
 msgstr "Autore"
 
 #: .\events\templates\events\edit_event.html:65
-#: .\events\templates\events\new_event.html:33
+#: .\events\templates\events\new_event.html:39
 msgid "Event author"
 msgstr "Autore evento"
 
 #: .\events\templates\events\edit_event.html:79
-#: .\events\templates\events\new_event.html:47
+#: .\events\templates\events\new_event.html:53
 msgid "Event title"
 msgstr "Titolo evento"
 
 #: .\events\templates\events\edit_event.html:87
-#: .\events\templates\events\new_event.html:156
-#: .\events\templates\events\new_event.html:211
+#: .\events\templates\events\new_event.html:162
+#: .\events\templates\events\new_event.html:217
 msgid "Optional"
 msgstr "Facoltativo"
 
 #: .\events\templates\events\edit_event.html:92
-#: .\events\templates\events\new_event.html:75
+#: .\events\templates\events\new_event.html:81
 msgid "Describe your event here"
 msgstr "Descrivi qui il tuo evento"
 
-#: .\events\templates\events\edit_event.html:114
-#: .\events\templates\events\new_event.html:106
+#: .\events\templates\events\edit_event.html:111
+#: .\events\templates\events\new_event.html:112
 msgid "Event location"
 msgstr "Location evento"
 
-#: .\events\templates\events\edit_event.html:128
-#: .\events\templates\events\new_event.html:120
+#: .\events\templates\events\edit_event.html:125
+#: .\events\templates\events\new_event.html:126
 msgid "Enter a date"
 msgstr "Inserisci una data"
 
-#: .\events\templates\events\edit_event.html:136
+#: .\events\templates\events\edit_event.html:133
 msgid "Event date"
 msgstr "Data evento"
 
-#: .\events\templates\events\edit_event.html:155
-#: .\events\templates\events\new_event.html:144
+#: .\events\templates\events\edit_event.html:152
+#: .\events\templates\events\new_event.html:150
 msgid "Days"
 msgstr "Giorni"
 
-#: .\events\templates\events\edit_event.html:159
-#: .\events\templates\events\new_event.html:140
+#: .\events\templates\events\edit_event.html:156
+#: .\events\templates\events\new_event.html:146
 msgid "Hours"
 msgstr "Ore"
 
-#: .\events\templates\events\edit_event.html:163
-#: .\events\templates\events\new_event.html:136
+#: .\events\templates\events\edit_event.html:160
+#: .\events\templates\events\new_event.html:142
 msgid "Minutes"
 msgstr "Minuti"
 
-#: .\events\templates\events\edit_event.html:171
-#: .\events\templates\events\new_event.html:156
+#: .\events\templates\events\edit_event.html:168
+#: .\events\templates\events\new_event.html:162
 msgid "Choose a theme"
 msgstr "Scegli un tema"
 
-#: .\events\templates\events\edit_event.html:176
-#: .\events\templates\events\new_event.html:161
+#: .\events\templates\events\edit_event.html:173
+#: .\events\templates\events\new_event.html:167
 msgid "Default"
 msgstr ""
 
-#: .\events\templates\events\edit_event.html:179
-#: .\events\templates\events\new_event.html:164
+#: .\events\templates\events\edit_event.html:176
+#: .\events\templates\events\new_event.html:170
 msgid "Beach"
 msgstr "Spiaggia"
 
-#: .\events\templates\events\edit_event.html:182
-#: .\events\templates\events\new_event.html:167
+#: .\events\templates\events\edit_event.html:179
+#: .\events\templates\events\new_event.html:173
 msgid "Birthday party"
 msgstr "Festa di compleanno"
 
-#: .\events\templates\events\edit_event.html:185
-#: .\events\templates\events\new_event.html:170
+#: .\events\templates\events\edit_event.html:182
+#: .\events\templates\events\new_event.html:176
 msgid "Drink"
 msgstr "Aperitivo"
 
-#: .\events\templates\events\edit_event.html:188
-#: .\events\templates\events\new_event.html:173
+#: .\events\templates\events\edit_event.html:185
+#: .\events\templates\events\new_event.html:179
 msgid "Forest"
 msgstr "Foresta"
 
-#: .\events\templates\events\edit_event.html:191
-#: .\events\templates\events\new_event.html:176
+#: .\events\templates\events\edit_event.html:188
+#: .\events\templates\events\new_event.html:182
 msgid "Graduation"
 msgstr "Diploma"
 
-#: .\events\templates\events\edit_event.html:194
-#: .\events\templates\events\new_event.html:179
+#: .\events\templates\events\edit_event.html:191
+#: .\events\templates\events\new_event.html:185
 msgid "Match"
 msgstr "Sfida"
 
-#: .\events\templates\events\edit_event.html:197
-#: .\events\templates\events\new_event.html:182
+#: .\events\templates\events\edit_event.html:194
+#: .\events\templates\events\new_event.html:188
 msgid "Meeting"
 msgstr ""
 
-#: .\events\templates\events\edit_event.html:200
-#: .\events\templates\events\new_event.html:185
+#: .\events\templates\events\edit_event.html:197
+#: .\events\templates\events\new_event.html:191
 msgid "Mountain"
 msgstr "Montagna"
 
-#: .\events\templates\events\edit_event.html:203
-#: .\events\templates\events\new_event.html:188
+#: .\events\templates\events\edit_event.html:200
+#: .\events\templates\events\new_event.html:194
 msgid "Music"
 msgstr "Musica"
 
-#: .\events\templates\events\edit_event.html:206
-#: .\events\templates\events\new_event.html:191
+#: .\events\templates\events\edit_event.html:203
+#: .\events\templates\events\new_event.html:197
 msgid "Pizza"
 msgstr ""
 
-#: .\events\templates\events\edit_event.html:209
-#: .\events\templates\events\new_event.html:194
+#: .\events\templates\events\edit_event.html:206
+#: .\events\templates\events\new_event.html:200
 msgid "Movie"
 msgstr "Film"
 
-#: .\events\templates\events\edit_event.html:212
-#: .\events\templates\events\new_event.html:197
+#: .\events\templates\events\edit_event.html:209
+#: .\events\templates\events\new_event.html:203
 msgid "Relax"
 msgstr ""
 
-#: .\events\templates\events\edit_event.html:215
-#: .\events\templates\events\new_event.html:200
+#: .\events\templates\events\edit_event.html:212
+#: .\events\templates\events\new_event.html:206
 msgid "Event"
 msgstr "Evento"
 
-#: .\events\templates\events\edit_event.html:218
-#: .\events\templates\events\new_event.html:203
+#: .\events\templates\events\edit_event.html:215
+#: .\events\templates\events\new_event.html:209
 msgid "Travel"
 msgstr "Viaggio"
 
-#: .\events\templates\events\edit_event.html:225
+#: .\events\templates\events\edit_event.html:222
 msgid "Participants"
 msgstr "Partecipanti"
 
-#: .\events\templates\events\edit_event.html:229
-#: .\events\templates\events\edit_event.html:402
+#: .\events\templates\events\edit_event.html:226
+#: .\events\templates\events\edit_event.html:397
 msgid "Add participant"
 msgstr "Aggiungi partecipante"
 
-#: .\events\templates\events\edit_event.html:263
+#: .\events\templates\events\edit_event.html:260
 msgid "Removed participants"
 msgstr "Partecipanti rimossi"
 
-#: .\events\templates\events\edit_event.html:265
+#: .\events\templates\events\edit_event.html:262
 msgid "To restore one or more removed participants:"
 msgstr "Per ripristinare uno o più partecipanti rimossi:"
 
-#: .\events\templates\events\edit_event.html:267
+#: .\events\templates\events\edit_event.html:264
 msgid "Click on participants' name"
 msgstr "Clicca sui nomi dei partecipanti"
 
-#: .\events\templates\events\edit_event.html:268
+#: .\events\templates\events\edit_event.html:265
 msgid "Selected participants will appear in yellow"
 msgstr "I partecipanti selezionati appariranno in giallo"
 
-#: .\events\templates\events\edit_event.html:269
+#: .\events\templates\events\edit_event.html:266
 msgid "Click <strong>Save</strong> to confirm"
 msgstr "Clicca <strong>Salva</strong> per confermare"
 
-#: .\events\templates\events\edit_event.html:283
-#: .\events\templates\events\new_event.html:282
-#: .\events\templates\events\view_event.html:236
+#: .\events\templates\events\edit_event.html:280
+#: .\events\templates\events\new_event.html:288
+#: .\events\templates\events\view_event.html:233
 msgid "Save"
 msgstr "Salva"
 
-#: .\events\templates\events\edit_event.html:293
+#: .\events\templates\events\edit_event.html:290
 msgid ""
 "By clicking <strong>Cancel event</strong> button you'll cancel this event."
 msgstr ""
 "Cliccando il pulsante <strong>Annulla evento</strong> annullerai questo "
 "evento."
 
-#: .\events\templates\events\edit_event.html:297
+#: .\events\templates\events\edit_event.html:294
 msgid "After clicking the button:"
 msgstr "Dopo aver cliccato il pulsante:"
 
-#: .\events\templates\events\edit_event.html:299
+#: .\events\templates\events\edit_event.html:296
 msgid "The event will be flagged as <strong>Cancelled</strong>"
 msgstr "L'evento verrà segnato come <strong>Annullato</strong>"
 
-#: .\events\templates\events\edit_event.html:300
+#: .\events\templates\events\edit_event.html:297
 msgid ""
 "<strong>Participants</strong> permission will be deactivated so they "
 "<strong>will only be able to view the event</strong>"
@@ -467,7 +469,7 @@ msgstr ""
 "I permessi dei <strong>partecipanti</strong> saranno disattivati quindi "
 "<strong>potranno solamente visualizzare l'evento</strong>"
 
-#: .\events\templates\events\edit_event.html:301
+#: .\events\templates\events\edit_event.html:298
 msgid ""
 "The <strong>event will be forever deleted after 2 days</strong> without "
 "possibility to recover it"
@@ -475,7 +477,7 @@ msgstr ""
 "<strong>L'evento sarà eliminato per sempre dopo 2 giorni</strong> senza "
 "possibilità di recuperarlo"
 
-#: .\events\templates\events\edit_event.html:302
+#: .\events\templates\events\edit_event.html:299
 msgid ""
 "<strong>It will still be possible to undo the cancellation</strong> in the "
 "following 2 days, before the event is deleted"
@@ -483,23 +485,23 @@ msgstr ""
 "<strong>Sarà ancora possibile cancellare l'annullamento</strong> nei "
 "successivi 2 giorni, prima che l'evento sia eliminato"
 
-#: .\events\templates\events\edit_event.html:310
+#: .\events\templates\events\edit_event.html:306
 msgid "I understand"
 msgstr "Capisco"
 
-#: .\events\templates\events\edit_event.html:317
+#: .\events\templates\events\edit_event.html:312
 msgid "Cancel event"
 msgstr "Annulla evento"
 
-#: .\events\templates\events\edit_event.html:321
+#: .\events\templates\events\edit_event.html:316
 msgid "The end is near!"
 msgstr "La fine è vicina!"
 
-#: .\events\templates\events\edit_event.html:322
+#: .\events\templates\events\edit_event.html:317
 msgid "Expiration date:"
 msgstr "Data di scadenza:"
 
-#: .\events\templates\events\edit_event.html:324
+#: .\events\templates\events\edit_event.html:319
 msgid ""
 "Ok, calm down...the event is flagged as <strong>Cancelled</strong> and will "
 "be permanently deleted after the expiration date."
@@ -507,7 +509,7 @@ msgstr ""
 "Ok, calma...l'evento è segnato come <strong>Annullato</strong> e sarà "
 "eliminato definitivamente dopo la data di scadenza."
 
-#: .\events\templates\events\edit_event.html:325
+#: .\events\templates\events\edit_event.html:320
 msgid ""
 "Sometimes it is useful to let things go...but if you changed your mind, it's "
 "not too late!"
@@ -515,22 +517,22 @@ msgstr ""
 "A volte è utile lasciarsi le cose alle spalle...ma se hai cambiato idea, non "
 "è troppo tardi!"
 
-#: .\events\templates\events\edit_event.html:327
+#: .\events\templates\events\edit_event.html:322
 msgid "To reactivate the event: "
 msgstr "Per riattivare l'evento: "
 
-#: .\events\templates\events\edit_event.html:329
+#: .\events\templates\events\edit_event.html:324
 msgid "Click on <strong>Reactivate event</strong> button below"
 msgstr "Clicca il pulsante <strong>Riattiva evento</strong> che trovi sotto"
 
-#: .\events\templates\events\edit_event.html:330
+#: .\events\templates\events\edit_event.html:325
 msgid ""
 "<strong>Event will be reactivated</strong> and it's deletion will be canceled"
 msgstr ""
 "<strong>L'evento sarà riattivato</strong> e la sua eliminazione sarà "
 "annullata"
 
-#: .\events\templates\events\edit_event.html:331
+#: .\events\templates\events\edit_event.html:326
 msgid ""
 "After reactivation, <strong>check participants permission</strong> "
 "(permissions had been deactivated upon event cancellation)"
@@ -538,41 +540,41 @@ msgstr ""
 "Dopo la riattivazione, <strong>controlla i permessi dei partecipanti</"
 "strong> (i permessi sono stati disattivati con l'annullamento dell'evento)"
 
-#: .\events\templates\events\edit_event.html:338
+#: .\events\templates\events\edit_event.html:333
 msgid "Reactivate event"
 msgstr "Riattiva evento"
 
-#: .\events\templates\events\edit_event.html:350
+#: .\events\templates\events\edit_event.html:345
 msgid "Event settings"
 msgstr "Impostazioni evento"
 
-#: .\events\templates\events\edit_event.html:355
-#: .\events\templates\events\new_event.html:230
+#: .\events\templates\events\edit_event.html:350
+#: .\events\templates\events\new_event.html:236
 msgid "Choose what participants are allowed to do"
 msgstr "Scegli cosa possono fare i partecipanti"
 
-#: .\events\templates\events\edit_event.html:359
-#: .\events\templates\events\new_event.html:211
-#: .\events\templates\events\new_event.html:233
+#: .\events\templates\events\edit_event.html:354
+#: .\events\templates\events\new_event.html:217
+#: .\events\templates\events\new_event.html:239
 msgid "Add participants"
 msgstr "Aggiungi partecipanti"
 
-#: .\events\templates\events\edit_event.html:364
-#: .\events\templates\events\new_event.html:237
+#: .\events\templates\events\edit_event.html:359
+#: .\events\templates\events\new_event.html:243
 msgid "Edit participants"
 msgstr "Modifica partecipanti"
 
-#: .\events\templates\events\edit_event.html:368
-#: .\events\templates\events\new_event.html:241
+#: .\events\templates\events\edit_event.html:363
+#: .\events\templates\events\new_event.html:247
 msgid "Remove participants"
 msgstr "Rimuovi partecipanti"
 
-#: .\events\templates\events\edit_event.html:370
-#: .\events\templates\events\new_event.html:258
+#: .\events\templates\events\edit_event.html:365
+#: .\events\templates\events\new_event.html:264
 msgid "Security"
 msgstr "Sicurezza"
 
-#: .\events\templates\events\edit_event.html:379
+#: .\events\templates\events\edit_event.html:374
 msgid ""
 "If you set or change the event password, everyone will need to enter this "
 "password to access the event."
@@ -580,27 +582,27 @@ msgstr ""
 "Se imposti o cambi la password dell'evento, tutti dovranno inserire questa "
 "password per accedere all'evento."
 
-#: .\events\templates\events\edit_event.html:381
+#: .\events\templates\events\edit_event.html:376
 #: .\events\templates\events\private_event.html:37
 msgid "Password"
 msgstr ""
 
-#: .\events\templates\events\edit_event.html:385
-#: .\events\templates\events\new_event.html:273
+#: .\events\templates\events\edit_event.html:380
+#: .\events\templates\events\new_event.html:279
 msgid "Repeat password"
 msgstr "Ripeti password"
 
-#: .\events\templates\events\edit_event.html:408
+#: .\events\templates\events\edit_event.html:403
 msgid "Particpant name"
 msgstr "Nome partecipante"
 
-#: .\events\templates\events\edit_event.html:412
-#: .\events\templates\events\view_event.html:233
-#: .\events\templates\events\view_event.html:320
+#: .\events\templates\events\edit_event.html:407
+#: .\events\templates\events\view_event.html:230
+#: .\events\templates\events\view_event.html:317
 msgid "Cancel"
 msgstr "Annulla"
 
-#: .\events\templates\events\edit_event.html:413
+#: .\events\templates\events\edit_event.html:408
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -708,24 +710,24 @@ msgstr ""
 "Schedama è un modo veloce e intuitivo per creare un evento, condividerlo e "
 "accordarsi su data e ora."
 
-#: .\events\templates\events\index.html:24
+#: .\events\templates\events\index.html:23
 msgid "Create an event"
 msgstr "Crea un evento"
 
-#: .\events\templates\events\index.html:25
+#: .\events\templates\events\index.html:24
 msgid "Easily create a new event by clicking "
 msgstr "Crea un nuovo evento in modo semplice cliccando "
 
-#: .\events\templates\events\index.html:28
+#: .\events\templates\events\index.html:27
 #: .\events\templates\events\navbar.html:19
 msgid "Create event"
 msgstr "Crea evento"
 
-#: .\events\templates\events\index.html:43
+#: .\events\templates\events\index.html:42
 msgid "Save event links"
 msgstr "Salva i link dell'evento"
 
-#: .\events\templates\events\index.html:44
+#: .\events\templates\events\index.html:43
 msgid ""
 "After event creation, 2 links are generated: <strong>Participation URL</"
 "strong> and <strong>Administration URL</strong>"
@@ -733,11 +735,11 @@ msgstr ""
 "Dopo la creazione dell'evento, vengono generati 2 link: <strong>URL "
 "Partecipante</strong> e <strong>URL Amministrazione</strong>"
 
-#: .\events\templates\events\index.html:58
+#: .\events\templates\events\index.html:57
 msgid "Share event"
 msgstr "Condividi evento"
 
-#: .\events\templates\events\index.html:59
+#: .\events\templates\events\index.html:58
 msgid ""
 "Share the event with whoever you like by sending them the "
 "<strong>Participation URL</strong>"
@@ -745,11 +747,11 @@ msgstr ""
 "Condividi l'evento con chiunque vuoi inviando l'<strong>URL Partecipante</"
 "strong>"
 
-#: .\events\templates\events\index.html:73
+#: .\events\templates\events\index.html:72
 msgid "Administrate your event"
 msgstr "Amministra il tuo evento"
 
-#: .\events\templates\events\index.html:74
+#: .\events\templates\events\index.html:73
 msgid ""
 "You can fully manage your event by visiting the <strong>Administration URL</"
 "strong>."
@@ -765,6 +767,10 @@ msgstr "Apri evento"
 #: .\events\templates\events\navbar.html:28
 msgid "About us"
 msgstr "About us"
+
+#: .\events\templates\events\navbar.html:31
+msgid "Privacy"
+msgstr ""
 
 #: .\events\templates\events\new_event.html:5
 msgid "Create a new event online with Schedama.com"
@@ -786,11 +792,19 @@ msgstr "Editor eventi"
 msgid "Create and customize your event"
 msgstr "Crea e personalizza il tuo evento"
 
-#: .\events\templates\events\new_event.html:23
-msgid "What's your name?"
-msgstr "Come ti chiami?"
+#: .\events\templates\events\new_event.html:22
+msgid "If you have any doubt concerning your data, please check our"
+msgstr "In caso di dubbi riguardo i tuoi dati, controlla la nostra"
 
-#: .\events\templates\events\new_event.html:27
+#: .\events\templates\events\new_event.html:23
+msgid "Privacy policy"
+msgstr ""
+
+#: .\events\templates\events\new_event.html:29
+msgid "Your nickname"
+msgstr "Il tuo nickname"
+
+#: .\events\templates\events\new_event.html:33
 msgid ""
 "This name will be visible as the event author. You will also be "
 "automatically added as a participant with this name."
@@ -798,115 +812,115 @@ msgstr ""
 "Questo nome sarà visibile come autore dell'evento. Sarai anche "
 "automaticamente aggiunto come partecipante con questo nome."
 
-#: .\events\templates\events\new_event.html:41
+#: .\events\templates\events\new_event.html:47
 msgid "Enter a title"
 msgstr "Inserisci un titolo"
 
-#: .\events\templates\events\new_event.html:55
+#: .\events\templates\events\new_event.html:61
 msgid "Do you wish to add a description?"
 msgstr "Vuoi aggiungere una descrizione?"
 
-#: .\events\templates\events\new_event.html:58
-#: .\events\templates\events\new_event.html:88
+#: .\events\templates\events\new_event.html:64
+#: .\events\templates\events\new_event.html:94
 msgid "Yes"
 msgstr "Sì"
 
-#: .\events\templates\events\new_event.html:62
-#: .\events\templates\events\new_event.html:92
+#: .\events\templates\events\new_event.html:68
+#: .\events\templates\events\new_event.html:98
 msgid "No"
 msgstr "No"
 
-#: .\events\templates\events\new_event.html:70
+#: .\events\templates\events\new_event.html:76
 msgid "Describe the event"
 msgstr "Descrivi l'evento"
 
-#: .\events\templates\events\new_event.html:85
+#: .\events\templates\events\new_event.html:91
 msgid "Do you wish to add a location?"
 msgstr "Vuoi aggiungere una location?"
 
-#: .\events\templates\events\new_event.html:100
+#: .\events\templates\events\new_event.html:106
 msgid "Choose a location"
 msgstr "Scegli una location"
 
-#: .\events\templates\events\new_event.html:114
+#: .\events\templates\events\new_event.html:120
 msgid "Set a date and time"
 msgstr "Imposta data e ora"
 
-#: .\events\templates\events\new_event.html:114
+#: .\events\templates\events\new_event.html:120
 msgid "you can indicate more than one possible date"
 msgstr "puoi indicare anche più di una data possibile"
 
-#: .\events\templates\events\new_event.html:128
+#: .\events\templates\events\new_event.html:134
 msgid "Indicate duration"
 msgstr "Indica la durata"
 
-#: .\events\templates\events\new_event.html:132
+#: .\events\templates\events\new_event.html:138
 msgid "Event duration"
 msgstr "Durata evento"
 
-#: .\events\templates\events\new_event.html:149
+#: .\events\templates\events\new_event.html:155
 msgid "Scroll the selectors to change event duration."
 msgstr "Fai scorrere i selettori per cambiare la durata dell'evento."
 
-#: .\events\templates\events\new_event.html:216
-#: .\events\templates\events\new_event.html:217
+#: .\events\templates\events\new_event.html:222
+#: .\events\templates\events\new_event.html:223
 msgid "Enter new participant"
 msgstr "Inserisci un nuovo partecipante"
 
-#: .\events\templates\events\new_event.html:225
+#: .\events\templates\events\new_event.html:231
 msgid "Configure Settings"
 msgstr "Configura Impostazioni"
 
-#: .\events\templates\events\new_event.html:246
+#: .\events\templates\events\new_event.html:252
 msgid "Current settings"
 msgstr "Impostazioni correnti"
 
-#: .\events\templates\events\new_event.html:247
+#: .\events\templates\events\new_event.html:253
 msgid "Add one ore more names to the participant list"
 msgstr "Aggiungere uno o più nomi alla lista partecipanti"
 
-#: .\events\templates\events\new_event.html:248
+#: .\events\templates\events\new_event.html:254
 msgid ""
 "Change preferences and availability on dates for participants in the list"
 msgstr ""
 "Modificare preferenze e disponibilità sulle date per i partecipanti in lista"
 
-#: .\events\templates\events\new_event.html:249
+#: .\events\templates\events\new_event.html:255
 msgid "Remove one or more names from the participant list"
 msgstr "Rimuovere uno o più nomi dalla lista partecipanti"
 
-#: .\events\templates\events\new_event.html:259
+#: .\events\templates\events\new_event.html:265
 msgid ""
 "You can choose to make your event private, protecting it with a password."
 msgstr ""
 "Puoi scegliere di rendere il tuo evento privato, proteggendolo con una "
 "password."
 
-#: .\events\templates\events\new_event.html:264
+#: .\events\templates\events\new_event.html:270
 msgid "Make event private"
 msgstr "Rendi evento privato"
 
-#: .\events\templates\events\new_event.html:269
+#: .\events\templates\events\new_event.html:275
 msgid "Choose a password"
 msgstr "Scegli una password"
 
-#: .\events\templates\events\new_event.html:293
+#: .\events\templates\events\new_event.html:299
 msgid "Restore unsaved data"
 msgstr "Ripristina dati non salvati"
 
-#: .\events\templates\events\new_event.html:297
+#: .\events\templates\events\new_event.html:303
 msgid "It seems you have worked on a new event without saving."
 msgstr "Sembra che tu abbia lavorato ad un nuovo evento senza salvare."
 
-#: .\events\templates\events\new_event.html:298
+#: .\events\templates\events\new_event.html:304
 msgid "Do you wish to reload previous data?"
 msgstr "Vuoi ricaricare i dati precedenti?"
 
-#: .\events\templates\events\new_event.html:302
+#: .\events\templates\events\new_event.html:308
 msgid "Nah, don't care"
 msgstr "Nah, non mi interessa"
 
-#: .\events\templates\events\new_event.html:305
+#: .\events\templates\events\new_event.html:311
 msgid "Restore data"
 msgstr "Ripristina i dati"
 
@@ -952,6 +966,217 @@ msgstr ""
 "Ad esempio, puoi vedere che l'ID evento è la parte di testo evidenziata nel "
 "seguente URL partecipante"
 
+#: .\events\templates\events\privacy.html:5
+msgid "Learn about how Schedama maintains your privacy - Schedama.com"
+msgstr "Scopri come Schedama mantiene la tua privacy - Schedama.com"
+
+#: .\events\templates\events\privacy.html:6
+msgid ""
+"Learn more about how Schedama works, regarding user privacy and what kinds "
+"of data are collected."
+msgstr ""
+"Scopri di più su come funziona Schedama, riguardo la privacy degli utenti e "
+"quali tipi di dato sono raccolti."
+
+#: .\events\templates\events\privacy.html:11
+msgid "Review how Schedama.com handles data"
+msgstr "Verifica come Schedama.com gestisce i dati"
+
+#: .\events\templates\events\privacy.html:17
+msgid "User privacy is important on Schedama!"
+msgstr "La privacy degli utenti è importante su Schedama!"
+
+#: .\events\templates\events\privacy.html:19
+msgid ""
+"That's why we do not ask for or collect any personally identifiable "
+"information (eg.: names, email addresses, IP addresses, etc.)."
+msgstr ""
+"Ecco perché non chiediamo o raccogliamo alcuna informazione di "
+"identificazione personale (es.: nomi, indirizzi email, indirizzi IP, ecc.)."
+
+#: .\events\templates\events\privacy.html:26
+msgid "Types of data collected"
+msgstr "Tipi di dati raccolti"
+
+#: .\events\templates\events\privacy.html:28
+msgid ""
+"Schedama only collects data related to events created by users and only data "
+"entered by users."
+msgstr ""
+"Schedama raccoglie solo dati relativi agli eventi creati dagli utenti e solo "
+"dati inseriti dagli utenti."
+
+#: .\events\templates\events\privacy.html:30
+msgid "Such data may include:"
+msgstr "Tali dati possono includere:"
+
+#: .\events\templates\events\privacy.html:32
+msgid "Event title and description (if present)"
+msgstr "Titolo e descrizione (se presente) dell'evento"
+
+#: .\events\templates\events\privacy.html:33
+msgid "Location (if provided)"
+msgstr "Location (se fornita)"
+
+#: .\events\templates\events\privacy.html:34
+msgid "Date, time and duration of the event"
+msgstr "Data, ora e durata dell'evento"
+
+#: .\events\templates\events\privacy.html:36
+msgid "Voting preferences submitted by participants"
+msgstr "Voti e preferenze inviate dai partecipanti"
+
+#: .\events\templates\events\privacy.html:38
+msgid ""
+"To better protect your privacy, we recommend that you do NOT include "
+"personal or confidential information in the events you create."
+msgstr ""
+"Per meglio proteggere la tua privacy, ti raccomandiamo di NON includere "
+"informazioni personali o confidenziali negli eventi che crei."
+
+#: .\events\templates\events\privacy.html:43
+msgid "How we use data"
+msgstr "Come utilizziamo i dati"
+
+#: .\events\templates\events\privacy.html:45
+msgid ""
+"Data related to events created are saved in our database with the sole "
+"purpose of:"
+msgstr ""
+"I dati relativi agli eventi creati sono salvati nel nostro database con "
+"l'unico scopo di:"
+
+#: .\events\templates\events\privacy.html:48
+msgid "Enable event authors to view, manage and share information"
+msgstr ""
+"Permettere agli autori dell'evento di visualizzare, gestire e condividere le "
+"informazioni"
+
+#: .\events\templates\events\privacy.html:49
+msgid ""
+"Allow participants to view relevant information about the event and indicate "
+"their participation (possibly by voting for one or more of the available "
+"dates)"
+msgstr ""
+"Consentire ai partecipanti di visualizzare le informazioni rilevanti "
+"sull'evento e indicare la loro partecipazione (possibilmente votando fra una "
+"o più delle date disponibili)"
+
+#: .\events\templates\events\privacy.html:54
+msgid "Data sharing"
+msgstr "Condivisione dei dati"
+
+#: .\events\templates\events\privacy.html:56
+msgid "Upon event creation, two links are generated:"
+msgstr "Alla creazione dell'evento sono generati due link:"
+
+#: .\events\templates\events\privacy.html:59
+msgid ""
+"Participant URL: Anyone with the link can view the event (event authors can "
+"share this link with the participants)"
+msgstr ""
+"URL Partecipante: Chiunque abbia il link può visualizzare l'evento (gli "
+"autori dell'evento possono condividere questo link con i partecipanti)"
+
+#: .\events\templates\events\privacy.html:60
+msgid ""
+"Administration URL: Anyone with the link can modify the event (we recommend "
+"event authors to keep this link to themselves or share it only with trusted "
+"individuals)"
+msgstr ""
+"URL Amministrazione: Chiunque abbia il link può modificare l'evento "
+"(raccomandiamo agli autori dell'evento di tenere questo link per sé o "
+"condividerlo solo con persone fidate)"
+
+#: .\events\templates\events\privacy.html:63
+msgid "The links are unique and are generated based on the event ID."
+msgstr "I link sono unici e sono generati in base all'ID evento."
+
+#: .\events\templates\events\privacy.html:64
+msgid "These different links represent the two ways an event can be shared."
+msgstr ""
+"Questi differenti link rappresentano i due modi in cui un evento può essere "
+"condiviso."
+
+#: .\events\templates\events\privacy.html:66
+msgid ""
+"It is the user's responsibility to keep these links and share them only with "
+"the intended recipients."
+msgstr ""
+"È responsabilità dell'utente mantenere questi link e condividerli solo con i "
+"destinatari previsti."
+
+#: .\events\templates\events\privacy.html:73
+msgid ""
+"When you create or visit an event, its links are made available on the "
+"history page."
+msgstr ""
+"Quando crei o visiti un evento, i suoi link sono resi disponibili nella "
+"pagina di cronologia."
+
+#: .\events\templates\events\privacy.html:75
+msgid ""
+"This is particularly useful in case you can no longer find the link to an "
+"event or if you've forgotten to save it."
+msgstr ""
+"Questo è particolarmente utile nel caso in cui tu non riesca più a trovare "
+"il link per un evento o abbia dimenticato di salvarlo."
+
+#: .\events\templates\events\privacy.html:77
+msgid ""
+"History data only reside locally on your device in your browser storage and "
+"are NOT sent or saved by Schedama or shared with third parties."
+msgstr ""
+"I dati della cronologia risiedono solo localmente sul tuo dispositivo nella "
+"memoria del browser e NON sono inviati o salvati da Schedama nè condivisi "
+"con terze parti."
+
+#: .\events\templates\events\privacy.html:78
+msgid ""
+"History data are therefore not permanent and may be lost if the browser data "
+"are deleted."
+msgstr ""
+"I dati della cronologia non sono quindi permanenti e possono essere persi "
+"qualora i dati del browser vengano eliminati."
+
+#: .\events\templates\events\privacy.html:83
+msgid "Data retention"
+msgstr "Conservazione dei dati"
+
+#: .\events\templates\events\privacy.html:85
+msgid "Event data are retained until the author of the event deletes them."
+msgstr ""
+"I dati dell'evento sono conservati fino a quando l'autore dell'evento non li "
+"elimina."
+
+#: .\events\templates\events\privacy.html:87
+msgid "To delete your event data:"
+msgstr "Per cancellare i dati del tuo evento:"
+
+#: .\events\templates\events\privacy.html:89
+msgid "Visit the administration page of your event"
+msgstr "Visita la pagina di amministrazione del tuo evento"
+
+#: .\events\templates\events\privacy.html:90
+msgid "Scroll to the bottom until the 'Danger Zone' area"
+msgstr "Scorri in basso fino all'area 'Danger Zone'"
+
+#: .\events\templates\events\privacy.html:91
+msgid "Read the disclaimer and select 'I understand'"
+msgstr "Leggi il disclaimer e seleziona 'Capisco'"
+
+#: .\events\templates\events\privacy.html:92
+msgid "Click on 'Cancel event'"
+msgstr "Clicca su 'Annulla evento'"
+
+#: .\events\templates\events\privacy.html:93
+msgid ""
+"After approximately 2 days the event and all it's data will be automatically "
+"and permanently deleted"
+msgstr ""
+"Dopo circa 2 giorni l'evento e tutti i suoi dati saranno automaticamente e "
+"definitivamente eliminati"
+
 #: .\events\templates\events\private_event.html:5
 msgid "Private event - Schedama.com"
 msgstr "Evento privato - Schedama.com"
@@ -987,23 +1212,23 @@ msgstr ""
 "Puoi vedere i dettagli dell'evento, registrare la tua partecipazione e "
 "vedere gli altri partecipanti."
 
-#: .\events\templates\events\view_event.html:53
+#: .\events\templates\events\view_event.html:42
 msgid "Starts in"
 msgstr "Inizia tra"
 
-#: .\events\templates\events\view_event.html:55
+#: .\events\templates\events\view_event.html:44
 msgid "d"
 msgstr "g"
 
-#: .\events\templates\events\view_event.html:77
+#: .\events\templates\events\view_event.html:73
 msgid "Author:"
 msgstr "Autore:"
 
-#: .\events\templates\events\view_event.html:87
+#: .\events\templates\events\view_event.html:84
 msgid "Add to Google Calendar"
 msgstr "Aggiungi a Google Calendar"
 
-#: .\events\templates\events\view_event.html:104
+#: .\events\templates\events\view_event.html:101
 msgid ""
 "Best date automatically selected based on attendance. The effective date may "
 "vary as participants enter new confirmations."
@@ -1012,83 +1237,80 @@ msgstr ""
 "data effettiva può variare man mano che i partecipanti inseriscono nuove "
 "conferme."
 
-#: .\events\templates\events\view_event.html:140
+#: .\events\templates\events\view_event.html:137
 msgid "List"
 msgstr "Lista"
 
-#: .\events\templates\events\view_event.html:147
+#: .\events\templates\events\view_event.html:144
 msgid "Participate"
 msgstr "Partecipa"
 
-#: .\events\templates\events\view_event.html:188
+#: .\events\templates\events\view_event.html:185
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:195
+#: .\events\templates\events\view_event.html:192
 msgid "View by date"
 msgstr "Vedi per data"
 
-#: .\events\templates\events\view_event.html:239
-#: .\events\templates\events\view_event.html:287
+#: .\events\templates\events\view_event.html:236
+#: .\events\templates\events\view_event.html:284
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:262
+#: .\events\templates\events\view_event.html:259
 msgid "Date view"
 msgstr "Vista per data"
 
-#: .\events\templates\events\view_event.html:266
+#: .\events\templates\events\view_event.html:263
 msgid "Select a date to view confirmed participants"
 msgstr "Seleziona una data per vedere i partecipanti confermati"
 
-#: .\events\templates\events\view_event.html:269
+#: .\events\templates\events\view_event.html:266
 msgid "-"
 msgstr ""
 
-#: .\events\templates\events\view_event.html:284
+#: .\events\templates\events\view_event.html:281
 msgid "Back to list"
 msgstr "Torna alla lista"
 
-#: .\events\templates\events\view_event.html:300
+#: .\events\templates\events\view_event.html:297
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:306
+#: .\events\templates\events\view_event.html:303
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:308
+#: .\events\templates\events\view_event.html:305
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:323
+#: .\events\templates\events\view_event.html:320
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:173 .\events\views.py:312 .\events\views.py:446
-#: .\events\views.py:557 .\events\views.py:593 .\events\views.py:668
-#: .\events\views.py:681 .\events\views.py:728 .\events\views.py:741
+#: .\events\views.py:178 .\events\views.py:317 .\events\views.py:451
+#: .\events\views.py:562 .\events\views.py:598 .\events\views.py:673
+#: .\events\views.py:686 .\events\views.py:733 .\events\views.py:746
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
-#: .\events\views.py:197
+#: .\events\views.py:202
 msgid "An error has occurred while creating the event. Please try again later."
 msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:323 .\events\views.py:434 .\events\views.py:585
-#: .\events\views.py:708 .\events\views.py:761
+#: .\events\views.py:328 .\events\views.py:439 .\events\views.py:590
+#: .\events\views.py:713 .\events\views.py:766
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:357 .\events\views.py:422 .\events\views.py:647
+#: .\events\views.py:362 .\events\views.py:427 .\events\views.py:652
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
 
-#: .\events\views.py:805
+#: .\events\views.py:810
 msgid "Wrong password! Ehm...are you sure you're supposed to see this event?"
 msgstr "Password errata! Ehm...sei sicuro di poter vedere questo evento?"
-
-#~ msgid "Legend"
-#~ msgstr "Legenda"
