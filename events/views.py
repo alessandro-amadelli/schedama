@@ -15,6 +15,8 @@ from django.core.cache import cache
 import json
 from datetime import datetime, timedelta
 
+from django_ratelimit.decorators import ratelimit
+
 import schedama.dynamodb_ops as dynamodb_ops
 from schedama.settings import CACHE_TTL, CACHE_DB_TTL, SECRET_KEY
 from .forms import EventForm, PasswordForm
@@ -242,7 +244,7 @@ def participate_view(request, eventID):
     ]
 
     # Format event duration
-    event_data["duration"] = int(event_data.get("duration", 60))
+    event_data["duration"] = int(event_data.get("duration", 60)) or 60
 
     # Selecting best date for the event (if event has multiple dates and
     # at least 1 participant)
@@ -277,8 +279,15 @@ def participate_view(request, eventID):
     context = {
         "event": event_data
     }
+    response = render(request, "events/view_event.html", context)
 
-    return render(request, "events/view_event.html", context)
+    if event_data.get("private_event"):
+        # Prevent caching for private events
+        response["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response["Pragma"] = "no-cache"
+        response["Expires"] = "0"
+
+    return response
 
 
 def add_participant_view(request):
@@ -783,6 +792,7 @@ def private_event_view(request, eventID):
     return render(request, "events/private_event.html", context)
 
 
+@ratelimit(key='ip', rate='5/m', method='POST', block=True)
 def password_check_view(request):
     if request.method != 'POST':
         return redirect("index")
@@ -827,7 +837,11 @@ def password_check_view(request):
     # Authorise user and redirect to participant view
     signed_value = signing.dumps({'authenticated': True})
     response.set_signed_cookie(
-        f"auth_event_{event_id}", signed_value, salt=generate_cookie_salt(event_id)
+        f"auth_event_{event_id}",
+        signed_value,
+        salt=generate_cookie_salt(event_id),
+        secure=True,
+        httponly=True,
     )
     return response
 

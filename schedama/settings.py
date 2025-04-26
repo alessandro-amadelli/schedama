@@ -28,7 +28,7 @@ SECRET_KEY = os.environ["SCHEDAMA_SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("SCHEDAMA_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = os.environ.get("SCHEDAMA_ALLOWED_HOSTS","").split()
+ALLOWED_HOSTS = os.environ.get("SCHEDAMA_ALLOWED_HOSTS", "").split()
 
 # Application definition
 
