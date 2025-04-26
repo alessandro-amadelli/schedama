@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-25 15:39+0200\n"
+"POT-Creation-Date: 2025-04-26 16:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,7 @@ msgstr "Clicca su"
 #: .\events\templates\events\about_us.html:59
 #: .\events\templates\events\history.html:12
 #: .\events\templates\events\navbar.html:25
-#: .\events\templates\events\privacy.html:71
+#: .\events\templates\events\privacy.html:80
 msgid "History"
 msgstr "Cronologia"
 
@@ -160,7 +160,7 @@ msgid "Duration"
 msgstr "Durata"
 
 #: .\events\templates\events\about_us.html:87
-#: .\events\templates\events\privacy.html:35
+#: .\events\templates\events\privacy.html:38
 msgid "List of participants"
 msgstr "Lista dei partecipanti"
 
@@ -606,6 +606,26 @@ msgstr "Annulla"
 msgid "Confirm"
 msgstr "Conferma"
 
+#: .\events\templates\events\error403.html:6
+#: .\events\templates\events\error403.html:12
+msgid "Forbidden"
+msgstr ""
+
+#: .\events\templates\events\error403.html:22
+msgid "Nothing to see here..."
+msgstr "Non c'è niente da vedere qui..."
+
+#: .\events\templates\events\error403.html:25
+msgid "It seems like you were trying to do something you were not supposed to!"
+msgstr "Sembra che tu stessi provando a fare qualcosa che non potresti fare!"
+
+#: .\events\templates\events\error403.html:27
+msgid ""
+"Maybe think about it for a while, then try again...if you still think it's "
+"the right thing to do."
+msgstr ""
+"Magari pensaci su per un po', poi riprova...se pensi che sia la cosa giusta da fare."
+
 #: .\events\templates\events\error404.html:6
 #: .\events\templates\events\error404.html:12
 msgid "Page not found"
@@ -982,11 +1002,11 @@ msgstr ""
 msgid "Review how Schedama.com handles data"
 msgstr "Verifica come Schedama.com gestisce i dati"
 
-#: .\events\templates\events\privacy.html:17
+#: .\events\templates\events\privacy.html:18
 msgid "User privacy is important on Schedama!"
 msgstr "La privacy degli utenti è importante su Schedama!"
 
-#: .\events\templates\events\privacy.html:19
+#: .\events\templates\events\privacy.html:20
 msgid ""
 "That's why we do not ask for or collect any personally identifiable "
 "information (eg.: names, email addresses, IP addresses, etc.)."
@@ -994,11 +1014,11 @@ msgstr ""
 "Ecco perché non chiediamo o raccogliamo alcuna informazione di "
 "identificazione personale (es.: nomi, indirizzi email, indirizzi IP, ecc.)."
 
-#: .\events\templates\events\privacy.html:26
+#: .\events\templates\events\privacy.html:29
 msgid "Types of data collected"
 msgstr "Tipi di dati raccolti"
 
-#: .\events\templates\events\privacy.html:28
+#: .\events\templates\events\privacy.html:31
 msgid ""
 "Schedama only collects data related to events created by users and only data "
 "entered by users."
@@ -1006,27 +1026,27 @@ msgstr ""
 "Schedama raccoglie solo dati relativi agli eventi creati dagli utenti e solo "
 "dati inseriti dagli utenti."
 
-#: .\events\templates\events\privacy.html:30
+#: .\events\templates\events\privacy.html:33
 msgid "Such data may include:"
 msgstr "Tali dati possono includere:"
 
-#: .\events\templates\events\privacy.html:32
+#: .\events\templates\events\privacy.html:35
 msgid "Event title and description (if present)"
 msgstr "Titolo e descrizione (se presente) dell'evento"
 
-#: .\events\templates\events\privacy.html:33
+#: .\events\templates\events\privacy.html:36
 msgid "Location (if provided)"
 msgstr "Location (se fornita)"
 
-#: .\events\templates\events\privacy.html:34
+#: .\events\templates\events\privacy.html:37
 msgid "Date, time and duration of the event"
 msgstr "Data, ora e durata dell'evento"
 
-#: .\events\templates\events\privacy.html:36
+#: .\events\templates\events\privacy.html:39
 msgid "Voting preferences submitted by participants"
 msgstr "Voti e preferenze inviate dai partecipanti"
 
-#: .\events\templates\events\privacy.html:38
+#: .\events\templates\events\privacy.html:41
 msgid ""
 "To better protect your privacy, we recommend that you do NOT include "
 "personal or confidential information in the events you create."
@@ -1034,11 +1054,11 @@ msgstr ""
 "Per meglio proteggere la tua privacy, ti raccomandiamo di NON includere "
 "informazioni personali o confidenziali negli eventi che crei."
 
-#: .\events\templates\events\privacy.html:43
+#: .\events\templates\events\privacy.html:48
 msgid "How we use data"
 msgstr "Come utilizziamo i dati"
 
-#: .\events\templates\events\privacy.html:45
+#: .\events\templates\events\privacy.html:50
 msgid ""
 "Data related to events created are saved in our database with the sole "
 "purpose of:"
@@ -1046,13 +1066,13 @@ msgstr ""
 "I dati relativi agli eventi creati sono salvati nel nostro database con "
 "l'unico scopo di:"
 
-#: .\events\templates\events\privacy.html:48
+#: .\events\templates\events\privacy.html:53
 msgid "Enable event authors to view, manage and share information"
 msgstr ""
 "Permettere agli autori dell'evento di visualizzare, gestire e condividere le "
 "informazioni"
 
-#: .\events\templates\events\privacy.html:49
+#: .\events\templates\events\privacy.html:54
 msgid ""
 "Allow participants to view relevant information about the event and indicate "
 "their participation (possibly by voting for one or more of the available "
@@ -1062,15 +1082,15 @@ msgstr ""
 "sull'evento e indicare la loro partecipazione (possibilmente votando fra una "
 "o più delle date disponibili)"
 
-#: .\events\templates\events\privacy.html:54
+#: .\events\templates\events\privacy.html:61
 msgid "Data sharing"
 msgstr "Condivisione dei dati"
 
-#: .\events\templates\events\privacy.html:56
+#: .\events\templates\events\privacy.html:63
 msgid "Upon event creation, two links are generated:"
 msgstr "Alla creazione dell'evento sono generati due link:"
 
-#: .\events\templates\events\privacy.html:59
+#: .\events\templates\events\privacy.html:66
 msgid ""
 "Participant URL: Anyone with the link can view the event (event authors can "
 "share this link with the participants)"
@@ -1078,7 +1098,7 @@ msgstr ""
 "URL Partecipante: Chiunque abbia il link può visualizzare l'evento (gli "
 "autori dell'evento possono condividere questo link con i partecipanti)"
 
-#: .\events\templates\events\privacy.html:60
+#: .\events\templates\events\privacy.html:67
 msgid ""
 "Administration URL: Anyone with the link can modify the event (we recommend "
 "event authors to keep this link to themselves or share it only with trusted "
@@ -1088,17 +1108,17 @@ msgstr ""
 "(raccomandiamo agli autori dell'evento di tenere questo link per sé o "
 "condividerlo solo con persone fidate)"
 
-#: .\events\templates\events\privacy.html:63
+#: .\events\templates\events\privacy.html:70
 msgid "The links are unique and are generated based on the event ID."
 msgstr "I link sono unici e sono generati in base all'ID evento."
 
-#: .\events\templates\events\privacy.html:64
+#: .\events\templates\events\privacy.html:71
 msgid "These different links represent the two ways an event can be shared."
 msgstr ""
 "Questi differenti link rappresentano i due modi in cui un evento può essere "
 "condiviso."
 
-#: .\events\templates\events\privacy.html:66
+#: .\events\templates\events\privacy.html:73
 msgid ""
 "It is the user's responsibility to keep these links and share them only with "
 "the intended recipients."
@@ -1106,7 +1126,7 @@ msgstr ""
 "È responsabilità dell'utente mantenere questi link e condividerli solo con i "
 "destinatari previsti."
 
-#: .\events\templates\events\privacy.html:73
+#: .\events\templates\events\privacy.html:82
 msgid ""
 "When you create or visit an event, its links are made available on the "
 "history page."
@@ -1114,7 +1134,7 @@ msgstr ""
 "Quando crei o visiti un evento, i suoi link sono resi disponibili nella "
 "pagina di cronologia."
 
-#: .\events\templates\events\privacy.html:75
+#: .\events\templates\events\privacy.html:84
 msgid ""
 "This is particularly useful in case you can no longer find the link to an "
 "event or if you've forgotten to save it."
@@ -1122,7 +1142,7 @@ msgstr ""
 "Questo è particolarmente utile nel caso in cui tu non riesca più a trovare "
 "il link per un evento o abbia dimenticato di salvarlo."
 
-#: .\events\templates\events\privacy.html:77
+#: .\events\templates\events\privacy.html:86
 msgid ""
 "History data only reside locally on your device in your browser storage and "
 "are NOT sent or saved by Schedama or shared with third parties."
@@ -1131,7 +1151,7 @@ msgstr ""
 "memoria del browser e NON sono inviati o salvati da Schedama nè condivisi "
 "con terze parti."
 
-#: .\events\templates\events\privacy.html:78
+#: .\events\templates\events\privacy.html:87
 msgid ""
 "History data are therefore not permanent and may be lost if the browser data "
 "are deleted."
@@ -1139,37 +1159,37 @@ msgstr ""
 "I dati della cronologia non sono quindi permanenti e possono essere persi "
 "qualora i dati del browser vengano eliminati."
 
-#: .\events\templates\events\privacy.html:83
+#: .\events\templates\events\privacy.html:94
 msgid "Data retention"
 msgstr "Conservazione dei dati"
 
-#: .\events\templates\events\privacy.html:85
+#: .\events\templates\events\privacy.html:96
 msgid "Event data are retained until the author of the event deletes them."
 msgstr ""
 "I dati dell'evento sono conservati fino a quando l'autore dell'evento non li "
 "elimina."
 
-#: .\events\templates\events\privacy.html:87
+#: .\events\templates\events\privacy.html:98
 msgid "To delete your event data:"
 msgstr "Per cancellare i dati del tuo evento:"
 
-#: .\events\templates\events\privacy.html:89
+#: .\events\templates\events\privacy.html:100
 msgid "Visit the administration page of your event"
 msgstr "Visita la pagina di amministrazione del tuo evento"
 
-#: .\events\templates\events\privacy.html:90
+#: .\events\templates\events\privacy.html:101
 msgid "Scroll to the bottom until the 'Danger Zone' area"
 msgstr "Scorri in basso fino all'area 'Danger Zone'"
 
-#: .\events\templates\events\privacy.html:91
+#: .\events\templates\events\privacy.html:102
 msgid "Read the disclaimer and select 'I understand'"
 msgstr "Leggi il disclaimer e seleziona 'Capisco'"
 
-#: .\events\templates\events\privacy.html:92
+#: .\events\templates\events\privacy.html:103
 msgid "Click on 'Cancel event'"
 msgstr "Clicca su 'Annulla evento'"
 
-#: .\events\templates\events\privacy.html:93
+#: .\events\templates\events\privacy.html:104
 msgid ""
 "After approximately 2 days the event and all it's data will be automatically "
 "and permanently deleted"
@@ -1290,27 +1310,27 @@ msgstr "Preferenze"
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:178 .\events\views.py:317 .\events\views.py:451
-#: .\events\views.py:562 .\events\views.py:598 .\events\views.py:673
-#: .\events\views.py:686 .\events\views.py:733 .\events\views.py:746
+#: .\events\views.py:180 .\events\views.py:326 .\events\views.py:460
+#: .\events\views.py:571 .\events\views.py:607 .\events\views.py:682
+#: .\events\views.py:695 .\events\views.py:742 .\events\views.py:755
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
-#: .\events\views.py:202
+#: .\events\views.py:204
 msgid "An error has occurred while creating the event. Please try again later."
 msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:328 .\events\views.py:439 .\events\views.py:590
-#: .\events\views.py:713 .\events\views.py:766
+#: .\events\views.py:337 .\events\views.py:448 .\events\views.py:599
+#: .\events\views.py:722 .\events\views.py:775
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:362 .\events\views.py:427 .\events\views.py:652
+#: .\events\views.py:371 .\events\views.py:436 .\events\views.py:661
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
 
-#: .\events\views.py:810
+#: .\events\views.py:820
 msgid "Wrong password! Ehm...are you sure you're supposed to see this event?"
 msgstr "Password errata! Ehm...sei sicuro di poter vedere questo evento?"

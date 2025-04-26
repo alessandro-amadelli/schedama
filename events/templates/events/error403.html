@@ -1,0 +1,30 @@
+{% extends 'events/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% translate "Forbidden" %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="title-section">
+        <h1 class="text-center">{% translate "Forbidden" %}</h1>
+    </div>
+
+    <div class="section p-2">
+        <div class="row mb-2 text-center">
+            <div class="col-12" style="font-size: 20vw; user-select: none;">
+                403
+            </div>
+        </div>
+        
+        <h2 class="text-center">{% translate "Nothing to see here..." %}</h2>
+
+        <p>
+            {% translate "It seems like you were trying to do something you were not supposed to!" %}
+            <br>
+            {% translate "Maybe think about it for a while, then try again...if you still think it's the right thing to do." %}
+        </p>
+    </div>
+{% endblock %}

@@ -856,3 +856,8 @@ def error404_view(request, exception, eventID=""):
         context["item_id"] = eventID
 
     return render(request, "events/error404.html", context)
+
+
+@cache_page(CACHE_TTL)
+def error403_view(request, exception):
+    return render(request, "events/error403.html", status=403)

@@ -23,3 +23,4 @@ urlpatterns = [
 ]
 
 handler404 = 'events.views.error404_view'
+handler403 = 'events.views.error403_view'
