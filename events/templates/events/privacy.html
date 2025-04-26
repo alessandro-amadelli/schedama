@@ -11,89 +11,102 @@
   <h2 class="entering-1">{% translate "Review how Schedama.com handles data" %}</h2>
 </div>
 
-  <div class="section p-2">
+<div class="section p-2">
     <div class="row mb-3 entering-2">
-      <div class="col-12">
-        <h3>{% translate "User privacy is important on Schedama!" %}</h3>
-        <p class="lead">
-          {% translate "That's why we do not ask for or collect any personally identifiable information (eg.: names, email addresses, IP addresses, etc.)." %}
-        </p>
+      <div class="col-12 card p-3 mb-3">
+        <div class="card-body">
+            <h3 class="card-title">{% translate "User privacy is important on Schedama!" %}</h3>
+            <p class="lead">
+              {% translate "That's why we do not ask for or collect any personally identifiable information (eg.: names, email addresses, IP addresses, etc.)." %}
+            </p>
+        </div>
       </div>
     </div>
 
     <div class="row mb-3 entering-3">
-      <div class="col-12">
-        <h3>{% translate "Types of data collected" %}</h3>
-        <p>
-          {% translate "Schedama only collects data related to events created by users and only data entered by users." %}
-          <br>
-          {% translate "Such data may include:" %}
-          <ul>
-            <li>{% translate "Event title and description (if present)" %}</li>
-            <li>{% translate "Location (if provided)" %}</li>
-            <li>{% translate "Date, time and duration of the event" %}</li>
-            <li>{% translate "List of participants" %}</li>
-            <li>{% translate "Voting preferences submitted by participants" %}</li>
-          </ul>
-          {% translate "To better protect your privacy, we recommend that you do NOT include personal or confidential information in the events you create." %}
-        </p>
+      <div class="col-12 card rounded shadow p-2 mb-3">
+        <div class="card-body">
+            <h3 class="card-title">{% translate "Types of data collected" %}</h3>
+            <p>
+              {% translate "Schedama only collects data related to events created by users and only data entered by users." %}
+              <br>
+              {% translate "Such data may include:" %}
+              <ul>
+                <li>{% translate "Event title and description (if present)" %}</li>
+                <li>{% translate "Location (if provided)" %}</li>
+                <li>{% translate "Date, time and duration of the event" %}</li>
+                <li>{% translate "List of participants" %}</li>
+                <li>{% translate "Voting preferences submitted by participants" %}</li>
+              </ul>
+              {% translate "To better protect your privacy, we recommend that you do NOT include personal or confidential information in the events you create." %}
+            </p>
+        </div>
       </div>
 
-      <div class="col-12">
-        <h3>{% translate "How we use data" %}</h3>
-        <p>
-            {% translate "Data related to events created are saved in our database with the sole purpose of:" %}
-        </p>
-        <ul>
-          <li>{% translate "Enable event authors to view, manage and share information" %}</li>
-          <li>{% translate "Allow participants to view relevant information about the event and indicate their participation (possibly by voting for one or more of the available dates)" %}</li>
-        </ul>
-      </div>
-
-      <div class="col-12">
-        <h3>{% translate "Data sharing" %}</h3>
-        <p>
-            {% translate "Upon event creation, two links are generated:" %}
-        </p>
-        <ul>
-          <li>{% translate "Participant URL: Anyone with the link can view the event (event authors can share this link with the participants)" %}</li>
-          <li>{% translate "Administration URL: Anyone with the link can modify the event (we recommend event authors to keep this link to themselves or share it only with trusted individuals)" %}</li>
-        </ul>
-        <p>
-            {% translate "The links are unique and are generated based on the event ID." %}
-            {% translate "These different links represent the two ways an event can be shared." %}
-            <br>
-            {% translate "It is the user's responsibility to keep these links and share them only with the intended recipients." %}
-        </p>
-      </div>
-
-      <div class="col-12">
-        <h3>{% translate "History" %}</h3>
-        <p>
-            {% translate "When you create or visit an event, its links are made available on the history page." %}
-            <br>
-            {% translate "This is particularly useful in case you can no longer find the link to an event or if you've forgotten to save it." %}
-            <br>
-            {% translate "History data only reside locally on your device in your browser storage and are NOT sent or saved by Schedama or shared with third parties." %}
-            {% translate "History data are therefore not permanent and may be lost if the browser data are deleted." %}
-        </p>
-      </div>
-
-      <div class="col-12">
-        <h3>{% translate "Data retention" %}</h3>
-        <p>
-          {% translate "Event data are retained until the author of the event deletes them." %}
-            <br>
-            {% translate "To delete your event data:" %}
-             <ul>
-              <li>{% translate "Visit the administration page of your event" %}</li>
-              <li>{% translate "Scroll to the bottom until the 'Danger Zone' area" %}</li>
-              <li>{% translate "Read the disclaimer and select 'I understand'" %}</li>
-              <li>{% translate "Click on 'Cancel event'" %}</li>
-              <li>{% translate "After approximately 2 days the event and all it's data will be automatically and permanently deleted" %}</li>
+      <div class="col-12 card rounded shadow p-2 mb-3">
+        <div class="card-body">
+            <h3 class="card-title">{% translate "How we use data" %}</h3>
+            <p>
+                {% translate "Data related to events created are saved in our database with the sole purpose of:" %}
+            </p>
+            <ul>
+              <li>{% translate "Enable event authors to view, manage and share information" %}</li>
+              <li>{% translate "Allow participants to view relevant information about the event and indicate their participation (possibly by voting for one or more of the available dates)" %}</li>
             </ul>
-        </p>
+        </div>
       </div>
+
+      <div class="col-12 card rounded shadow p-2 mb-3">
+        <div class="card-body">
+            <h3 class="card-title">{% translate "Data sharing" %}</h3>
+            <p>
+                {% translate "Upon event creation, two links are generated:" %}
+            </p>
+            <ul>
+              <li>{% translate "Participant URL: Anyone with the link can view the event (event authors can share this link with the participants)" %}</li>
+              <li>{% translate "Administration URL: Anyone with the link can modify the event (we recommend event authors to keep this link to themselves or share it only with trusted individuals)" %}</li>
+            </ul>
+            <p>
+                {% translate "The links are unique and are generated based on the event ID." %}
+                {% translate "These different links represent the two ways an event can be shared." %}
+                <br>
+                {% translate "It is the user's responsibility to keep these links and share them only with the intended recipients." %}
+            </p>
+        </div>
+      </div>
+
+      <div class="col-12 card rounded shadow p-2 mb-3">
+        <div class="card-body">
+            <h3 class="card-title">{% translate "History" %}</h3>
+            <p>
+                {% translate "When you create or visit an event, its links are made available on the history page." %}
+                <br>
+                {% translate "This is particularly useful in case you can no longer find the link to an event or if you've forgotten to save it." %}
+                <br>
+                {% translate "History data only reside locally on your device in your browser storage and are NOT sent or saved by Schedama or shared with third parties." %}
+                {% translate "History data are therefore not permanent and may be lost if the browser data are deleted." %}
+            </p>
+        </div>
+      </div>
+
+      <div class="col-12 card rounded shadow p-2 mb-3">
+        <div class="card-body">
+            <h3 class="card-title">{% translate "Data retention" %}</h3>
+            <p>
+              {% translate "Event data are retained until the author of the event deletes them." %}
+                <br>
+                {% translate "To delete your event data:" %}
+                 <ul>
+                  <li>{% translate "Visit the administration page of your event" %}</li>
+                  <li>{% translate "Scroll to the bottom until the 'Danger Zone' area" %}</li>
+                  <li>{% translate "Read the disclaimer and select 'I understand'" %}</li>
+                  <li>{% translate "Click on 'Cancel event'" %}</li>
+                  <li>{% translate "After approximately 2 days the event and all it's data will be automatically and permanently deleted" %}</li>
+                </ul>
+            </p>
+        </div>
+      </div>
+
     </div>
-  </div>
+</div>
 {% endblock %}
