@@ -617,7 +617,7 @@ msgstr "Non c'è niente da vedere qui..."
 
 #: .\events\templates\events\error403.html:25
 msgid "It seems like you were trying to do something you were not supposed to!"
-msgstr "Sembra che tu stessi provando a fare qualcosa che non potresti fare!"
+msgstr "Sembra che tu stessi provando a fare qualcosa che non dovresti fare!"
 
 #: .\events\templates\events\error403.html:27
 msgid ""
