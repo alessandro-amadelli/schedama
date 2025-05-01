@@ -1,17 +1,4 @@
-const cacheName = 'schedama-cache-v3.5.60';
-
-function precache() {
-	return caches.open('schedama-cache').then(function (cache){
-		return cache.addAll([
-			"{% url 'index' %}",
-			"{% url 'new_event_view' %}",
-			"{% url 'open_event_view' %}",
-			"{% url 'history_view' %}",
-			"{% url 'about_us_view' %}",
-			"{% url 'privacy_view' %}",
-		]);
-	});
-}
+const cacheName = 'schedama-cache-v3.5.62';
 
 {% load static %}
 
@@ -25,17 +12,33 @@ const staticAssets = [
 	'{% static "events/view_event.js" %}',
 	'{% static "events/schedama_logo_dark.png" %}',
 	'{% static "events/schedama_logo.png" %}',
+	'{% static "events/fonts/Poppins-Regular.woff2" %}',
+	"{% url 'index' %}",
+	"{% url 'new_event_view' %}",
+	"{% url 'open_event_view' %}",
+	"{% url 'history_view' %}",
+	"{% url 'about_us_view' %}",
+	"{% url 'privacy_view' %}",
 ];
 
 self.addEventListener('install', async e => {
 	const cache = await caches.open(cacheName);
 	await cache.addAll(staticAssets);
+    const cacheContent = await cache.keys();
 	return self.skipWaiting();
 });
 
 self.addEventListener('activate', e => {
-	self.clients.claim();
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(key => key !== cacheName).map(key => caches.delete(key))
+      )
+    )
+  );
+  self.clients.claim();
 });
+
 
 self.addEventListener('fetch', async e => {
 	const req = e.request;
@@ -55,6 +58,10 @@ async function cacheFirst(req) {
 
 async function networkAndCache(req) {
 	const cache = await caches.open(cacheName);
+	const cached = await cache.match(req);
+	if (cached) {
+	    return cached;
+	}
 	try {
 		const fresh = await fetch(req);
 		await cache.put(req, fresh.clone());

@@ -55,6 +55,13 @@ Main color palette
 #06d6a0 -> green
 */
 
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/Poppins-Regular.woff2') format('woff2');
+}
+
 /* CSS animations */
 @keyframes introAnimation {
     0% {
