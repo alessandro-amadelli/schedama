@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-26 16:46+0200\n"
+"POT-Creation-Date: 2025-05-01 14:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,15 +218,15 @@ msgstr ""
 
 #: .\events\templates\events\about_us.html:124
 msgid ""
-"I know...it not perfect but I'm always trying to learn, improve and add new "
-"features."
+"I know...it's not perfect, but I'm always trying to learn, improve and add "
+"new features."
 msgstr ""
-"Lo so...non è perfetta ma cerco sempre di imparare, migliorare e aggiungere "
+"Lo so...non è perfetta, ma cerco sempre di imparare, migliorare e aggiungere "
 "nuove funzionalità."
 
 #: .\events\templates\events\about_us.html:125
 msgid ""
-"I work on it in my spare time so if you like it, spread the word and "
+"I work on it in my spare time so, if you like it, spread the word and "
 "together we can make Schedama grow."
 msgstr ""
 "Ci lavoro nel mio tempo libero quindi, se ti piace, spargi la voce e insieme "
@@ -624,7 +624,8 @@ msgid ""
 "Maybe think about it for a while, then try again...if you still think it's "
 "the right thing to do."
 msgstr ""
-"Magari pensaci su per un po', poi riprova...se pensi che sia la cosa giusta da fare."
+"Magari pensaci su per un po', poi riprova...se pensi che sia la cosa giusta "
+"da fare."
 
 #: .\events\templates\events\error404.html:6
 #: .\events\templates\events\error404.html:12
