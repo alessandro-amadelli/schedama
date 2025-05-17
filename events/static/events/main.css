@@ -380,7 +380,7 @@ select, option {
         var(--event-div-bg) 100%
     );
     animation-name: timerNotStartedAnimation;
-    animation-duration: 5s;
+    animation-duration: 6s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-play-state: running;
