@@ -37,7 +37,7 @@
     --moving-bg-color: #118ab2;
     --navbar-bg-color: #000;
     --shimmer-color: #09ffbf;
-    --text-muted-color: rgb(143, 143, 143);
+    --text-muted-color: #969696;
     --text-blue: #019ed5;
     --text-green: #06d6a0;
     --text-lightblue: #02e0ee;
@@ -300,6 +300,10 @@ input, .form-control, input:focus, .form-control:focus {
     color: var(--color) !important;
     border-color: transparent;
     background-color: var(--input-bg-color);
+}
+
+input::placeholder, .form-control::placeholder {
+    color: var(--text-muted-color) !important;
 }
 
 input[type="checkbox"],

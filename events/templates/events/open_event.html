@@ -29,7 +29,7 @@
 
   <p class="lead entering-2">{% translate "You can open the participation page of the event by entering the event ID" %}*</p>
 
-  <div class="row mb-5">
+  <div class="row mb-5 text-center">
     <div class="col-12 col-lg-6">
         <div class="input-group">
             <input type="text" id="eventID" class="form-control" placeholder="{% translate 'Event ID' %}" maxlength="9" aria-label="{% translate 'Event ID' %}" aria-describedby="btnSearch">
@@ -39,14 +39,17 @@
   </div>
 
   <div class="row text-center rounded shadow">
-    <div class="col">
-        <p class="lead">
-            *{% translate "Event ID is contained in the event participation URL" %}
-        </p>
-        <p>
-            {% translate "As an example, you can see the event ID is the highlighted text in the following participant URL" %}<br>
-            https://schedama.com/participate/<mark>3x4MpL3-</mark>
-        </p>
+    <div class="col card">
+        <div class="card-body">
+            <h3 class="card-title">* {% translate "How to find the event ID" %}</h3>
+            <p class="lead">
+                {% translate "Event ID is contained in the event participation URL" %}
+            </p>
+            <p>
+                {% translate "As an example, you can see the event ID is the highlighted text in the following participant URL" %}<br>
+                https://schedama.com/participate/<mark>3x4MpL3-</mark>
+            </p>
+        </div>
     </div>
   </div>
 
