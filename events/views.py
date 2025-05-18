@@ -441,13 +441,14 @@ def update_event_view(request):
     admin_key = request_data.get("admin_key", "")
 
     # Retrieve event's data
-    event_data = get_event_data(item_id)
-    if not event_data:
+    old_event_data = get_event_data(item_id)
+    if not old_event_data:
         response = {
             "status": "ERROR",
             "description": _("An error has occurred.")
         }
         return JsonResponse(response)
+    event_data = old_event_data.copy()
 
     event_settings = event_data["settings"]
 
@@ -551,6 +552,13 @@ def update_event_view(request):
                     custom_validation = True
                     event_data["password_1"] = request_data.get("password_1", "")
                     event_data["password_2"] = request_data.get("password_2", "")
+
+        # Check if at least one event info has changed
+        if event_data == old_event_data:
+            response = {
+                "status": "OK"
+            }
+            return JsonResponse(response)
 
         # Saving new event's info
         result, new_event = save_event_to_db(event_data, custom_validation)
