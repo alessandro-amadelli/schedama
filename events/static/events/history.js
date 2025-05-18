@@ -32,6 +32,8 @@ function fillHistory() {
         const linkBg = document.querySelector("body").classList.contains("dark-mode") ? "text-bg-dark" : "text-bg-light";
         const adminLink = item.hasOwnProperty("admin_link") ? `<a class="card-link" href="${item.admin_link}"><i class="fa-regular fa-id-card text-primary p-1 rounded ${linkBg}"></i></a>` : '';
 
+        const shareBtn = generateShareBtn(item.participation_link);
+
         const cardTemplate = `
             <div class="col d-flex appearing">
                 <div class="card shadow w-100" style="width: 18rem;">
@@ -47,6 +49,9 @@ function fillHistory() {
                     <div class="card-footer">
                         <a class="card-link" href="${item.participation_link}"><i class="fa-solid fa-user-group text-warning p-1 rounded ${linkBg}"></i></a>
                         ${adminLink}
+                        <span class="float-end">
+                            ${shareBtn.innerHTML}
+                        </span>
                     </div>
                 </div>
             </div>
