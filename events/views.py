@@ -160,6 +160,7 @@ def privacy_view(request):
     return render(request, "events/privacy.html")
 
 
+@ratelimit(key='ip', rate='3/m', method='POST', block=True)
 def save_event_view(request):
     """
     This view is called when creating a new event
@@ -290,6 +291,7 @@ def participate_view(request, eventID):
     return response
 
 
+@ratelimit(key='ip', rate='10/m', method='POST', block=True)
 def add_participant_view(request):
     if request.method != 'POST':
         return redirect("index")
@@ -422,6 +424,7 @@ def edit_event_view(request, eventID):
     return render(request, "events/edit_event.html", context)
 
 
+@ratelimit(key='ip', rate='10/m', method='POST', block=True)
 def update_event_view(request):
     if request.method != 'POST':
         return redirect("index")
@@ -581,6 +584,7 @@ def update_event_view(request):
     return JsonResponse(response)
 
 
+@ratelimit(key='ip', rate='10/m', method='POST', block=True)
 def modify_participants_view(request):
     if request.method != 'POST':
         return redirect("index")
@@ -672,6 +676,7 @@ def modify_participants_view(request):
     return JsonResponse(response)
 
 
+@ratelimit(key='ip', rate='10/m', method='POST', block=True)
 def cancel_event_view(request):
     if request.method != 'POST':
         return redirect("index")
@@ -732,6 +737,7 @@ def cancel_event_view(request):
     return JsonResponse(response)
 
 
+@ratelimit(key='ip', rate='10/m', method='POST', block=True)
 def reactivate_event_view(request):
     if request.method != 'POST':
         return redirect("index")
