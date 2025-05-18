@@ -604,13 +604,14 @@ def modify_participants_view(request):
         return JsonResponse(response)
     
     # Retrieve event's data
-    event_data = get_event_data(item_id)
-    if not event_data:
+    old_event_data = get_event_data(item_id)
+    if not old_event_data:
         response = {
             "status": "ERROR",
             "description": _("An error has occurred.")
         }
         return JsonResponse(response)
+    event_data = old_event_data.copy()
 
     # Check if event is private and user is authorized
     if event_data.get("private_event") and not check_event_authorization(request, item_id):
@@ -648,6 +649,13 @@ def modify_participants_view(request):
     part_field = form.fields.get("participants")
 
     participants = part_field.clean(event_data["participants"])
+
+    # Check if at a least one event info has changed
+    if event_data == old_event_data:
+        response = {
+            "status": "OK"
+        }
+        return JsonResponse(response)
 
     # Updating event
     try:
