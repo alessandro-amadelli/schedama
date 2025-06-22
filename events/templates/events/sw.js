@@ -1,8 +1,8 @@
-const cacheName = 'schedama-cache-v3.5.65';
+const cacheName = 'schedama-cache-v3.5.66';
 
 {% load static %}
 
-const staticAssets = [
+const cacheAssets = [
 	'{% static "events/main.css" %}',
 	'{% static "events/edit_event.js" %}',
 	'{% static "events/error404.js" %}',
@@ -23,7 +23,7 @@ const staticAssets = [
 
 self.addEventListener('install', async e => {
 	const cache = await caches.open(cacheName);
-	await cache.addAll(staticAssets);
+	await cache.addAll(cacheAssets);
     const cacheContent = await cache.keys();
 	return self.skipWaiting();
 });
