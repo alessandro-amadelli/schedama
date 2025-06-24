@@ -134,6 +134,11 @@ nav {
     z-index: 99;
 }
 
+.nav-link:hover, .nav-link:focus {
+    transform: scale(1.1);
+    transition: transform .3s ease-in-out;
+}
+
 .round-img {
     border-radius:50%;
 }
