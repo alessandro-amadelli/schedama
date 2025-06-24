@@ -254,6 +254,7 @@ body {
     transform: scale(1.1);
     transition: .4s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
 
 .title-section {
@@ -507,6 +508,7 @@ select, option {
 .btn:hover, .btn:focus {
     transform: scale(1.05);
     transition: transform .3s ease-in-out;
+    z-index: 10;
 }
 
 /* Event themes */
