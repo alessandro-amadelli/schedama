@@ -250,6 +250,12 @@ body {
     color: var(--text-yellow);
 }
 
+.index-card:hover, .history-container .card:hover {
+    transform: scale(1.1);
+    transition: .4s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .title-section {
     position:relative;
     margin-bottom: 2rem;
@@ -496,6 +502,11 @@ select, option {
 
 .btn-check:checked + label {
     text-decoration: none;
+}
+
+.btn:hover, .btn:focus {
+    transform: scale(1.05);
+    transition: transform .3s ease-in-out;
 }
 
 /* Event themes */
