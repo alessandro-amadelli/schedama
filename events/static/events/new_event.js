@@ -428,7 +428,7 @@ function createNewParticipant(partName=null) {
     newParticipantInp.classList.add("form-control");
     const newParticipantLabel = document.createElement("label");
     newParticipantLabel.setAttribute("for", "participantName");
-    newParticipantLabel.innerText = "Name";
+    newParticipantLabel.innerText = gettext("Participant");
     newFormDiv.appendChild(newParticipantInp);
     newFormDiv.appendChild(newParticipantLabel);
     newParticipantCol.appendChild(newFormDiv);

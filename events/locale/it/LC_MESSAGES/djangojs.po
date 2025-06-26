@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-29 17:43+0100\n"
+"POT-Creation-Date: 2025-06-26 10:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,34 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\events\static\events\edit_event.js:201
+#: .\events\static\events\edit_event.js:213
 #: .\events\static\events\new_event.js:388
 #: .\events\static\events\view_event.js:286
 msgid "d"
 msgstr "g"
 
-#: .\events\static\events\edit_event.js:225
+#: .\events\static\events\edit_event.js:237
 msgid "Participant removed"
 msgstr "Partecipante rimosso"
 
-#: .\events\static\events\edit_event.js:273
+#: .\events\static\events\edit_event.js:285
 #: .\events\static\events\new_event.js:342
 msgid "Event Date"
 msgstr "Data evento"
 
-#: .\events\static\events\edit_event.js:303
+#: .\events\static\events\edit_event.js:315
 #: .\events\static\events\new_event.js:376
 msgid "Date added"
 msgstr "Data aggiunta"
 
-#: .\events\static\events\edit_event.js:516
+#: .\events\static\events\edit_event.js:532
 #: .\events\static\events\new_event.js:698
 msgid "Please, check input fields."
 msgstr "Per favore, controlla i campi di input."
 
-#: .\events\static\events\edit_event.js:543
-#: .\events\static\events\edit_event.js:590
-#: .\events\static\events\edit_event.js:639
+#: .\events\static\events\edit_event.js:559
+#: .\events\static\events\edit_event.js:606
+#: .\events\static\events\edit_event.js:655
 #: .\events\static\events\new_event.js:741
 #: .\events\static\events\view_event.js:554
 #: .\events\static\events\view_event.js:666
@@ -56,7 +56,7 @@ msgstr "Si è verificato un errore. Per favore riprova più tardi."
 msgid "Nothing to see here..."
 msgstr "Non c'è niente da vedere qui..."
 
-#: .\events\static\events\history.js:45
+#: .\events\static\events\history.js:47
 msgid "Author:"
 msgstr "Autore:"
 
@@ -76,6 +76,10 @@ msgstr "Chiunque"
 #: .\events\static\events\new_event.js:499
 msgid "You have to choose at least one date."
 msgstr "Devi scegliere almeno una data."
+
+#: .\events\static\events\new_event.js:431
+msgid "Participant"
+msgstr "Partecipante"
 
 #: .\events\static\events\new_event.js:466
 msgid "Participant added"
