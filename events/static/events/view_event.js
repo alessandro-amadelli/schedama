@@ -727,7 +727,10 @@ async function updateEmojiCounters(eventID) {
       document.querySelectorAll("#emoji-reactions .reaction-btn").forEach(btn => {
         const emojiKey = btn.dataset.emoji;
         const countSpan = btn.querySelector(".count");
-        countSpan.innerText = data["reactions"][emojiKey] || 0;
+        const newValue = data["reactions"][emojiKey] || 0;
+        if (countSpan.innerText !== newValue.toString()) {
+            updateSingleCounter(countSpan, newValue);
+        }
         if (previousReaction === emojiKey) {
           btn.classList.add("selected");
         } else {
@@ -740,6 +743,13 @@ async function updateEmojiCounters(eventID) {
     });
 }
 
+function updateSingleCounter(countSpan, newValue) {
+    countSpan.style.animation = "count-out 0.2s forwards";
+    setTimeout(() => {
+        countSpan.innerText = newValue;
+        countSpan.style.animation = "count-in 0.2s forwards";
+    }, 200);
+}
 
 async function reactToEvent(btnEmoji, eventID) {
     const previousReaction = localStorage.getItem("reaction_" + eventID);

@@ -119,6 +119,16 @@ Main color palette
     }
 }
 
+@keyframes count-out {
+  0%   { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-10px); opacity: 0; }
+}
+
+@keyframes count-in {
+  0%   { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
 ::selection {
     background-color: #06d6a0;
 }
@@ -622,6 +632,14 @@ div[data-theme="travel"]::before {
 .reaction-btn.selected {
     border: solid medium var(--accent-color) !important;
     color: var(--accent-color);
+}
+
+.count {
+    display: inline-block;
+    transition: transform 0.2s, opacity 0.2s;
+    min-width: 1.5ch;
+    text-align: center;
+    position: relative;
 }
 
 .password-form {
