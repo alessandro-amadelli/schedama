@@ -10,6 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.paddingRight = '0';
     });
 
+    // Emoji container
+    const emojiContainer = document.querySelector("#emoji-reactions");
+    const eventID= emojiContainer.dataset.eventId;
+    emojiContainer.querySelectorAll(".reaction-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            reactToEvent(btn, eventID);
+        });
+    });
+    updateEmojiCounters(eventID);
+    setInterval(() => {
+        updateEmojiCounters(eventID);
+    }, 30000);
+
 });
 
 function updateCharts() {
@@ -598,7 +611,7 @@ function saveModificationsLocally(tr) {
     // Save modifications
     localStorage.setItem("modifications", JSON.stringify(oldMods));
 
-    // Abilitate modal button
+    // Enable modal button
     const btnSave = document.querySelector("#btnSaveParticipants");
     if (btnSave) {
         btnSave.disabled = false;
@@ -701,4 +714,68 @@ function updateHistory() {
     };
 
     addToHistory(eventData);
+}
+
+async function updateEmojiCounters(eventID) {
+  await fetch(`/get-reactions/${eventID}`)
+    .then(response => {
+      if (!response.ok) throw new Error("Request error");
+      return response.json();
+    })
+    .then(data => {
+      const previousReaction = localStorage.getItem("reaction_" + eventID);
+      document.querySelectorAll("#emoji-reactions .reaction-btn").forEach(btn => {
+        const emojiKey = btn.dataset.emoji;
+        const countSpan = btn.querySelector(".count");
+        countSpan.innerText = data["reactions"][emojiKey] || 0;
+        if (previousReaction === emojiKey) {
+          btn.classList.add("selected");
+        } else {
+          btn.classList.remove("selected");
+        }
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
+
+async function reactToEvent(btnEmoji, eventID) {
+    const previousReaction = localStorage.getItem("reaction_" + eventID);
+    if (previousReaction) {
+        return;
+    }
+
+    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    const emoji = btnEmoji.dataset.emoji;
+    const emojiSymbol = btnEmoji.dataset.emojiSymbol;
+
+    const data = {
+        emoji: emoji
+    }
+
+    let reqHeaders = new Headers();
+    reqHeaders.append('Content-type', 'application/json');
+    reqHeaders.append('X-CSRFToken', csrftoken);
+
+    let initObject = {
+        method: 'POST',
+        headers: reqHeaders,
+        body: JSON.stringify(data),
+        credentials: 'include',
+    };
+
+    await fetch('/add-reaction/' + eventID, initObject)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            localStorage.setItem("reaction_" + eventID, emoji);
+            updateEmojiCounters(eventID);
+            notify(emojiSymbol + " +1");
+        })
+        .catch(function (err) {
+            console.error("Error reacting to event:", err);
+        });
 }

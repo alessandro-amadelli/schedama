@@ -606,6 +606,24 @@ div[data-theme="travel"]::before {
     opacity: .4;
 }
 
+.reaction-btn {
+    color: var(--color);
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.reaction-btn.selected {
+    border: solid medium var(--accent-color) !important;
+    color: var(--accent-color);
+}
+
 .password-form {
     background-color: var(--event-div-bg);
  }

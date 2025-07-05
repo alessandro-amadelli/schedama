@@ -23,7 +23,6 @@
         const dates = JSON.parse(document.getElementById('dates').textContent);
     </script>
 
-    {#<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>#}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <script src="{% static 'events/view_event.js' %}"></script>
 
@@ -145,6 +144,31 @@
                         </button>
                     </div>
                 {% endif %}
+                <div class="w-100"></div>
+                <div class="col-12 mt-4">
+                    <div id="emoji-reactions" data-event-id="{{ event.item_id }}" class="d-flex justify-content-evenly">
+                      <button class="btn reaction-btn rounded" data-emoji="heart" data-emoji-symbol="❤️">
+                          ❤️
+                          <span class="count">{{ event.reactions.heart|default:"0" }}</span>
+                      </button>
+                      <button class="btn reaction-btn rounded" data-emoji="fire" data-emoji-symbol="🔥">
+                          🔥
+                          <span class="count">{{ event.reactions.fire|default:"0" }}</span>
+                      </button>
+                      <button class="btn reaction-btn rounded" data-emoji="thumbs_up" data-emoji-symbol="👍">
+                          👍
+                          <span class="count">{{ event.reactions.thumbs_up|default:"0" }}</span>
+                      </button>
+                      <button class="btn reaction-btn rounded" data-emoji="party" data-emoji-symbol="🎉">
+                          🎉
+                          <span class="count">{{ event.reactions.party|default:"0" }}</span>
+                      </button>
+                      <button class="btn reaction-btn rounded" data-emoji="eyes" data-emoji-symbol="👀">
+                          👀
+                          <span class="count">{{ event.reactions.eyes|default:"0" }}</span>
+                      </button>
+                    </div>
+                </div>
             </div>
             {% if event.description != "" %}
                 <!-- Event description  -->

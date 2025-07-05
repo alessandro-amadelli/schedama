@@ -1,27 +1,23 @@
+from datetime import datetime, timedelta
 import hashlib
+import json
 import re
 
 from django.contrib.auth.hashers import make_password, check_password
 from django.core import signing
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.core.exceptions import PermissionDenied
-from django.utils.translation import gettext as _
-from django.views.generic.base import TemplateView
-
-from django.views.decorators.cache import cache_page
 from django.core.cache import cache
-
-import json
-from datetime import datetime, timedelta
-
+from django.core.exceptions import PermissionDenied
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.utils.translation import gettext as _
+from django.views.decorators.cache import cache_page
+from django.views.generic.base import TemplateView
 from django_ratelimit.decorators import ratelimit
 
+from collections import Counter
 import schedama.dynamodb_ops as dynamodb_ops
 from schedama.settings import CACHE_TTL, CACHE_DB_TTL, SECRET_KEY
 from .forms import EventForm, PasswordForm
-
-from collections import Counter
 
 
 class ServiceWorker(TemplateView):
@@ -866,6 +862,66 @@ def password_check_view(request):
         httponly=True,
     )
     return response
+
+
+@ratelimit(key='ip', rate='2/m', method='POST', block=True)
+def add_reaction_view(request, eventID):
+    if request.method != 'POST':
+        return redirect("index")
+
+    VALID_EMOJIS = ["heart", "fire", "thumbs_up", "party", "eyes"]
+
+    # Retrieve request data
+    request_data = json.loads(request.body)
+    emoji = request_data.get("emoji", "")
+
+    if emoji not in VALID_EMOJIS:
+        response = {
+            "status": "ERROR",
+            "description": _("Emoji is required.")
+        }
+        return JsonResponse(response)
+
+    # Retrieve event data
+    event_data = get_event_data(eventID)
+
+    # Return page not found
+    if not event_data:
+        return error404_view(request, None, eventID)
+
+    if "reactions" not in event_data:
+        event_data["reactions"] = {}
+    event_data["reactions"][emoji] = event_data["reactions"].get(emoji, 0) + 1
+    update_event_in_db(eventID, "event", {"reactions": event_data["reactions"]})
+
+    response = {
+        "status": "OK",
+        "reactions": event_data.get("reactions", [])
+    }
+
+    return JsonResponse(response)
+
+
+def get_reactions_view(request, eventID):
+    """
+    Returns the reactions for a specific event.
+    """
+    # Retrieve event data
+    event_data = get_event_data(eventID)
+
+    # Return page not found
+    if not event_data:
+        return error404_view(request, None, eventID)
+
+    # Get reactions from event data
+    reactions = event_data.get("reactions", {})
+
+    response = {
+        "status": "OK",
+        "reactions": reactions
+    }
+
+    return JsonResponse(response)
 
 
 @cache_page(CACHE_TTL)
