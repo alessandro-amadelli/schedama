@@ -374,6 +374,15 @@ select, option {
     border: solid medium var(--accent-color);
 }
 
+.filter-grayscale {
+    filter: grayscale(1);
+    transition: filter .5s ease;
+}
+
+.filter-grayscale:hover {
+    filter: none;
+}
+
 .event-title {
     font-size: 3.5rem;
     text-align: center;
@@ -623,15 +632,16 @@ div[data-theme="travel"]::before {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    transition: transform 0.1s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
+    transition: all .4s ease;
+}
+
+.reaction-btn:hover {
+    transform: scale(1.2);
 }
 
 .reaction-btn.selected {
-    border: solid medium var(--accent-color) !important;
     color: var(--accent-color);
+    filter: none;
 }
 
 .count {

@@ -31,12 +31,12 @@
     {% endif %}
 
     <!-- Event title-->
-    <div class="title-section{% if event.is_cancelled %} opacity-50{% endif %} mb-3">
+    <div class="title-section{% if event.is_cancelled %} filter-grayscale{% endif %} mb-3">
         <h1 class="entering event-title"><span id="eventTitle">{{ event.title }}</span></h1>
     </div>
 
     <!-- Countdown row -->
-    <div class="row mb-3{% if event.is_cancelled %} opacity-50{% endif %}">
+    <div class="row mb-3{% if event.is_cancelled %} filter-grayscale{% endif %}">
         <div class="row mx-auto event-clock-div clock-event-not-started justify-content-center rounded shadow display-5 p-3 position-relative" id="clockDiv">
             <div class="col-12 text-center mb-2" id="clockText">{% translate "Starts in" %}</div>
             <div class="col-3 col-lg-2 text-center">
@@ -55,7 +55,7 @@
     </div>
 
     <!-- Event info row -->
-    <div class="row mb-4{% if event.is_cancelled %} opacity-50{% endif %} info-section">
+    <div class="row mb-4{% if event.is_cancelled %} filter-grayscale{% endif %} info-section">
         <div class="col-12 event-info-div display-5 p-3 shadow rounded"{% if event.event_theme %} data-theme="{{ event.event_theme }}"{% endif %}>
             {% if event.author or event.private_event %}
                 <div class="row mb-2 fs-6">
@@ -147,23 +147,23 @@
                 <div class="w-100"></div>
                 <div class="col-12 mt-4">
                     <div id="emoji-reactions" data-event-id="{{ event.item_id }}" class="d-flex justify-content-evenly">
-                      <button class="btn reaction-btn rounded" data-emoji="heart" data-emoji-symbol="❤️">
+                      <button class="btn reaction-btn rounded filter-grayscale" data-emoji="heart" data-emoji-symbol="❤️">
                           ❤️
                           <span class="count">{{ event.reactions.heart|default:"0" }}</span>
                       </button>
-                      <button class="btn reaction-btn rounded" data-emoji="fire" data-emoji-symbol="🔥">
+                      <button class="btn reaction-btn rounded filter-grayscale" data-emoji="fire" data-emoji-symbol="🔥">
                           🔥
                           <span class="count">{{ event.reactions.fire|default:"0" }}</span>
                       </button>
-                      <button class="btn reaction-btn rounded" data-emoji="thumbs_up" data-emoji-symbol="👍">
+                      <button class="btn reaction-btn rounded filter-grayscale" data-emoji="thumbs_up" data-emoji-symbol="👍">
                           👍
                           <span class="count">{{ event.reactions.thumbs_up|default:"0" }}</span>
                       </button>
-                      <button class="btn reaction-btn rounded" data-emoji="party" data-emoji-symbol="🎉">
+                      <button class="btn reaction-btn rounded filter-grayscale" data-emoji="party" data-emoji-symbol="🎉">
                           🎉
                           <span class="count">{{ event.reactions.party|default:"0" }}</span>
                       </button>
-                      <button class="btn reaction-btn rounded" data-emoji="eyes" data-emoji-symbol="👀">
+                      <button class="btn reaction-btn rounded filter-grayscale" data-emoji="eyes" data-emoji-symbol="👀">
                           👀
                           <span class="count">{{ event.reactions.eyes|default:"0" }}</span>
                       </button>
@@ -186,7 +186,7 @@
     </div>
 
     <!-- Chart area  -->
-    <div class="row p-2 mb-3 event-chart-div shadow rounded{% if event.is_cancelled %} opacity-50{% endif %}" id="chartAreaDiv">
+    <div class="row p-2 mb-3 event-chart-div shadow rounded{% if event.is_cancelled %} filter-grayscale{% endif %}" id="chartAreaDiv">
         <div class="col-12 col-lg-4 p-0">
             <div class="position-relative">
                 <canvas id="totChart"></canvas>
