@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-26 10:40+0200\n"
+"POT-Creation-Date: 2025-07-13 15:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: .\events\static\events\edit_event.js:213
 #: .\events\static\events\new_event.js:388
-#: .\events\static\events\view_event.js:286
+#: .\events\static\events\view_event.js:299
 msgid "d"
 msgstr "g"
 
@@ -47,8 +47,8 @@ msgstr "Per favore, controlla i campi di input."
 #: .\events\static\events\edit_event.js:606
 #: .\events\static\events\edit_event.js:655
 #: .\events\static\events\new_event.js:741
-#: .\events\static\events\view_event.js:554
-#: .\events\static\events\view_event.js:666
+#: .\events\static\events\view_event.js:567
+#: .\events\static\events\view_event.js:679
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
@@ -159,26 +159,30 @@ msgstr "Sei stato invitato ad un evento su Schedama: "
 msgid "Copy url"
 msgstr "Copia url"
 
-#: .\events\static\events\view_event.js:259
+#: .\events\static\events\view_event.js:272
 msgid "Ended"
 msgstr "Concluso"
 
-#: .\events\static\events\view_event.js:269
+#: .\events\static\events\view_event.js:282
 msgid "In progress"
 msgstr "In corso"
 
-#: .\events\static\events\view_event.js:328
+#: .\events\static\events\view_event.js:341
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\events\static\events\view_event.js:328
+#: .\events\static\events\view_event.js:341
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\events\static\events\view_event.js:413
+#: .\events\static\events\view_event.js:426
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\events\static\events\view_event.js:430
+#: .\events\static\events\view_event.js:443
 msgid "Preferences"
 msgstr "Preferenze"
+
+#: .\events\static\events\view_event.js:737
+msgid "You reacted with"
+msgstr "Hai reagito con"

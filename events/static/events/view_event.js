@@ -724,6 +724,7 @@ async function updateEmojiCounters(eventID) {
     })
     .then(data => {
       const previousReaction = localStorage.getItem("reaction_" + eventID);
+      const reactedText = document.querySelector("#reactedText");
       document.querySelectorAll("#emoji-reactions .reaction-btn").forEach(btn => {
         const emojiKey = btn.dataset.emoji;
         const countSpan = btn.querySelector(".count");
@@ -733,6 +734,8 @@ async function updateEmojiCounters(eventID) {
         }
         if (previousReaction === emojiKey) {
           btn.classList.add("selected");
+          reactedText.innerText = gettext("You reacted with") + " " + btn.dataset.emojiSymbol;
+          reactedText.classList.remove("d-none");
         } else {
           btn.classList.remove("selected");
         }
