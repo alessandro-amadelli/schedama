@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-13 15:18+0200\n"
+"POT-Creation-Date: 2025-07-20 10:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -446,7 +446,7 @@ msgstr "Clicca <strong>Salva</strong> per confermare"
 
 #: .\events\templates\events\edit_event.html:280
 #: .\events\templates\events\new_event.html:288
-#: .\events\templates\events\view_event.html:258
+#: .\events\templates\events\view_event.html:261
 msgid "Save"
 msgstr "Salva"
 
@@ -601,8 +601,8 @@ msgid "Particpant name"
 msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:407
-#: .\events\templates\events\view_event.html:255
-#: .\events\templates\events\view_event.html:342
+#: .\events\templates\events\view_event.html:258
+#: .\events\templates\events\view_event.html:345
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -1281,40 +1281,45 @@ msgstr "Lista partecipanti"
 msgid "View by date"
 msgstr "Vedi per data"
 
-#: .\events\templates\events\view_event.html:261
-#: .\events\templates\events\view_event.html:309
+#: .\events\templates\events\view_event.html:220
+#, python-format
+msgid "You can click on %(icon_yes)s or %(icon_no)s to change vote."
+msgstr "Puoi cliccare su %(icon_yes)s o %(icon_no)s per cambiare voto."
+
+#: .\events\templates\events\view_event.html:264
+#: .\events\templates\events\view_event.html:312
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:284
+#: .\events\templates\events\view_event.html:287
 msgid "Date view"
 msgstr "Vista per data"
 
-#: .\events\templates\events\view_event.html:288
+#: .\events\templates\events\view_event.html:291
 msgid "Select a date to view confirmed participants"
 msgstr "Seleziona una data per vedere i partecipanti confermati"
 
-#: .\events\templates\events\view_event.html:291
+#: .\events\templates\events\view_event.html:294
 msgid "-"
 msgstr ""
 
-#: .\events\templates\events\view_event.html:306
+#: .\events\templates\events\view_event.html:309
 msgid "Back to list"
 msgstr "Torna alla lista"
 
-#: .\events\templates\events\view_event.html:322
+#: .\events\templates\events\view_event.html:325
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:328
+#: .\events\templates\events\view_event.html:331
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:330
+#: .\events\templates\events\view_event.html:333
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:345
+#: .\events\templates\events\view_event.html:348
 msgid "Join"
 msgstr "Partecipa"
 

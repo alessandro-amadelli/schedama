@@ -216,6 +216,11 @@
                         <i class="fa-solid fa-calendar-week"></i>
                         {% translate "View by date" %}
                     </button>
+                    {% if event.settings.edit_participant %}
+                        <p>
+                            {% blocktrans with icon_yes="<i class='fa-solid fa-circle-check text-green'></i>" icon_no="<i class='fa-solid fa-circle-xmark text-red'></i>" %}You can click on {{ icon_yes }} or {{ icon_no }} to change vote.{% endblocktrans %}
+                        </p>
+                    {% endif %}
                     <div class="row overflow-auto">
                         <table class="table table-striped" id="tableParticipants">
                             <thead>
@@ -250,7 +255,7 @@
                     
                 </div>
                 <div class="modal-footer">
-                    {% if event.settings.edit_participant or event.settings.remove_participant%}
+                    {% if event.settings.edit_participant or event.settings.remove_participant %}
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCancelSaveParticipants">
                             <i class="fa-solid fa-circle-xmark"></i> {% translate "Cancel" %}
                         </button>
