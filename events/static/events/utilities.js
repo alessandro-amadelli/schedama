@@ -193,7 +193,12 @@ function showPageMsg(msgClass, msgContent) {
     document.querySelector(".container").prepend(newAlert);
 
     // Scrolling to top of the page so the user can see the alert
-    window.scroll(0,0);
+    setTimeout(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, 100);
 }
 
 

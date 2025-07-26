@@ -341,6 +341,18 @@ def add_participant_view(request):
         "dates": new_participant.get("dates", [])
     }
 
+    # Check if the name is already present in the participants list
+    participants_names = [p.get("name") for p in event_data.get("participants", [])]
+    if new_participant_ok["name"] in participants_names:
+        response = {
+            "status": "ERROR",
+            "description": _(
+                "Mmmmh, a participant with this name already exists. "
+                "Maybe you've already registered? Or just try to be more...original"
+            )
+        }
+        return JsonResponse(response)
+
     # Adding new participant and cleaning input
     event_data["participants"].append(new_participant_ok)
     form = EventForm(event_data)

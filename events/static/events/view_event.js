@@ -148,6 +148,11 @@ function initializeEntirePage() {
     // Update localStorage history
     updateHistory();
 
+    // Event for participate modal show
+    document.querySelector("#modalParticipate").addEventListener('show.bs.modal', function () {
+        document.querySelector("#btnConfirmParticipate").disabled = false;
+    });
+
 }
 
 function updateParticipantsListForDate() {
@@ -503,6 +508,7 @@ function clearParticipateModal() {
     document.querySelector("#modalParticipate").querySelectorAll("input[type=checkbox]").forEach((check) => {
         check.checked = true;
     });
+    document.querySelector("#btnConfirmParticipate").disabled = false;
 }
 
 
@@ -573,6 +579,8 @@ function participantAddedSuccessfully(data) {
     if (data.status == "OK") {
         window.location.reload();
     } else {
+        const modalParticipate = bootstrap.Modal.getInstance(document.getElementById('modalParticipate'));
+        modalParticipate.hide();
         showPageMsg("alert-danger", data.description);
         removeLoading();
     }
