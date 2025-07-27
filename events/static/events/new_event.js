@@ -46,6 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+var currentStep = 0;
+
+function updateProgressBar() {
+    const progressOuter = document.querySelector("#progressOuter");
+    const progressInner = document.querySelector("#progressInner");
+    let percentage = (currentStep / 5) * 100;
+    progressOuter.ariaValueNow = currentStep;
+    progressInner.style.width = percentage + "%";
+    if (percentage == 100) {
+        progressInner.classList.remove("progress-bar-animated");
+    }
+}
+
 function showModalRestoreData() {
     document.querySelector("#btnRestoreData").onclick = () => {restorePreviousData();};
     document.querySelector("#btnClearData").onclick = () => {clearPreviousData();};
@@ -126,6 +139,10 @@ function initializeAuthorRow() {
 }
 
 function initializeTitleRow() {
+    if (currentStep < 1) {
+        currentStep = 1;
+    }
+    updateProgressBar();
     // Intro animation start
     const titleRow = document.querySelector("#titleRow");
     titleRow.style.animationPlayState = "running";
@@ -136,6 +153,10 @@ function initializeTitleRow() {
 }
 
 function initializeAddDescriptionRow() {
+    if (currentStep < 2) {
+        currentStep = 2;
+    }
+    updateProgressBar();
     // Intro animation start
     const addDescriptionRow = document.querySelector("#addDescriptionRow");
     addDescriptionRow.style.animationPlayState = "running";
@@ -216,6 +237,10 @@ function updateCharCount() {
 }
 
 function initializeAddLocationRow() {
+    if (currentStep < 3) {
+        currentStep = 3;
+    }
+    updateProgressBar();
     // Intro animation start
     const addLocationRow = document.querySelector("#addLocationRow");
     addLocationRow.style.animationPlayState = "running";
@@ -261,6 +286,10 @@ function initializeLocationRow() {
 }
 
 function initializeDateRow() {
+    if (currentStep < 4) {
+        currentStep = 4;
+    }
+    updateProgressBar();
     // Remove of event listener on previous input fields
     const locationInput = document.querySelector("#eventLocation");
     locationInput.removeEventListener('input', initializeDateRow);
@@ -374,6 +403,11 @@ function createNewDate() {
 
     // Show notification for the added date
     notify(gettext("Date added"));
+
+    if (currentStep < 5) {
+        currentStep = 5;
+    }
+    updateProgressBar();
 }
 
 function updateDuration() {

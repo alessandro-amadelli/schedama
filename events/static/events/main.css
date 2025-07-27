@@ -272,6 +272,11 @@ body {
     z-index: 10;
 }
 
+.progress-bar {
+    transition: width 1s ease-in-out;
+    background-color: var(--accent-color);
+}
+
 .title-section {
     position:relative;
     margin-bottom: 2rem;

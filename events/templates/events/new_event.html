@@ -23,6 +23,13 @@
         <a href="{% url 'privacy_view' %}">{% translate "Privacy policy" %}</a>
     </p>
 
+    <div class="row fixed-bottom justify-content-center">
+      <div id="progressOuter" class="col-10 progress p-0" role="progressbar" aria-label="{% translate 'Progress bar' %}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5">
+        <div id="progressInner" class="progress-bar progress-bar-striped progress-bar-animated" style="width:0%;"></div>
+      </div>
+    </div>
+
+
     <!-- Event author -->
     <div class="row p-3 mb-3 mt-5 intro-animated" id="authorRow">
       <div class="col">
@@ -78,7 +85,7 @@
       <div class="w-100"></div>
       <div class="col-12">
         <div class="form-floating">
-          <textarea class="form-control" id="eventDescription" placeholder="{% translate 'Describe your event here' %}" maxlength="400" style="min-height:6em;"></textarea>
+          <textarea class="form-control" id="eventDescription" maxlength="400" style="min-height:6em;"></textarea>
           <label for="eventDescription">{% translate "Description" %}</label>
         </div>
         <span id="descrCharCount">0</span>
@@ -108,7 +115,7 @@
       <div class="w-100"></div>
       <div class="col" id="locationCol">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="eventLocation" placeholder="Location of your event" maxlength="100">
+          <input type="text" class="form-control" id="eventLocation" maxlength="100">
           <label for="eventLocation">{% translate "Event location" %}</label>
         </div>
       </div>
