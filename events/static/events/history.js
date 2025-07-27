@@ -35,7 +35,7 @@ function fillHistory() {
         const shareBtn = generateShareBtn(item.participation_link);
 
         const cardTemplate = `
-            <div class="col d-flex appearing">
+            <div class="col d-flex entering-2">
                 <div class="card shadow w-100" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title text-truncate">
