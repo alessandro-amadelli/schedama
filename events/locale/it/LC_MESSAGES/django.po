@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-26 23:06+0200\n"
+"POT-Creation-Date: 2025-07-27 10:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -736,8 +736,8 @@ msgstr ""
 "accordarsi su data e ora."
 
 #: .\events\templates\events\index.html:23
-msgid "Create an event"
-msgstr "Crea un evento"
+msgid "Create"
+msgstr "Crea"
 
 #: .\events\templates\events\index.html:24
 msgid "Easily create a new event by clicking "
@@ -749,22 +749,10 @@ msgid "Create event"
 msgstr "Crea evento"
 
 #: .\events\templates\events\index.html:42
-msgid "Save event links"
-msgstr "Salva i link dell'evento"
+msgid "Share"
+msgstr "Condividi"
 
 #: .\events\templates\events\index.html:43
-msgid ""
-"After event creation, 2 links are generated: <strong>Participation URL</"
-"strong> and <strong>Administration URL</strong>"
-msgstr ""
-"Dopo la creazione dell'evento, vengono generati 2 link: <strong>URL "
-"Partecipante</strong> e <strong>URL Amministrazione</strong>"
-
-#: .\events\templates\events\index.html:57
-msgid "Share event"
-msgstr "Condividi evento"
-
-#: .\events\templates\events\index.html:58
 msgid ""
 "Share the event with whoever you like by sending them the "
 "<strong>Participation URL</strong>"
@@ -772,11 +760,11 @@ msgstr ""
 "Condividi l'evento con chiunque vuoi inviando l'<strong>URL Partecipante</"
 "strong>"
 
-#: .\events\templates\events\index.html:72
-msgid "Administrate your event"
-msgstr "Amministra il tuo evento"
+#: .\events\templates\events\index.html:57
+msgid "Manage"
+msgstr "Gestisci"
 
-#: .\events\templates\events\index.html:73
+#: .\events\templates\events\index.html:58
 msgid ""
 "You can fully manage your event by visiting the <strong>Administration URL</"
 "strong>."
@@ -1323,9 +1311,9 @@ msgstr "Preferenze"
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:177 .\events\views.py:324 .\events\views.py:473
-#: .\events\views.py:591 .\events\views.py:629 .\events\views.py:712
-#: .\events\views.py:725 .\events\views.py:773 .\events\views.py:786
+#: .\events\views.py:177 .\events\views.py:324 .\events\views.py:472
+#: .\events\views.py:590 .\events\views.py:628 .\events\views.py:711
+#: .\events\views.py:724 .\events\views.py:772 .\events\views.py:785
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
@@ -1335,12 +1323,12 @@ msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:335 .\events\views.py:460 .\events\views.py:620
-#: .\events\views.py:752 .\events\views.py:806
+#: .\events\views.py:335 .\events\views.py:459 .\events\views.py:619
+#: .\events\views.py:751 .\events\views.py:805
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:351
+#: .\events\views.py:350
 msgid ""
 "Mmmmh, a participant with this name already exists. Maybe you've already "
 "registered? Or just try to be more...original"
@@ -1348,14 +1336,14 @@ msgstr ""
 "Mmmmh, un partecipante con questo nome esiste già. Forse ti sei già "
 "registrato? Oppure prova solo ad essere più...originale"
 
-#: .\events\views.py:382 .\events\views.py:448 .\events\views.py:690
+#: .\events\views.py:381 .\events\views.py:447 .\events\views.py:689
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
 
-#: .\events\views.py:851
+#: .\events\views.py:850
 msgid "Wrong password! Ehm...are you sure you're supposed to see this event?"
 msgstr "Password errata! Ehm...sei sicuro di poter vedere questo evento?"
 
-#: .\events\views.py:894
+#: .\events\views.py:893
 msgid "Emoji is required."
 msgstr "Emoji obbligatoria."
