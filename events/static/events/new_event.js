@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-//var currentStep = 0;
+var currentStep = 0;
 
 //function updateProgressBar() {
 //    const progressOuter = document.querySelector("#progressOuter");
