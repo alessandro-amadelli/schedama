@@ -3,3 +3,4 @@ translation_cmd.txt
 theme_backgrounds
 .idea
 launch_local_db.bat
+**/__pycache__/
