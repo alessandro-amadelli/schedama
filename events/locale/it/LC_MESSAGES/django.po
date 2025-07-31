@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-27 10:30+0200\n"
+"POT-Creation-Date: 2025-07-31 11:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,7 +140,7 @@ msgstr "Titolo"
 #: .\events\templates\events\about_us.html:83
 #: .\events\templates\events\edit_event.html:87
 #: .\events\templates\events\edit_event.html:94
-#: .\events\templates\events\new_event.html:82
+#: .\events\templates\events\new_event.html:88
 msgid "Description"
 msgstr "Descrizione"
 
@@ -286,33 +286,32 @@ msgid "Author"
 msgstr "Autore"
 
 #: .\events\templates\events\edit_event.html:65
-#: .\events\templates\events\new_event.html:39
+#: .\events\templates\events\new_event.html:45
 msgid "Event author"
 msgstr "Autore evento"
 
 #: .\events\templates\events\edit_event.html:79
-#: .\events\templates\events\new_event.html:53
+#: .\events\templates\events\new_event.html:59
 msgid "Event title"
 msgstr "Titolo evento"
 
 #: .\events\templates\events\edit_event.html:87
-#: .\events\templates\events\new_event.html:162
-#: .\events\templates\events\new_event.html:217
+#: .\events\templates\events\new_event.html:168
+#: .\events\templates\events\new_event.html:223
 msgid "Optional"
 msgstr "Facoltativo"
 
 #: .\events\templates\events\edit_event.html:92
-#: .\events\templates\events\new_event.html:81
 msgid "Describe your event here"
 msgstr "Descrivi qui il tuo evento"
 
 #: .\events\templates\events\edit_event.html:111
-#: .\events\templates\events\new_event.html:112
+#: .\events\templates\events\new_event.html:118
 msgid "Event location"
 msgstr "Location evento"
 
 #: .\events\templates\events\edit_event.html:125
-#: .\events\templates\events\new_event.html:126
+#: .\events\templates\events\new_event.html:132
 msgid "Enter a date"
 msgstr "Inserisci una data"
 
@@ -321,97 +320,97 @@ msgid "Event date"
 msgstr "Data evento"
 
 #: .\events\templates\events\edit_event.html:152
-#: .\events\templates\events\new_event.html:150
+#: .\events\templates\events\new_event.html:156
 msgid "Days"
 msgstr "Giorni"
 
 #: .\events\templates\events\edit_event.html:156
-#: .\events\templates\events\new_event.html:146
+#: .\events\templates\events\new_event.html:152
 msgid "Hours"
 msgstr "Ore"
 
 #: .\events\templates\events\edit_event.html:160
-#: .\events\templates\events\new_event.html:142
+#: .\events\templates\events\new_event.html:148
 msgid "Minutes"
 msgstr "Minuti"
 
 #: .\events\templates\events\edit_event.html:168
-#: .\events\templates\events\new_event.html:162
+#: .\events\templates\events\new_event.html:168
 msgid "Choose a theme"
 msgstr "Scegli un tema"
 
 #: .\events\templates\events\edit_event.html:173
-#: .\events\templates\events\new_event.html:167
+#: .\events\templates\events\new_event.html:173
 msgid "Default"
 msgstr ""
 
 #: .\events\templates\events\edit_event.html:176
-#: .\events\templates\events\new_event.html:170
+#: .\events\templates\events\new_event.html:176
 msgid "Beach"
 msgstr "Spiaggia"
 
 #: .\events\templates\events\edit_event.html:179
-#: .\events\templates\events\new_event.html:173
+#: .\events\templates\events\new_event.html:179
 msgid "Birthday party"
 msgstr "Festa di compleanno"
 
 #: .\events\templates\events\edit_event.html:182
-#: .\events\templates\events\new_event.html:176
+#: .\events\templates\events\new_event.html:182
 msgid "Drink"
 msgstr "Aperitivo"
 
 #: .\events\templates\events\edit_event.html:185
-#: .\events\templates\events\new_event.html:179
+#: .\events\templates\events\new_event.html:185
 msgid "Forest"
 msgstr "Foresta"
 
 #: .\events\templates\events\edit_event.html:188
-#: .\events\templates\events\new_event.html:182
+#: .\events\templates\events\new_event.html:188
 msgid "Graduation"
 msgstr "Diploma"
 
 #: .\events\templates\events\edit_event.html:191
-#: .\events\templates\events\new_event.html:185
+#: .\events\templates\events\new_event.html:191
 msgid "Match"
 msgstr "Sfida"
 
 #: .\events\templates\events\edit_event.html:194
-#: .\events\templates\events\new_event.html:188
+#: .\events\templates\events\new_event.html:194
 msgid "Meeting"
 msgstr ""
 
 #: .\events\templates\events\edit_event.html:197
-#: .\events\templates\events\new_event.html:191
+#: .\events\templates\events\new_event.html:197
 msgid "Mountain"
 msgstr "Montagna"
 
 #: .\events\templates\events\edit_event.html:200
-#: .\events\templates\events\new_event.html:194
+#: .\events\templates\events\new_event.html:200
 msgid "Music"
 msgstr "Musica"
 
 #: .\events\templates\events\edit_event.html:203
-#: .\events\templates\events\new_event.html:197
+#: .\events\templates\events\new_event.html:203
 msgid "Pizza"
 msgstr ""
 
 #: .\events\templates\events\edit_event.html:206
-#: .\events\templates\events\new_event.html:200
+#: .\events\templates\events\new_event.html:206
 msgid "Movie"
 msgstr "Film"
 
 #: .\events\templates\events\edit_event.html:209
-#: .\events\templates\events\new_event.html:203
+#: .\events\templates\events\new_event.html:209
 msgid "Relax"
 msgstr ""
 
 #: .\events\templates\events\edit_event.html:212
-#: .\events\templates\events\new_event.html:206
+#: .\events\templates\events\new_event.html:212
 msgid "Event"
 msgstr "Evento"
 
 #: .\events\templates\events\edit_event.html:215
-#: .\events\templates\events\new_event.html:209
+#: .\events\templates\events\new_event.html:215
 msgid "Travel"
 msgstr "Viaggio"
 
@@ -445,7 +444,7 @@ msgid "Click <strong>Save</strong> to confirm"
 msgstr "Clicca <strong>Salva</strong> per confermare"
 
 #: .\events\templates\events\edit_event.html:280
-#: .\events\templates\events\new_event.html:288
+#: .\events\templates\events\new_event.html:294
 #: .\events\templates\events\view_event.html:263
 msgid "Save"
 msgstr "Salva"
@@ -553,28 +552,28 @@ msgid "Event settings"
 msgstr "Impostazioni evento"
 
 #: .\events\templates\events\edit_event.html:350
-#: .\events\templates\events\new_event.html:236
+#: .\events\templates\events\new_event.html:242
 msgid "Choose what participants are allowed to do"
 msgstr "Scegli cosa possono fare i partecipanti"
 
 #: .\events\templates\events\edit_event.html:354
-#: .\events\templates\events\new_event.html:217
-#: .\events\templates\events\new_event.html:239
+#: .\events\templates\events\new_event.html:223
+#: .\events\templates\events\new_event.html:245
 msgid "Add participants"
 msgstr "Aggiungi partecipanti"
 
 #: .\events\templates\events\edit_event.html:359
-#: .\events\templates\events\new_event.html:243
+#: .\events\templates\events\new_event.html:249
 msgid "Edit participants"
 msgstr "Modifica partecipanti"
 
 #: .\events\templates\events\edit_event.html:363
-#: .\events\templates\events\new_event.html:247
+#: .\events\templates\events\new_event.html:253
 msgid "Remove participants"
 msgstr "Rimuovi partecipanti"
 
 #: .\events\templates\events\edit_event.html:365
-#: .\events\templates\events\new_event.html:264
+#: .\events\templates\events\new_event.html:270
 msgid "Security"
 msgstr "Sicurezza"
 
@@ -592,7 +591,7 @@ msgid "Password"
 msgstr ""
 
 #: .\events\templates\events\edit_event.html:380
-#: .\events\templates\events\new_event.html:279
+#: .\events\templates\events\new_event.html:285
 msgid "Repeat password"
 msgstr "Ripeti password"
 
@@ -813,11 +812,15 @@ msgstr "In caso di dubbi riguardo ai tuoi dati, controlla la nostra"
 msgid "Privacy policy"
 msgstr ""
 
-#: .\events\templates\events\new_event.html:29
+#: .\events\templates\events\new_event.html:27
+msgid "Progress bar"
+msgstr ""
+
+#: .\events\templates\events\new_event.html:35
 msgid "Your nickname"
 msgstr "Il tuo nickname"
 
-#: .\events\templates\events\new_event.html:33
+#: .\events\templates\events\new_event.html:39
 msgid ""
 "This name will be visible as the event author. You will also be "
 "automatically added as a participant with this name."
@@ -825,114 +828,114 @@ msgstr ""
 "Questo nome sarà visibile come autore dell'evento. Sarai anche "
 "automaticamente aggiunto come partecipante con questo nome."
 
-#: .\events\templates\events\new_event.html:47
+#: .\events\templates\events\new_event.html:53
 msgid "Enter a title"
 msgstr "Inserisci un titolo"
 
-#: .\events\templates\events\new_event.html:61
+#: .\events\templates\events\new_event.html:67
 msgid "Do you wish to add a description?"
 msgstr "Vuoi aggiungere una descrizione?"
 
-#: .\events\templates\events\new_event.html:64
-#: .\events\templates\events\new_event.html:94
+#: .\events\templates\events\new_event.html:70
+#: .\events\templates\events\new_event.html:100
 msgid "Yes"
 msgstr "Sì"
 
-#: .\events\templates\events\new_event.html:68
-#: .\events\templates\events\new_event.html:98
+#: .\events\templates\events\new_event.html:74
+#: .\events\templates\events\new_event.html:104
 msgid "No"
 msgstr "No"
 
-#: .\events\templates\events\new_event.html:76
+#: .\events\templates\events\new_event.html:82
 msgid "Describe the event"
 msgstr "Descrivi l'evento"
 
-#: .\events\templates\events\new_event.html:91
+#: .\events\templates\events\new_event.html:97
 msgid "Do you wish to add a location?"
 msgstr "Vuoi aggiungere una location?"
 
-#: .\events\templates\events\new_event.html:106
+#: .\events\templates\events\new_event.html:112
 msgid "Choose a location"
 msgstr "Scegli una location"
 
-#: .\events\templates\events\new_event.html:120
+#: .\events\templates\events\new_event.html:126
 msgid "Set a date and time"
 msgstr "Imposta data e ora"
 
-#: .\events\templates\events\new_event.html:120
+#: .\events\templates\events\new_event.html:126
 msgid "you can indicate more than one possible date"
 msgstr "puoi indicare anche più di una data possibile"
 
-#: .\events\templates\events\new_event.html:134
+#: .\events\templates\events\new_event.html:140
 msgid "Indicate duration"
 msgstr "Indica la durata"
 
-#: .\events\templates\events\new_event.html:138
+#: .\events\templates\events\new_event.html:144
 msgid "Event duration"
 msgstr "Durata evento"
 
-#: .\events\templates\events\new_event.html:155
+#: .\events\templates\events\new_event.html:161
 msgid "Scroll the selectors to change event duration."
 msgstr "Fai scorrere i selettori per cambiare la durata dell'evento."
 
-#: .\events\templates\events\new_event.html:223
+#: .\events\templates\events\new_event.html:229
 msgid "Participant name"
 msgstr "Nome partecipante"
 
-#: .\events\templates\events\new_event.html:231
+#: .\events\templates\events\new_event.html:237
 msgid "Configure Settings"
 msgstr "Configura Impostazioni"
 
-#: .\events\templates\events\new_event.html:252
+#: .\events\templates\events\new_event.html:258
 msgid "Current settings"
 msgstr "Impostazioni correnti"
 
-#: .\events\templates\events\new_event.html:253
-msgid "Add one ore more names to the participant list"
+#: .\events\templates\events\new_event.html:259
+msgid "Add one or more names to the participant list"
 msgstr "Aggiungere uno o più nomi alla lista partecipanti"
 
-#: .\events\templates\events\new_event.html:254
+#: .\events\templates\events\new_event.html:260
 msgid ""
 "Change preferences and availability on dates for participants in the list"
 msgstr ""
 "Modificare preferenze e disponibilità sulle date per i partecipanti in lista"
 
-#: .\events\templates\events\new_event.html:255
+#: .\events\templates\events\new_event.html:261
 msgid "Remove one or more names from the participant list"
 msgstr "Rimuovere uno o più nomi dalla lista partecipanti"
 
-#: .\events\templates\events\new_event.html:265
+#: .\events\templates\events\new_event.html:271
 msgid ""
 "You can choose to make your event private, protecting it with a password."
 msgstr ""
 "Puoi scegliere di rendere il tuo evento privato, proteggendolo con una "
 "password."
 
-#: .\events\templates\events\new_event.html:270
+#: .\events\templates\events\new_event.html:276
 msgid "Make event private"
 msgstr "Rendi evento privato"
 
-#: .\events\templates\events\new_event.html:275
+#: .\events\templates\events\new_event.html:281
 msgid "Choose a password"
 msgstr "Scegli una password"
 
-#: .\events\templates\events\new_event.html:299
+#: .\events\templates\events\new_event.html:305
 msgid "Restore unsaved data"
 msgstr "Ripristina dati non salvati"
 
-#: .\events\templates\events\new_event.html:303
+#: .\events\templates\events\new_event.html:309
 msgid "It seems you have worked on a new event without saving."
 msgstr "Sembra che tu abbia lavorato ad un nuovo evento senza salvare."
 
-#: .\events\templates\events\new_event.html:304
+#: .\events\templates\events\new_event.html:310
 msgid "Do you wish to reload previous data?"
 msgstr "Vuoi ricaricare i dati precedenti?"
 
-#: .\events\templates\events\new_event.html:308
+#: .\events\templates\events\new_event.html:314
 msgid "Nah, don't care"
 msgstr "Nah, non mi interessa"
 
-#: .\events\templates\events\new_event.html:311
+#: .\events\templates\events\new_event.html:317
 msgid "Restore data"
 msgstr "Ripristina i dati"
 
@@ -1311,24 +1314,24 @@ msgstr "Preferenze"
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:177 .\events\views.py:324 .\events\views.py:472
-#: .\events\views.py:590 .\events\views.py:628 .\events\views.py:711
-#: .\events\views.py:724 .\events\views.py:772 .\events\views.py:785
+#: .\events\views.py:178 .\events\views.py:325 .\events\views.py:478
+#: .\events\views.py:596 .\events\views.py:634 .\events\views.py:722
+#: .\events\views.py:735 .\events\views.py:783 .\events\views.py:796
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
-#: .\events\views.py:201
+#: .\events\views.py:202
 msgid "An error has occurred while creating the event. Please try again later."
 msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:335 .\events\views.py:459 .\events\views.py:619
-#: .\events\views.py:751 .\events\views.py:805
+#: .\events\views.py:336 .\events\views.py:465 .\events\views.py:625
+#: .\events\views.py:762 .\events\views.py:816
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:350
+#: .\events\views.py:351
 msgid ""
 "Mmmmh, a participant with this name already exists. Maybe you've already "
 "registered? Or just try to be more...original"
@@ -1336,14 +1339,15 @@ msgstr ""
 "Mmmmh, un partecipante con questo nome esiste già. Forse ti sei già "
 "registrato? Oppure prova solo ad essere più...originale"
 
-#: .\events\views.py:381 .\events\views.py:447 .\events\views.py:689
+#: .\events\views.py:363 .\events\views.py:387 .\events\views.py:453
+#: .\events\views.py:666 .\events\views.py:700
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
 
-#: .\events\views.py:850
+#: .\events\views.py:861
 msgid "Wrong password! Ehm...are you sure you're supposed to see this event?"
 msgstr "Password errata! Ehm...sei sicuro di poter vedere questo evento?"
 
-#: .\events\views.py:893
+#: .\events\views.py:904
 msgid "Emoji is required."
 msgstr "Emoji obbligatoria."

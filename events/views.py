@@ -1,3 +1,4 @@
+import copy
 from datetime import datetime, timedelta
 import hashlib
 import json
@@ -356,9 +357,14 @@ def add_participant_view(request):
     # Adding new participant and cleaning input
     event_data["participants"].append(new_participant_ok)
     form = EventForm(event_data)
-    part_field = form.fields.get("participants")
+    if not form.is_valid():
+        response = {
+            "status": "ERROR",
+            "description": _("Sorry, submitted data is invalid.")
+        }
+        return JsonResponse(response)
 
-    participants = part_field.clean(event_data["participants"])
+    participants = form.cleaned_data.get("participants", [])
 
     # Updating event
     try:
@@ -459,7 +465,7 @@ def update_event_view(request):
             "description": _("An error has occurred.")
         }
         return JsonResponse(response)
-    event_data = old_event_data.copy()
+    event_data = copy.deepcopy(old_event_data)
 
     event_settings = event_data["settings"]
 
@@ -619,7 +625,7 @@ def modify_participants_view(request):
             "description": _("An error has occurred.")
         }
         return JsonResponse(response)
-    event_data = old_event_data.copy()
+    event_data = copy.deepcopy(old_event_data)
 
     # Check if event is private and user is authorized
     if event_data.get("private_event") and not check_event_authorization(request, item_id):
@@ -654,9 +660,14 @@ def modify_participants_view(request):
 
     # Updating event with new participants list
     form = EventForm(event_data)
-    part_field = form.fields.get("participants")
+    if not form.is_valid():
+        response = {
+            "status": "ERROR",
+            "description": _("Sorry, submitted data is invalid.")
+        }
+        return JsonResponse(response)
 
-    participants = part_field.clean(event_data["participants"])
+    participants = form.cleaned_data.get("participants", [])
 
     # Check if at a least one event info has changed
     if event_data == old_event_data:
