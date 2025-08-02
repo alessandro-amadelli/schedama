@@ -34,13 +34,11 @@ ALLOWED_HOSTS = os.environ.get("SCHEDAMA_ALLOWED_HOSTS", "").split()
 
 INSTALLED_APPS = [
     'events.apps.EventsConfig',
-    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'pwa',
 ]
 
 MIDDLEWARE = [
