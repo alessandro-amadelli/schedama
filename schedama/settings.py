@@ -144,6 +144,7 @@ if os.environ.get("SCHEDAMA_ENVIRONMENT", "TEST") == "PRODUCTION":
             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         },
     }
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
     CACHES = {
         "default": {
