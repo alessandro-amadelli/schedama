@@ -139,12 +139,12 @@ CACHE_DB_TTL = 60 * 60 * 24 * 2  # for database records (eg.: events)
 
 # If production environment
 if os.environ.get("SCHEDAMA_ENVIRONMENT", "TEST") == "PRODUCTION":
-    # STORAGES = {
-    #     "staticfiles": {
-    #         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    #     },
-    # }
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STORAGES = {
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+    # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
     CACHES = {
         "default": {
