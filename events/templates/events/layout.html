@@ -1,4 +1,3 @@
-
 {% load static %}
 {% load i18n %}
 
@@ -6,25 +5,26 @@
 <html lang="en">
   <head>
     
-  <!-- Manifest -->
-  <link rel="manifest" href="{% static 'events/manifest.webmanifest' %}">
+    <!-- Manifest -->
+    <meta name="msapplication-TileColor" content="#073b4c">
+    <link rel="manifest" href="{% static 'events/manifest.webmanifest' %}">
 
-  <!-- Service worker registration -->
-  <script>
-    registerSW();
+    <!-- Service worker registration -->
+    <script>
+      registerSW();
 
-    async function registerSW() {
-      if ('serviceWorker' in navigator) {
-        try {
-          await navigator.serviceWorker.register('{% url "sw" %}', {
-            scope: "/"
-        });
-        } catch(err) {
-          console.log('SW registration failed: ', err);
+      async function registerSW() {
+        if ('serviceWorker' in navigator) {
+          try {
+            await navigator.serviceWorker.register('{% url "sw" %}', {
+              scope: "/"
+          });
+          } catch(err) {
+            console.log('SW registration failed: ', err);
+          }
         }
       }
-    }
-  </script>
+    </script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,10 +47,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'events/favicon-16x16.png' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'events/favicon.ico' %}">
     <meta name="msapplication-TileImage" content="{% static 'events/ms-icon-144x144.png' %}">
-
-    <!-- Manifest -->
-    <meta name="msapplication-TileColor" content="#073b4c">
-    <link rel="manifest" href="{% static 'events/manifest.webmanifest' %}">
 
     <title>{% block title %}{% endblock %}</title>
     <meta name="description" content="{% block description %}{% endblock %}">
