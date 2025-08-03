@@ -533,7 +533,10 @@ async function sendUpdateToServer() {
         return false;
     }
 
-    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    let csrftoken = getCookie('csrftoken');
+    if (!csrftoken) {
+        csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    }
 
     let reqHeaders = new Headers();
     reqHeaders.append('Content-type', 'application/json');
@@ -580,7 +583,10 @@ async function sendEventCancellationToServer() {
         admin_key: dataFull.admin_key
     }
 
-    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    let csrftoken = getCookie('csrftoken');
+    if (!csrftoken) {
+        csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    }
 
     let reqHeaders = new Headers();
     reqHeaders.append('Content-type', 'application/json');
@@ -629,7 +635,10 @@ async function sendEventReactivationToServer() {
         admin_key: dataFull.admin_key
     }
 
-    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    let csrftoken = getCookie('csrftoken');
+    if (!csrftoken) {
+        csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    }
 
     let reqHeaders = new Headers();
     reqHeaders.append('Content-type', 'application/json');

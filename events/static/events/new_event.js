@@ -724,7 +724,11 @@ function saveLocally() {
 
 async function sendEventToServer() {
     const data = JSON.parse(localStorage.getItem("unsavedEvent"));
-    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+
+    let csrftoken = getCookie('csrftoken');
+    if (!csrftoken) {
+        csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    }
 
     const isValidated = validateEvent();
 

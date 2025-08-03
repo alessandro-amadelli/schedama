@@ -532,7 +532,10 @@ async function sendParticipationToServer() {
     // Disabling button to avoid multiple submissions on slow connections (if a user clicks multiple times before page reloads)
     document.querySelector("#btnConfirmParticipate").disabled = true;
 
-    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    let csrftoken = getCookie('csrftoken');
+    if (!csrftoken) {
+        csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    }
 
     // New participant data
     const newPartName = document.querySelector("#newPartName").value;
@@ -654,7 +657,10 @@ async function sendModificationsToServer() {
     document.querySelector("#modalList").querySelector(".btn-close").click();
     showLoading();
 
-    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    let csrftoken = getCookie('csrftoken');
+    if (!csrftoken) {
+        csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    }
 
     const modifications = localStorage.getItem("modifications");
     if (!modifications) {
@@ -768,7 +774,11 @@ async function reactToEvent(btnEmoji, eventID) {
         return;
     }
 
-    const csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    let csrftoken = getCookie('csrftoken');
+    if (!csrftoken) {
+        csrftoken = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+    }
+
     const emoji = btnEmoji.dataset.emoji;
     const emojiSymbol = btnEmoji.dataset.emojiSymbol;
 
