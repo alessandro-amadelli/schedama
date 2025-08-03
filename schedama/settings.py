@@ -139,12 +139,12 @@ CACHE_DB_TTL = 60 * 60 * 24 * 2  # for database records (eg.: events)
 
 # If production environment
 if os.environ.get("SCHEDAMA_ENVIRONMENT", "TEST") == "PRODUCTION":
-    STORAGES = {
-        "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-        },
-    }
-    # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    # STORAGES = {
+    #     "staticfiles": {
+    #         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    #     },
+    # }
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
     CACHES = {
         "default": {
@@ -158,6 +158,20 @@ else:
     'default': {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "ERROR",
+    },
 }
 
 # Default primary key field type
