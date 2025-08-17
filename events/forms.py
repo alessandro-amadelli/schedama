@@ -16,8 +16,10 @@ class EventForm(forms.Form):
     author = forms.CharField(required=False)
     title = forms.CharField()
     description = forms.CharField(required=False)
-    location = forms.CharField(required=False)
     has_location = forms.BooleanField(required=False, initial=False)
+    location = forms.CharField(required=False)
+    has_parking = forms.BooleanField(required=False, initial=False)
+    parking = forms.CharField(required=False)
     dates = forms.JSONField()
     duration = forms.IntegerField(initial=60)
     participants = forms.JSONField(required=False)
@@ -45,15 +47,25 @@ class EventForm(forms.Form):
         dates = self.cleaned_data.get("dates", [])
         return list(set(dates))
 
-    def clean_location(self):
-        location = self.cleaned_data.get("location", "")
-        return Truncator(location).chars(LOCATION_MAX_LENGTH)
-
     def clean_has_location(self):
         has_location = self.cleaned_data["has_location"]
         if has_location is None:
             has_location = False
         return has_location
+
+    def clean_location(self):
+        location = self.cleaned_data.get("location", "")
+        return Truncator(location).chars(LOCATION_MAX_LENGTH)
+
+    def clean_has_parking(self):
+        has_parking = self.cleaned_data["has_parking"]
+        if has_parking is None:
+            has_parking = False
+        return has_parking
+
+    def clean_parking(self):
+        parking = self.cleaned_data.get("parking", "")
+        return Truncator(parking).chars(LOCATION_MAX_LENGTH)
 
     def clean_duration(self):
         duration = self.cleaned_data["duration"]

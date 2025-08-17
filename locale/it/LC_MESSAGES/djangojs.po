@@ -1,0 +1,173 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-17 17:21+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\static\events\edit_event.js:213 .\static\events\new_event.js:422
+#: .\static\events\view_event.js:304
+msgid "d"
+msgstr ""
+
+#: .\static\events\edit_event.js:237
+msgid "Participant removed"
+msgstr ""
+
+#: .\static\events\edit_event.js:285 .\static\events\new_event.js:371
+msgid "Event Date"
+msgstr ""
+
+#: .\static\events\edit_event.js:315 .\static\events\new_event.js:405
+msgid "Date added"
+msgstr ""
+
+#: .\static\events\edit_event.js:532 .\static\events\new_event.js:736
+msgid "Please, check input fields."
+msgstr ""
+
+#: .\static\events\edit_event.js:562 .\static\events\edit_event.js:612
+#: .\static\events\edit_event.js:664 .\static\events\new_event.js:779
+#: .\static\events\view_event.js:576 .\static\events\view_event.js:693
+msgid "An error has occurred. Please try again later."
+msgstr ""
+
+#: .\static\events\history.js:18
+msgid "Nothing to see here..."
+msgstr ""
+
+#: .\static\events\history.js:47
+msgid "Author:"
+msgstr ""
+
+#: .\static\events\new_event.js:82 .\static\events\new_event.js:83
+#: .\static\events\new_event.js:84
+msgid "Administrator only"
+msgstr ""
+
+#: .\static\events\new_event.js:92 .\static\events\new_event.js:98
+#: .\static\events\new_event.js:104
+msgid "Anyone"
+msgstr ""
+
+#: .\static\events\new_event.js:347 .\static\events\new_event.js:533
+msgid "You have to choose at least one date."
+msgstr ""
+
+#: .\static\events\new_event.js:465
+msgid "Participant"
+msgstr ""
+
+#: .\static\events\new_event.js:500
+msgid "Participant added"
+msgstr ""
+
+#: .\static\events\new_event.js:509
+msgid "Insert a title for your event."
+msgstr ""
+
+#: .\static\events\new_event.js:520
+msgid "Please enter a location."
+msgstr ""
+
+#: .\static\events\new_event.js:799
+msgid "Event created"
+msgstr ""
+
+#: .\static\events\new_event.js:800
+msgid "Your event has been successfully created"
+msgstr ""
+
+#: .\static\events\new_event.js:815
+msgid "The following links have been automatically saved to the history page"
+msgstr ""
+
+#: .\static\events\new_event.js:822
+msgid "Participant URL"
+msgstr ""
+
+#: .\static\events\new_event.js:825 .\static\events\new_event.js:844
+msgid "View URL"
+msgstr ""
+
+#: .\static\events\new_event.js:833
+msgid "Participant page"
+msgstr ""
+
+#: .\static\events\new_event.js:841
+msgid "Administration URL"
+msgstr ""
+
+#: .\static\events\new_event.js:851
+msgid ""
+"IMPORTANT: make sure to keep this link, it's the only way you'll be able to "
+"administrate your event."
+msgstr ""
+
+#: .\static\events\new_event.js:859
+msgid "Administration page"
+msgstr ""
+
+#: .\static\events\new_event.js:876
+msgid "Data saved to history"
+msgstr ""
+
+#: .\static\events\utilities.js:65
+msgid "Lights off"
+msgstr ""
+
+#: .\static\events\utilities.js:113
+msgid "Lights on"
+msgstr ""
+
+#: .\static\events\utilities.js:143
+msgid "Loading, please wait."
+msgstr ""
+
+#: .\static\events\utilities.js:260
+msgid "You've been invited to an event on Schedama: "
+msgstr ""
+
+#: .\static\events\utilities.js:305
+msgid "Copy url"
+msgstr ""
+
+#: .\static\events\view_event.js:277
+msgid "Ended"
+msgstr ""
+
+#: .\static\events\view_event.js:287
+msgid "In progress"
+msgstr ""
+
+#: .\static\events\view_event.js:346
+msgid "Confirmed"
+msgstr ""
+
+#: .\static\events\view_event.js:346
+msgid "Not confirmed"
+msgstr ""
+
+#: .\static\events\view_event.js:431
+msgid "No Indications"
+msgstr ""
+
+#: .\static\events\view_event.js:448
+msgid "Preferences"
+msgstr ""
+
+#: .\static\events\view_event.js:751
+msgid "You reacted with"
+msgstr ""

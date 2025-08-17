@@ -114,6 +114,16 @@
                 </div>
             {% endif %}
 
+            {% if event.has_parking %}
+                <!-- Event parking -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <i class="fa-solid fa-square-parking fs-1 text-red"></i>
+                        <a href="" id="eventParking" target="_blank">{{ event.parking }}</a>
+                    </div>
+                </div>
+            {% endif %}
+
             <!-- Event duration -->
             <div class="row mb-4">
                 <div class="col-12">

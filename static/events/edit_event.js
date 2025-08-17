@@ -438,6 +438,8 @@ function getEventData() {
     const eventDescription = document.getElementById("eventDescription").value;
     const hasLocation = document.getElementById("checkEventLocation").checked;
     const eventLocation = document.getElementById("eventLocation").value;
+    const hasParking = document.getElementById("checkEventParking").checked;
+    const eventParking = document.getElementById("eventParking").value;
 
     let eventDates = [];
     document.querySelectorAll("input[name=eventDate]").forEach((date) => {
@@ -504,6 +506,8 @@ function getEventData() {
         description: eventDescription,
         has_location: hasLocation,
         location: eventLocation,
+        has_parking: hasParking,
+        parking: eventParking,
         dates: eventDates,
         duration: eventDuration,
         event_theme: eventTheme,

@@ -531,6 +531,8 @@ def update_event_view(request):
         event_data["description"] = form.cleaned_data.get("description", "")
         event_data["has_location"] = form.cleaned_data.get("has_location", False)
         event_data["location"] = form.cleaned_data.get("location", "")
+        event_data["has_parking"] = form.cleaned_data.get("has_parking", False)
+        event_data["parking"] = form.cleaned_data.get("parking", "")
         event_data["dates"] = form.cleaned_data.get("dates", [])
         event_data["dates"].sort()  # Order event dates
         event_data["duration"] = form.cleaned_data.get("duration", 60)

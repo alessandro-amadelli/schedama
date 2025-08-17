@@ -46,18 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-var currentStep = 0;
-
-//function updateProgressBar() {
-//    const progressOuter = document.querySelector("#progressOuter");
-//    const progressInner = document.querySelector("#progressInner");
-//    let percentage = (currentStep / 5) * 100;
-//    progressOuter.ariaValueNow = currentStep;
-//    progressInner.style.width = percentage + "%";
-//    if (percentage == 100) {
-//        progressInner.classList.remove("progress-bar-animated");
-//    }
-//}
 
 function showModalRestoreData() {
     document.querySelector("#btnRestoreData").onclick = () => {restorePreviousData();};
@@ -111,7 +99,6 @@ function updatePermissionDescriptions() {
     whoCanEdit.style.color = colorCanEdit;
     whoCanRemove.innerHTML = `<i class="fa-solid fa-${iconCanRemove}" style="--fa-animation-iteration-count:1;"></i> ${textCanRemove}`;
     whoCanRemove.style.color = colorCanRemove;
-
 }
 
 function selectEventTheme(clickedItem) {
@@ -139,10 +126,6 @@ function initializeAuthorRow() {
 }
 
 function initializeTitleRow() {
-    if (currentStep < 1) {
-        currentStep = 1;
-    }
-//    updateProgressBar();
     // Intro animation start
     const titleRow = document.querySelector("#titleRow");
     titleRow.style.animationPlayState = "running";
@@ -153,10 +136,6 @@ function initializeTitleRow() {
 }
 
 function initializeAddDescriptionRow() {
-    if (currentStep < 2) {
-        currentStep = 2;
-    }
-//    updateProgressBar();
     // Intro animation start
     const addDescriptionRow = document.querySelector("#addDescriptionRow");
     addDescriptionRow.style.animationPlayState = "running";
@@ -237,10 +216,6 @@ function updateCharCount() {
 }
 
 function initializeAddLocationRow() {
-    if (currentStep < 3) {
-        currentStep = 3;
-    }
-//    updateProgressBar();
     // Intro animation start
     const addLocationRow = document.querySelector("#addLocationRow");
     addLocationRow.style.animationPlayState = "running";
@@ -259,9 +234,13 @@ function initializeAddLocationRow() {
 function showLocationRow(toShow) {
     if (toShow) {
         document.querySelector("#locationRow").style.display = "block";
+        document.querySelector("#addParkingRow").style.display = "block";
+        initializeAddParkingRow();
         initializeLocationRow();
     } else {
         document.querySelector("#locationRow").style.display = "none";
+        document.querySelector("#addParkingRow").style.display = "none";
+        document.querySelector("#parkingRow").style.display = "none";
         initializeDateRow();
     }
 }
@@ -282,14 +261,57 @@ function initializeLocationRow() {
 
     // Event listener to start animation of next input field
     const locationInput = document.querySelector("#eventLocation");
-    locationInput.addEventListener('input', initializeDateRow);
+    locationInput.addEventListener('input', initializeAddParkingRow);
+}
+
+function initializeAddParkingRow() {
+    // Intro animation start
+    const addParkingRow = document.querySelector("#addParkingRow");
+    addParkingRow.style.animationPlayState = "running";
+
+    // Remove event listener from previous field
+    document.querySelector("#eventLocation").removeEventListener('input', initializeAddParkingRow);
+
+    showParkingRow(document.querySelector("#addParkY").checked);
+
+    // Event listener to start animation of next input field
+    document.querySelectorAll("input[name=addParkingRadio]").forEach((radio) => {
+        radio.addEventListener('click', () => {
+            showParkingRow(radio.value == 'Y');
+        })
+    });
+}
+
+function showParkingRow(toShow) {
+    if (toShow) {
+        document.querySelector("#parkingRow").style.display = "block";
+        initializeParkingRow();
+    } else {
+        document.querySelector("#parkingRow").style.display = "none";
+        initializeDateRow();
+    }
+}
+
+function initializeParkingRow() {
+    // Remove of event listener on previous input field
+    const eventLocation = document.querySelector("#eventLocation");
+    eventLocation.removeEventListener('input', initializeAddParkingRow);
+
+    // Intro animation start
+    const parkingRow = document.querySelector("#parkingRow");
+
+    if (document.querySelector("#addParkY").checked) {
+        parkingRow.style.animationPlayState = "running";
+    } else {
+        parkingRow.style.display = "none";
+    }
+
+    // Event listener to start animation of next input field
+    const parkingInput = document.querySelector("#eventParking");
+    parkingInput.addEventListener('input', initializeDateRow);
 }
 
 function initializeDateRow() {
-    if (currentStep < 4) {
-        currentStep = 4;
-    }
-//    updateProgressBar();
     // Remove of event listener on previous input fields
     const locationInput = document.querySelector("#eventLocation");
     locationInput.removeEventListener('input', initializeDateRow);
@@ -403,11 +425,6 @@ function createNewDate() {
 
     // Show notification for the added date
     notify(gettext("Date added"));
-
-    if (currentStep < 5) {
-        currentStep = 5;
-    }
-//    updateProgressBar();
 }
 
 function updateDuration() {
@@ -526,7 +543,21 @@ function validateEvent() {
         setInvalid(location, false);
     }
 
-    //Check #3 Date and time
+    // Check #3 Parking
+    const parkSwitch = document.querySelector("#addParkY");
+    const parking = document.querySelector("#eventParking");
+    if (parkSwitch.checked) {
+        if (parking.value.replaceAll(" ", "").length == 0) {
+            setInvalid(parking, true, gettext("Please enter a parking location."));
+            validated = false;
+        } else {
+            setInvalid(parking, false);
+        }
+    } else {
+        setInvalid(parking, false);
+    }
+
+    //Check #4 Date and time
     const firstDate = document.querySelector("#dateInp");
     const dates = document.querySelectorAll("[name='eventDate']");
     if (dates.length == 0) {
@@ -536,14 +567,10 @@ function validateEvent() {
         setInvalid(firstDate, false);
     }
 
-    // Check #4 Private event
+    // Check #5 Private event
     const privateEvent = document.querySelector("#checkPrivateEvent").checked;
     const eventPassword1 = document.querySelector("#eventPassword1");
     const eventPassword2 = document.querySelector("#eventPassword2");
-
-    if (privateEvent) {
-
-    }
 
     return validated;
 }
@@ -588,6 +615,18 @@ function restorePreviousData() {
         initializeLocationRow();
     } else {
         document.querySelector("#addLocN").checked = true;
+    }
+
+    // Event parking
+    if (unsavedEvent.has_location) {
+        initializeAddParkingRow();
+    }
+    document.querySelector("#eventParking").value = unsavedEvent.parking || "";
+    if (unsavedEvent.has_parking) {
+        document.querySelector("#addParkY").checked = true;
+        showParkingRow(true);
+    } else {
+        document.querySelector("#addParkN").checked = true;
     }
 
     // Event dates
@@ -654,8 +693,10 @@ function saveLocally() {
     const author = document.getElementById("eventAuthor").value;
     const eventTitle = document.querySelector("#eventTitle").value;
     const eventDescription = document.querySelector("#eventDescription").value;
-    const eventLocation = document.querySelector("#eventLocation").value;
     const locationActive = document.querySelector("#addLocY").checked;
+    const eventLocation = document.querySelector("#eventLocation").value;
+    const parkingActive = document.querySelector("#addParkY").checked;
+    const eventParking = document.querySelector("#eventParking").value;
     const eventDates = document.querySelectorAll("[name='eventDate']");
     let eventDuration = 60; // default duration is 1 hour
     const participants = document.querySelectorAll("[name='participantName']");
@@ -702,8 +743,10 @@ function saveLocally() {
         author: author,
         title: eventTitle.trim(),
         description: eventDescription.trim(),
-        location: eventLocation,
         has_location: locationActive,
+        location: eventLocation,
+        has_parking: parkingActive,
+        parking: eventParking,
         dates: dateList,
         duration: eventDuration,
         participants: participantList,

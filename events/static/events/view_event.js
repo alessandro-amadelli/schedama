@@ -124,9 +124,16 @@ function initializeEntirePage() {
     document.querySelector("#dateViewSelect").addEventListener('change', updateParticipantsListForDate);
 
     // Transform location in a Google Maps link
+    const baseGMapsURL= "https://www.google.com/maps/search/?api=1&query=";
     const locationLink = document.querySelector("#eventLocation");
     if (locationLink) {
-        locationLink.setAttribute("href", "https://www.google.com/maps/search/?api=1&query=" + encodeURI(locationLink.innerText));
+        locationLink.setAttribute("href", baseGMapsURL + encodeURI(locationLink.innerText));
+    }
+
+    // Transform parking location in a Google Maps link
+    const parkingLink = document.querySelector("#eventParking");
+    if (parkingLink) {
+        parkingLink.setAttribute("href", baseGMapsURL + encodeURI(parkingLink.innerText));
     }
 
     // Link to Google Calendar

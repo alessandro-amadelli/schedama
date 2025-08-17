@@ -89,8 +89,7 @@
             <div class="w-100"></div>
             <div class="col-12">
               <div class="form-floating">
-                <textarea class="form-control" id="eventDescription" placeholder="{% translate 'Describe your event here' %}"
-                maxlength="400" style="min-height:6em;">{{ event.description }}</textarea>
+                <textarea class="form-control" id="eventDescription" maxlength="400" style="min-height:6em;">{{ event.description }}</textarea>
                 <label for="eventDescription">{% translate "Description" %}</label>
               </div>
               <span id="descrCharCount">0</span>
@@ -107,8 +106,24 @@
             <div class="w-100"></div>
             <div class="col" id="locationCol">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="eventLocation" value="{{ event.location }}" placeholder="Event location" maxlength="100">
+                    <input type="text" class="form-control" id="eventLocation" value="{{ event.location }}" maxlength="100">
                     <label for="eventLocation">{% translate "Event location" %}</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event parking -->
+        <div class="row m-3 entering-4" id="parkingRow">
+            <div class="col-12">
+                <h4>{% translate "Parking spot" %}
+                    <input class="form-check-input" type="checkbox" role="switch" id="checkEventParking" {% if event.has_parking %}checked{% endif %}>
+                </h4>
+            </div>
+            <div class="w-100"></div>
+            <div class="col" id="parkingCol">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="eventParking" value="{{ event.parking }}" maxlength="100">
+                    <label for="eventParking">{% translate "Event parking" %}</label>
                 </div>
             </div>
         </div>

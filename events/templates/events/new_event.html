@@ -120,6 +120,35 @@
       </div>
     </div>
 
+    <!-- Add parking row -->
+    <div class="row mb-3 intro-animated" id="addParkingRow">
+      <div class="col-12">
+        <h4>{% translate "Do you know a convenient parking spot?" %} <span class="text-danger">*</span></h4>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkY" value="Y">
+          <label class="form-check-label" for="addParkY">{% translate "Yes" %}</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkN" value="N">
+          <label class="form-check-label" for="addParkN">{% translate "No" %}</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parking location -->
+    <div class="row p-3 mb-3 intro-animated" id="parkingRow">
+      <div class="col">
+        <h4><i class="fa-solid fa-square-parking fa-bounce"></i> {% translate "Enter parking location" %}</h4>
+      </div>
+      <div class="w-100"></div>
+      <div class="col" id="parkingCol">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="eventParking" maxlength="100">
+          <label for="eventParking">{% translate "Parking spot" %}</label>
+        </div>
+      </div>
+    </div>
+
     <!-- Event date and time -->
     <div class="row p-3 mb-3 intro-animated" id="dateRow">
       <div class="col">
