@@ -1,4 +1,4 @@
-const cacheName = 'schedama-cache-v3.5.92';
+const cacheName = 'schedama-cache-v3.5.93';
 
 {% load static %}
 
@@ -11,7 +11,8 @@ const cacheAssets = [
 	'{% static "events/utilities.js" %}',
 	'{% static "events/view_event.js" %}',
 	'{% static "events/schedama_logo_dark.png" %}',
-	'{% static "events/schedama_logo.png" %}',
+	'{% static "events/schedama_logo_dark.png" %}',
+	'{% static "events/qrcode_logo.png" %}',
 	'{% static "events/fonts/Poppins-Regular.woff2" %}',
 	"{% url 'index' %}",
 	"{% url 'new_event_view' %}",

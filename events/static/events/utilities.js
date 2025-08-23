@@ -238,7 +238,23 @@ function notify(text) {
   }
 
 
+//function generateQR(text) {
+//    let qrDiv = document.getElementById("qrDiv");
+//    let qrModal = document.getElementById("modalQR");
+//
+//    if (!qrDiv || !qrModal) {
+//        return false;
+//    }
+//
+//    var qrcode = new QRCode(document.getElementById("qrDiv"), {
+//        text: text,
+//        colorDark: "#000000",
+//        colorLight: "#ffffff"
+//    });
+//}
+
 function generateQR(text) {
+    console.log(text);
     let qrDiv = document.getElementById("qrDiv");
     let qrModal = document.getElementById("modalQR");
 
@@ -246,11 +262,15 @@ function generateQR(text) {
         return false;
     }
 
-    var qrcode = new QRCode(document.getElementById("qrDiv"), {
-        text: text,
-        colorDark: "#000000",
-        colorLight: "#ffffff"
+    var qrCode = new QRCodeStyling({
+      data: text,
+      dotsOptions: { color: "#073b4c", type: "rounded" },
+      backgroundOptions: { color: "#ffffff" },
+      imageOptions: { crossOrigin: "anonymous", margin: 10 },
+      image: "https://schedama.com/static/events/qrcode_logo.png"
     });
+
+    qrCode.append(qrDiv);
 }
 
 
