@@ -466,8 +466,17 @@ select, option {
     word-wrap: break-word;
 }
 
+.maps-link {
+    color: var(--text-color);
+}
+
+.maps-link:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
 .blurred {
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) !important;
 }
 
 .event-chart-div {

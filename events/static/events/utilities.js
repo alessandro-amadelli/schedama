@@ -238,21 +238,6 @@ function notify(text) {
   }
 
 
-//function generateQR(text) {
-//    let qrDiv = document.getElementById("qrDiv");
-//    let qrModal = document.getElementById("modalQR");
-//
-//    if (!qrDiv || !qrModal) {
-//        return false;
-//    }
-//
-//    var qrcode = new QRCode(document.getElementById("qrDiv"), {
-//        text: text,
-//        colorDark: "#000000",
-//        colorLight: "#ffffff"
-//    });
-//}
-
 function generateQR(text) {
     console.log(text);
     let qrDiv = document.getElementById("qrDiv");
