@@ -156,10 +156,12 @@ function initializeEntirePage() {
     updateHistory();
 
     // Event for participate modal show
-    document.querySelector("#modalParticipate").addEventListener('show.bs.modal', function () {
-        document.querySelector("#btnConfirmParticipate").disabled = false;
-    });
-
+    let modalParticipate = document.getElementById("modalParticipate");
+    if (modalParticipate) {
+        modalParticipate.addEventListener('show.bs.modal', function () {
+            document.querySelector("#btnConfirmParticipate").disabled = false;
+        });
+    }
 }
 
 function updateParticipantsListForDate() {
