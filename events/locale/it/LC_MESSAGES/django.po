@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-17 17:21+0200\n"
+"POT-Creation-Date: 2025-10-04 13:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,12 +125,8 @@ msgid "Features"
 msgstr "Funzionalità"
 
 #: .\events\templates\events\about_us.html:80
-msgid ""
-"Participants you invite to an event can see all relevant event information, "
-"such as:"
-msgstr ""
-"I partecipanti che inviti a un evento possono vedere tutte le informazioni "
-"fondamentali, come:"
+msgid "You can add all the relevant information to your event, such as:"
+msgstr "Puoi aggiungere tutte le informazioni rilevanti al tuo evento, come:"
 
 #: .\events\templates\events\about_us.html:82
 #: .\events\templates\events\edit_event.html:73
@@ -165,8 +161,8 @@ msgid "List of participants"
 msgstr "Lista dei partecipanti"
 
 #: .\events\templates\events\about_us.html:92
-msgid "Participants to your event can:"
-msgstr "I partecipanti al tuo evento possono:"
+msgid "Participants you invite to your event can:"
+msgstr "I partecipanti che inviti al tuo evento possono:"
 
 #: .\events\templates\events\about_us.html:94
 msgid "Indicate preferences and availability for the event"
@@ -209,10 +205,24 @@ msgid "Private events"
 msgstr "Eventi privati"
 
 #: .\events\templates\events\about_us.html:117
-msgid "Now you can make private events and protect them with a password"
-msgstr "Ora puoi fare eventi privati e proteggerli con una password"
+msgid "You can create private events and protect them with a password"
+msgstr "Puoi creare eventi privati e proteggerli con una password"
 
-#: .\events\templates\events\about_us.html:127
+#: .\events\templates\events\about_us.html:122
+#: .\events\templates\events\edit_event.html:398
+#: .\events\templates\events\edit_event.html:406
+msgid "Maintenance mode"
+msgstr "Modalità manutenzione"
+
+#: .\events\templates\events\about_us.html:125
+msgid ""
+"Now you can use maintenance mode to temporarily hide event information while "
+"you work on them"
+msgstr ""
+"Adesso puoi utilizzare la modalità manutenzione per nascondere temporaneamente le "
+"informazioni sul tuo evento finchè ci lavori"
+
+#: .\events\templates\events\about_us.html:135
 msgid ""
 "Hi, I'm Alessandro, the developer behind this little project.<br>It's nice "
 "to see you here, I hope you're enjoying this web app."
@@ -220,7 +230,7 @@ msgstr ""
 "Ciao, sono Alessandro, lo sviluppatore dietro questo piccolo progetto.<br>È "
 "bello vederti qui, spero che questa web app ti stia piacendo."
 
-#: .\events\templates\events\about_us.html:128
+#: .\events\templates\events\about_us.html:136
 msgid ""
 "I know...it's not perfect, but I'm always trying to learn, improve and add "
 "new features."
@@ -228,7 +238,7 @@ msgstr ""
 "Lo so...non è perfetta, ma cerco sempre di imparare, migliorare e aggiungere "
 "nuove funzionalità."
 
-#: .\events\templates\events\about_us.html:129
+#: .\events\templates\events\about_us.html:137
 msgid ""
 "I work on it in my spare time so, if you like it, spread the word and "
 "together we can make Schedama grow."
@@ -424,7 +434,7 @@ msgid "Participants"
 msgstr "Partecipanti"
 
 #: .\events\templates\events\edit_event.html:241
-#: .\events\templates\events\edit_event.html:412
+#: .\events\templates\events\edit_event.html:422
 msgid "Add participant"
 msgstr "Aggiungi partecipante"
 
@@ -450,6 +460,7 @@ msgstr "Clicca <strong>Salva</strong> per confermare"
 
 #: .\events\templates\events\edit_event.html:295
 #: .\events\templates\events\new_event.html:323
+#: .\events\templates\events\under_maintenance.html:68
 #: .\events\templates\events\view_event.html:273
 msgid "Save"
 msgstr "Salva"
@@ -600,17 +611,23 @@ msgstr ""
 msgid "Repeat password"
 msgstr "Ripeti password"
 
-#: .\events\templates\events\edit_event.html:418
+#: .\events\templates\events\edit_event.html:401
+msgid "You can activate maintenance mode to temporarily hide your event."
+msgstr ""
+"Puoi attivare la modalità manutenzione per nascondere temporaneamente il tuo "
+"evento."
+
+#: .\events\templates\events\edit_event.html:428
 msgid "Particpant name"
 msgstr "Nome partecipante"
 
-#: .\events\templates\events\edit_event.html:422
+#: .\events\templates\events\edit_event.html:432
 #: .\events\templates\events\view_event.html:270
 #: .\events\templates\events\view_event.html:357
 msgid "Cancel"
 msgstr "Annulla"
 
-#: .\events\templates\events\edit_event.html:423
+#: .\events\templates\events\edit_event.html:433
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -1235,6 +1252,72 @@ msgstr "Invia"
 msgid "If you don't know the password, contact the event administrator."
 msgstr "Se non conosci la password, contatta l'amministratore dell'evento."
 
+#: .\events\templates\events\under_maintenance.html:6
+#: .\events\templates\events\under_maintenance.html:12
+msgid "Event under maintenance"
+msgstr "Evento in manutenzione"
+
+#: .\events\templates\events\under_maintenance.html:18
+msgid "Be right back..."
+msgstr "Torniamo subito..."
+
+#: .\events\templates\events\under_maintenance.html:22
+msgid "Administrator put the event under maintenance"
+msgstr "L'amministratore ha messo l'evento in manutenzione"
+
+#: .\events\templates\events\under_maintenance.html:26
+msgid ""
+"Event is under maintenance and will be visible again once the administrator "
+"disables maintenance mode"
+msgstr ""
+"L'evento è in manutenzione e sarà di nuovo visibile una volta che "
+"l'amministratore disabiliterà la modalità manutenzione"
+
+#: .\events\templates\events\under_maintenance.html:31
+msgid "What can I do?? Click the button to discover:"
+msgstr "Cosa posso fare?? Clicca il bottone per scoprire:"
+
+#: .\events\templates\events\under_maintenance.html:37
+msgid "I'm a participant"
+msgstr "Sono un partecipante"
+
+#: .\events\templates\events\under_maintenance.html:42
+msgid "I'm the administrator"
+msgstr "Sono l'amministrazione"
+
+#: .\events\templates\events\under_maintenance.html:50
+msgid "Contact the administrator, if you know how..."
+msgstr "Contatta l'amministratore, se sai come..."
+
+#: .\events\templates\events\under_maintenance.html:51
+msgid "Pray until the event is visible again (might work)"
+msgstr ""
+"Prega finché l'evento non sarà nuovamente visibile (potrebbe funzionare)"
+
+#: .\events\templates\events\under_maintenance.html:52
+msgid "Compulsively refresh this page (okay, maybe don't do this)"
+msgstr "Ricarica compulsivamente questa pagina (ok, forse non farlo)"
+
+#: .\events\templates\events\under_maintenance.html:53
+msgid "Keep calm and come back later"
+msgstr "Keep calm e torna più tardi"
+
+#: .\events\templates\events\under_maintenance.html:62
+msgid "If you'd like to make your event visible again, just:"
+msgstr "Se vuoi rendere di nuovo visibile il tuo evento, semplicemente:"
+
+#: .\events\templates\events\under_maintenance.html:65
+msgid "Go to the <b>event administration</b> page"
+msgstr "Vai alla pagina di <b>amministrazione evento</b>"
+
+#: .\events\templates\events\under_maintenance.html:66
+msgid "Click <b>Settings</b>"
+msgstr "Clicca su <b>Impostazioni</b>"
+
+#: .\events\templates\events\under_maintenance.html:67
+msgid "Disable <b>maintenance mode</b>"
+msgstr "Disattiva la <b>modalità manutenzione</b>"
+
 #: .\events\templates\events\view_event.html:5
 msgid "Join the event | Participate to the event - Schedama.com"
 msgstr "Unisciti all'evento | Partecipa all'evento - Schedama.com"
@@ -1330,9 +1413,9 @@ msgstr "Preferenze"
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:178 .\events\views.py:325 .\events\views.py:478
-#: .\events\views.py:598 .\events\views.py:636 .\events\views.py:724
-#: .\events\views.py:737 .\events\views.py:785 .\events\views.py:798
+#: .\events\views.py:178 .\events\views.py:340 .\events\views.py:493
+#: .\events\views.py:617 .\events\views.py:666 .\events\views.py:754
+#: .\events\views.py:767 .\events\views.py:815 .\events\views.py:828
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
@@ -1342,12 +1425,17 @@ msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:336 .\events\views.py:465 .\events\views.py:627
-#: .\events\views.py:764 .\events\views.py:818
+#: .\events\views.py:328 .\events\views.py:656 .\events\views.py:952
+#: .\events\views.py:987
+msgid "The event is currently under maintenance. Please try again later."
+msgstr "L'evento è attualmente in manutenzione. Per favore riprova più tardi."
+
+#: .\events\views.py:351 .\events\views.py:480 .\events\views.py:646
+#: .\events\views.py:794 .\events\views.py:848
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:351
+#: .\events\views.py:366
 msgid ""
 "Mmmmh, a participant with this name already exists. Maybe you've already "
 "registered? Or just try to be more...original"
@@ -1355,15 +1443,15 @@ msgstr ""
 "Mmmmh, un partecipante con questo nome esiste già. Forse ti sei già "
 "registrato? Oppure prova solo ad essere più...originale"
 
-#: .\events\views.py:363 .\events\views.py:387 .\events\views.py:453
-#: .\events\views.py:668 .\events\views.py:702
+#: .\events\views.py:378 .\events\views.py:402 .\events\views.py:468
+#: .\events\views.py:698 .\events\views.py:732
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
 
-#: .\events\views.py:863
+#: .\events\views.py:893
 msgid "Wrong password! Ehm...are you sure you're supposed to see this event?"
 msgstr "Password errata! Ehm...sei sicuro di poter vedere questo evento?"
 
-#: .\events\views.py:906
+#: .\events\views.py:936
 msgid "Emoji is required."
 msgstr "Emoji obbligatoria."

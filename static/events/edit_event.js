@@ -477,6 +477,7 @@ function getEventData() {
     const eventAddParticipant = document.querySelector("#switchAddParticipant").checked;
     const eventEditParticipant = document.querySelector("#switchEditParticipant").checked;
     const eventRemoveParticipant = document.querySelector("#switchRemoveParticipant").checked;
+    const eventMaintenanceMode = document.querySelector("#switchMaintenanceMode").checked;
 
     const itemID = document.querySelector("#item-id").value;
     const adminKey = document.querySelector("#admin-key").value;
@@ -520,7 +521,8 @@ function getEventData() {
         settings: {
             add_participant: eventAddParticipant,
             edit_participant: eventEditParticipant,
-            remove_participant: eventRemoveParticipant
+            remove_participant: eventRemoveParticipant,
+            maintenance_mode: eventMaintenanceMode
         }
     };
 

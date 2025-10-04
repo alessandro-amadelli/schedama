@@ -764,9 +764,7 @@ async function updateEmojiCounters(eventID) {
         }
       });
     })
-    .catch(err => {
-      console.error(err);
-    });
+    .catch(err => {});
 }
 
 function updateSingleCounter(countSpan, newValue) {
@@ -811,9 +809,14 @@ async function reactToEvent(btnEmoji, eventID) {
             return response.json();
         })
         .then(function (data) {
-            localStorage.setItem("reaction_" + eventID, emoji);
-            updateEmojiCounters(eventID);
-            notify(emojiSymbol + " +1");
+            console.log(data);
+            if (data.status == "OK") {
+                localStorage.setItem("reaction_" + eventID, emoji);
+                updateEmojiCounters(eventID);
+                notify(emojiSymbol + " +1");
+            } else {
+                notify(data.description);
+            }
         })
         .catch(function (err) {
             console.error("Error reacting to event:", err);

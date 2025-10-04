@@ -227,6 +227,10 @@ def participate_view(request, eventID):
     if not event_data:
         return error404_view(request, None, eventID)
 
+    # Check if maintenance mode is active
+    if event_data["settings"].get("maintenance_mode", False):
+        return render(request, "events/under_maintenance.html")
+
     # Check if event is private and user is authorized
     if event_data.get("private_event") and not check_event_authorization(request, eventID):
         return private_event_view(request, eventID)
@@ -315,7 +319,18 @@ def add_participant_view(request):
     if admin_key:
         if admin_key == event_data["admin_key"]:
             is_admin = True
-    
+
+    # If user is not admin and maintenance mode is active
+    if not is_admin and event_settings.get("maintenance_mode", False):
+        response = {
+            "status": "ERROR",
+            "description": _(
+                "The event is currently under maintenance. "
+                "Please try again later."
+            )
+        }
+        return JsonResponse(response)
+
     # If user is not admin and the add_participant permission is false the
     # action is blocked
     if not is_admin and not user_add_participant:
@@ -538,6 +553,7 @@ def update_event_view(request):
         event_data["duration"] = form.cleaned_data.get("duration", 60)
         event_data["event_theme"] = form.cleaned_data.get("event_theme", "")
         event_data["participants"] = total_participants
+        # Event settings
         event_data["settings"]["add_participant"] = (
             form.cleaned_data["settings"].get("add_participant", False)
         )
@@ -546,6 +562,9 @@ def update_event_view(request):
         )
         event_data["settings"]["remove_participant"] = (
             form.cleaned_data["settings"].get("remove_participant", False)
+        )
+        event_data["settings"]["maintenance_mode"] = (
+            form.cleaned_data["settings"].get("maintenance_mode", False)
         )
         event_data["event_bin"] = event_bin
 
@@ -628,6 +647,17 @@ def modify_participants_view(request):
         }
         return JsonResponse(response)
     event_data = copy.deepcopy(old_event_data)
+
+    # Check if maintenance mode is active
+    if event_data["settings"].get("maintenance_mode", False):
+        response = {
+            "status": "ERROR",
+            "description": _(
+                "The event is currently under maintenance. "
+                "Please try again later."
+            )
+        }
+        return JsonResponse(response)
 
     # Check if event is private and user is authorized
     if event_data.get("private_event") and not check_event_authorization(request, item_id):
@@ -914,6 +944,17 @@ def add_reaction_view(request, eventID):
     if not event_data:
         return error404_view(request, None, eventID)
 
+    # Check if maintenance mode is active
+    if event_data["settings"].get("maintenance_mode", False):
+        response = {
+            "status": "ERROR",
+            "description": _(
+                "The event is currently under maintenance. "
+                "Please try again later."
+            )
+        }
+        return JsonResponse(response)
+
     if "reactions" not in event_data:
         event_data["reactions"] = {}
     event_data["reactions"][emoji] = event_data["reactions"].get(emoji, 0) + 1
@@ -937,6 +978,17 @@ def get_reactions_view(request, eventID):
     # Return page not found
     if not event_data:
         return error404_view(request, None, eventID)
+
+    # Check if maintenance mode is active
+    if event_data["settings"].get("maintenance_mode", False):
+        response = {
+            "status": "ERROR",
+            "description": _(
+                "The event is currently under maintenance. "
+                "Please try again later."
+            )
+        }
+        return JsonResponse(response)
 
     # Get reactions from event data
     reactions = event_data.get("reactions", {})
