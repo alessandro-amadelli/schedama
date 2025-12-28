@@ -23,308 +23,362 @@
         <a href="{% url 'privacy_view' %}">{% translate "Privacy policy" %}</a>
     </p>
 
-<!--    <div class="row sticky-top justify-content-center">-->
-<!--      <div id="progressOuter" class="col-10 progress p-0" role="progressbar" aria-label="{% translate 'Progress bar' %}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5">-->
-<!--        <div id="progressInner" class="progress-bar progress-bar-striped progress-bar-animated" style="width:0%;"></div>-->
-<!--      </div>-->
-<!--    </div>-->
 
-    <!-- Event author -->
-    <div class="row p-3 mb-3 mt-5 intro-animated" id="authorRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-id-card fa-bounce"></i> {% translate "Your nickname" %} <span class="text-danger">*</span></h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col">
-        <p>{% translate "This name will be visible as the event author. You will also be automatically added as a participant with this name." %}</p>
-      </div>
-      <div class="w-100"></div>
-      <div class="col">
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="eventAuthor" maxlength="30">
-          <label for="eventAuthor">{% translate "Event author" %}</label>
+
+    <div class="container my-5">
+
+        <!-- TIMELINE -->
+        <div class="d-flex justify-content-center align-items-center my-4" id="wizard-timeline">
+            <div class="timeline-step active" data-step="1">1</div>
+            <div class="timeline-line"></div>
+            <div class="timeline-step" data-step="2">2</div>
+            <div class="timeline-line"></div>
+            <div class="timeline-step" data-step="3">3</div>
+            <div class="timeline-line"></div>
+            <div class="timeline-step" data-step="4">4</div>
+            <div class="timeline-line"></div>
+            <div class="timeline-step" data-step="5">5</div>
+            <div class="timeline-line"></div>
+            <div class="timeline-step" data-step="6">6</div>
+            <div class="timeline-line"></div>
+            <div class="timeline-step" data-step="7">7</div>
+            <div class="timeline-line"></div>
+            <div class="timeline-step" data-step="8">8</div>
+            <div class="timeline-line"></div>
+            <div class="timeline-step" data-step="9">9</div>
         </div>
-      </div>
+
+        <!-- Save event button -->
+        <div class="d-grid col-6 col-lg-4 mx-auto mb-4">
+          <button type="button" class="btn btn-success btn-lg visually-hidden" id="btnSaveEvent" disabled>
+            <i class="fa-solid fa-floppy-disk"></i>
+            {% translate "Save" %}
+          </button>
+        </div>
+
+        <!-- CARD CONTAINER -->
+        <div id="wizard-cards">
+            <!-- STEP 1 -->
+            <div class="card step-card active" data-step="1">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa-solid fa-id-card fa-bounce"></i>
+                        {% translate "Your nickname" %} <span class="text-danger">*</span>
+                    </h4>
+                    <p>{% translate "This name will be visible as the event author. You will also be automatically added as a participant with this name." %}</p>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="eventAuthor" maxlength="30">
+                      <label for="eventAuthor">{% translate "Event author" %}</label>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button class="btn btn-lg btn-primary next-btn" data-step="2">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="card step-card d-none" data-step="2">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa-solid fa-book-open fa-bounce"></i>
+                        {% translate "Enter a title" %} <span class="text-danger">*</span>
+                    </h4>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="eventTitle" maxlength="150">
+                      <label for="eventTitle">{% translate "Event title" %}</label>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-lg btn-primary next-btn" data-step="3">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="card step-card d-none" data-step="3">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {% translate "Do you wish to add a description?" %} <span class="text-danger">*</span>
+                    </h4>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrY" value="Y">
+                      <label class="form-check-label" for="addDescrY">{% translate "Yes" %}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrN" value="N">
+                      <label class="form-check-label" for="addDescrN">{% translate "No" %}</label>
+                    </div>
+                    <h4><i class="fa-solid fa-message fa-bounce"></i> {% translate "Describe the event" %}</h4>
+                    <div class="form-floating">
+                      <textarea class="form-control" id="eventDescription" maxlength="400" style="min-height:6em;"></textarea>
+                      <label for="eventDescription">{% translate "Description" %}</label>
+                    </div>
+                    <span id="descrCharCount">0</span>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-lg btn-primary next-btn" data-step="4">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="card step-card d-none" data-step="4">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {% translate "Do you wish to add a location?" %} <span class="text-danger">*</span>
+                    </h4>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocY" value="Y">
+                      <label class="form-check-label" for="addLocY">{% translate "Yes" %}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocN" value="N">
+                      <label class="form-check-label" for="addLocN">{% translate "No" %}</label>
+                    </div>
+                    <h4><i class="fa-solid fa-location-dot fa-bounce"></i> {% translate "Choose a location" %}</h4>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="eventLocation" maxlength="100">
+                      <label for="eventLocation">{% translate "Event location" %}</label>
+                    </div>
+
+                     <h4>{% translate "Do you know a convenient parking spot?" %} <span class="text-danger">*</span></h4>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkY" value="Y">
+                      <label class="form-check-label" for="addParkY">{% translate "Yes" %}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkN" value="N">
+                      <label class="form-check-label" for="addParkN">{% translate "No" %}</label>
+                    </div>
+                    <h4><i class="fa-solid fa-square-parking fa-bounce"></i> {% translate "Enter parking location" %}</h4>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="eventParking" maxlength="100">
+                      <label for="eventParking">{% translate "Parking spot" %}</label>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-lg btn-primary next-btn" data-step="5">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 5 -->
+            <div class="card step-card d-none" data-step="5">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa-solid fa-calendar-day fa-bounce"></i>
+                        {% translate "Set a date and time" %} <span class="text-danger">*</span> <span class="text-muted">({% translate "you can indicate more than one possible date" %})</span>
+                    </h4>
+                    <div class="row" id="dateRow">
+                        <div class="form-floating mb-3">
+                          <input type="datetime-local" class="form-control" id="dateInp" min="{% now 'Y-m-d\TH:i' %}">
+                          <label for="dateInp">{% translate "Enter a date" %}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-lg btn-primary next-btn" data-step="6">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 6 -->
+            <div class="card step-card d-none" data-step="6">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa-solid fa-hourglass fa-bounce"></i>
+                        {% translate "Indicate duration" %} <span class="text-danger">*</span>
+                    </h4>
+                    <div class="row">
+                        <div class="col-12 col-md-4 py-2 mb-2 text-center rounded selected-border">
+                            {% translate "Event duration" %}: <span class="fs-3" id="durationText">1h</span>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-12 col-lg-4">
+                            <label for="durationMinutes">{% translate "Minutes" %}</label>
+                            <input type="range" class="form-range" id="durationMinutes" min="0" max="59" step="1" value="0">
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <label for="durationHours">{% translate "Hours" %}</label>
+                            <input type="range" class="form-range" id="durationHours" min="0" max="23" step="1" value="1">
+                        </div>
+                          <div class="col-12 col-lg-4">
+                            <label for="durationDays">{% translate "Days" %}</label>
+                            <input type="range" class="form-range" id="durationDays" min="0" max="30" step="1" value="0">
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <p><i class="fa-solid fa-circle-info"></i>&nbsp;{% translate "Scroll the selectors to change event duration." %}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-lg btn-primary next-btn" data-step="7">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 7 -->
+            <div class="card step-card d-none" data-step="7">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa-solid fa-palette fa-bounce"></i>
+                        {% translate "Choose a theme" %} <span class="text-muted">({% translate "Optional" %})</span>
+                    </h4>
+                    <div class="row row-cols-1 row-cols-md-4 thumbnail-row">
+                        <div class="card col theme-thumbnail thumbnail-selected">
+                      <div class="card-body">{% translate "Default" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="beach">
+                      <div class="card-body">{% translate "Beach" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="birthday">
+                      <div class="card-body">{% translate "Birthday party" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="drink">
+                      <div class="card-body">{% translate "Drink" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="forest">
+                      <div class="card-body">{% translate "Forest" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="graduation">
+                      <div class="card-body">{% translate "Graduation" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="match">
+                      <div class="card-body">{% translate "Match" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="meeting">
+                      <div class="card-body">{% translate "Meeting" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="mountain">
+                      <div class="card-body">{% translate "Mountain" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="music">
+                      <div class="card-body">{% translate "Music" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="pizza">
+                      <div class="card-body">{% translate "Pizza" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="popcorn">
+                      <div class="card-body">{% translate "Movie" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="relax">
+                      <div class="card-body">{% translate "Relax" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="ticket">
+                      <div class="card-body">{% translate "Event" %}</div>
+                    </div>
+                    <div class="card col theme-thumbnail" data-theme="travel">
+                      <div class="card-body">{% translate "Travel" %}</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-lg btn-primary next-btn" data-step="8">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 8 -->
+            <div class="card step-card d-none" data-step="8">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa-solid fa-user-group fa-bounce"></i>
+                        {% translate "Add participants" %} <span class="text-muted">({% translate "Optional" %})</span>
+                    </h4>
+                    <div id="participantRow">
+                         <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="participantInp" maxlength="30">
+                          <label for="participantInp">{% translate "Participant name" %}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-lg btn-primary next-btn" data-step="9">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 9 -->
+            <div class="card step-card d-none" data-step="9">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa-solid fa-wrench fa-bounce"></i>&nbsp;{% translate "Settings & Security" %}
+                    </h4>
+                    <div class="mb-3" id="settingsRow">
+                        <form>
+                          <h5>{% translate "Choose what participants are allowed to do" %}</h5>
+                          <div class="mb-3 fs-4">
+                            <input class="form-check-input" type="checkbox" id="checkAddParticipant" checked>
+                            <label class="form-check-label" for="checkAddParticipant">{% translate "Add participants" %}</label>
+                          </div>
+                          <div class="mb-3 fs-4">
+                            <input class="form-check-input" type="checkbox" id="checkEditParticipant" checked>
+                            <label class="form-check-label" for="checkEditParticipant">{% translate "Edit participants" %}</label>
+                          </div>
+                          <div class="mb-3 fs-4">
+                            <input class="form-check-input" type="checkbox" id="checkRemoveParticipant">
+                            <label class="form-check-label" for="checkRemoveParticipant">{% translate "Remove participants" %}</label>
+                          </div>
+                        </form>
+                        <p>
+                          <ul class="list-group">
+                            <li class="list-group-item list-group-item-info"><h5>{% translate "Current settings" %}</h5></li>
+                            <li class="list-group-item list-group-item-info"><span id="whoCanAdd"></span><br>{% translate "Add one or more names to the participant list" %}</li>
+                            <li class="list-group-item list-group-item-info"><span id="whoCanEdit"></span><br>{% translate "Change preferences and availability on dates for participants in the list" %}</li>
+                            <li class="list-group-item list-group-item-info"><span id="whoCanRemove"></span><br>{% translate "Remove one or more names from the participant list" %}</li>
+                          </ul>
+                        </p>
+                    </div>
+                    <h5>
+                        <i class="fa-solid fa-shield fa-bounce"></i>
+                        {% translate "You can choose to make your event private, protecting it with a password." %}
+                    </h5>
+                    <div class="mb-3">
+                        <input class="form-check-input" type="checkbox" id="checkPrivateEvent">
+                        <label class="form-check-label" for="checkPrivateEvent">{% translate "Make event private" %}</label>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-floating mb-3 password-row intro-animated">
+                          <input type="password" class="form-control" id="eventPassword1" maxlength="100">
+                          <label for="eventPassword1">{% translate "Choose a password" %}</label>
+                        </div>
+                        <div class="form-floating mb-3 password-row intro-animated">
+                          <input type="password" class="form-control" id="eventPassword2" maxlength="100">
+                          <label for="eventPassword2">{% translate "Repeat password" %}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <!-- Event title -->
-    <div class="row p-3 mb-3 mt-5 intro-animated" id="titleRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-book-open fa-bounce"></i> {% translate "Enter a title" %} <span class="text-danger">*</span></h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col">
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="eventTitle" maxlength="150">
-          <label for="eventTitle">{% translate "Event title" %}</label>
-        </div>
-      </div>
-    </div>
 
-    <!-- Add description row -->
-    <div class="row mb-3 intro-animated" id="addDescriptionRow">
-      <div class="col-12">
-        <h4>{% translate "Do you wish to add a description?" %} <span class="text-danger">*</span></h4>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrY" value="Y">
-          <label class="form-check-label" for="addDescrY">{% translate "Yes" %}</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrN" value="N">
-          <label class="form-check-label" for="addDescrN">{% translate "No" %}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Event description -->
-    <div class="row p-3 mb-3 intro-animated" id ="descriptionRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-message fa-bounce"></i> {% translate "Describe the event" %}</h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col-12">
-        <div class="form-floating">
-          <textarea class="form-control" id="eventDescription" maxlength="400" style="min-height:6em;"></textarea>
-          <label for="eventDescription">{% translate "Description" %}</label>
-        </div>
-        <span id="descrCharCount">0</span>
-      </div>
-    </div>
-
-    <!-- Add location row -->
-    <div class="row mb-3 intro-animated" id="addLocationRow">
-      <div class="col-12">
-        <h4>{% translate "Do you wish to add a location?" %} <span class="text-danger">*</span></h4>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocY" value="Y">
-          <label class="form-check-label" for="addLocY">{% translate "Yes" %}</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocN" value="N">
-          <label class="form-check-label" for="addLocN">{% translate "No" %}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Event location -->
-    <div class="row p-3 mb-3 intro-animated" id="locationRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-location-dot fa-bounce"></i> {% translate "Choose a location" %}</h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col" id="locationCol">
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="eventLocation" maxlength="100">
-          <label for="eventLocation">{% translate "Event location" %}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Add parking row -->
-    <div class="row mb-3 intro-animated" id="addParkingRow">
-      <div class="col-12">
-        <h4>{% translate "Do you know a convenient parking spot?" %} <span class="text-danger">*</span></h4>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkY" value="Y">
-          <label class="form-check-label" for="addParkY">{% translate "Yes" %}</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkN" value="N">
-          <label class="form-check-label" for="addParkN">{% translate "No" %}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Parking location -->
-    <div class="row p-3 mb-3 intro-animated" id="parkingRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-square-parking fa-bounce"></i> {% translate "Enter parking location" %}</h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col" id="parkingCol">
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="eventParking" maxlength="100">
-          <label for="eventParking">{% translate "Parking spot" %}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Event date and time -->
-    <div class="row p-3 mb-3 intro-animated" id="dateRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-calendar-day fa-bounce"></i> {% translate "Set a date and time" %} <span class="text-danger">*</span> <span class="text-muted">({% translate "you can indicate more than one possible date" %})</span></h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col-12 col-md-4 mb-3">
-        <div class="form-floating mb-3">
-          <input type="datetime-local" class="form-control" id="dateInp" min="{% now 'Y-m-d\TH:i' %}">
-          <label for="dateInp">{% translate "Enter a date" %}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Event duration -->
-    <div class="row p-3 mb-3 intro-animated" id="durationRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-hourglass fa-bounce"></i> {% translate "Indicate duration" %} <span class="text-danger">*</span></h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col-12 col-md-4 py-2 mb-2 text-center rounded selected-border">
-        {% translate "Event duration" %}: <span class="fs-3" id="durationText">1h</span>
-      </div>
-      <div class="w-100"></div>
-      <div class="col-12 col-lg-4">
-        <label for="durationMinutes">{% translate "Minutes" %}</label>
-        <input type="range" class="form-range" id="durationMinutes" min="0" max="59" step="1" value="0">
-      </div>
-      <div class="col-12 col-lg-4">
-        <label for="durationHours">{% translate "Hours" %}</label>
-        <input type="range" class="form-range" id="durationHours" min="0" max="23" step="1" value="1">
-      </div>
-      <div class="col-12 col-lg-4">
-        <label for="durationDays">{% translate "Days" %}</label>
-        <input type="range" class="form-range" id="durationDays" min="0" max="30" step="1" value="0">
-      </div>
-       <div class="w-100"></div>
-      <div class="col">
-        <p><i class="fa-solid fa-circle-info"></i>&nbsp;{% translate "Scroll the selectors to change event duration." %}</p>
-      </div>
-    </div> 
-
-    <!-- Event theme -->
-    <div class="row p-3 mb-3 intro-animated" id="themeRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-palette fa-bounce"></i> {% translate "Choose a theme" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="row row-cols-1 row-cols-md-4 thumbnail-row">
-        <div class="card col theme-thumbnail thumbnail-selected">
-          <div class="card-body">{% translate "Default" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="beach">
-          <div class="card-body">{% translate "Beach" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="birthday">
-          <div class="card-body">{% translate "Birthday party" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="drink">
-          <div class="card-body">{% translate "Drink" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="forest">
-          <div class="card-body">{% translate "Forest" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="graduation">
-          <div class="card-body">{% translate "Graduation" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="match">
-          <div class="card-body">{% translate "Match" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="meeting">
-          <div class="card-body">{% translate "Meeting" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="mountain">
-          <div class="card-body">{% translate "Mountain" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="music">
-          <div class="card-body">{% translate "Music" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="pizza">
-          <div class="card-body">{% translate "Pizza" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="popcorn">
-          <div class="card-body">{% translate "Movie" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="relax">
-          <div class="card-body">{% translate "Relax" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="ticket">
-          <div class="card-body">{% translate "Event" %}</div>
-        </div>
-        <div class="card col theme-thumbnail" data-theme="travel">
-          <div class="card-body">{% translate "Travel" %}</div>
-        </div>
-      </div>
-    </div> 
-
-    <!-- Participants -->
-    <div class="row p-3 mb-3 intro-animated" id="participantRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-user-group fa-bounce"></i> {% translate "Add participants" %} <span class="text-muted">({% translate "Optional" %})</span></h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col-8 col-md-4 mb-3">
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="participantInp" maxlength="30">
-          <label for="participantInp">{% translate "Participant name" %}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Event settings -->
-    <div class="row p-3 mb-3 intro-animated" id="settingsRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-wrench fa-bounce"></i> {% translate "Configure Settings" %}</h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="mb-3">
-        <form>
-          <h5>{% translate "Choose what participants are allowed to do" %}</h5>
-          <div class="mb-3 fs-4">
-            <input class="form-check-input" type="checkbox" id="checkAddParticipant" checked>
-            <label class="form-check-label" for="checkAddParticipant">{% translate "Add participants" %}</label>
-          </div>
-          <div class="mb-3 fs-4">
-            <input class="form-check-input" type="checkbox" id="checkEditParticipant" checked>
-            <label class="form-check-label" for="checkEditParticipant">{% translate "Edit participants" %}</label>
-          </div>
-          <div class="mb-3 fs-4">
-            <input class="form-check-input" type="checkbox" id="checkRemoveParticipant">
-            <label class="form-check-label" for="checkRemoveParticipant">{% translate "Remove participants" %}</label>
-          </div>
-        </form>
-        <p>
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-info"><h5>{% translate "Current settings" %}</h5></li>
-            <li class="list-group-item list-group-item-info"><span id="whoCanAdd"></span><br>{% translate "Add one or more names to the participant list" %}</li>
-            <li class="list-group-item list-group-item-info"><span id="whoCanEdit"></span><br>{% translate "Change preferences and availability on dates for participants in the list" %}</li>
-            <li class="list-group-item list-group-item-info"><span id="whoCanRemove"></span><br>{% translate "Remove one or more names from the participant list" %}</li>
-          </ul>
-        </p>
-      </div>
-    </div>
-
-    <!-- Security -->
-    <div class="row p-3 mb-3 intro-animated" id="securityRow">
-      <div class="col">
-        <h4><i class="fa-solid fa-shield fa-bounce"></i> {% translate "Security" %}</h4>
-        <h5>{% translate "You can choose to make your event private, protecting it with a password." %}</h5>
-      </div>
-      <div class="w-100"></div>
-      <div class="mb-3">
-        <input class="form-check-input" type="checkbox" id="checkPrivateEvent">
-        <label class="form-check-label" for="checkPrivateEvent">{% translate "Make event private" %}</label>
-      </div>
-      <div class="mb-3">
-        <div class="form-floating mb-3 password-row intro-animated">
-          <input type="password" class="form-control" id="eventPassword1" maxlength="100">
-          <label for="eventPassword1">{% translate "Choose a password" %}</label>
-        </div>
-        <div class="form-floating mb-3 password-row intro-animated">
-          <input type="password" class="form-control" id="eventPassword2" maxlength="100">
-          <label for="eventPassword2">{% translate "Repeat password" %}</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Save event button -->
-    <div class="d-grid col-6 col-lg-4 mx-auto">
-      <button type="button" class="btn btn-success btn-lg visually-hidden" id="btnSaveEvent" disabled>
-        <i class="fa-solid fa-floppy-disk"></i>
-        {% translate "Save" %}
-      </button>
-    </div>
-
-  </div>
+</div>
 
   <!-- Modal to restore previous event data -->
   <div class="modal fade" id="modalRestoreData" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">

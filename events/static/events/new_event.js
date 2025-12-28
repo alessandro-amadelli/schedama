@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    initializeAuthorRow();
-
     // Save event button
     document.querySelector("#btnSaveEvent").onclick = () => {
         sendEventToServer();
@@ -33,6 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
         showModalRestoreData();
     }
 
+    // Event listener to save description data
+    const descrInp = document.querySelector("#eventDescription");
+    descrInp.addEventListener('change', saveLocally);
+    descrInp.addEventListener('keyup', updateCharCount);
+
     // Event listener for theme thumbnails
     document.querySelectorAll(".theme-thumbnail").forEach((item) => {
         item.addEventListener('click', () => {
@@ -41,9 +44,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Event listener for setting descriptions
     document.querySelector("#settingsRow").querySelectorAll("input[type='checkbox']").forEach(element => {
         element.addEventListener('change', updatePermissionDescriptions);
     });
+
+    // Event listeners for step management
+    document.querySelectorAll(".next-btn").forEach(element => {
+        element.addEventListener('click', () => {
+            activateStep(element.dataset.step);
+        });
+    });
+    document.querySelectorAll(".timeline-step").forEach(element => {
+        element.addEventListener('click', () => {
+            activateStep(element.dataset.step);
+        });
+    });
+
+    // Event listener to show password inputs
+    const checkPrivateEvent = document.querySelector("#checkPrivateEvent");
+    checkPrivateEvent.addEventListener('change', () => {
+        passwordInputVisibility(checkPrivateEvent.checked);
+    });
+
+    // Initial function calls
+    updateCharCount();
+    updatePermissionDescriptions();
 });
 
 
@@ -53,6 +79,206 @@ function showModalRestoreData() {
     modal = new bootstrap.Modal(document.querySelector("#modalRestoreData"));
     modal.show();
 }
+
+
+function restorePreviousData() {
+    const unsavedEvent = JSON.parse(localStorage.getItem("unsavedEvent"));
+    let firstEmptyStep = "9";
+
+    if (!unsavedEvent) {
+        activateStep("1");
+        return false;
+    }
+
+    // Event author
+    document.getElementById("eventAuthor").value = unsavedEvent.author;
+    if (!unsavedEvent.author) {
+        firstEmptyStep = "1";
+    }
+
+    // Event title
+    document.querySelector("#eventTitle").value = unsavedEvent.title;
+    if (!unsavedEvent.title && firstEmptyStep > "2") {
+        firstEmptyStep = "2";
+    }
+
+    // Event description
+    document.querySelector("#eventDescription").value = unsavedEvent.description;
+    updateCharCount();
+
+    if (unsavedEvent.description != "") {
+        document.querySelector("#addDescrY").checked = true;
+    }
+    // else {
+    //     document.querySelector("#addDescrN").checked = true;
+    // }
+
+    if (
+        !unsavedEvent.description &&
+        !document.querySelector("#addDescrY").checked &&
+        !document.querySelector("#addDescrN").checked &&
+        firstEmptyStep > "3"
+    ) {
+        firstEmptyStep = "3";
+    }
+
+    // Event location
+    document.querySelector("#eventLocation").value = unsavedEvent.location;
+    if (unsavedEvent.has_location) {
+        document.querySelector("#addLocY").checked = true;
+    } else {
+        document.querySelector("#addLocN").checked = true;
+    }
+
+    // Event parking
+    if (unsavedEvent.has_location) {
+    }
+    document.querySelector("#eventParking").value = unsavedEvent.parking || "";
+    if (unsavedEvent.has_parking) {
+        document.querySelector("#addParkY").checked = true;
+        showParkingRow(true);
+    } else {
+        document.querySelector("#addParkN").checked = true;
+    }
+    if (
+        (
+            (!unsavedEvent.location && document.querySelector("#addLocY").checked) ||
+            (!unsavedEvent.parking && document.querySelector("#addParkY").checked)
+        ) && firstEmptyStep > "4"
+    ){
+        firstEmptyStep = "4";
+    }
+
+    // Event dates
+    unsavedEvent.dates.forEach((item) => {
+        document.querySelector("#dateInp").value = item;
+        createNewDate();
+    });
+    if (unsavedEvent.dates.length==0 && firstEmptyStep > "5") {
+        firstEmptyStep = "5";
+    }
+
+    // Restoring event duration
+    const durationMinutes = document.querySelector("#durationMinutes");
+    const durationHours = document.querySelector("#durationHours");
+    const durationDays = document.querySelector("#durationDays");
+    let eventDuration = unsavedEvent.duration;
+    if (!eventDuration) {
+        eventDuration = 60;
+        if (firstEmptyStep > "6") {
+            firstEmptyStep = "6";
+        }
+    }
+    // Days
+    durationDays.value = 0;
+    if (eventDuration >= (24 * 60) ) {
+        let days = Math.floor(eventDuration/(24*60));
+        durationDays.value = days;
+        eventDuration = eventDuration - (days * 24 * 60);
+    }
+    // Hours
+    durationHours.value = 0;
+    if (eventDuration >= 60) {
+        let hours = Math.floor(eventDuration/60);
+        durationHours.value = hours;
+        eventDuration = eventDuration - (hours * 60);
+    }
+    // Minutes
+    durationMinutes.value = eventDuration;
+    // Duration text
+    updateDuration();
+
+    // Event theme
+    if (unsavedEvent.event_theme) {
+        selectEventTheme(document.querySelector(".theme-thumbnail[data-theme='" + unsavedEvent.event_theme + "']"));
+    } else {
+        if (firstEmptyStep > "7") {
+            firstEmptyStep = "7";
+        }
+    }
+
+    // Participants
+    unsavedEvent.participants.forEach((participant) => {
+        document.querySelector("#participantInp"). value = participant.name;
+        createNewParticipant();
+    });
+
+    if (!unsavedEvent.participants.length==0 && firstEmptyStep > "8") {
+        firstEmptyStep = "8";
+    }
+
+    // Event settings
+    document.querySelector("#checkAddParticipant").checked = unsavedEvent.settings.add_participant;
+    document.querySelector("#checkEditParticipant").checked = unsavedEvent.settings.edit_participant;
+    document.querySelector("#checkRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
+
+    // Activate correct step
+    activateStep(firstEmptyStep);
+
+}
+
+
+function clearPreviousData() {
+    localStorage.removeItem("unsavedEvent");
+}
+
+
+function setStepStatus(step, status) {
+    const currentStep = document.querySelector(`.timeline-step[data-step="${step}"]`);
+    if (!currentStep) {
+        return;
+    }
+
+    if (status === "complete") {
+        currentStep.classList.remove("error");
+        currentStep.classList.add("complete");
+        return;
+    } else if (status === "error") {
+        currentStep.classList.remove("complete");
+        currentStep.classList.add("error");
+    }
+}
+
+
+function activateStep(step) {
+    let activeCard = document.querySelector(".step-card.active");
+    let stepCard = document.querySelector(`.step-card[data-step="${step}"]`);
+    let activeTimeline = document.querySelector(".timeline-step.active");
+    let timelineStep = document.querySelector(`.timeline-step[data-step="${step}"]`);
+
+    if (!activeCard) {
+        activeCard = document.querySelector('.step-card[data-step="1"]');
+    }
+    if (!activeTimeline) {
+        activeTimeline = document.querySelector('.timeline-step[data-step="1"]');
+    }
+
+    if (!stepCard || !timelineStep) {
+        activateStep("1");
+        return;
+    }
+
+    // Removing active class from current step card
+    activeCard.classList.remove("active");
+    // activeCard.classList.add("d-none");
+    activeCard.classList.add("exiting");
+    activeCard.addEventListener("animationend", function handler() {
+        activeCard.classList.remove("exiting");
+        activeCard.classList.add("d-none");
+        activeCard.removeEventListener('animationend', handler);
+    });
+
+    // Removing active class from current timeline step
+    activeTimeline.classList.remove("active");
+
+    // Activating correct step card
+    stepCard.classList.add("active");
+    stepCard.classList.remove("d-none");
+
+    // Activating correct timeline step
+    timelineStep.classList.add("active");
+}
+
 
 function updatePermissionDescriptions() {
     const checkAddParticipant = document.querySelector("#checkAddParticipant").checked;
@@ -115,57 +341,6 @@ function selectEventTheme(clickedItem) {
     clickedItem.classList.add("thumbnail-selected");
 }
 
-function initializeAuthorRow() {
-    // Intro animation start
-    const authorRow = document.getElementById("authorRow");
-    authorRow.style.animationPlayState = "running";
-
-    // Event listener to start animation of next input field
-    const authorInput = document.getElementById("eventAuthor");
-    authorInput.addEventListener('input', initializeTitleRow);
-}
-
-function initializeTitleRow() {
-    // Intro animation start
-    const titleRow = document.querySelector("#titleRow");
-    titleRow.style.animationPlayState = "running";
-    
-    // Event listener to start animation of next input field
-    const titleInput = document.querySelector("#eventTitle");
-    titleInput.addEventListener('input', initializeAddDescriptionRow);
-}
-
-function initializeAddDescriptionRow() {
-    // Intro animation start
-    const addDescriptionRow = document.querySelector("#addDescriptionRow");
-    addDescriptionRow.style.animationPlayState = "running";
-
-    // Remove event listener from previous field
-    document.querySelector("#eventTitle").removeEventListener('input', initializeAddDescriptionRow);
-
-    // Event listener to start animation of next input field
-    document.querySelectorAll("input[name=addDescriptionRadio]").forEach((radio) => {
-        radio.addEventListener('click', () => {
-            showDescriptionRow(radio.value == 'Y');
-        })
-    });
-
-    // Event listener to show password inputs
-    const checkPrivateEvent = document.querySelector("#checkPrivateEvent");
-    checkPrivateEvent.addEventListener('change', () => {
-        passwordInputVisibility(checkPrivateEvent.checked);
-    });
-}
-
-function showDescriptionRow(toShow) {
-    if (toShow) {
-        document.querySelector("#descriptionRow").style.display = "block";
-        initializeDescriptionRow();
-    } else {
-        document.querySelector("#descriptionRow").style.display = "none";
-        initializeAddLocationRow();
-    }
-}
 
 function passwordInputVisibility(toShow) {
     const passwordRows = document.querySelectorAll(".password-row");
@@ -182,26 +357,6 @@ function passwordInputVisibility(toShow) {
     }
 }
 
-function initializeDescriptionRow() {
-    // Start intro animation in description row
-    const descrRow = document.querySelector("#descriptionRow");
-    
-    if (document.querySelector("#addDescrY").checked) {
-        descrRow.style.animationPlayState = "running";
-    } else {
-        descrRow.style.display = 'none';
-    }
-
-    // Event listener to save description data
-    const descrInp = document.querySelector("#eventDescription");
-    descrInp.addEventListener('change', saveLocally);
-    descrInp.addEventListener('keyup', updateCharCount);
-    
-    updateCharCount();
-    
-    // Event listener to initialize location row
-    descrInp.addEventListener('input', initializeAddLocationRow);
-}
 
 function updateCharCount() {
     const eventDescription = document.querySelector("#eventDescription");
@@ -215,151 +370,6 @@ function updateCharCount() {
     countSpan.innerText = remaining;
 }
 
-function initializeAddLocationRow() {
-    // Intro animation start
-    const addLocationRow = document.querySelector("#addLocationRow");
-    addLocationRow.style.animationPlayState = "running";
-
-    // Remove event listener from previous field
-    document.querySelector("#eventDescription").removeEventListener('input', initializeAddLocationRow);
-
-    // Event listener to start animation of next input field
-    document.querySelectorAll("input[name=addLocationRadio]").forEach((radio) => {
-        radio.addEventListener('click', () => {
-            showLocationRow(radio.value == 'Y');
-        })
-    });
-}
-
-function showLocationRow(toShow) {
-    if (toShow) {
-        document.querySelector("#locationRow").style.display = "block";
-        document.querySelector("#addParkingRow").style.display = "block";
-        initializeAddParkingRow();
-        initializeLocationRow();
-    } else {
-        document.querySelector("#locationRow").style.display = "none";
-        document.querySelector("#addParkingRow").style.display = "none";
-        document.querySelector("#parkingRow").style.display = "none";
-        initializeDateRow();
-    }
-}
-
-function initializeLocationRow() {
-    // Remove of event listener on previous input field
-    const eventDescription = document.querySelector("#eventDescription");
-    eventDescription.removeEventListener('input', initializeAddLocationRow);
-
-    // Intro animation start
-    const locationRow = document.querySelector("#locationRow");
-
-    if (document.querySelector("#addLocY").checked) {
-        locationRow.style.animationPlayState = "running";
-    } else {
-        locationRow.style.display = "none";
-    }
-
-    // Event listener to start animation of next input field
-    const locationInput = document.querySelector("#eventLocation");
-    locationInput.addEventListener('input', initializeAddParkingRow);
-}
-
-function initializeAddParkingRow() {
-    // Intro animation start
-    const addParkingRow = document.querySelector("#addParkingRow");
-    addParkingRow.style.animationPlayState = "running";
-
-    // Remove event listener from previous field
-    document.querySelector("#eventLocation").removeEventListener('input', initializeAddParkingRow);
-
-    showParkingRow(document.querySelector("#addParkY").checked);
-
-    // Event listener to start animation of next input field
-    document.querySelectorAll("input[name=addParkingRadio]").forEach((radio) => {
-        radio.addEventListener('click', () => {
-            showParkingRow(radio.value == 'Y');
-        })
-    });
-}
-
-function showParkingRow(toShow) {
-    if (toShow) {
-        document.querySelector("#parkingRow").style.display = "block";
-        initializeParkingRow();
-    } else {
-        document.querySelector("#parkingRow").style.display = "none";
-        initializeDateRow();
-    }
-}
-
-function initializeParkingRow() {
-    // Remove of event listener on previous input field
-    const eventLocation = document.querySelector("#eventLocation");
-    eventLocation.removeEventListener('input', initializeAddParkingRow);
-
-    // Intro animation start
-    const parkingRow = document.querySelector("#parkingRow");
-
-    if (document.querySelector("#addParkY").checked) {
-        parkingRow.style.animationPlayState = "running";
-    } else {
-        parkingRow.style.display = "none";
-    }
-
-    // Event listener to start animation of next input field
-    const parkingInput = document.querySelector("#eventParking");
-    parkingInput.addEventListener('input', initializeDateRow);
-}
-
-function initializeDateRow() {
-    // Remove of event listener on previous input fields
-    const locationInput = document.querySelector("#eventLocation");
-    locationInput.removeEventListener('input', initializeDateRow);
-
-    // Intro animation start
-    const dateRow = document.querySelector("#dateRow");
-    dateRow.style.animationPlayState = "running";
-
-    // Animation start on duration row
-    const durationRow = document.querySelector("#durationRow");
-    durationRow.style.animationPlayState = "running";
-
-    document.querySelector("#dateInp").addEventListener('change', ()=> {
-        // Initialize participant row
-        initializeParticipantRow();
-    
-        // Initialize theme row with thumbnails
-        initializeThemeRow();
-
-        // Initialize settings row
-        initializeSettingsRow();
-
-        // Initialize security row
-        initializeSecurityRow();
-    });
-}
-
-function initializeParticipantRow() {
-    const participantRow = document.querySelector("#participantRow");
-    participantRow.style.animationPlayState = "running";
-
-}
-
-function initializeSettingsRow() {
-    const settingsRow = document.querySelector("#settingsRow");
-    settingsRow.style.animationPlayState = "running";
-    updatePermissionDescriptions();
-}
-
-function initializeThemeRow() {
-    const themeRow = document.querySelector("#themeRow");
-    themeRow.style.animationPlayState = "running";
-}
-
-function initializeSecurityRow() {
-    const securityRow = document.querySelector("#securityRow");
-    securityRow.style.animationPlayState = "running";
-}
 
 function createNewDate() {
     const dateRow = document.querySelector("#dateRow");
@@ -517,25 +527,58 @@ function createNewParticipant(partName=null) {
     notify(gettext("Participant added"));
 }
 
+
 function validateEvent() {
     validated = true;
+
+    // Check #0 Author
+    const author = document.querySelector("#eventAuthor");
+    if (author.value.replaceAll(" ", "").length == 0) {
+        setInvalid(author, true, gettext("Choose a nickname."));
+        setStepStatus("1", "error");
+        validated = false;
+    } else {
+        setInvalid(author, false);
+        setStepStatus("1", "complete");
+    }
 
     // Check #1 Title
     const title = document.querySelector("#eventTitle");
     if (title.value.replaceAll(" ", "").length == 0) {
         setInvalid(title, true, gettext("Insert a title for your event."));
+        setStepStatus("2", "error");
         validated = false;
     } else {
         setInvalid(title, false);
+        setStepStatus("2", "complete");
     }
 
-    // Check #2 Location
+    // Check #2 Description
+    const descSwitch = document.querySelector("#addDescrY");
+    const description = document.querySelector("#eventDescription");
+    if (descSwitch.checked) {
+        if (description.value.replaceAll(" ", "").length == 0) {
+            setInvalid(description, true, gettext("Please enter a location."));
+            validated = false;
+            setStepStatus("3", "error");
+        } else {
+            setInvalid(description, false);
+            setStepStatus("3", "complete");
+        }
+    } else {
+        setInvalid(description, false);
+        setStepStatus("3", "complete");
+    }
+
+    // Check #3 Location
     const locSwitch = document.querySelector("#addLocY");
     const location = document.querySelector("#eventLocation");
+    let step4Status = "complete";
     if (locSwitch.checked) {
         if (location.value.replaceAll(" ", "").length == 0) {
             setInvalid(location, true, gettext("Please enter a location."));
             validated = false;
+            step4Status = "error";
         } else {
             setInvalid(location, false);
         }
@@ -543,151 +586,48 @@ function validateEvent() {
         setInvalid(location, false);
     }
 
-    // Check #3 Parking
+    // Check #4 Parking
     const parkSwitch = document.querySelector("#addParkY");
     const parking = document.querySelector("#eventParking");
     if (parkSwitch.checked) {
         if (parking.value.replaceAll(" ", "").length == 0) {
             setInvalid(parking, true, gettext("Please enter a parking location."));
             validated = false;
+            step4Status = "error";
         } else {
             setInvalid(parking, false);
         }
     } else {
         setInvalid(parking, false);
     }
+    setStepStatus("4", step4Status);
 
-    //Check #4 Date and time
+    //Check #5 Date and time
     const firstDate = document.querySelector("#dateInp");
     const dates = document.querySelectorAll("[name='eventDate']");
     if (dates.length == 0) {
         setInvalid(firstDate, true, gettext("You have to choose at least one date."));
         validated = false;
+        setStepStatus("5", "error");
     } else {
         setInvalid(firstDate, false);
+        setStepStatus("5", "complete");
     }
 
-    // Check #5 Private event
-    const privateEvent = document.querySelector("#checkPrivateEvent").checked;
-    const eventPassword1 = document.querySelector("#eventPassword1");
-    const eventPassword2 = document.querySelector("#eventPassword2");
+    // Check #6 Private event
+    // const privateEvent = document.querySelector("#checkPrivateEvent").checked;
+    // const eventPassword1 = document.querySelector("#eventPassword1");
+    // const eventPassword2 = document.querySelector("#eventPassword2");
+
+    // Setting optional steps as complete
+    setStepStatus("6", "complete");
+    setStepStatus("7", "complete");
+    setStepStatus("8", "complete");
+    setStepStatus("9", "complete");
 
     return validated;
 }
 
-function restorePreviousData() {
-    const unsavedEvent = JSON.parse(localStorage.getItem("unsavedEvent"));
-
-    if (!unsavedEvent) {
-        return false;
-    }
-
-    // Event settings
-    document.querySelector("#checkAddParticipant").checked = unsavedEvent.settings.add_participant;
-    document.querySelector("#checkEditParticipant").checked = unsavedEvent.settings.edit_participant;
-    document.querySelector("#checkRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
-
-    // Event author
-    document.getElementById("eventAuthor").value = unsavedEvent.author;    
-
-    // Event title
-    document.querySelector("#eventTitle").value = unsavedEvent.title;
-    initializeTitleRow();
-
-    // Event description
-    document.querySelector("#eventDescription").value = unsavedEvent.description;
-    updateCharCount();
-
-    if (unsavedEvent.description != "") {
-        document.querySelector("#addDescrY").checked = true;
-    } else {
-        document.querySelector("#addDescrN").checked = true;
-    }
-
-    initializeAddDescriptionRow();
-    initializeDescriptionRow();
-
-    // Event location
-    initializeAddLocationRow();
-    document.querySelector("#eventLocation").value = unsavedEvent.location;
-    if (unsavedEvent.has_location) {
-        document.querySelector("#addLocY").checked = true;
-        initializeLocationRow();
-    } else {
-        document.querySelector("#addLocN").checked = true;
-    }
-
-    // Event parking
-    if (unsavedEvent.has_location) {
-        initializeAddParkingRow();
-    }
-    document.querySelector("#eventParking").value = unsavedEvent.parking || "";
-    if (unsavedEvent.has_parking) {
-        document.querySelector("#addParkY").checked = true;
-        showParkingRow(true);
-    } else {
-        document.querySelector("#addParkN").checked = true;
-    }
-
-    // Event dates
-    initializeDateRow();
-    unsavedEvent.dates.forEach((item) => {
-        document.querySelector("#dateInp").value = item;
-        createNewDate();
-    });
-
-    // Restoring event duration
-    const durationMinutes = document.querySelector("#durationMinutes");
-    const durationHours = document.querySelector("#durationHours");
-    const durationDays = document.querySelector("#durationDays");
-    let eventDuration = unsavedEvent.duration;
-    if (!eventDuration) {
-        eventDuration = 60;
-    }
-    // Days
-    durationDays.value = 0;
-    if (eventDuration >= (24 * 60) ) {
-        let days = Math.floor(eventDuration/(24*60));
-        durationDays.value = days;
-        eventDuration = eventDuration - (days * 24 * 60);
-    }
-    // Hours
-    durationHours.value = 0;
-    if (eventDuration >= 60) {
-        let hours = Math.floor(eventDuration/60);
-        durationHours.value = hours;
-        eventDuration = eventDuration - (hours * 60);
-    }
-    // Minutes
-    durationMinutes.value = eventDuration;
-    // Duration text
-    updateDuration();
-
-    // Event theme
-    if (unsavedEvent.event_theme) {
-        selectEventTheme(document.querySelector(".theme-thumbnail[data-theme='" + unsavedEvent.event_theme + "']"));
-    }
-
-    // Participants
-    initializeParticipantRow();
-    unsavedEvent.participants.forEach((participant) => {
-        document.querySelector("#participantInp"). value = participant.name;
-        createNewParticipant();
-    });
-
-    // Settings
-    initializeSettingsRow();
-
-    // Initialize theme row with thumbnails
-    initializeThemeRow();
-
-    // Initialize security row
-    initializeSecurityRow();
-}
-
-function clearPreviousData() {
-    localStorage.removeItem("unsavedEvent");
-}
 
 function saveLocally() {
     const author = document.getElementById("eventAuthor").value;

@@ -19,6 +19,7 @@
     --text-lightblue: #02e0ee;
     --text-red: #d30429;
     --text-yellow: #e4de20;
+    --timeline-bg-color: #969696;
     --title-color: #073b4c;
 }
 
@@ -43,6 +44,7 @@
     --text-lightblue: #02e0ee;
     --text-red: #d30429;
     --text-yellow: #e4de20;
+    --timeline-bg-color: #969696;
     --title-color: #073b4c;
 }
 
@@ -127,6 +129,16 @@ Main color palette
 @keyframes count-in {
   0%   { transform: translateY(10px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideIn {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
 }
 
 ::selection {
@@ -276,6 +288,80 @@ body {
     transition: width 1s ease-in-out;
     background-color: var(--accent-color);
 }
+
+/* ---------------------------------------------- */
+/* CARD VISIBILITY */
+
+#wizard-cards {
+    position: relative;
+}
+
+.step-card {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translateX(100%);
+    transition: transform .5s ease, opacity .5s ease !important;
+    z-index: 1;
+}
+
+.step-card.active {
+    display: block !important;
+    opacity: 1;
+    animation: slideIn .45s ease forwards;
+    z-index: 2;
+}
+
+.step-card.exiting {
+    position: absolute;
+    animation: slideOut 0.45s ease forwards;
+    z-index: 3;
+}
+
+.step-card.d-none {
+    position: absolute;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* TIMELINE */
+.timeline-step {
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: 50%;
+    background: var(--timeline-bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.timeline-step.active {
+    background: var(--accent-color);
+}
+
+.timeline-step.complete {
+    background: var(--text-green);
+}
+
+.timeline-step.error {
+    background: var(--text-red) !important;
+}
+
+.timeline-line {
+    width: 1em;
+    height: 4px;
+    background: var(--timeline-bg-color);
+}
+
+.timeline-step.completed + .timeline-line {
+    background: var(--text-green);
+}
+/* ---------------------------------------------- */
 
 .title-section {
     position:relative;

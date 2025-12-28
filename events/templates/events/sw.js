@@ -1,4 +1,4 @@
-const cacheName = 'schedama-cache-v3.5.97';
+const cacheName = 'schedama-cache-v3.5.98';
 
 {% load static %}
 
