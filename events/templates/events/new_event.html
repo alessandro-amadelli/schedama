@@ -29,23 +29,23 @@
 
         <!-- TIMELINE -->
         <div class="d-flex justify-content-center align-items-center my-4" id="wizard-timeline">
-            <div class="timeline-step active" data-step="1">1</div>
+            <div class="timeline-step active" data-bs-toggle="tooltip" data-bs-title="{% translate 'Nickname' %}" data-step="1">1</div>
             <div class="timeline-line"></div>
-            <div class="timeline-step" data-step="2">2</div>
+            <div class="timeline-step" data-bs-toggle="tooltip" data-bs-title="{% translate 'Title' %}" data-step="2">2</div>
             <div class="timeline-line"></div>
-            <div class="timeline-step" data-step="3">3</div>
+            <div class="timeline-step" data-bs-toggle="tooltip" data-bs-title="{% translate 'Description' %}" data-step="3">3</div>
             <div class="timeline-line"></div>
-            <div class="timeline-step" data-step="4">4</div>
+            <div class="timeline-step" data-bs-toggle="tooltip" data-bs-title="{% translate 'Location' %}" data-step="4">4</div>
             <div class="timeline-line"></div>
-            <div class="timeline-step" data-step="5">5</div>
+            <div class="timeline-step" data-bs-toggle="tooltip" data-bs-title="{% translate 'Date and time' %}" data-step="5">5</div>
             <div class="timeline-line"></div>
-            <div class="timeline-step" data-step="6">6</div>
+            <div class="timeline-step" data-bs-toggle="tooltip" data-bs-title="{% translate 'Duration' %}" data-step="6">6</div>
             <div class="timeline-line"></div>
-            <div class="timeline-step" data-step="7">7</div>
+            <div class="timeline-step" data-bs-toggle="tooltip" data-bs-title="{% translate 'Theme' %}" data-step="7">7</div>
             <div class="timeline-line"></div>
-            <div class="timeline-step" data-step="8">8</div>
+            <div class="timeline-step" data-bs-toggle="tooltip" data-bs-title="{% translate 'Participants' %}" data-step="8">8</div>
             <div class="timeline-line"></div>
-            <div class="timeline-step" data-step="9">9</div>
+            <div class="timeline-step" data-bs-toggle="tooltip" data-bs-title="{% translate 'Settings & Security' %}" data-step="9">9</div>
         </div>
 
         <!-- Save event button -->
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <button class="btn btn-lg btn-primary next-btn" data-step="2">
+                    <button class="btn btn-lg btn-light next-btn" data-step="2">
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
@@ -91,10 +91,17 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-lg btn-primary next-btn" data-step="3">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <button class="btn btn-lg btn-light next-btn" data-step="1">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <button class="btn btn-lg btn-light next-btn" data-step="3">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,7 +120,7 @@
                       <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrN" value="N" checked>
                       <label class="form-check-label" for="addDescrN">{% translate "No" %}</label>
                     </div>
-                    <div id="descriptionRow" class="mt-2">
+                    <div id="descriptionRow" class="mt-3">
                         <h4><i class="fa-solid fa-message fa-bounce"></i> {% translate "Describe the event" %}</h4>
                         <div class="form-floating">
                           <textarea class="form-control" id="eventDescription" maxlength="400" style="min-height:6em;"></textarea>
@@ -123,10 +130,17 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-lg btn-primary next-btn" data-step="4">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <button class="btn btn-lg btn-light next-btn" data-step="2">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <button class="btn btn-lg btn-light next-btn" data-step="4">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,7 +159,7 @@
                       <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocN" value="N" checked>
                       <label class="form-check-label" for="addLocN">{% translate "No" %}</label>
                     </div>
-                    <div id="locationRow">
+                    <div id="locationRow" class="mt-3">
                         <h4><i class="fa-solid fa-location-dot fa-bounce"></i> {% translate "Choose a location" %}</h4>
                         <div class="form-floating mb-3">
                           <input type="text" class="form-control" id="eventLocation" maxlength="100">
@@ -160,7 +174,7 @@
                           <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkN" value="N" checked>
                           <label class="form-check-label" for="addParkN">{% translate "No" %}</label>
                         </div>
-                        <div id="parkingRow">
+                        <div id="parkingRow" class="mt-3">
                             <h4><i class="fa-solid fa-square-parking fa-bounce"></i> {% translate "Enter parking location" %}</h4>
                             <div class="form-floating mb-3">
                               <input type="text" class="form-control" id="eventParking" maxlength="100">
@@ -170,10 +184,17 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-lg btn-primary next-btn" data-step="5">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <button class="btn btn-lg btn-light next-btn" data-step="3">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <button class="btn btn-lg btn-light next-btn" data-step="5">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -193,10 +214,17 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-lg btn-primary next-btn" data-step="6">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <button class="btn btn-lg btn-light next-btn" data-step="4">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <button class="btn btn-lg btn-light next-btn" data-step="6">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,10 +260,17 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-lg btn-primary next-btn" data-step="7">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <button class="btn btn-lg btn-light next-btn" data-step="5">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <button class="btn btn-lg btn-light next-btn" data-step="7">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -247,59 +282,66 @@
                         <i class="fa-solid fa-palette fa-bounce"></i>
                         {% translate "Choose a theme" %} <span class="text-muted">({% translate "Optional" %})</span>
                     </h4>
-                    <div class="row row-cols-1 row-cols-md-4 thumbnail-row">
+                    <div class="row row-cols-1 row-cols-md-4 thumbnail-row mt-3">
                         <div class="card col theme-thumbnail thumbnail-selected">
-                      <div class="card-body">{% translate "Default" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="beach">
-                      <div class="card-body">{% translate "Beach" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="birthday">
-                      <div class="card-body">{% translate "Birthday party" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="drink">
-                      <div class="card-body">{% translate "Drink" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="forest">
-                      <div class="card-body">{% translate "Forest" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="graduation">
-                      <div class="card-body">{% translate "Graduation" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="match">
-                      <div class="card-body">{% translate "Match" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="meeting">
-                      <div class="card-body">{% translate "Meeting" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="mountain">
-                      <div class="card-body">{% translate "Mountain" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="music">
-                      <div class="card-body">{% translate "Music" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="pizza">
-                      <div class="card-body">{% translate "Pizza" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="popcorn">
-                      <div class="card-body">{% translate "Movie" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="relax">
-                      <div class="card-body">{% translate "Relax" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="ticket">
-                      <div class="card-body">{% translate "Event" %}</div>
-                    </div>
-                    <div class="card col theme-thumbnail" data-theme="travel">
-                      <div class="card-body">{% translate "Travel" %}</div>
-                    </div>
+                          <div class="card-body">{% translate "Default" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="beach">
+                          <div class="card-body">{% translate "Beach" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="birthday">
+                          <div class="card-body">{% translate "Birthday party" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="drink">
+                          <div class="card-body">{% translate "Drink" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="forest">
+                          <div class="card-body">{% translate "Forest" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="graduation">
+                          <div class="card-body">{% translate "Graduation" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="match">
+                          <div class="card-body">{% translate "Match" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="meeting">
+                          <div class="card-body">{% translate "Meeting" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="mountain">
+                          <div class="card-body">{% translate "Mountain" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="music">
+                          <div class="card-body">{% translate "Music" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="pizza">
+                          <div class="card-body">{% translate "Pizza" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="popcorn">
+                          <div class="card-body">{% translate "Movie" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="relax">
+                          <div class="card-body">{% translate "Relax" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="ticket">
+                          <div class="card-body">{% translate "Event" %}</div>
+                        </div>
+                        <div class="card col theme-thumbnail" data-theme="travel">
+                          <div class="card-body">{% translate "Travel" %}</div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-lg btn-primary next-btn" data-step="8">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <button class="btn btn-lg btn-light next-btn" data-step="6">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <button class="btn btn-lg btn-light next-btn" data-step="8">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -319,10 +361,17 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-lg btn-primary next-btn" data-step="9">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <button class="btn btn-lg btn-light next-btn" data-step="7">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <button class="btn btn-lg btn-light next-btn" data-step="9">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -378,6 +427,13 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <button class="btn btn-lg btn-light next-btn" data-step="8">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

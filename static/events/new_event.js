@@ -36,6 +36,28 @@ document.addEventListener('DOMContentLoaded', () => {
     descrInp.addEventListener('change', saveLocally);
     descrInp.addEventListener('keyup', updateCharCount);
 
+    // Event listener to show/hide description row
+    document.querySelectorAll("input[name=addDescriptionRadio]").forEach(element => {
+        element.addEventListener(
+            'change', () => {
+            toggleDescrVisibility();
+        });
+    });
+    // Event listener to show/hide location row
+    document.querySelectorAll("input[name=addLocationRadio]").forEach(element => {
+        element.addEventListener(
+            'change', () => {
+            toggleLocVisibility();
+        });
+    });
+    // Event listener to show/hide parking row
+    document.querySelectorAll("input[name=addParkingRadio]").forEach(element => {
+        element.addEventListener(
+            'change', () => {
+            toggleParkVisibility();
+        });
+    });
+
     // Event listener for theme thumbnails
     document.querySelectorAll(".theme-thumbnail").forEach((item) => {
         item.addEventListener('click', () => {
@@ -64,12 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener to show password inputs
     const checkPrivateEvent = document.querySelector("#checkPrivateEvent");
     checkPrivateEvent.addEventListener('change', () => {
-        passwordInputVisibility(checkPrivateEvent.checked);
+        togglePswVisibility();
     });
 
     // Initial function calls
+    toggleDescrVisibility();
     updateCharCount();
+    toggleLocVisibility();
+    toggleParkVisibility();
     updatePermissionDescriptions();
+    togglePswVisibility();
 });
 
 
@@ -136,7 +162,6 @@ function restorePreviousData() {
     document.querySelector("#eventParking").value = unsavedEvent.parking || "";
     if (unsavedEvent.has_parking) {
         document.querySelector("#addParkY").checked = true;
-        showParkingRow(true);
     } else {
         document.querySelector("#addParkN").checked = true;
     }
@@ -207,14 +232,22 @@ function restorePreviousData() {
         firstEmptyStep = "8";
     }
 
-    // Event settings
+    // Event settings & security
     document.querySelector("#checkAddParticipant").checked = unsavedEvent.settings.add_participant;
     document.querySelector("#checkEditParticipant").checked = unsavedEvent.settings.edit_participant;
     document.querySelector("#checkRemoveParticipant").checked = unsavedEvent.settings.remove_participant;
+    document.querySelector("#checkPrivateEvent").checked = unsavedEvent.private_event;
 
     // Activate correct step
     activateStep(firstEmptyStep);
 
+    // Initial function calls
+    toggleDescrVisibility();
+    updateCharCount();
+    toggleLocVisibility();
+    toggleParkVisibility();
+    updatePermissionDescriptions();
+    togglePswVisibility();
 }
 
 
@@ -280,6 +313,39 @@ function activateStep(step) {
 }
 
 
+function toggleDescrVisibility() {
+    const descrRow = document.querySelector("#descriptionRow");
+    const addDescrY = document.querySelector("#addDescrY");
+    if (addDescrY.checked) {
+        descrRow.style.display = "block";
+    } else {
+        descrRow.style.display = "none";
+    }
+}
+
+
+function toggleLocVisibility() {
+    const locRow = document.querySelector("#locationRow");
+    const addLocY = document.querySelector("#addLocY");
+    if (addLocY.checked) {
+        locRow.style.display = "block";
+    } else {
+        locRow.style.display = "none";
+    }
+}
+
+
+function toggleParkVisibility() {
+    const parkRow = document.querySelector("#parkingRow");
+    const addParkY = document.querySelector("#addParkY");
+    if (addParkY.checked) {
+        parkRow.style.display = "block";
+    } else {
+        parkRow.style.display = "none";
+    }
+}
+
+
 function updatePermissionDescriptions() {
     const checkAddParticipant = document.querySelector("#checkAddParticipant").checked;
     const checkEditParticipant = document.querySelector("#checkEditParticipant").checked;
@@ -342,8 +408,10 @@ function selectEventTheme(clickedItem) {
 }
 
 
-function passwordInputVisibility(toShow) {
+function togglePswVisibility() {
     const passwordRows = document.querySelectorAll(".password-row");
+    const checkPrivateEvent = document.querySelector("#checkPrivateEvent");
+    const toShow = checkPrivateEvent.checked;
     if (toShow) {
         passwordRows.forEach((row) => {
             row.style.display = "block";
@@ -589,7 +657,7 @@ function validateEvent() {
     // Check #4 Parking
     const parkSwitch = document.querySelector("#addParkY");
     const parking = document.querySelector("#eventParking");
-    if (parkSwitch.checked) {
+    if (parkSwitch.checked && locSwitch.checked) {
         if (parking.value.replaceAll(" ", "").length == 0) {
             setInvalid(parking, true, gettext("Please enter a parking location."));
             validated = false;
@@ -615,15 +683,44 @@ function validateEvent() {
     }
 
     // Check #6 Private event
-    // const privateEvent = document.querySelector("#checkPrivateEvent").checked;
-    // const eventPassword1 = document.querySelector("#eventPassword1");
-    // const eventPassword2 = document.querySelector("#eventPassword2");
+    const isPrivate = document.querySelector("#checkPrivateEvent").checked;
+    const eventPassword1 = document.querySelector("#eventPassword1");
+    const eventPassword2 = document.querySelector("#eventPassword2");
+    if (isPrivate) {
+        // Check #6.1 passwords filled
+        if (eventPassword1.value == "" || eventPassword2.value == "") {
+            setInvalid(
+                eventPassword1,
+                true,
+                gettext("You need to enter a password if you want to make the event private.")
+            );
+            validated = false;
+            setStepStatus("9", "error");
+        } else {
+            setInvalid(eventPassword1, false);
+            setStepStatus("9", "complete");
+        }
+        // Check #6.2 passwords match
+        if (eventPassword1.value !== eventPassword2.value) {
+            setInvalid(
+                eventPassword2,
+                true,
+                gettext("Passwords don't match.")
+            );
+            validated = false;
+            setStepStatus("9", "error");
+        } else {
+            setInvalid(eventPassword2, false);
+        }
+    } else {
+        setInvalid(eventPassword1, false);
+        setStepStatus("9", "complete");
+    }
 
     // Setting optional steps as complete
     setStepStatus("6", "complete");
     setStepStatus("7", "complete");
     setStepStatus("8", "complete");
-    setStepStatus("9", "complete");
 
     return validated;
 }
@@ -766,29 +863,33 @@ async function sendEventToServer() {
 
 
 function eventCreatedSuccessfully(data) {
-   if (data.status == "ERROR") {
+    if (data.status == "ERROR") {
         showPageMsg("alert-danger", data.description);
         return false;
     }
 
-    // Salvare il titolo dell'evento
     const eventTitle = document.querySelector("#eventTitle").value;
 
     // Delete page content
     const section = document.querySelector(".section");
     section.innerHTML = ""; // Empty the section area
 
+    // Removing old alert (if present)
+    const oldAlert = document.querySelector(".alert");
+    oldAlert.remove();
+
     // Changing page titles
     document.querySelector("h1").innerText = gettext("Event created");
     document.querySelector("h2").innerText = gettext("Your event has been successfully created");
 
-    // Dati dell'evento creato
+    // Created event's data
     const itemID = data.item_id;
     const adminKey = data.admin_key;
 
-    // Determinare classe pulsante per tema scuro o chiaro
+    // Setting dark/light class for buttons
     const darkLightClass = document.body.classList.contains("dark-mode") ? "btn-light" : "btn-dark";
 
+    // New HTML content for the section div
     const newHTMLContent = `
         <h1><i class="fa-solid fa-book-open"></i>&nbsp;${eventTitle}</h1>
         <hr>
@@ -847,7 +948,7 @@ function eventCreatedSuccessfully(data) {
         </div>
     `;
 
-    // Salva i dati nella cronologia
+    // Save data in history
     const eventData = {
         item_id: itemID,
         title: eventTitle,
@@ -858,7 +959,7 @@ function eventCreatedSuccessfully(data) {
 
     notify(gettext("Data saved to history"));
 
-    // Rimuovi l'evento non salvato dalla memoria locale
+    // Removing unsaved event from localStorage
     localStorage.removeItem("unsavedEvent");
 
     section.innerHTML = newHTMLContent;
