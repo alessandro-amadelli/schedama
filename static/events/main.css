@@ -328,7 +328,8 @@ body {
 /* TIMELINE */
 .timeline-step {
     width: 2.6em;
-    height: 2.6em;
+    /* height: 2.6em; */
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     background: var(--timeline-bg-color);
     display: flex;
@@ -358,7 +359,7 @@ body {
     background: var(--timeline-bg-color);
 }
 
-.timeline-step.completed + .timeline-line {
+.timeline-step.complete + .timeline-line {
     background: var(--text-green);
 }
 /* ---------------------------------------------- */
