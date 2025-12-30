@@ -110,15 +110,17 @@
                       <label class="form-check-label" for="addDescrY">{% translate "Yes" %}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrN" value="N">
+                      <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrN" value="N" checked>
                       <label class="form-check-label" for="addDescrN">{% translate "No" %}</label>
                     </div>
-                    <h4><i class="fa-solid fa-message fa-bounce"></i> {% translate "Describe the event" %}</h4>
-                    <div class="form-floating">
-                      <textarea class="form-control" id="eventDescription" maxlength="400" style="min-height:6em;"></textarea>
-                      <label for="eventDescription">{% translate "Description" %}</label>
+                    <div id="descriptionRow" class="mt-2">
+                        <h4><i class="fa-solid fa-message fa-bounce"></i> {% translate "Describe the event" %}</h4>
+                        <div class="form-floating">
+                          <textarea class="form-control" id="eventDescription" maxlength="400" style="min-height:6em;"></textarea>
+                          <label for="eventDescription">{% translate "Description" %}</label>
+                        </div>
+                        <span id="descrCharCount">0</span>
                     </div>
-                    <span id="descrCharCount">0</span>
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-end">
@@ -140,28 +142,31 @@
                       <label class="form-check-label" for="addLocY">{% translate "Yes" %}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocN" value="N">
+                      <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocN" value="N" checked>
                       <label class="form-check-label" for="addLocN">{% translate "No" %}</label>
                     </div>
-                    <h4><i class="fa-solid fa-location-dot fa-bounce"></i> {% translate "Choose a location" %}</h4>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="eventLocation" maxlength="100">
-                      <label for="eventLocation">{% translate "Event location" %}</label>
-                    </div>
-
-                     <h4>{% translate "Do you know a convenient parking spot?" %} <span class="text-danger">*</span></h4>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkY" value="Y">
-                      <label class="form-check-label" for="addParkY">{% translate "Yes" %}</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkN" value="N">
-                      <label class="form-check-label" for="addParkN">{% translate "No" %}</label>
-                    </div>
-                    <h4><i class="fa-solid fa-square-parking fa-bounce"></i> {% translate "Enter parking location" %}</h4>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="eventParking" maxlength="100">
-                      <label for="eventParking">{% translate "Parking spot" %}</label>
+                    <div id="locationRow">
+                        <h4><i class="fa-solid fa-location-dot fa-bounce"></i> {% translate "Choose a location" %}</h4>
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="eventLocation" maxlength="100">
+                          <label for="eventLocation">{% translate "Event location" %}</label>
+                        </div>
+                         <h4>{% translate "Do you know a convenient parking spot?" %} <span class="text-danger">*</span></h4>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkY" value="Y">
+                          <label class="form-check-label" for="addParkY">{% translate "Yes" %}</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkN" value="N" checked>
+                          <label class="form-check-label" for="addParkN">{% translate "No" %}</label>
+                        </div>
+                        <div id="parkingRow">
+                            <h4><i class="fa-solid fa-square-parking fa-bounce"></i> {% translate "Enter parking location" %}</h4>
+                            <div class="form-floating mb-3">
+                              <input type="text" class="form-control" id="eventParking" maxlength="100">
+                              <label for="eventParking">{% translate "Parking spot" %}</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer">

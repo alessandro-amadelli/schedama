@@ -36,6 +36,28 @@ document.addEventListener('DOMContentLoaded', () => {
     descrInp.addEventListener('change', saveLocally);
     descrInp.addEventListener('keyup', updateCharCount);
 
+    // Event listener to show/hide description row
+    document.querySelectorAll("input[name=addDescriptionRadio]").forEach(element => {
+        element.addEventListener(
+            'change', () => {
+            toggleDescrVisibility();
+        });
+    });
+    // Event listener to show/hide location row
+    document.querySelectorAll("input[name=addLocationRadio]").forEach(element => {
+        element.addEventListener(
+            'change', () => {
+            toggleLocVisibility();
+        });
+    });
+    // Event listener to show/hide parking row
+    document.querySelectorAll("input[name=addParkingRadio]").forEach(element => {
+        element.addEventListener(
+            'change', () => {
+            toggleParkVisibility();
+        });
+    });
+
     // Event listener for theme thumbnails
     document.querySelectorAll(".theme-thumbnail").forEach((item) => {
         item.addEventListener('click', () => {
@@ -68,7 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial function calls
+    toggleDescrVisibility();
     updateCharCount();
+    toggleLocVisibility();
+    toggleParkVisibility();
     updatePermissionDescriptions();
 });
 
@@ -215,6 +240,12 @@ function restorePreviousData() {
     // Activate correct step
     activateStep(firstEmptyStep);
 
+    // Initial function calls
+    toggleDescrVisibility();
+    updateCharCount();
+    toggleLocVisibility();
+    toggleParkVisibility();
+    updatePermissionDescriptions();
 }
 
 
@@ -277,6 +308,39 @@ function activateStep(step) {
 
     // Activating correct timeline step
     timelineStep.classList.add("active");
+}
+
+
+function toggleDescrVisibility() {
+    const descrRow = document.querySelector("#descriptionRow");
+    const addDescrY = document.querySelector("#addDescrY");
+    if (addDescrY.checked) {
+        descrRow.style.display = "block";
+    } else {
+        descrRow.style.display = "none";
+    }
+}
+
+
+function toggleLocVisibility() {
+    const locRow = document.querySelector("#locationRow");
+    const addLocY = document.querySelector("#addLocY");
+    if (addLocY.checked) {
+        locRow.style.display = "block";
+    } else {
+        locRow.style.display = "none";
+    }
+}
+
+
+function toggleParkVisibility() {
+    const parkRow = document.querySelector("#parkingRow");
+    const addParkY = document.querySelector("#addParkY");
+    if (addParkY.checked) {
+        parkRow.style.display = "block";
+    } else {
+        parkRow.style.display = "none";
+    }
 }
 
 
