@@ -1299,7 +1299,7 @@ msgstr "Sono un partecipante"
 
 #: .\events\templates\events\under_maintenance.html:42
 msgid "I'm the administrator"
-msgstr "Sono l'amministrazione"
+msgstr "Sono l'amministratore"
 
 #: .\events\templates\events\under_maintenance.html:50
 msgid "Contact the administrator, if you know how..."

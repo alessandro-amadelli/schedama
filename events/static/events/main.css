@@ -244,7 +244,6 @@ body {
     min-height: 100vh;
     min-height: 100svh;
     transition: background-color 1s ease, background 1s ease;
-    overflow-x: hidden;
     margin: 0;
 }
 
@@ -376,6 +375,7 @@ body {
     transition: background-color 1s ease;
 }
 
+/*
 .title-section::before {
     content: "";
     position: absolute;
@@ -385,6 +385,21 @@ body {
     z-index: -1;
     background-color: var(--accent-color);
     transition: .5s ease-in;
+}
+
+*/
+
+.title-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    transition: .5s ease-in;
+    z-index: -1;
 }
 
 .loading-overlay{
