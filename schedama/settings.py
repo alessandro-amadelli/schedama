@@ -129,9 +129,7 @@ STATIC_URL = '/static/'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Service worker for PWA functionalities
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default cache TTLs values
 CACHE_TTL = 60 * 15  # for entire views
