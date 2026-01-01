@@ -23,8 +23,6 @@
         <a href="{% url 'privacy_view' %}">{% translate "Privacy policy" %}</a>
     </p>
 
-
-
     <div class="container my-5">
 
         <!-- TIMELINE -->
@@ -110,7 +108,7 @@
             <div class="card step-card d-none" data-step="3">
                 <div class="card-body">
                     <h4 class="card-title">
-                        {% translate "Do you wish to add a description?" %} <span class="text-danger">*</span>
+                        {% translate "Do you wish to add a description?" %}
                     </h4>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="addDescriptionRadio" id="addDescrY" value="Y">
@@ -149,7 +147,7 @@
             <div class="card step-card d-none" data-step="4">
                 <div class="card-body">
                     <h4 class="card-title">
-                        {% translate "Do you wish to add a location?" %} <span class="text-danger">*</span>
+                        {% translate "Do you wish to add a location?" %}
                     </h4>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="addLocationRadio" id="addLocY" value="Y">
@@ -165,7 +163,7 @@
                           <input type="text" class="form-control" id="eventLocation" maxlength="100">
                           <label for="eventLocation">{% translate "Event location" %}</label>
                         </div>
-                         <h4>{% translate "Do you know a convenient parking spot?" %} <span class="text-danger">*</span></h4>
+                         <h4>{% translate "Do you know a convenient parking spot?" %}</h4>
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="addParkingRadio" id="addParkY" value="Y">
                           <label class="form-check-label" for="addParkY">{% translate "Yes" %}</label>
@@ -234,7 +232,7 @@
                 <div class="card-body">
                     <h4 class="card-title">
                         <i class="fa-solid fa-hourglass fa-bounce"></i>
-                        {% translate "Indicate duration" %} <span class="text-danger">*</span>
+                        {% translate "Indicate duration" %}
                     </h4>
                     <div class="row">
                         <div class="col-12 col-md-4 py-2 mb-2 text-center rounded selected-border">
