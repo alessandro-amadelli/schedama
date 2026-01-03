@@ -435,31 +435,32 @@
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
-
-  <!-- Modal to restore previous event data -->
-  <div class="modal fade" id="modalRestoreData" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog rounded">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">{% translate "Restore unsaved data" %}</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>{% translate "It seems you have worked on a new event without saving." %} <br> 
-          {% translate "Do you wish to reload previous data?" %}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnClearData">
-            <i class="fa-solid fa-trash-can"></i> {% translate "Nah, don't care" %}
-          </button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btnRestoreData">
-            <i class="fa-solid fa-rotate-left fa-spin fa-spin-reverse"></i>&nbsp;{% translate "Restore data" %}
-          </button>
+      <!-- Modal to restore previous event data -->
+      <div class="modal fade" id="modalRestoreData" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog rounded">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{% translate "Restore unsaved data" %}</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>{% translate "It seems you have worked on a new event without saving." %} <br>
+              {% translate "Do you wish to reload previous data?" %}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnClearData">
+                <i class="fa-solid fa-trash-can"></i> {% translate "Nah, don't care" %}
+              </button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btnRestoreData">
+                <i class="fa-solid fa-rotate-left fa-spin fa-spin-reverse"></i>&nbsp;{% translate "Restore data" %}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
-  </div>
+</div>
+
 {% endblock %}

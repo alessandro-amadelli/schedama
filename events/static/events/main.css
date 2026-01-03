@@ -288,9 +288,6 @@ body {
     background-color: var(--accent-color);
 }
 
-/* ---------------------------------------------- */
-/* CARD VISIBILITY */
-
 #wizard-cards {
     position: relative;
 }
@@ -364,7 +361,6 @@ body {
 .timeline-step.complete + .timeline-line {
     background: var(--text-green);
 }
-/* ---------------------------------------------- */
 
 .title-section {
     position:relative;
@@ -374,20 +370,6 @@ body {
     color: var(--title-color);
     transition: background-color 1s ease;
 }
-
-/*
-.title-section::before {
-    content: "";
-    position: absolute;
-    width: 150%;
-    height: 100%;
-    left: -25%;
-    z-index: -1;
-    background-color: var(--accent-color);
-    transition: .5s ease-in;
-}
-
-*/
 
 .title-section::before {
     content: "";
@@ -470,9 +452,11 @@ select, option {
     background-color: var(--input-bg-color) !important;
 }
 
+/*
 .modal-open {
     padding-right: 0 !important;
 }
+*/
 
 .modal-content {
     background-color: var(--modal-bg-color);
