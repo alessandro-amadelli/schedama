@@ -28,8 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if a local, unsaved event is available
     const unsavedEvent = localStorage.getItem("unsavedEvent");
     if (unsavedEvent) {
-        showModalRestoreData();
+        setTimeout(() => {
+            showModalRestoreData();
+        }, 500);
     }
+    //showModalRestoreData();
 
     // Event listener to save description data
     const descrInp = document.querySelector("#eventDescription");
