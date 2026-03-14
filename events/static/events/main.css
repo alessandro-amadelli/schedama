@@ -1,7 +1,8 @@
 /* CSS variables for LIGHT MODE */
 :root {
     --accent-color: #e5597a;
-    --body-background: linear-gradient(180deg, #118ab2 0%, #cff3fe 50%);
+    /* --body-background: linear-gradient(180deg, #118ab2 0%, #cff3fe 50%); */
+    --body-background: #cff3fe;
     --body-bg-color: #118ab2;
     --card-bg-color: #fff;
     --color: black;
