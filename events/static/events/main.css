@@ -2,7 +2,7 @@
 :root {
     --accent-color: #e5597a;
     /* --body-background: linear-gradient(180deg, #118ab2 0%, #cff3fe 50%); */
-    --body-background: #cff3fe;
+    --body-background: #CBF3F0;
     --body-bg-color: #118ab2;
     --card-bg-color: #fff;
     --color: black;
@@ -10,7 +10,7 @@
     --event-ended-bg: rgba(255,0,0,.5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(0,0,0,.05);
-    --modal-bg-color: rgba(17, 138, 178, .2);
+    --modal-bg-color: rgba(203, 243, 240, .3);
     --moving-bg-color: #18b2e5;
     --navbar-bg-color: #fff;
     --shimmer-color: #09ffbf;
@@ -26,8 +26,9 @@
 
 /* CSS variables for DARK MODE */
 .dark-mode {
-    --accent-color: #ffd166;
-    --body-background: linear-gradient(180deg, #073b4c 60%, rgb(37, 37, 37) 100%);
+    --accent-color: #FFB703;
+    /* --body-background: linear-gradient(180deg, #073b4c 60%, rgb(37, 37, 37) 100%); */
+    --body-background: #023047;
     --body-bg-color: #073b4c;
     --card-bg-color: rgba(0,0,0,.2);
     --color: #fff;
@@ -54,7 +55,7 @@ Main color palette
 #e5597a -> pink
 #ffd166 -> yellow
 #118ab2 -> light-blue
-#073b4c -> dark-blue-greenish rgb(7, 59, 76)
+#073b4c -> dark-blue-greenish
 #06d6a0 -> green
 */
 
