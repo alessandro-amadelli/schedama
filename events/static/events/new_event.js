@@ -838,7 +838,7 @@ async function sendEventToServer() {
     }
 
     let reqHeaders = new Headers();
-    reqHeaders.append('Content-type', 'application/json');
+    reqHeaders.append('Content-Type', 'application/json');
     reqHeaders.append('X-CSRFToken', csrftoken);
 
     let initObject = {
@@ -879,7 +879,9 @@ function eventCreatedSuccessfully(data) {
 
     // Removing old alert (if present)
     const oldAlert = document.querySelector(".alert");
-    oldAlert.remove();
+    if (oldAlert) {
+        oldAlert.remove();
+    }
 
     // Changing page titles
     document.querySelector("h1").innerText = gettext("Event created");
