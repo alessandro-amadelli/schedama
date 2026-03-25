@@ -226,7 +226,7 @@ function updateDuration() {
 
 
 function removeParticipantRow(btn) {
-    const partRow = btn.parentElement.parentElement.parentElement.parentElement;
+    const partRow = btn.closest("tr");
     const partUID = partRow.querySelector("input[name='participantName']").dataset.partuid;
     if (partUID){
         removedParticipantsArray.push(partUID);
@@ -450,7 +450,7 @@ function getEventData() {
         partName = participant.value;
         partDates = [];
         // Select all checked checkboxes for dates
-        participant.parentElement.parentElement.parentElement.parentElement.querySelectorAll("input[type=checkbox]").forEach((c) => {
+        participant.closest("tr").querySelectorAll("input[type=checkbox]").forEach((c) => {
             if (c.checked) {
                 partDates.push(c.value);
             }

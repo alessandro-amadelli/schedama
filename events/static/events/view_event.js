@@ -87,7 +87,7 @@ function initializeEntirePage() {
     // Event listener for modifications on participants (if authorized)
     document.querySelector("#tableParticipants").querySelectorAll("input[type=checkbox]").forEach((check) => {
         check.addEventListener('change', ()  => {
-            const tr = check.parentElement.parentElement;
+            const tr = check.closest("tr");
             saveModificationsLocally(tr);
         });
     });
@@ -95,8 +95,9 @@ function initializeEntirePage() {
     // Buttons to remove participant (if authorized)
     document.querySelectorAll("i[name=btnDeleteRow]").forEach((btn) => {
         btn.addEventListener("click", () => {
-            const partUID = btn.parentElement.parentElement.querySelector(".participant-name-td").dataset.partuid;
-            btn.parentElement.parentElement.remove();
+            const partTr = btn.closest("tr");
+            const partUID = partTr.querySelector(".participant-name-td").dataset.partuid;
+            partTr.remove();
             saveDeletionLocally(partUID);
         });
     });
