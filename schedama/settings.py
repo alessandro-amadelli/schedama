@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 from pathlib import Path
-
 import os
+import mimetypes
+
 
 # Translations
 from django.utils.translation import gettext_lazy as _
@@ -137,11 +138,6 @@ CACHE_DB_TTL = 60 * 60 * 24 * 2  # for database records (eg.: events)
 
 # If production environment
 if os.environ.get("SCHEDAMA_ENVIRONMENT", "TEST") == "PRODUCTION":
-    # STORAGES = {
-    #     "staticfiles": {
-    #         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    #     },
-    # }
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
     CACHES = {
@@ -157,6 +153,8 @@ else:
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+mimetypes.add_type("application/manifest+json", ".webmanifest")
 
 LOGGING = {
     "version": 1,
