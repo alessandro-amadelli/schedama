@@ -155,6 +155,9 @@ else:
 }
 
 mimetypes.add_type("application/manifest+json", ".webmanifest")
+WHITENOISE_MIMETYPES = {
+    ".webmanifest": "application/manifest+json",
+}
 
 LOGGING = {
     "version": 1,
