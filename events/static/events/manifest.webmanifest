@@ -50,19 +50,40 @@
         "name": "Create a new event",
         "short_name": "New event",
         "description": "Create a new event on Schedama.com",
-        "url": "/create-event"
+        "url": "/create-event/",
+        "icons": [
+            {
+                "src": "/static/events/android-icon-96x96.png",
+                "sizes": "96x96",
+                "type": "image\/png"
+            }
+        ]
     },
     {
         "name": "Open event",
         "short_name": "Open event",
         "description": "Open a shared event",
-        "url": "/open-event"
+        "url": "/open-event/",
+        "icons": [
+            {
+                "src": "/static/events/android-icon-96x96.png",
+                "sizes": "96x96",
+                "type": "image\/png"
+            }
+        ]
     },
     {
         "name": "History",
         "short_name": "History",
         "description": "View visited events",
-        "url": "/history"
+        "url": "/history/",
+        "icons": [
+            {
+                "src": "/static/events/android-icon-96x96.png",
+                "sizes": "96x96",
+                "type": "image\/png"
+            }
+        ]
     }
  ]
 }
