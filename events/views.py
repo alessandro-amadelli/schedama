@@ -8,8 +8,9 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core import signing
 from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import cache_page
 from django.views.generic.base import TemplateView
@@ -139,7 +140,14 @@ def index(request):
 
 @cache_page(CACHE_TTL)
 def robots_view(request):
-    return render(request, "events/robots.txt")
+    content = render_to_string("events/robots.txt")
+    return HttpResponse(content, content_type="text/plain; charset=utf-8")
+
+
+@cache_page(CACHE_TTL)
+def sitemap_view(request):
+    content = render_to_string("events/sitemap.xml")
+    return HttpResponse(content, content_type="application/xml")
 
 
 @cache_page(CACHE_TTL)

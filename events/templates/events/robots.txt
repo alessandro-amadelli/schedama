@@ -1,3 +1,1 @@
 User-agent: *
-Disallow: /participate/
-Disallow: /edit-event/

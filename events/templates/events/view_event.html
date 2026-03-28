@@ -2,6 +2,10 @@
 {% load static %}
 {% load i18n %}
 
+{% block extra_head %}
+    <meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
 {% block title %}{% translate "Join the event | Participate to the event - Schedama.com" %}{% endblock %}
 {% block description %}{% translate "You can see event details, register your participation and see other participants." %}{% endblock %}
 

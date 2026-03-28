@@ -6,7 +6,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('robots.txt/', views.robots_view, name='robots.txt'),
+    path('robots.txt', views.robots_view, name='robots_view'),
+    path('sitemap.xml', views.sitemap_view, name='sitemap_view'),
     path('create-event/', views.new_event_view, name='new_event_view'),
     path('save-event/', views.save_event_view, name='save_event_view'),
     path('open-event/', views.open_event_view, name='open_event_view'),

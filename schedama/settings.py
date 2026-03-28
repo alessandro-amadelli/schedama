@@ -155,8 +155,10 @@ else:
 }
 
 mimetypes.add_type("application/manifest+json", ".webmanifest")
+mimetypes.add_type("text/plain", ".txt")
 WHITENOISE_MIMETYPES = {
     ".webmanifest": "application/manifest+json",
+    ".txt": "text/plain",
 }
 
 LOGGING = {
