@@ -5,6 +5,58 @@
 {% block extra_head %}
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://schedama.com">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Schedama",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web browser",
+          "url": "https://schedama.com",
+          "description": "{% translate 'Schedama is a free online tool to organize events, create date polls and find the best time for everyone without registration.' %}",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "{% translate 'Is Schedama free?' %}",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "{% translate 'Yes, it is completely free to use.' %}"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "{% translate 'Do I need to register?' %}",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "{% translate 'No, you can create events instantly without an account.' %}"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "{% translate 'How do I share an event?' %}",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "{% translate 'Just send the participation link to anyone you want.' %}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+
+
 {% endblock %}
 
 {% block title %}
