@@ -22,7 +22,7 @@
     --text-red: #d30429;
     --text-yellow: #e4de20;
     --timeline-bg-color: #969696;
-    --title-color: #073b4c;
+    --title-color: #fff;
 }
 
 /* CSS variables for DARK MODE */
@@ -48,7 +48,7 @@
     --text-red: #d30429;
     --text-yellow: #e4de20;
     --timeline-bg-color: #969696;
-    --title-color: #073b4c;
+    --title-color: #023047;
 }
 
 /*
@@ -248,6 +248,12 @@ body {
     min-height: 100svh;
     transition: background-color 1s ease, background 1s ease;
     margin: 0;
+}
+
+.highlight-on-hover:hover {
+    background-color: var(--accent-color) !important;
+    transform: scale(1.05);
+    transition: .6s ease;
 }
 
 .bg-accent {

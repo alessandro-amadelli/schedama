@@ -2,16 +2,60 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% translate "Create and share important events - Schedama.com" %}{% endblock %}
-{% block description %}{% translate "With Schedama you can easily create your important events, save relevant information and share them with anyone." %}{% endblock %}
+{% block extra_head %}
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://schedama.com">
+{% endblock %}
+
+{% block title %}
+  {% translate "Find the best date for your events | Schedama" %}
+{% endblock %}
+{% block description %}
+  {% translate "Create event polls, share them and find the best date for everyone. Free and no registration required." %}
+{% endblock %}
 
 {% block body %}
   <div class="title-section">
-    <h1 class="entering">{% translate "Welcome to Schedama" %}</h1>
-    <h2 class="entering-1">{% translate "Create and share your important events with ease" %}</h2>
+    <h1 class="entering">{% translate "Organize events and find the perfect date easily" %}</h1>
+    <h2 class="entering-1">{% translate "Create a poll, share the link and let participants choose the best time" %}</h2>
   </div>
 
-  <p class="lead entering-2">{% translate "Schedama is a quick and intuitive way to create an event, share it and agree on a date and time." %}</p>
+  <p class="lead entering-2">
+    {% translate "Schedama is a free online tool to organize events, create date polls and find the best time for everyone without registration." %}
+  </p>
+
+  <div class="row mb-5 entering-2">
+    <div class="col-12 text-center">
+      <span class="badge rounded-pill bg-light text-dark highlight-on-hover p-2 m-1">
+        <i class="fa-solid fa-user-slash"></i>
+        {% translate "No registration" %}
+      </span>
+
+      <span class="badge rounded-pill bg-light text-dark highlight-on-hover p-2 m-1">
+        <i class="fa-solid fa-euro-sign"></i>
+        {% translate "Free to use" %}
+      </span>
+
+      <span class="badge rounded-pill bg-light text-dark highlight-on-hover p-2 m-1">
+        <i class="fa-solid fa-shield-halved"></i>
+        {% translate "Privacy friendly" %}
+      </span>
+
+      <span class="badge rounded-pill bg-light text-dark highlight-on-hover p-2 m-1">
+        <i class="fa-solid fa-link"></i>
+        {% translate "Share with a link" %}
+      </span>
+
+      <span class="badge rounded-pill bg-light text-dark highlight-on-hover p-2 m-1">
+        <i class="fa-solid fa-calendar-check"></i>
+        {% translate "Smart date selection" %}
+      </span>
+    </div>
+  </div>
+
+  <h2 class="text-center mt-5 entering-3">
+    {% translate "Organize an event in 3 simple steps" %}
+  </h2>
 
   <div class="row row-cols-1 row-cols-lg-3 mt-5">
     <div class="col mb-3 d-flex">
@@ -20,11 +64,14 @@
           <h3 class="text-center"><i class="fa-regular fa-calendar-plus"></i></h3>
         </div>
         <div class="card-body">
-          <h2 class="card-title text-center">{% translate "Create" %}</h2>
-          <p class="card-text">{% translate "Easily create an event with our step-by-step process by clicking " %}
+          <h2 class="card-title text-center">
+            {% translate "<b>CREATE</b> your event and propose multiple dates" %}
+          </h2>
+          <p class="card-text">
+            {% translate "Create an event and add multiple possible dates so participants can choose based on their availability." %}
           </p>
           <div class="d-grid gap-2 col-8 col-md-6 mx-auto">
-            <a href="{% url 'new_event_view' %}" class="btn btn-primary p-2">{% translate "Create event"%}</a>
+            <a href="{% url 'new_event_view' %}" class="btn btn-primary p-2">{% translate "Start now"%}</a>
           </div>
         </div>
         <div class="card-footer text-center">
@@ -39,8 +86,12 @@
           <h3 class="text-center"><i class="fa-solid fa-share"></i></h3>
         </div>
         <div class="card-body">
-          <h2 class="card-title text-center">{% translate "Share" %}</h2>
-          <p class="card-text">{% translate "Share the event with whoever you like by sending them the <strong>Participation URL</strong>" %}</p>
+          <h2 class="card-title text-center">
+            {% translate "<b>SHARE</b> the event with just a link" %}
+          </h2>
+          <p class="card-text">
+            {% translate "Send the participation link to friends or colleagues and let them select their preferred dates." %}
+          </p>
         </div>
         <div class="card-footer text-center">
           <span class="fs-2">2</span>
@@ -51,16 +102,64 @@
     <div class="col mb-3 d-flex">
       <div class="card rounded index-card appearing-4">
         <div class="card-header">
-          <h3 class="text-center"><i class="fa-solid fa-id-card"></i></h3>
+          <h3 class="text-center"><i class="fa-solid fa-ranking-star"></i></h3>
         </div>
         <div class="card-body">
-          <h2 class="card-title text-center">{% translate "Manage" %}</h2>
-          <p class="card-text">{% translate "You can fully manage your event by visiting the <strong>Administration URL</strong>." %}</p>
+          <h2 class="card-title text-center">
+            {% translate "<b>FIND</b> the best date automatically" %}
+          </h2>
+          <p class="card-text">
+            {% translate "Schedama organizes all responses and helps you choose the best date for everyone." %}
+          </p>
         </div>
         <div class="card-footer text-center">
           <span class="fs-2">3</span>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row entering-3 mt-2">
+    <div class="text-center mt-4">
+      <p>
+        {% translate "Want to learn more about how Schedama works?" %}
+      </p>
+      <a href="{% url 'about_us_view' %}" class="btn btn-outline-primary">
+        {% translate "Learn more" %}
+      </a>
+    </div>
+  </div>
+
+  <div class="row entering-4">
+    <div class="col mt-5">
+      <h2 class="text-center mb-4">
+        {% translate "Perfect for any type of event" %}
+      </h2>
+
+      <ul class="text-center list-unstyled">
+        <li>{% translate "Dinners with friends" %}</li>
+        <li>{% translate "Work meetings" %}</li>
+        <li>{% translate "Parties and birthdays" %}</li>
+        <li>{% translate "Sports events" %}</li>
+        <li>{% translate "Family organization" %}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row text-center entering-4 mt-5">
+    <h2 class="text-center mb-4">
+      {% translate "Frequently asked questions" %}
+    </h2>
+
+    <div>
+      <h3>{% translate "Is Schedama free?" %}</h3>
+      <p>{% translate "Yes, it is completely free to use." %}</p>
+
+      <h3>{% translate "Do I need to register?" %}</h3>
+      <p>{% translate "No, you can create events instantly without an account." %}</p>
+
+      <h3>{% translate "How do I share an event?" %}</h3>
+      <p>{% translate "Just send the participation link to anyone you want." %}</p>
     </div>
   </div>
 
