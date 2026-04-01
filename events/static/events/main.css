@@ -21,7 +21,8 @@
     --text-lightblue: #02e0ee;
     --text-red: #d30429;
     --text-yellow: #e4de20;
-    --timeline-bg-color: #969696;
+    --timeline-bg-color: #fff;
+    --timeline-text-color: #000;
     --title-color: #fff;
 }
 
@@ -47,7 +48,8 @@
     --text-lightblue: #02e0ee;
     --text-red: #d30429;
     --text-yellow: #e4de20;
-    --timeline-bg-color: #969696;
+    --timeline-bg-color: #fff;
+    --timeline-text-color: #000;
     --title-color: #023047;
 }
 
@@ -334,6 +336,7 @@ body {
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     background: var(--timeline-bg-color);
+    color: var(--timeline-text-color);
     display: flex;
     align-items: center;
     justify-content: center;
