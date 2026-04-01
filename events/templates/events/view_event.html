@@ -2,6 +2,18 @@
 {% load static %}
 {% load i18n %}
 
+{% block og_meta %}
+    <meta property="og:title" content="{{ event.title|escape }}">
+    <meta property="og:description" content="{% translate 'Join the event, see details and participants.' %}">
+    {% if event.theme_image_url %}
+        <meta property="og:image" content="{{ event.theme_image_url }}">
+    {% else %}
+        <meta property="og:image" content="{% static 'events/schedama_logo_dark.png' %}">
+    {% endif %}
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+{% endblock %}
+
 {% block extra_head %}
     <meta name="robots" content="noindex, nofollow">
     <!-- QR code generation via qr-code-styling library-->

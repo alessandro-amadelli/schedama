@@ -227,6 +227,31 @@ def open_event_view(request):
     return render(request, "events/open_event.html")
 
 
+def get_theme_image_url(theme_name):
+    """
+    Returns the URL of the image associated with the event theme.
+    """
+    if theme_name not in (
+        "beach",
+        "birthday",
+        "drink",
+        "forest",
+        "graduation",
+        "match",
+        "meeting",
+        "mountain",
+        "music",
+        "pizza",
+        "popcorn",
+        "relax",
+        "ticket",
+        "travel",
+    ):
+        return ""
+
+    base_url = "https://schedama-assets.s3.eu-central-1.amazonaws.com/img/"
+    return base_url + theme_name + ".jpg"
+
 def participate_view(request, eventID):
     # Retrieving event data
     event_data = get_event_data(eventID)
@@ -285,6 +310,8 @@ def participate_view(request, eventID):
             )
         except ValueError:
             pass
+
+    event_data["theme_image_url"] = get_theme_image_url(event_data.get("event_theme", ""))
 
     context = {
         "event": event_data

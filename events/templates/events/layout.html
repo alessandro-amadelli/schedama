@@ -47,6 +47,9 @@
     <link rel="icon" type="image/x-icon" href="{% static 'events/favicon.ico' %}">
     <meta name="msapplication-TileImage" content="{% static 'events/ms-icon-144x144.png' %}">
 
+    {% block og_meta %}
+    {% endblock %}
+
     {% block extra_head %}
     {% endblock %}
 
