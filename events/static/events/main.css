@@ -72,18 +72,15 @@ Main color palette
 @keyframes introAnimation {
     0% {
         opacity: 0;
-        display: none;
-        position: relative;
-        left: -50%;
+        transform: translateX(-50%);
     }
     75% {
-        position: relative;
         opacity: 1;
-        left: 5%;
+        transform: translateX(5%);
     }
     100% {
-        position: relative;
-        left: 0%;
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
@@ -96,11 +93,9 @@ Main color palette
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;
-        height: 0;
     }
     100% {
         opacity: 1;
-        height: 100%;
     }
 }
 
@@ -182,6 +177,7 @@ nav {
 }
 
 .entering, .entering-1, .entering-2, .entering-3, .entering-4 {
+    will-change: transform, opacity;
     animation-name: introAnimation;
     animation-duration: .6s;
     animation-fill-mode: backwards;
@@ -206,6 +202,7 @@ nav {
 }
 
 .appearing, .appearing-1, .appearing-2, .appearing-3, .appearing-4 {
+    will-change: opacity;
     animation-name: fadeInAnimation;
     animation-duration: 1s;
     animation-fill-mode: backwards;
