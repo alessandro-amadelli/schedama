@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fillHistory();
 
     // Event listener for ordering button to toggle between different ordering options
-    document.querySelector("#orderingBtn").addEventListener("click", function() {
+    const orderingBtn = document.querySelector("#orderingBtn");
+    if (!orderingBtn) return;
+    orderingBtn.addEventListener("click", function() {
         const currentOrdering = this.dataset.ordering;
         let newOrdering;
         switch (currentOrdering) {
