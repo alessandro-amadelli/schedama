@@ -1,5 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
     fillHistory();
+
+    // Event listener for ordering button to toggle between different ordering options
+    document.querySelector("#orderingBtn").addEventListener("click", function() {
+        const currentOrdering = this.dataset.ordering;
+        let newOrdering;
+        switch (currentOrdering) {
+            case "last_visited_desc":
+                newOrdering = "last_visited_asc";
+                this.innerHTML = `<i class="fa-solid fa-arrow-down-short-wide"></i>&nbsp;${gettext("Last visited")}`;
+                break;
+            case "last_visited_asc":
+                newOrdering = "title_asc";
+                this.innerHTML = `<i class="fa-solid fa-arrow-down-short-wide"></i>&nbsp;${gettext("Title")}`;
+                break;
+            case "title_asc":
+                newOrdering = "title_desc";
+                this.innerHTML = `<i class="fa-solid fa-arrow-down-wide-short"></i>&nbsp;${gettext("Title")}`;
+                break;
+            case "title_desc":
+                newOrdering = "last_visited_desc";
+                this.innerHTML = `<i class="fa-solid fa-arrow-down-wide-short"></i>&nbsp;${gettext("Last visited")}`;
+                break;
+            default:
+                newOrdering = "last_visited_desc";
+                this.innerHTML = `<i class="fa-solid fa-arrow-down-wide-short"></i>&nbsp;${gettext("Last visited")}`;
+        }
+        this.dataset.ordering = newOrdering;
+        fillHistory();
+    });
 });
 
 
@@ -11,6 +40,7 @@ function getHistoryData() {
 
 function fillHistory() {
     const historyContainer = document.querySelector(".history-container");
+    document.querySelectorAll(".history-col").forEach(card => card.remove());
 
     let history = getHistoryData();
     if (!history) {
@@ -19,12 +49,23 @@ function fillHistory() {
         return false;
     }
 
+    // Get ordering preference from the ordering button's data attribute
+    const ordering = document.querySelector("#orderingBtn").dataset.ordering;
+
     // Parse history data into JSON format
     history = JSON.parse(history);
 
-    // sort history data based on last_visited
+    // sort history data based on last_visited or title
     history.sort(function(a, b) {
-        return b.last_visited_epoch - a.last_visited_epoch;
+        if (ordering === "last_visited_desc") {
+            return b.last_visited_epoch - a.last_visited_epoch;
+        } else if (ordering === "last_visited_asc") {
+            return a.last_visited_epoch - b.last_visited_epoch;
+        } else if (ordering === "title_asc") {
+            return a.title.localeCompare(b.title);
+        } else if (ordering === "title_desc") {
+            return b.title.localeCompare(a.title);
+        }
     });
 
     // for every history item, create history card
@@ -35,8 +76,8 @@ function fillHistory() {
         const shareBtn = generateShareBtn(item.participation_link);
 
         const cardTemplate = `
-            <div class="col d-flex entering-2">
-                <div class="card shadow w-100" style="width: 18rem;">
+            <div class="col history-col d-flex entering-2">
+                <div class="card history-card shadow w-100" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title text-truncate">
                             ${item.private_event ? `<i class="fa-solid fa-lock"></i>&nbsp;` : ''}${item.title}

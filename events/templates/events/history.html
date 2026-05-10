@@ -22,6 +22,12 @@
 
     <div class="history-container row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 mt-5">
       <div class="w-100">
+        <button class="btn btn-dark col-10 col-lg-3" id="orderingBtn" data-ordering="last_visited_desc">
+          <i class="fa-solid fa-arrow-down-wide-short"></i>
+          {% translate "Last visited" %}
+        </button>
+      </div>
+      <div class="w-100">
         <div class="badge rounded-pill text-bg-dark col-10 col-lg-3 text-start p-2 mb-2">
           <i class="fa-solid fa-clock-rotate-left text-muted text-bg-light p-1 rounded"></i>&nbsp;{% translate "Last time you opened the event" %} <br>
         </div>
