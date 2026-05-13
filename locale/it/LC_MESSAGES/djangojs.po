@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 16:41+0100\n"
+"POT-Creation-Date: 2026-05-13 08:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,167 +18,187 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\static\events\edit_event.js:213 .\static\events\new_event.js:449
-#: .\static\events\view_event.js:313
+#: .\staticfiles\events\edit_event.js:213 .\staticfiles\events\new_event.js:520
+#: .\staticfiles\events\view_event.js:314
 msgid "d"
 msgstr ""
 
-#: .\static\events\edit_event.js:237
+#: .\staticfiles\events\edit_event.js:237
 msgid "Participant removed"
 msgstr ""
 
-#: .\static\events\edit_event.js:285 .\static\events\new_event.js:403
+#: .\staticfiles\events\edit_event.js:285 .\staticfiles\events\new_event.js:474
 msgid "Event Date"
 msgstr "Data Evento"
 
-#: .\static\events\edit_event.js:315 .\static\events\new_event.js:437
+#: .\staticfiles\events\edit_event.js:315 .\staticfiles\events\new_event.js:508
 msgid "Date added"
 msgstr "Data aggiunta"
 
-#: .\static\events\edit_event.js:538 .\static\events\new_event.js:719
+#: .\staticfiles\events\edit_event.js:538 .\staticfiles\events\new_event.js:819
 msgid "Please, check input fields."
 msgstr "Per favore, controlla i campi di input."
 
-#: .\static\events\edit_event.js:568 .\static\events\edit_event.js:618
-#: .\static\events\edit_event.js:670 .\static\events\new_event.js:762
-#: .\static\events\view_event.js:585 .\static\events\view_event.js:702
+#: .\staticfiles\events\edit_event.js:568
+#: .\staticfiles\events\edit_event.js:618
+#: .\staticfiles\events\edit_event.js:670 .\staticfiles\events\new_event.js:862
+#: .\staticfiles\events\view_event.js:586
+#: .\staticfiles\events\view_event.js:703
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
-#: .\static\events\history.js:18
+#: .\staticfiles\events\history.js:11 .\staticfiles\events\history.js:23
+#: .\staticfiles\events\history.js:27
+msgid "Last visited"
+msgstr ""
+
+#: .\staticfiles\events\history.js:15 .\staticfiles\events\history.js:19
+msgid "Title"
+msgstr ""
+
+#: .\staticfiles\events\history.js:48
 msgid "Nothing to see here..."
 msgstr "Niente da vedere qui..."
 
-#: .\static\events\history.js:47
+#: .\staticfiles\events\history.js:88
 msgid "Author:"
 msgstr "Autore:"
 
-#: .\static\events\new_event.js:296 .\static\events\new_event.js:297
-#: .\static\events\new_event.js:298
+#: .\staticfiles\events\new_event.js:365 .\staticfiles\events\new_event.js:366
+#: .\staticfiles\events\new_event.js:367
 msgid "Administrator only"
 msgstr "Solo l'amministratore"
 
-#: .\static\events\new_event.js:306 .\static\events\new_event.js:312
-#: .\static\events\new_event.js:318
+#: .\staticfiles\events\new_event.js:375 .\staticfiles\events\new_event.js:381
+#: .\staticfiles\events\new_event.js:387
 msgid "Anyone"
 msgstr "Chiunque"
 
-#: .\static\events\new_event.js:379 .\static\events\new_event.js:609
+#: .\staticfiles\events\new_event.js:450 .\staticfiles\events\new_event.js:680
 msgid "You have to choose at least one date."
 msgstr "Devi scegliere almeno una data."
 
-#: .\static\events\new_event.js:492
+#: .\staticfiles\events\new_event.js:563
 msgid "Participant"
 msgstr "Partecipante"
 
-#: .\static\events\new_event.js:527
+#: .\staticfiles\events\new_event.js:598
 msgid "Participant added"
 msgstr "Aggiunto partecipante"
 
-#: .\static\events\new_event.js:537
+#: .\staticfiles\events\new_event.js:608
 msgid "Choose a nickname."
 msgstr "Scegli un nickname."
 
-#: .\static\events\new_event.js:548
+#: .\staticfiles\events\new_event.js:619
 msgid "Insert a title for your event."
 msgstr "Inserisci un titolo per il tuo evento."
 
-#: .\static\events\new_event.js:561 .\static\events\new_event.js:579
+#: .\staticfiles\events\new_event.js:632 .\staticfiles\events\new_event.js:650
 msgid "Please enter a location."
 msgstr "Per favore inserisci una location."
 
-#: .\static\events\new_event.js:594
+#: .\staticfiles\events\new_event.js:665
 msgid "Please enter a parking location."
 msgstr "Per favore inserisci un luogo per il parcheggio."
 
-#: .\static\events\new_event.js:782
+#: .\staticfiles\events\new_event.js:698
+msgid "You need to enter a password if you want to make the event private."
+msgstr ""
+
+#: .\staticfiles\events\new_event.js:711
+msgid "Passwords don't match."
+msgstr ""
+
+#: .\staticfiles\events\new_event.js:887
 msgid "Event created"
 msgstr "Evento creato"
 
-#: .\static\events\new_event.js:783
+#: .\staticfiles\events\new_event.js:888
 msgid "Your event has been successfully created"
 msgstr "Il tuo evento è stato creato con successo"
 
-#: .\static\events\new_event.js:798
+#: .\staticfiles\events\new_event.js:904
 msgid "The following links have been automatically saved to the history page"
-msgstr "I seguenti link sono stati salvati automaticamente nella pagina di cronologia"
+msgstr ""
+"I seguenti link sono stati salvati automaticamente nella pagina di cronologia"
 
-#: .\static\events\new_event.js:805
+#: .\staticfiles\events\new_event.js:911
 msgid "Participant URL"
 msgstr "URL Partecipante"
 
-#: .\static\events\new_event.js:808 .\static\events\new_event.js:827
+#: .\staticfiles\events\new_event.js:914 .\staticfiles\events\new_event.js:933
 msgid "View URL"
 msgstr "Vedi URL"
 
-#: .\static\events\new_event.js:816
+#: .\staticfiles\events\new_event.js:922
 msgid "Participant page"
 msgstr "Pagina partecipante"
 
-#: .\static\events\new_event.js:824
+#: .\staticfiles\events\new_event.js:930
 msgid "Administration URL"
 msgstr "URL Amministrazione"
 
-#: .\static\events\new_event.js:834
+#: .\staticfiles\events\new_event.js:940
 msgid ""
 "IMPORTANT: make sure to keep this link, it's the only way you'll be able to "
 "administrate your event."
 msgstr ""
-"IMPORTANTE: assicurati di conservare questo link, è l'unico modo in cui sarai in grado di "
-"amministrare il tuo evento."
+"IMPORTANTE: assicurati di conservare questo link, è l'unico modo in cui "
+"sarai in grado di amministrare il tuo evento."
 
-#: .\static\events\new_event.js:842
+#: .\staticfiles\events\new_event.js:948
 msgid "Administration page"
 msgstr "Pagina amministrazione"
 
-#: .\static\events\new_event.js:859
+#: .\staticfiles\events\new_event.js:965
 msgid "Data saved to history"
 msgstr "Dati salvati in cronologia"
 
-#: .\static\events\utilities.js:65
+#: .\staticfiles\events\utilities.js:65
 msgid "Lights off"
 msgstr "Spegni la luce"
 
-#: .\static\events\utilities.js:113
+#: .\staticfiles\events\utilities.js:113
 msgid "Lights on"
 msgstr "Accendi la luce"
 
-#: .\static\events\utilities.js:143
+#: .\staticfiles\events\utilities.js:143
 msgid "Loading, please wait."
 msgstr "Caricamento, attendi per favore."
 
-#: .\static\events\utilities.js:265
+#: .\staticfiles\events\utilities.js:265
 msgid "You've been invited to an event on Schedama: "
 msgstr "Sei stato invitato a un evento su Schedama: "
 
-#: .\static\events\utilities.js:310
+#: .\staticfiles\events\utilities.js:310
 msgid "Copy url"
 msgstr "Copia url"
 
-#: .\static\events\view_event.js:286
+#: .\staticfiles\events\view_event.js:287
 msgid "Ended"
 msgstr "Terminato"
 
-#: .\static\events\view_event.js:296
+#: .\staticfiles\events\view_event.js:297
 msgid "In progress"
 msgstr "In corso"
 
-#: .\static\events\view_event.js:355
+#: .\staticfiles\events\view_event.js:356
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\static\events\view_event.js:355
+#: .\staticfiles\events\view_event.js:356
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\static\events\view_event.js:440
+#: .\staticfiles\events\view_event.js:441
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\static\events\view_event.js:457
+#: .\staticfiles\events\view_event.js:458
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\static\events\view_event.js:760
+#: .\staticfiles\events\view_event.js:761
 msgid "You reacted with"
 msgstr "Hai reagito con"

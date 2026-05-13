@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case "last_visited_asc":
                 newOrdering = "title_asc";
-                this.innerHTML = `<i class="fa-solid fa-arrow-down-short-wide"></i>&nbsp;${gettext("Title")}`;
+                this.innerHTML = `<i class="fa-solid fa-arrow-down-a-z"></i>&nbsp;${gettext("Title")}`;
                 break;
             case "title_asc":
                 newOrdering = "title_desc";
-                this.innerHTML = `<i class="fa-solid fa-arrow-down-wide-short"></i>&nbsp;${gettext("Title")}`;
+                this.innerHTML = `<i class="fa-solid fa-arrow-down-z-a"></i>&nbsp;${gettext("Title")}`;
                 break;
             case "title_desc":
                 newOrdering = "last_visited_desc";
