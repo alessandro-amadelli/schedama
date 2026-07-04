@@ -950,6 +950,16 @@ def password_check_view(request):
         salt=generate_cookie_salt(event_id),
         secure=True,
         httponly=True,
+        samesite='Strict',
+    )
+    return response
+
+
+def logout_event(request, eventID):
+    response = redirect("participate_view", eventID=eventID)
+    response.delete_cookie(
+        f"auth_event_{eventID}",
+        samesite="Strict",
     )
     return response
 
@@ -987,6 +997,14 @@ def add_reaction_view(request, eventID):
                 "The event is currently under maintenance. "
                 "Please try again later."
             )
+        }
+        return JsonResponse(response)
+
+    # Check if the event is private and the user is authorized for the event
+    if event_data.get("private_event") and not check_event_authorization(request, eventID):
+        response = {
+            "status": "ERROR",
+            "description": _("You are not authorized to perform this operation.")
         }
         return JsonResponse(response)
 

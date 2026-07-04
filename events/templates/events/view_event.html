@@ -53,6 +53,17 @@
         <h1 class="entering event-title"><span id="eventTitle">{{ event.title }}</span></h1>
     </div>
 
+    {% if event.private_event %}
+        <div class="row mb-3">
+            <div class="col text-end">
+                <a href="{% url 'logout_event_view' event.item_id %}" class="btn btn-light" >
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    {%translate "Logout" %}
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
     <!-- Countdown row -->
     <div class="row mb-3{% if event.is_cancelled %} filter-grayscale{% endif %}">
         <div class="row mx-auto event-clock-div clock-event-not-started justify-content-center rounded shadow display-5 p-3 position-relative" id="clockDiv">

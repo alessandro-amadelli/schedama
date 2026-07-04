@@ -21,6 +21,7 @@ urlpatterns = [
     path('cancel-event/', views.cancel_event_view, name='cancel_event_view'),
     path('reactivate-event/', views.reactivate_event_view, name='reactivate_event_view'),
     path('password-check', views.password_check_view, name="password_check"),
+    path('logout/<str:eventID>', views.logout_event, name='logout_event_view'),
     path('history/', views.history_view, name='history_view'),
     path('about-us/', views.about_us_view, name='about_us_view'),
     path('privacy/', views.privacy_view, name='privacy_view'),
