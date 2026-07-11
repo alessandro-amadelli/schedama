@@ -82,12 +82,12 @@ function fillHistory() {
                 <div class="card history-card shadow w-100" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title text-truncate">
-                            ${item.private_event ? `<i class="fa-solid fa-lock"></i>&nbsp;` : ''}${item.title}
+                            ${item.private_event ? `<i class="fa-solid fa-lock"></i>&nbsp;` : ''}${escapeHtml(item.title)}
                         </h5>
                         <p class="card-text">
                             <i class="fa-solid fa-clock-rotate-left text-muted"></i>&nbsp;${item.last_visited}
                         </p>
-                        ${item.author ? `<p class="card-text">${gettext("Author:")} ${item.author}</p>` : ''}
+                        ${item.author ? `<p class="card-text">${gettext("Author:")} ${escapeHtml(item.author)}</p>` : ''}
                     </div>
                     <div class="card-footer">
                         <a class="card-link" href="${item.participation_link}"><i class="fa-solid fa-user-group text-warning p-1 rounded ${linkBg}"></i></a>

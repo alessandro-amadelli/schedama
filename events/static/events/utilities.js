@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+}
+
 function toggleMode() {
     let currentMode = localStorage.getItem("currentMode");
 

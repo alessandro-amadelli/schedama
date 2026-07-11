@@ -896,7 +896,7 @@ function eventCreatedSuccessfully(data) {
 
     // New HTML content for the section div
     const newHTMLContent = `
-        <h1><i class="fa-solid fa-book-open"></i>&nbsp;${eventTitle}</h1>
+        <h1><i class="fa-solid fa-book-open"></i>&nbsp;${escapeHtml(eventTitle)}</h1>
         <hr>
 
         <div class="alert alert-info mb-3">
