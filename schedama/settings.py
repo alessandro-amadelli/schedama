@@ -113,7 +113,7 @@ LANGUAGES = [
 ]
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, "events\locale"),
+    os.path.join(BASE_DIR, "events", "locale"),
     )
 
 TIME_ZONE = 'UTC'

@@ -80,7 +80,7 @@ class EventForm(forms.Form):
         if participants is None:
             participants = []
         for p in participants:
-            p["name"] = Truncator(p.get("name" "")).chars(PARTICIPANT_NAME_MAX_LENGTH)
+            p["name"] = Truncator(p.get("name", "")).chars(PARTICIPANT_NAME_MAX_LENGTH)
         return participants
 
     def clean_event_theme(self):

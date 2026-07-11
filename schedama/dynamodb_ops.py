@@ -129,7 +129,7 @@ def insert_record(record_data):
 
 
 # UPDATE OPERATIONS #
-def update_single_event(item_id, item_type, update_dict=dict()):
+def update_single_event(item_id, item_type, update_dict=None):
     """
     Updates values on one or more field of an event record.
     update_dict is a dictionary with the following format:
