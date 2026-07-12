@@ -29,10 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-        console.log("Page hidden, stopping emoji polling");
         clearInterval(pollingInterval);
     } else {
-        console.log("Page visible, resuming emoji polling");
         updateEmojiCounters();
         pollingInterval = setInterval(() => {
             updateEmojiCounters();
