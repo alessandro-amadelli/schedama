@@ -1,3 +1,5 @@
+let pollingInterval;
+
 document.addEventListener('DOMContentLoaded', () => {
     initializeEntirePage();
     document.addEventListener('modeChanged', updateCharts);
@@ -12,17 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Emoji container
     const emojiContainer = document.querySelector("#emoji-reactions");
-    const eventID= emojiContainer.dataset.eventId;
+    const eventID = emojiContainer.dataset.eventId;
     emojiContainer.querySelectorAll(".reaction-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
             reactToEvent(btn, eventID);
         });
     });
-    updateEmojiCounters(eventID);
-    setInterval(() => {
-        updateEmojiCounters(eventID);
+    updateEmojiCounters();
+    pollingInterval = setInterval(() => {
+        updateEmojiCounters();
     }, 30000);
 
+});
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        console.log("Page hidden, stopping emoji polling");
+        clearInterval(pollingInterval);
+    } else {
+        console.log("Page visible, resuming emoji polling");
+        updateEmojiCounters();
+        pollingInterval = setInterval(() => {
+            updateEmojiCounters();
+        }, 30000);
+    }
 });
 
 function updateCharts() {
@@ -740,7 +755,10 @@ function updateHistory() {
     addToHistory(eventData);
 }
 
-async function updateEmojiCounters(eventID) {
+async function updateEmojiCounters() {
+  const emojiContainer = document.querySelector("#emoji-reactions");
+  const eventID = emojiContainer.dataset.eventId;
+
   await fetch(`/get-reactions/${eventID}`)
     .then(response => {
       if (!response.ok) throw new Error("Request error");
@@ -813,7 +831,7 @@ async function reactToEvent(btnEmoji, eventID) {
             console.log(data);
             if (data.status == "OK") {
                 localStorage.setItem("reaction_" + eventID, emoji);
-                updateEmojiCounters(eventID);
+                updateEmojiCounters();
                 notify(emojiSymbol + " +1");
             } else {
                 notify(data.description);
