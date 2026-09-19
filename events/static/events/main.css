@@ -178,7 +178,7 @@ nav {
     animation-play-state: paused;
 }
 
-.entering, .entering-1, .entering-2, .entering-3, .entering-4 {
+.entering, .entering-1, .entering-2, .entering-3, .entering-4, .entering-sequence {
     will-change: transform, opacity;
     animation-name: introAnimation;
     animation-duration: .6s;
@@ -203,7 +203,11 @@ nav {
     animation-delay: .8s;
 }
 
-.appearing, .appearing-1, .appearing-2, .appearing-3, .appearing-4 {
+.entering-sequence {
+    animation-delay: calc(sibling-index() * .2s);
+}
+
+.appearing, .appearing-1, .appearing-2, .appearing-sequence {
     will-change: opacity;
     animation-name: fadeInAnimation;
     animation-duration: 1s;
@@ -218,15 +222,11 @@ nav {
 }
 
 .appearing-2 {
-    animation-delay: .6s;
+    animation-delay: calc(.6s + (sibling-index() * .3s));
 }
 
-.appearing-3 {
-    animation-delay: .9s;
-}
-
-.appearing-4 {
-    animation-delay: 1.2s;
+.appearing-sequence {
+    animation-delay: calc(sibling-index() * .2s);
 }
 
 .shaking {
