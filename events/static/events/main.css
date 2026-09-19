@@ -226,7 +226,7 @@ nav {
 }
 
 .appearing-sequence {
-    animation-delay: calc(sibling-index() * .2s);
+    animation-delay: calc(sibling-index() * .1s);
 }
 
 .shaking {
