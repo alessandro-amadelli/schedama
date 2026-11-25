@@ -264,6 +264,15 @@ def participate_view(request, eventID):
     # Retrieving event data
     event_data = get_event_data(eventID)
 
+    print(
+        "IP DEBUG",
+        request.META.get("REMOTE_ADDR"),
+        request.META.get("HTTP_CF_CONNECTING_IP"),
+        request.META.get("HTTP_X_FORWARDED_FOR"),
+        request.META.get("HTTP_X_REAL_IP"),
+        flush=True
+    )
+
     # Return page not found
     if not event_data:
         return error404_view(request, None, eventID)
