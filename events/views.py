@@ -22,6 +22,10 @@ from schedama.settings import CACHE_TTL, CACHE_DB_TTL, SECRET_KEY
 from .forms import EventForm, PasswordForm, PARTICIPANT_NAME_MAX_LENGTH
 
 
+# Constants
+EVENT_BIN_MAX = 50
+
+
 class ServiceWorker(TemplateView):
     template_name = "events/sw.js"
     content_type = "application/javascript"
@@ -618,7 +622,7 @@ def update_event_view(request):
         event_data["settings"]["maintenance_mode"] = (
             form.cleaned_data["settings"].get("maintenance_mode", False)
         )
-        event_data["event_bin"] = event_bin
+        event_data["event_bin"] = event_bin[-EVENT_BIN_MAX:]  # Limit event_bin to last N participants
 
         # Check if user has modified security settings
         custom_validation = False
@@ -786,7 +790,7 @@ def modify_participants_view(request):
             event_data["item_type"],
             {
                 "participants": participants,
-                "event_bin": event_data.get("event_bin", [])
+                "event_bin": event_data.get("event_bin", [])[-EVENT_BIN_MAX:]
             }
         )
         result = True

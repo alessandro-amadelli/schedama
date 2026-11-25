@@ -41,15 +41,15 @@ class EventForm(forms.Form):
 
     def clean_author(self):
         author = self.cleaned_data.get("author", "")
-        return Truncator(author).chars(AUTHOR_MAX_LENGTH)
+        return Truncator(author).chars(AUTHOR_MAX_LENGTH)[:AUTHOR_MAX_LENGTH]
 
     def clean_title(self):
         title = self.cleaned_data["title"]
-        return Truncator(title).chars(TITLE_MAX_LENGTH)
+        return Truncator(title).chars(TITLE_MAX_LENGTH)[:TITLE_MAX_LENGTH]
 
     def clean_description(self):
         description = self.cleaned_data.get("description", "")
-        return Truncator(description).chars(DESCRIPTION_MAX_LENGTH)
+        return Truncator(description).chars(DESCRIPTION_MAX_LENGTH)[:DESCRIPTION_MAX_LENGTH]
 
     def clean_dates(self):
         dates = self.cleaned_data.get("dates", [])
@@ -77,7 +77,7 @@ class EventForm(forms.Form):
 
     def clean_location(self):
         location = self.cleaned_data.get("location", "")
-        return Truncator(location).chars(LOCATION_MAX_LENGTH)
+        return Truncator(location).chars(LOCATION_MAX_LENGTH)[:LOCATION_MAX_LENGTH]
 
     def clean_has_parking(self):
         has_parking = self.cleaned_data["has_parking"]
@@ -87,7 +87,7 @@ class EventForm(forms.Form):
 
     def clean_parking(self):
         parking = self.cleaned_data.get("parking", "")
-        return Truncator(parking).chars(LOCATION_MAX_LENGTH)
+        return Truncator(parking).chars(LOCATION_MAX_LENGTH)[:LOCATION_MAX_LENGTH]
 
     def clean_duration(self):
         duration = self.cleaned_data["duration"]
@@ -122,7 +122,7 @@ class EventForm(forms.Form):
             if not isinstance(dates, list):
                 dates = []
             item = {
-                "name": Truncator(name.strip()).chars(PARTICIPANT_NAME_MAX_LENGTH),
+                "name": Truncator(name.strip()).chars(PARTICIPANT_NAME_MAX_LENGTH)[:PARTICIPANT_NAME_MAX_LENGTH],
                 "dates": sorted({d for d in dates if isinstance(d, str) and d in event_dates}),
             }
             uid = p.get("uid")
@@ -133,7 +133,7 @@ class EventForm(forms.Form):
 
     def clean_event_theme(self):
         event_theme = self.cleaned_data["event_theme"]
-        return Truncator(event_theme).chars(THEME_MAX_LENGTH)
+        return Truncator(event_theme).chars(THEME_MAX_LENGTH)[:THEME_MAX_LENGTH]
 
     def clean_settings(self):
         settings = self.cleaned_data["settings"]
