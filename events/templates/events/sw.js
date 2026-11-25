@@ -1,4 +1,4 @@
-const cacheName = 'schedama-cache-v3.6.28';
+const cacheName = 'schedama-cache-{{ build_id }}';
 
 {% load static %}
 
@@ -22,12 +22,15 @@ const cacheAssets = [
 	"{% url 'privacy_view' %}",
 ];
 
-self.addEventListener('install', async e => {
-	const cache = await caches.open(cacheName);
-	await cache.addAll(cacheAssets);
-    const cacheContent = await cache.keys();
-	return self.skipWaiting();
+
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(cacheName)
+      .then(cache => cache.addAll(cacheAssets))
+      .then(() => self.skipWaiting())
+  );
 });
+
 
 self.addEventListener('activate', e => {
   e.waitUntil(
@@ -51,11 +54,13 @@ self.addEventListener('fetch', async e => {
 	}
 });
 
+
 async function cacheFirst(req) {
 	const cache = await caches.open(cacheName);
 	const cached = await cache.match(req);
 	return cached || fetch(req);
 }
+
 
 async function networkAndCache(req) {
 	const cache = await caches.open(cacheName);

@@ -4,6 +4,9 @@ from django.views.generic import TemplateView
 
 from . import views
 
+import os
+BUILD_ID = os.environ.get("RENDER_GIT_COMMIT", "dev")[:12]
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('robots.txt', views.robots_view, name='robots_view'),
@@ -27,6 +30,8 @@ urlpatterns = [
     path('privacy/', views.privacy_view, name='privacy_view'),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path(
-        'sw', (TemplateView.as_view(template_name="events/sw.js", content_type='application/javascript', )), name='sw'
+        'sw', (TemplateView.as_view(
+            template_name="events/sw.js", content_type='application/javascript', extra_context={'build_id': BUILD_ID}
+        )), name='sw'
     ),
 ]

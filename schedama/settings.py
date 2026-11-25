@@ -32,7 +32,6 @@ DEBUG = os.environ.get("SCHEDAMA_DEBUG", "True") == "True"
 ALLOWED_HOSTS = os.environ.get("SCHEDAMA_ALLOWED_HOSTS", "").split()
 
 # Application definition
-
 INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'django.contrib.auth',
@@ -150,7 +149,8 @@ if os.environ.get("SCHEDAMA_ENVIRONMENT", "TEST") == "PRODUCTION":
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.redis.RedisCache",
-            "LOCATION": os.environ.get("SCHEDAMA_REDIS_URL", "")
+            "LOCATION": os.environ.get("SCHEDAMA_REDIS_URL", ""),
+            "KEY_PREFIX": os.environ.get("RENDER_GIT_COMMIT", "")[:12],
         }
     }
 else:
