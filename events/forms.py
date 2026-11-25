@@ -1,8 +1,11 @@
+import re
+from datetime import datetime
+
 from django import forms
 from django.utils.text import Truncator
 from django.utils.translation import gettext as _
 
-# Max lengths of EventForm fields
+# Max lengths of EventForm fields and constants for validation
 AUTHOR_MAX_LENGTH = 30
 TITLE_MAX_LENGTH = 150
 DESCRIPTION_MAX_LENGTH = 400
@@ -10,6 +13,11 @@ LOCATION_MAX_LENGTH = 100
 DURATION_MAX = (60 * 24 * 30) + (60 * 23) + 59
 PARTICIPANT_NAME_MAX_LENGTH = 30
 THEME_MAX_LENGTH = 20
+MAX_DATES = 30
+MAX_PARTICIPANTS = 200
+DATE_FORMAT = "%Y-%m-%dT%H:%M"
+DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}")
+SETTINGS_KEYS = ("add_participant", "edit_participant", "remove_participant", "maintenance_mode")
 
 
 class EventForm(forms.Form):
@@ -45,7 +53,21 @@ class EventForm(forms.Form):
 
     def clean_dates(self):
         dates = self.cleaned_data.get("dates", [])
-        return list(set(dates))
+        if not isinstance(dates, list) or not dates:
+            raise forms.ValidationError(_("Please provide at least one date."))
+        if len(dates) > MAX_DATES:
+            raise forms.ValidationError(
+                _("Maximum number of dates exceeded. You can provide a maximum of %(max_dates)s dates.") %
+                {"max_dates": MAX_DATES}
+            )
+        for d in dates:
+            if not isinstance(d, str) or not DATE_RE.match(d):
+                raise forms.ValidationError(_("One or more dates are not in the correct format."))
+            try:
+                datetime.strptime(d, DATE_FORMAT)
+            except ValueError:
+                raise forms.ValidationError(_("Invalid date value. Please provide valid dates."))
+        return sorted(set(dates))
 
     def clean_has_location(self):
         has_location = self.cleaned_data["has_location"]
@@ -79,9 +101,35 @@ class EventForm(forms.Form):
         participants = self.cleaned_data.get("participants")
         if participants is None:
             participants = []
+        if not isinstance(participants, list):
+            raise forms.ValidationError(_("Participants must be a list."))
+        if len(participants) > MAX_PARTICIPANTS:
+            raise forms.ValidationError(
+                _("Too many participants. Current maximum limit: %(max_participants)s participants per event.") %
+                {"max_participants": MAX_PARTICIPANTS}
+            )
+
+        # Cleaning and validating participants
+        event_dates = set(self.cleaned_data.get("dates", []))
+        cleaned = []
         for p in participants:
-            p["name"] = Truncator(p.get("name", "")).chars(PARTICIPANT_NAME_MAX_LENGTH)
-        return participants
+            if not isinstance(p, dict):
+                continue
+            name = p.get("name")
+            if not isinstance(name, str) or not name.strip():
+                continue
+            dates = p.get("dates", [])
+            if not isinstance(dates, list):
+                dates = []
+            item = {
+                "name": Truncator(name.strip()).chars(PARTICIPANT_NAME_MAX_LENGTH),
+                "dates": sorted({d for d in dates if isinstance(d, str) and d in event_dates}),
+            }
+            uid = p.get("uid")
+            if isinstance(uid, str) and uid.strip():
+                item["uid"] = uid.strip()[:16]
+            cleaned.append(item)
+        return cleaned
 
     def clean_event_theme(self):
         event_theme = self.cleaned_data["event_theme"]
@@ -89,7 +137,9 @@ class EventForm(forms.Form):
 
     def clean_settings(self):
         settings = self.cleaned_data["settings"]
-        return settings
+        if not isinstance(settings, dict):
+            raise forms.ValidationError(_("Invalid settings."))
+        return {k: bool(settings.get(k, False)) for k in SETTINGS_KEYS}
 
     @staticmethod
     def clean_item_type():

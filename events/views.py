@@ -19,7 +19,7 @@ from django_ratelimit.decorators import ratelimit
 from collections import Counter
 import schedama.dynamodb_ops as dynamodb_ops
 from schedama.settings import CACHE_TTL, CACHE_DB_TTL, SECRET_KEY
-from .forms import EventForm, PasswordForm
+from .forms import EventForm, PasswordForm, PARTICIPANT_NAME_MAX_LENGTH
 
 
 class ServiceWorker(TemplateView):
@@ -90,6 +90,12 @@ def validate_event(event_data, custom_validation=False):
         event_data["event_theme"] = form.cleaned_data["event_theme"]
         event_data["item_type"] = form.cleaned_data["item_type"]
         event_data["private_event"] = form.cleaned_data.get("private_event", False)
+        event_data["dates"] = form.cleaned_data["dates"]
+        event_data["participants"] = form.cleaned_data["participants"]
+        event_data["settings"] = form.cleaned_data["settings"]
+        event_data["has_parking"] = form.cleaned_data["has_parking"]
+        event_data["parking"] = form.cleaned_data["parking"]
+
         # Saving event password
         if custom_validation and event_data["private_event"]:
             password = form.cleaned_data.get("password_1", None)
@@ -165,6 +171,14 @@ def privacy_view(request):
     return render(request, "events/privacy.html")
 
 
+# Fields that can be included in the user's request when creating a new event
+CREATE_FIELDS = {
+    "author", "title", "description", "has_location", "location", "has_parking",
+    "parking", "dates", "duration", "participants", "event_theme", "settings",
+    "private_event", "password_1", "password_2",
+}
+
+
 @ratelimit(key='ip', rate='3/m', method='POST', block=True)
 def save_event_view(request):
     """
@@ -173,23 +187,17 @@ def save_event_view(request):
     if request.method != 'POST':
         return redirect("index")
 
-    event_data = json.loads(request.body)
-    event_data["item_type"] = "event"
-
-    # Check if 'item_id' is included.
-    # It shouldn't be present because this request is only used to create
-    # new events, not to edit old ones.
-    if "item_id" in event_data.keys():
+    payload = json.loads(request.body)
+    if not isinstance(payload, dict):
         response = {
             "status": "ERROR",
-            "description": _(
-                "You are not authorized to perform this operation."
-            )
+            "description": _("Sorry, submitted data is invalid.")
         }
         return JsonResponse(response)
 
-    # Order event dates
-    event_data["dates"].sort()
+    # Get event data filtering only the allowed fields
+    event_data = {k: v for k, v in payload.items() if k in CREATE_FIELDS}
+    event_data["item_type"] = "event"
 
     # Activate form custom validation (for private event settings managing)
     custom_validation = True
@@ -338,7 +346,13 @@ def add_participant_view(request):
     admin_key = request_data.get("admin_key", None)
 
     # Event data retrieved from database
-    event_data = get_event_data(item_id)
+    event_data = get_event_data(item_id) if isinstance(item_id, str) else None
+    if not event_data:
+        response = {
+            "status": "ERROR",
+            "description": _("An error has occurred.")
+        }
+        return JsonResponse(response)
     event_settings = event_data["settings"]
 
     ### AUTHORIZATION CHECKS ###
@@ -378,9 +392,12 @@ def add_participant_view(request):
         return JsonResponse(response)
     ### ###
     
-    # Adding new participant to the event (after checking correct format)
-    name_ok = new_participant.get("name", "")
-    if name_ok == "":
+    # Adding new participant to the event (after validating)
+    if (
+        not isinstance(new_participant, dict)
+        or not isinstance(new_participant.get("name"), str)
+        or not new_participant["name"].strip()
+    ):
         response = {
             "status": "ERROR",
             "description": _("An error has occurred.")
@@ -388,7 +405,7 @@ def add_participant_view(request):
         return JsonResponse(response)
 
     new_participant_ok = {
-        "name": name_ok[:30],
+        "name": new_participant["name"].strip()[:PARTICIPANT_NAME_MAX_LENGTH],
         "dates": new_participant.get("dates", [])
     }
 
@@ -662,9 +679,23 @@ def modify_participants_view(request):
     # Retrieve request data
     request_data = json.loads(request.body)
 
-    item_id = request_data["item_id"]
-    to_modify = request_data["modifications"].get("edited", {})
-    to_delete = request_data["modifications"].get("deleted", [])
+    item_id = request_data.get("item_id")
+    modifications = request_data.get("modifications")
+    if not isinstance(item_id, str) or not isinstance(modifications, dict):
+        response = {
+            "status": "ERROR",
+            "description": _("Sorry, submitted data is invalid.")
+        }
+        return JsonResponse(response)
+
+    to_modify = modifications.get("edited", {})
+    to_delete = modifications.get("deleted", [])
+    if not isinstance(to_modify, dict) or not isinstance(to_delete, list):
+        response = {
+            "status": "ERROR",
+            "description": _("Sorry, submitted data is invalid.")
+        }
+        return JsonResponse(response)
 
     # If there are no modifications then returns "OK"
     if len(to_modify) + len(to_delete) == 0:
@@ -712,8 +743,13 @@ def modify_participants_view(request):
         # Applying modifications
         for i, p in enumerate(event_data["participants"]):
             uid = p.get("uid", "")
-            if uid in to_modify.keys():
-                event_data["participants"][i] = to_modify[uid]
+            mod = to_modify.get(uid)
+            if isinstance(mod, dict):
+                event_data["participants"][i] = {
+                    "uid": uid,
+                    "name": mod.get("name", p.get("name", "")),
+                    "dates": mod.get("dates", [])
+                }
 
     # If the setting that allows for participants removal is true
     if remove_participant:

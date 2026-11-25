@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 08:53+0200\n"
+"POT-Creation-Date: 2026-11-25 12:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\staticfiles\events\edit_event.js:213 .\staticfiles\events\new_event.js:520
-#: .\staticfiles\events\view_event.js:314
+#: .\staticfiles\events\view_event.js:327
 msgid "d"
 msgstr ""
 
@@ -42,25 +42,25 @@ msgstr "Per favore, controlla i campi di input."
 #: .\staticfiles\events\edit_event.js:568
 #: .\staticfiles\events\edit_event.js:618
 #: .\staticfiles\events\edit_event.js:670 .\staticfiles\events\new_event.js:862
-#: .\staticfiles\events\view_event.js:586
-#: .\staticfiles\events\view_event.js:703
+#: .\staticfiles\events\view_event.js:599
+#: .\staticfiles\events\view_event.js:716
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
-#: .\staticfiles\events\history.js:11 .\staticfiles\events\history.js:23
-#: .\staticfiles\events\history.js:27
+#: .\staticfiles\events\history.js:13 .\staticfiles\events\history.js:25
+#: .\staticfiles\events\history.js:29
 msgid "Last visited"
 msgstr ""
 
-#: .\staticfiles\events\history.js:15 .\staticfiles\events\history.js:19
+#: .\staticfiles\events\history.js:17 .\staticfiles\events\history.js:21
 msgid "Title"
 msgstr ""
 
-#: .\staticfiles\events\history.js:48
+#: .\staticfiles\events\history.js:50
 msgid "Nothing to see here..."
 msgstr "Niente da vedere qui..."
 
-#: .\staticfiles\events\history.js:88
+#: .\staticfiles\events\history.js:90
 msgid "Author:"
 msgstr "Autore:"
 
@@ -155,50 +155,50 @@ msgstr "Pagina amministrazione"
 msgid "Data saved to history"
 msgstr "Dati salvati in cronologia"
 
-#: .\staticfiles\events\utilities.js:65
+#: .\staticfiles\events\utilities.js:71
 msgid "Lights off"
 msgstr "Spegni la luce"
 
-#: .\staticfiles\events\utilities.js:113
+#: .\staticfiles\events\utilities.js:119
 msgid "Lights on"
 msgstr "Accendi la luce"
 
-#: .\staticfiles\events\utilities.js:143
+#: .\staticfiles\events\utilities.js:149
 msgid "Loading, please wait."
 msgstr "Caricamento, attendi per favore."
 
-#: .\staticfiles\events\utilities.js:265
+#: .\staticfiles\events\utilities.js:271
 msgid "You've been invited to an event on Schedama: "
 msgstr "Sei stato invitato a un evento su Schedama: "
 
-#: .\staticfiles\events\utilities.js:310
+#: .\staticfiles\events\utilities.js:316
 msgid "Copy url"
 msgstr "Copia url"
 
-#: .\staticfiles\events\view_event.js:287
+#: .\staticfiles\events\view_event.js:300
 msgid "Ended"
 msgstr "Terminato"
 
-#: .\staticfiles\events\view_event.js:297
+#: .\staticfiles\events\view_event.js:310
 msgid "In progress"
 msgstr "In corso"
 
-#: .\staticfiles\events\view_event.js:356
+#: .\staticfiles\events\view_event.js:369
 msgid "Confirmed"
 msgstr "Confermati"
 
-#: .\staticfiles\events\view_event.js:356
+#: .\staticfiles\events\view_event.js:369
 msgid "Not confirmed"
 msgstr "Non confermati"
 
-#: .\staticfiles\events\view_event.js:441
+#: .\staticfiles\events\view_event.js:454
 msgid "No Indications"
 msgstr "Nessuna indicazione"
 
-#: .\staticfiles\events\view_event.js:458
+#: .\staticfiles\events\view_event.js:471
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\staticfiles\events\view_event.js:761
+#: .\staticfiles\events\view_event.js:777
 msgid "You reacted with"
 msgstr "Hai reagito con"
