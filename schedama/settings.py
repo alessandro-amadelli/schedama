@@ -137,12 +137,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default cache TTLs values
-CACHE_TTL = 60 * 15  # for entire views
+CACHE_TTL = 60 * 15  # for views
 CACHE_DB_TTL = 60 * 60 * 24 * 2  # for database records (eg.: events)
 
 # If production environment
 if os.environ.get("SCHEDAMA_ENVIRONMENT", "TEST") == "PRODUCTION":
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+    }
 
     CACHES = {
         "default": {
