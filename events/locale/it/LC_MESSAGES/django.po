@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-25 12:44+0100\n"
+"POT-Creation-Date: 2026-11-25 13:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1624,3 +1624,7 @@ msgstr "Password errata! Ehm...sei sicuro di poter vedere questo evento?"
 #: .\events\views.py:1017
 msgid "Emoji is required."
 msgstr "Emoji obbligatoria."
+
+#: .\events\views.py:1097
+msgid "Too many requests. Please try again later."
+msgstr "Troppe richieste. Per favore riprova più tardi."

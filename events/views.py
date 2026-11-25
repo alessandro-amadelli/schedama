@@ -264,15 +264,6 @@ def participate_view(request, eventID):
     # Retrieving event data
     event_data = get_event_data(eventID)
 
-    print(
-        "IP DEBUG",
-        request.META.get("REMOTE_ADDR"),
-        request.META.get("HTTP_CF_CONNECTING_IP"),
-        request.META.get("HTTP_X_FORWARDED_FOR"),
-        request.META.get("HTTP_X_REAL_IP"),
-        flush=True
-    )
-
     # Return page not found
     if not event_data:
         return error404_view(request, None, eventID)
@@ -1097,6 +1088,31 @@ def get_reactions_view(request, eventID):
     }
 
     return JsonResponse(response)
+
+
+def ratelimited_view(request, exception):
+    """
+    Called by django_ratelimit's RatelimitMiddleware when a limit is exceeded.
+    """
+    message = _("Too many requests. Please try again later.")
+
+    # The password page is a classic form POST: show the error on the same page
+    if request.resolver_match and request.resolver_match.url_name == "password_check":
+        form = PasswordForm(request.POST)
+        form.add_error("password", message)
+        context = {
+            "event_id": request.POST.get("event_id", ""),
+            "admin_key": request.POST.get("admin_key", ""),
+            "form": form,
+        }
+        return render(request, "events/private_event.html", context, status=429)
+
+    # Every other rate-limited endpoint is called with fetch() and expects JSON
+    response = {
+        "status": "ERROR",
+        "description": message
+    }
+    return JsonResponse(response, status=429)
 
 
 @cache_page(CACHE_TTL)

@@ -54,6 +54,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+RATELIMIT_IP_META_KEY = "schedama.client_ip.get_client_ip"
+RATELIMIT_VIEW = "events.views.ratelimited_view"
+MIDDLEWARE += ["django_ratelimit.middleware.RatelimitMiddleware"]
+
 ROOT_URLCONF = 'schedama.urls'
 
 TEMPLATES = [
