@@ -773,10 +773,8 @@ function saveLocally() {
         selectedTheme = "";
     }
 
-    // Security
+    // Security (passwords are never saved in localStorage)
     const privateEvent = document.querySelector("#checkPrivateEvent").checked;
-    const password1 = document.querySelector("#eventPassword1").value;
-    const password2 = document.querySelector("#eventPassword2").value;
 
     // Create unsaved event object
     unsavedEvent = {
@@ -796,9 +794,7 @@ function saveLocally() {
             edit_participant: editParticipant,
             remove_participant: removeParticipant
         },
-        private_event: privateEvent,
-        password_1: password1,
-        password_2: password2
+        private_event: privateEvent
     }
 
     // Save event data to local storage
@@ -836,6 +832,10 @@ async function sendEventToServer() {
     } else {
         data["event_theme"] = "";
     }
+
+    // Passwords are read from the form only when sending (never stored locally)
+    data["password_1"] = document.querySelector("#eventPassword1").value;
+    data["password_2"] = document.querySelector("#eventPassword2").value;
 
     let reqHeaders = new Headers();
     reqHeaders.append('Content-Type', 'application/json');

@@ -1,8 +1,6 @@
 /* CSS variables for LIGHT MODE */
 :root {
     --accent-color: #FFB703;
-    /* --body-background: linear-gradient(180deg, #118ab2 0%, #cff3fe 50%); */
-    --body-background: #D5E4EB;
     --body-bg-color: #D5E4EB;
     --card-bg-color: #fff;
     --color: #023047;
@@ -28,8 +26,6 @@
 /* CSS variables for DARK MODE */
 .dark-mode {
     --accent-color: #FFB703;
-    /* --body-background: linear-gradient(180deg, #073b4c 60%, rgb(37, 37, 37) 100%); */
-    --body-background: #023047;
     --body-bg-color: #023047;
     --card-bg-color: rgba(0,0,0,.2);
     --color: #fff;
@@ -240,7 +236,6 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--color) !important;
     background-color: var(--body-bg-color);
-    background: var(--body-background);
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
