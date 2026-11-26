@@ -21,6 +21,10 @@
     --timeline-bg-color: #fff;
     --timeline-text-color: #000;
     --title-color: #023047;
+    --leaf-bg: #fff;
+    --leaf-border: #d3e1e8;
+    --chip-bg: #f1f6f8;
+    --chip-border: #d3e1e8;
 }
 
 /* CSS variables for DARK MODE */
@@ -46,6 +50,10 @@
     --timeline-bg-color: #fff;
     --timeline-text-color: #000;
     --title-color: #023047;
+    --leaf-bg: #0b2f40;
+    --leaf-border: #24485a;
+    --chip-bg: #062a3a;
+    --chip-border: #2f5466;
 }
 
 /*
@@ -765,4 +773,127 @@ div[data-theme="travel"]::before {
 
 .password-form input {
     border: solid thin var(--color);
+}
+
+/* Event dates: grid of calendar leaves (one per day) */
+.event-dates {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.event-dates-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: .75rem;
+    row-gap: .125rem;
+    margin-bottom: .75rem;
+}
+
+.event-dates-title {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.event-dates-summary {
+    font-size: .85rem;
+}
+
+.date-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr));
+    gap: .625rem;
+    align-items: start;
+}
+
+.date-leaf {
+    background-color: var(--leaf-bg);
+    border: 1px solid var(--leaf-border);
+    border-radius: .75rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+.date-leaf-best {
+    border-color: var(--text-green);
+    box-shadow: 0 0 0 1px var(--text-green);
+}
+
+.date-leaf-month {
+    background-color: var(--text-green);
+    color: #023047;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: .2rem 0;
+}
+
+.date-leaf-body {
+    display: flex;
+    flex-direction: column;
+    padding: .375rem .5rem .625rem;
+}
+
+.date-leaf-weekday {
+    font-size: .8rem;
+    color: var(--text-muted-color);
+}
+
+.date-leaf-day {
+    font-size: 1.9rem;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.date-leaf-times {
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+    margin-top: .5rem;
+}
+
+.date-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+    min-height: 1.875rem;
+    border-radius: 999px;
+    background-color: var(--chip-bg);
+    border: 1px solid var(--chip-border);
+    font-size: .95rem;
+    font-weight: 500;
+}
+
+.date-time-best {
+    background-color: var(--text-green);
+    border-color: var(--text-green);
+    color: #023047;
+    font-weight: 600;
+}
+
+.date-legend {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: .75rem 0 0;
+    font-size: .85rem;
+}
+
+.date-legend-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background-color: var(--text-green);
+    color: #023047;
+    font-size: .65rem;
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-26 22:04+0100\n"
+"POT-Creation-Date: 2026-11-26 22:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,7 +69,9 @@ msgstr "Le password inserite non corrispondono."
 #: .\events\forms.py:178
 #, python-format
 msgid "Password length must be between %(min)d and %(max)d characters."
-msgstr "La lunghezza della password deve essere compresa tra %(min)d e %(max)d caratteri."
+msgstr ""
+"La lunghezza della password deve essere compresa tra %(min)d e %(max)d "
+"caratteri."
 
 #: .\events\templates\events\about_us.html:5
 msgid "Learn more about Schedama and how it works | Schedama"
@@ -516,7 +518,7 @@ msgstr "Clicca <strong>Salva</strong> per confermare"
 #: .\events\templates\events\edit_event.html:299
 #: .\events\templates\events\new_event.html:53
 #: .\events\templates\events\under_maintenance.html:68
-#: .\events\templates\events\view_event.html:302
+#: .\events\templates\events\view_event.html:331
 msgid "Save"
 msgstr "Salva"
 
@@ -676,8 +678,8 @@ msgid "Particpant name"
 msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:436
-#: .\events\templates\events\view_event.html:299
-#: .\events\templates\events\view_event.html:386
+#: .\events\templates\events\view_event.html:328
+#: .\events\templates\events\view_event.html:415
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -1519,7 +1521,18 @@ msgstr "Autore:"
 msgid "Add to Google Calendar"
 msgstr "Aggiungi a Google Calendar"
 
-#: .\events\templates\events\view_event.html:129
+#: .\events\templates\events\view_event.html:122
+msgid "Proposed dates"
+msgstr "Date proposte"
+
+#: .\events\templates\events\view_event.html:125
+#, python-format
+msgid "%(counter)s date"
+msgid_plural "%(counter)s dates"
+msgstr[0] "%(counter)s data"
+msgstr[1] "%(counter)s date"
+
+#: .\events\templates\events\view_event.html:144
 msgid ""
 "Best date automatically selected based on attendance. The effective date may "
 "vary as participants enter new confirmations."
@@ -1528,61 +1541,65 @@ msgstr ""
 "data effettiva può variare man mano che i partecipanti inseriscono nuove "
 "conferme."
 
-#: .\events\templates\events\view_event.html:175
+#: .\events\templates\events\view_event.html:160
+msgid "Best date based on availability"
+msgstr "Miglior data in base alle disponibilità"
+
+#: .\events\templates\events\view_event.html:204
 msgid "List"
 msgstr "Lista"
 
-#: .\events\templates\events\view_event.html:182
+#: .\events\templates\events\view_event.html:211
 msgid "Participate"
 msgstr "Partecipa"
 
-#: .\events\templates\events\view_event.html:249
+#: .\events\templates\events\view_event.html:278
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:256
+#: .\events\templates\events\view_event.html:285
 msgid "View by date"
 msgstr "Vedi per data"
 
-#: .\events\templates\events\view_event.html:260
+#: .\events\templates\events\view_event.html:289
 #, python-format
 msgid "You can click on %(icon_yes)s or %(icon_no)s to change vote."
 msgstr "Puoi cliccare su %(icon_yes)s o %(icon_no)s per cambiare voto."
 
-#: .\events\templates\events\view_event.html:305
-#: .\events\templates\events\view_event.html:353
+#: .\events\templates\events\view_event.html:334
+#: .\events\templates\events\view_event.html:382
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:328
+#: .\events\templates\events\view_event.html:357
 msgid "Date view"
 msgstr "Vista per data"
 
-#: .\events\templates\events\view_event.html:332
+#: .\events\templates\events\view_event.html:361
 msgid "Select a date to view confirmed participants"
 msgstr "Seleziona una data per vedere i partecipanti confermati"
 
-#: .\events\templates\events\view_event.html:335
+#: .\events\templates\events\view_event.html:364
 msgid "-"
 msgstr ""
 
-#: .\events\templates\events\view_event.html:350
+#: .\events\templates\events\view_event.html:379
 msgid "Back to list"
 msgstr "Torna alla lista"
 
-#: .\events\templates\events\view_event.html:366
+#: .\events\templates\events\view_event.html:395
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:372
+#: .\events\templates\events\view_event.html:401
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:374
+#: .\events\templates\events\view_event.html:403
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: .\events\templates\events\view_event.html:389
+#: .\events\templates\events\view_event.html:418
 msgid "Join"
 msgstr "Partecipa"
 

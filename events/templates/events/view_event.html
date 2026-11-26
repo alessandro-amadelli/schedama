@@ -114,24 +114,53 @@
                 </div>
             </div>
             
-            <!-- Event date and time -->
-            <div class="row mb-4">
-                {% for date in event.dates_formatted %}
-                    <div class="row mb-2 date-formatted{% if event.best_date_formatted and date != event.best_date_formatted %} text-muted{% endif %}">
-                        <div class="col-12 col-md mb-0">
-                            <i class="fa-solid fa-calendar-day fs-1 text-green"></i>
-                             <span class="formattedDate">{{ date|date:"D d/m/Y"}}</span>
+            <!-- Event dates -->
+            <section class="event-dates mb-4" aria-labelledby="eventDatesTitle">
+                <div class="event-dates-header">
+                    <h2 class="event-dates-title" id="eventDatesTitle">
+                        <i class="fa-solid fa-calendar-days text-green" aria-hidden="true"></i>
+                        {% translate "Proposed dates" %}
+                    </h2>
+                    <span class="event-dates-summary text-muted">
+                        {% blocktranslate count counter=event.dates|length %}{{ counter }} date{% plural %}{{ counter }} dates{% endblocktranslate %}
+                        {% with first=event.dates_formatted|first last=event.dates_formatted|last %}
+                            · {% if first|date:"Ym" == last|date:"Ym" %}{{ first|date:"F Y" }}{% elif first.year == last.year %}{{ first|date:"F" }} – {{ last|date:"F Y" }}{% else %}{{ first|date:"F Y" }} – {{ last|date:"F Y" }}{% endif %}
+                        {% endwith %}
+                    </span>
+                </div>
+
+                {% regroup event.dates_formatted by date as days %}
+                <div class="date-grid">
+                    {% for day in days %}
+                        <div class="date-leaf{% if event.best_date_formatted.date == day.grouper %} date-leaf-best{% endif %}">
+                            <div class="date-leaf-month">{{ day.grouper|date:"M" }}</div>
+                            <div class="date-leaf-body">
+                                <span class="date-leaf-weekday">{{ day.grouper|date:"D" }}</span>
+                                <span class="date-leaf-day">{{ day.grouper|date:"j" }}</span>
+                                <div class="date-leaf-times">
+                                    {% for date in day.list %}
+                                        {% if date == event.best_date_formatted %}
+                                            <span class="date-time date-time-best" tabindex="0" data-bs-toggle="tooltip"
+                                            data-bs-title="{% translate 'Best date automatically selected based on attendance. The effective date may vary as participants enter new confirmations.' %}">
+                                                <i class="fa-solid fa-check" aria-hidden="true"></i>{{ date|time:"G:i" }}
+                                            </span>
+                                        {% else %}
+                                            <span class="date-time">{{ date|time:"G:i" }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 col-md mb-0">
-                            <i class="fa-solid fa-clock fs-1 text-green"></i>&nbsp;<span class="formattedTime">{{ date|time:"G:i"}}</span>
-                            {% if date == event.best_date_formatted %}
-                                <i class="fa-regular fa-circle-check" data-bs-toggle="tooltip" 
-                                data-bs-title="{% translate 'Best date automatically selected based on attendance. The effective date may vary as participants enter new confirmations.' %}"></i>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
+
+                {% if event.best_date_formatted %}
+                    <p class="date-legend text-muted">
+                        <span class="date-legend-dot" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+                        {% translate "Best date based on availability" %}
+                    </p>
+                {% endif %}
+            </section>
 
             {% if event.has_location %}
                 <!-- Event location -->
