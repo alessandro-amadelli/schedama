@@ -1,19 +1,18 @@
 /* CSS variables for LIGHT MODE */
 :root {
-    --accent-color: #e5597a;
+    --accent-color: #FFB703;
     /* --body-background: linear-gradient(180deg, #118ab2 0%, #cff3fe 50%); */
-    --body-background: #CBF3F0;
-    --body-background: #b5ffe1;
-    --body-bg-color: #b5ffe1;
+    --body-background: #D5E4EB;
+    --body-bg-color: #D5E4EB;
     --card-bg-color: #fff;
-    --color: black;
+    --color: #023047;
     --event-div-bg: #fff;
     --event-ended-bg: rgba(255,0,0,.5);
     --event-started-bg: #06d6a0;
     --input-bg-color: rgba(0,0,0,.05);
     --modal-bg-color: rgba(203, 243, 240, .3);
     --moving-bg-color: #18b2e5;
-    --navbar-bg-color: #fff;
+    --navbar-bg-color: #F8FBFC;
     --shimmer-color: #09ffbf;
     --text-muted-color: rgb(92,92,92);
     --text-blue: #0091c4;
@@ -23,7 +22,7 @@
     --text-yellow: #e4de20;
     --timeline-bg-color: #fff;
     --timeline-text-color: #000;
-    --title-color: #fff;
+    --title-color: #023047;
 }
 
 /* CSS variables for DARK MODE */
