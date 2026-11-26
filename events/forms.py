@@ -15,6 +15,8 @@ PARTICIPANT_NAME_MAX_LENGTH = 30
 THEME_MAX_LENGTH = 20
 MAX_DATES = 30
 MAX_PARTICIPANTS = 200
+PASSWORD_MIN_LENGTH = 8
+PASSWORD_MAX_LENGTH = 100
 DATE_FORMAT = "%Y-%m-%dT%H:%M"
 DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}")
 SETTINGS_KEYS = ("add_participant", "edit_participant", "remove_participant", "maintenance_mode")
@@ -168,6 +170,14 @@ class EventForm(forms.Form):
                 self.add_error(
                     None,
                     _("The passwords you entered do not match.")
+                )
+                return False
+            if not PASSWORD_MIN_LENGTH <= len(self.cleaned_data["password_1"]) <= PASSWORD_MAX_LENGTH:
+                self.add_error(
+                    None,
+                    _("Password length must be between %(min)d and %(max)d characters.") % {
+                        "min": PASSWORD_MIN_LENGTH, "max": PASSWORD_MAX_LENGTH,
+                    }
                 )
                 return False
 
