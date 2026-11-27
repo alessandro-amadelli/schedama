@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-26 22:55+0100\n"
+"POT-Creation-Date: 2026-11-27 12:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,12 +184,14 @@ msgstr "Titolo"
 #: .\events\templates\events\edit_event.html:97
 #: .\events\templates\events\new_event.html:34
 #: .\events\templates\events\new_event.html:125
+#: .\events\templates\events\view_event.html:214
 msgid "Description"
 msgstr "Descrizione"
 
 #: .\events\templates\events\about_us.html:85
 #: .\events\templates\events\edit_event.html:106
 #: .\events\templates\events\new_event.html:36
+#: .\events\templates\events\view_event.html:190
 msgid "Location"
 msgstr "Location"
 
@@ -202,6 +204,7 @@ msgstr "Data e ora"
 #: .\events\templates\events\about_us.html:87
 #: .\events\templates\events\edit_event.html:164
 #: .\events\templates\events\new_event.html:40
+#: .\events\templates\events\view_event.html:170
 msgid "Duration"
 msgstr "Durata"
 
@@ -315,7 +318,7 @@ msgstr ""
 "modificare le date, la descrizione, ecc."
 
 #: .\events\templates\events\edit_event.html:17
-#: .\events\templates\events\view_event.html:48
+#: .\events\templates\events\view_event.html:47
 msgid "Event Cancelled"
 msgstr "Evento Annullato"
 
@@ -328,14 +331,14 @@ msgid "Manage your event"
 msgstr "Gestisci il tuo evento"
 
 #: .\events\templates\events\edit_event.html:38
-#: .\events\templates\events\view_event.html:93
+#: .\events\templates\events\view_event.html:92
 msgid "A password is needed to access this event."
 msgstr "È necessaria una password per accedere a questo evento."
 
 #: .\events\templates\events\edit_event.html:40
 #: .\events\templates\events\edit_event.html:388
 #: .\events\templates\events\private_event.html:9
-#: .\events\templates\events\view_event.html:95
+#: .\events\templates\events\view_event.html:94
 msgid "Private event"
 msgstr "Evento privato"
 
@@ -487,6 +490,7 @@ msgstr "Viaggio"
 
 #: .\events\templates\events\edit_event.html:241
 #: .\events\templates\events\new_event.html:44
+#: .\events\templates\events\view_event.html:180
 msgid "Participants"
 msgstr "Partecipanti"
 
@@ -518,7 +522,7 @@ msgstr "Clicca <strong>Salva</strong> per confermare"
 #: .\events\templates\events\edit_event.html:299
 #: .\events\templates\events\new_event.html:53
 #: .\events\templates\events\under_maintenance.html:68
-#: .\events\templates\events\view_event.html:331
+#: .\events\templates\events\view_event.html:393
 msgid "Save"
 msgstr "Salva"
 
@@ -678,8 +682,8 @@ msgid "Particpant name"
 msgstr "Nome partecipante"
 
 #: .\events\templates\events\edit_event.html:436
-#: .\events\templates\events\view_event.html:328
-#: .\events\templates\events\view_event.html:415
+#: .\events\templates\events\view_event.html:390
+#: .\events\templates\events\view_event.html:477
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -1501,38 +1505,38 @@ msgstr ""
 "Puoi vedere i dettagli dell'evento, registrare la tua partecipazione e "
 "vedere gli altri partecipanti."
 
-#: .\events\templates\events\view_event.html:61
+#: .\events\templates\events\view_event.html:60
 msgid "Logout"
 msgstr ""
 
-#: .\events\templates\events\view_event.html:70
+#: .\events\templates\events\view_event.html:69
 msgid "Starts in"
 msgstr "Inizia tra"
 
-#: .\events\templates\events\view_event.html:72
+#: .\events\templates\events\view_event.html:71
 msgid "d"
 msgstr "g"
 
-#: .\events\templates\events\view_event.html:101
+#: .\events\templates\events\view_event.html:100
 msgid "Author:"
 msgstr "Autore:"
 
-#: .\events\templates\events\view_event.html:112
+#: .\events\templates\events\view_event.html:111
 msgid "Add to Google Calendar"
 msgstr "Aggiungi a Google Calendar"
 
-#: .\events\templates\events\view_event.html:122
+#: .\events\templates\events\view_event.html:121
 msgid "Proposed dates"
 msgstr "Date proposte"
 
-#: .\events\templates\events\view_event.html:125
+#: .\events\templates\events\view_event.html:124
 #, python-format
 msgid "%(counter)s date"
 msgid_plural "%(counter)s dates"
 msgstr[0] "%(counter)s data"
 msgstr[1] "%(counter)s date"
 
-#: .\events\templates\events\view_event.html:144
+#: .\events\templates\events\view_event.html:143
 msgid ""
 "Best date automatically selected based on attendance. The effective date may "
 "vary as participants enter new confirmations."
@@ -1541,71 +1545,112 @@ msgstr ""
 "data effettiva può variare man mano che i partecipanti inseriscono nuove "
 "conferme."
 
-#: .\events\templates\events\view_event.html:160
+#: .\events\templates\events\view_event.html:159
 msgid "Best date based on availability"
 msgstr "Miglior data in base alle disponibilità"
 
-#: .\events\templates\events\view_event.html:204
+#: .\events\templates\events\view_event.html:202
+msgid "Parking"
+msgstr "Parcheggio"
+
+#: .\events\templates\events\view_event.html:226
 msgid "List"
 msgstr "Lista"
 
-#: .\events\templates\events\view_event.html:211
+#: .\events\templates\events\view_event.html:233
 msgid "Participate"
 msgstr "Partecipa"
 
-#: .\events\templates\events\view_event.html:278
+#: .\events\templates\events\view_event.html:273
+#: .\events\templates\events\view_event.html:465
+msgid "Preferences"
+msgstr "Preferenze"
+
+#: .\events\templates\events\view_event.html:276
+#, python-format
+msgid "%(counter)s participant"
+msgid_plural "%(counter)s participants"
+msgstr[0] "%(counter)s partecipante"
+msgstr[1] "%(counter)s partecipanti"
+
+#: .\events\templates\events\view_event.html:285
+#, python-format
+msgid "%(confirmed)s of %(total)s participants chose at least one date"
+msgstr "%(confirmed)s su %(total)s partecipanti hanno scelto almeno una data"
+
+#: .\events\templates\events\view_event.html:293
+msgid "confirmed"
+msgstr "confermati"
+
+#: .\events\templates\events\view_event.html:294
+msgid "no indication"
+msgstr "nessuna indicazione"
+
+#: .\events\templates\events\view_event.html:300
+msgid "Votes per date"
+msgstr "Voti per data"
+
+#: .\events\templates\events\view_event.html:307
+msgid "Best"
+msgstr "Migliore"
+
+#: .\events\templates\events\view_event.html:316
+msgid "No indication"
+msgstr "Nessuna indicazione"
+
+#: .\events\templates\events\view_event.html:327
+msgid "No preferences yet."
+msgstr "Ancora nessuna preferenza."
+
+#: .\events\templates\events\view_event.html:340
 msgid "Participant list"
 msgstr "Lista partecipanti"
 
-#: .\events\templates\events\view_event.html:285
+#: .\events\templates\events\view_event.html:347
 msgid "View by date"
 msgstr "Vedi per data"
 
-#: .\events\templates\events\view_event.html:289
+#: .\events\templates\events\view_event.html:351
 #, python-format
 msgid "You can click on %(icon_yes)s or %(icon_no)s to change vote."
 msgstr "Puoi cliccare su %(icon_yes)s o %(icon_no)s per cambiare voto."
 
-#: .\events\templates\events\view_event.html:334
-#: .\events\templates\events\view_event.html:382
+#: .\events\templates\events\view_event.html:396
+#: .\events\templates\events\view_event.html:444
 msgid "Close"
 msgstr "Chiudi"
 
-#: .\events\templates\events\view_event.html:357
+#: .\events\templates\events\view_event.html:419
 msgid "Date view"
 msgstr "Vista per data"
 
-#: .\events\templates\events\view_event.html:361
+#: .\events\templates\events\view_event.html:423
 msgid "Select a date to view confirmed participants"
 msgstr "Seleziona una data per vedere i partecipanti confermati"
 
-#: .\events\templates\events\view_event.html:364
+#: .\events\templates\events\view_event.html:426
 msgid "-"
 msgstr ""
 
-#: .\events\templates\events\view_event.html:379
+#: .\events\templates\events\view_event.html:441
 msgid "Back to list"
 msgstr "Torna alla lista"
 
-#: .\events\templates\events\view_event.html:395
+#: .\events\templates\events\view_event.html:457
 msgid "Join event"
 msgstr "Partecipa all'evento"
 
-#: .\events\templates\events\view_event.html:401
+#: .\events\templates\events\view_event.html:463
 msgid "Name"
 msgstr "Nome"
 
-#: .\events\templates\events\view_event.html:403
-msgid "Preferences"
-msgstr "Preferenze"
-
-#: .\events\templates\events\view_event.html:418
+#: .\events\templates\events\view_event.html:480
 msgid "Join"
 msgstr "Partecipa"
 
-#: .\events\views.py:198 .\events\views.py:434 .\events\views.py:458
-#: .\events\views.py:524 .\events\views.py:691 .\events\views.py:700
-#: .\events\views.py:773 .\events\views.py:807
+#: .\events\views.py:198 .\events\views.py:443 .\events\views.py:467
+#: .\events\views.py:533 .\events\views.py:700 .\events\views.py:709
+#: .\events\views.py:782 .\events\views.py:816
 msgid "Sorry, submitted data is invalid."
 msgstr "Spiacente, i dati inviati non sono validi."
 
@@ -1615,23 +1660,23 @@ msgstr ""
 "Si è verificato un errore durante la creazione dell'evento. Per favore "
 "riprova più tardi."
 
-#: .\events\views.py:357 .\events\views.py:407 .\events\views.py:536
-#: .\events\views.py:716 .\events\views.py:869 .\events\views.py:923
+#: .\events\views.py:366 .\events\views.py:416 .\events\views.py:545
+#: .\events\views.py:725 .\events\views.py:878 .\events\views.py:932
 msgid "An error has occurred."
 msgstr "Si è verificato un errore."
 
-#: .\events\views.py:381 .\events\views.py:726 .\events\views.py:1037
-#: .\events\views.py:1080
+#: .\events\views.py:390 .\events\views.py:735 .\events\views.py:1046
+#: .\events\views.py:1089
 msgid "The event is currently under maintenance. Please try again later."
 msgstr "L'evento è attualmente in manutenzione. Per favore riprova più tardi."
 
-#: .\events\views.py:393 .\events\views.py:549 .\events\views.py:673
-#: .\events\views.py:736 .\events\views.py:829 .\events\views.py:842
-#: .\events\views.py:890 .\events\views.py:903 .\events\views.py:1047
+#: .\events\views.py:402 .\events\views.py:558 .\events\views.py:682
+#: .\events\views.py:745 .\events\views.py:838 .\events\views.py:851
+#: .\events\views.py:899 .\events\views.py:912 .\events\views.py:1056
 msgid "You are not authorized to perform this operation."
 msgstr "Non sei autorizzato ad eseguire questa operazione."
 
-#: .\events\views.py:422
+#: .\events\views.py:431
 msgid ""
 "Mmmmh, a participant with this name already exists. Maybe you've already "
 "registered? Or just try to be more...original"
@@ -1639,14 +1684,14 @@ msgstr ""
 "Mmmmh, un partecipante con questo nome esiste già. Forse ti sei già "
 "registrato? Oppure prova solo ad essere più...originale"
 
-#: .\events\views.py:968
+#: .\events\views.py:977
 msgid "Wrong password! Ehm...are you sure you're supposed to see this event?"
 msgstr "Password errata! Ehm...sei sicuro di poter vedere questo evento?"
 
-#: .\events\views.py:1021
+#: .\events\views.py:1030
 msgid "Emoji is required."
 msgstr "Emoji obbligatoria."
 
-#: .\events\views.py:1101
+#: .\events\views.py:1110
 msgid "Too many requests. Please try again later."
 msgstr "Troppe richieste. Per favore riprova più tardi."

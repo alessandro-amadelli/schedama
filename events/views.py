@@ -293,6 +293,15 @@ def participate_view(request, eventID):
     # Format event duration
     event_data["duration"] = int(event_data.get("duration", 60)) or 60
 
+    # Preferences summary: confirmed participants and votes for each date
+    votes = Counter(d for p in event_data["participants"] for d in p["dates"])
+    event_data["confirmed_count"] = sum(1 for p in event_data["participants"] if p["dates"])
+    event_data["unconfirmed_count"] = len(event_data["participants"]) - event_data["confirmed_count"]
+    event_data["date_votes"] = [
+        {"date": d, "date_formatted": df, "count": votes[d]}
+        for d, df in zip(event_data["dates"], event_data["dates_formatted"])
+    ]
+
     # Selecting best date for the event (if event has multiple dates and
     # at least 1 participant)
     if len(event_data["dates"]) > 1 and len(event_data["participants"]) > 0:

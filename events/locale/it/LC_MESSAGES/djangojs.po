@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-25 12:18+0100\n"
+"POT-Creation-Date: 2026-11-27 12:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: .\events\static\events\edit_event.js:213
 #: .\events\static\events\new_event.js:520
-#: .\events\static\events\view_event.js:327
+#: .\events\static\events\view_event.js:306
 msgid "d"
 msgstr "g"
 
@@ -39,7 +39,7 @@ msgid "Date added"
 msgstr "Data aggiunta"
 
 #: .\events\static\events\edit_event.js:538
-#: .\events\static\events\new_event.js:819
+#: .\events\static\events\new_event.js:815
 msgid "Please, check input fields."
 msgstr "Per favore, controlla i campi di input."
 
@@ -47,8 +47,8 @@ msgstr "Per favore, controlla i campi di input."
 #: .\events\static\events\edit_event.js:618
 #: .\events\static\events\edit_event.js:670
 #: .\events\static\events\new_event.js:862
-#: .\events\static\events\view_event.js:599
-#: .\events\static\events\view_event.js:716
+#: .\events\static\events\view_event.js:465
+#: .\events\static\events\view_event.js:582
 msgid "An error has occurred. Please try again later."
 msgstr "Si è verificato un errore. Per favore riprova più tardi."
 
@@ -185,30 +185,14 @@ msgstr "Sei stato invitato ad un evento su Schedama: "
 msgid "Copy url"
 msgstr "Copia url"
 
-#: .\events\static\events\view_event.js:300
+#: .\events\static\events\view_event.js:279
 msgid "Ended"
 msgstr "Concluso"
 
-#: .\events\static\events\view_event.js:310
+#: .\events\static\events\view_event.js:289
 msgid "In progress"
 msgstr "In corso"
 
-#: .\events\static\events\view_event.js:369
-msgid "Confirmed"
-msgstr "Confermati"
-
-#: .\events\static\events\view_event.js:369
-msgid "Not confirmed"
-msgstr "Non confermati"
-
-#: .\events\static\events\view_event.js:454
-msgid "No Indications"
-msgstr "Nessuna indicazione"
-
-#: .\events\static\events\view_event.js:471
-msgid "Preferences"
-msgstr "Preferenze"
-
-#: .\events\static\events\view_event.js:777
+#: .\events\static\events\view_event.js:643
 msgid "You reacted with"
 msgstr "Hai reagito con"

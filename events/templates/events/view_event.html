@@ -41,7 +41,6 @@
         const dates = JSON.parse(document.getElementById('dates').textContent);
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <script src="{% static 'events/view_event.js' %}"></script>
 
     {% if event.is_cancelled %}
@@ -121,7 +120,7 @@
                         <i class="fa-solid fa-calendar-days text-green" aria-hidden="true"></i>
                         {% translate "Proposed dates" %}
                     </h2>
-                    <span class="event-dates-summary text-muted">
+                    <span class="event-dates-summary">
                         {% blocktranslate count counter=event.dates|length %}{{ counter }} date{% plural %}{{ counter }} dates{% endblocktranslate %}
                         {% with first=event.dates_formatted|first last=event.dates_formatted|last %}
                             · {% if first|date:"Ym" == last|date:"Ym" %}{{ first|date:"F Y" }}{% elif first.year == last.year %}{{ first|date:"F" }} – {{ last|date:"F Y" }}{% else %}{{ first|date:"F Y" }} – {{ last|date:"F Y" }}{% endif %}
@@ -155,49 +154,72 @@
                 </div>
 
                 {% if event.best_date_formatted %}
-                    <p class="date-legend text-muted">
+                    <p class="date-legend">
                         <span class="date-legend-dot" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
                         {% translate "Best date based on availability" %}
                     </p>
                 {% endif %}
             </section>
 
-            {% if event.has_location %}
-                <!-- Event location -->
-                <div class="row mb-4">
-                    <div class="col">
-                        <i class="fa-solid fa-location-dot fs-1 text-red"></i>
-                        <a href="" class="maps-link" id="eventLocation" target="_blank">{{ event.location }}</a>
+            <!-- Event details -->
+            <div class="info-cards mb-4">
+                <!-- Event duration -->
+                <div class="info-card">
+                    <div class="info-card-head">
+                        <span class="info-card-icon icon-bg-blue" aria-hidden="true"><i class="fa-solid fa-stopwatch"></i></span>
+                        <span class="info-card-label">{% translate "Duration" %}</span>
                     </div>
-                </div>
-            {% endif %}
-
-            {% if event.has_parking and event.parking %}
-                <!-- Event parking -->
-                <div class="row mb-4">
-                    <div class="col">
-                        <i class="fa-solid fa-square-parking fs-1 text-red"></i>
-                        <a href="" class="maps-link" id="eventParking" target="_blank">{{ event.parking }}</a>
-                    </div>
-                </div>
-            {% endif %}
-
-            <!-- Event duration -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <i class="fa-solid fa-stopwatch fs-1 text-blue"></i>
                     <span id="durationMin" style="display:none;">{{ event.duration }}</span>
-                    <span id="durationText"></span>
+                    <span class="info-card-value" id="durationText"></span>
                 </div>
+
+                <!-- Event participants count -->
+                <div class="info-card">
+                    <div class="info-card-head">
+                        <span class="info-card-icon icon-bg-yellow" aria-hidden="true"><i class="fa-solid fa-user-group"></i></span>
+                        <span class="info-card-label">{% translate "Participants" %}</span>
+                    </div>
+                    <span class="info-card-value">{{ event.participants|length }}</span>
+                </div>
+
+                {% if event.has_location %}
+                    <!-- Event location -->
+                    <div class="info-card info-card-wide position-relative">
+                        <div class="info-card-head">
+                            <span class="info-card-icon icon-bg-red" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+                            <span class="info-card-label">{% translate "Location" %}</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square info-card-external" aria-hidden="true"></i>
+                        </div>
+                        <a href="" class="info-card-link maps-link stretched-link" id="eventLocation" target="_blank">{{ event.location }}</a>
+                    </div>
+                {% endif %}
+
+                {% if event.has_parking and event.parking %}
+                    <!-- Event parking -->
+                    <div class="info-card info-card-wide position-relative">
+                        <div class="info-card-head">
+                            <span class="info-card-icon icon-bg-red" aria-hidden="true"><i class="fa-solid fa-square-parking"></i></span>
+                            <span class="info-card-label">{% translate "Parking" %}</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square info-card-external" aria-hidden="true"></i>
+                        </div>
+                        <a href="" class="info-card-link maps-link stretched-link" id="eventParking" target="_blank">{{ event.parking }}</a>
+                    </div>
+                {% endif %}
+
+                {% if event.description != "" %}
+                    <!-- Event description -->
+                    <div class="info-card info-card-full">
+                        <div class="info-card-head">
+                            <span class="info-card-icon icon-bg-lightblue" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span>
+                            <span class="info-card-label">{% translate "Description" %}</span>
+                        </div>
+                        <p class="info-card-text" id="descriptionText">{{ event.description }}</p>
+                    </div>
+                {% endif %}
             </div>
 
             <!-- Event participants -->
             <div class="row mb-4">
-                <div class="col-4 mb-4">
-                    <i class="fa-solid fa-user-group fs-1 text-yellow"></i>
-                    {{ event.participants|length }}
-                </div>
-                <div class="w-100"></div>
                 <div class="d-grid col-6 col-lg-5 p-1 mx-auto">
                     <button type="button" class="btn btn-light btn-lg" data-bs-target="#modalList" data-bs-toggle="modal">
                         <i class="fa-solid fa-rectangle-list"></i>
@@ -239,33 +261,73 @@
                 </div>
                 <div class="col-12 mt-2 h5 d-none" id="reactedText"></div>
             </div>
-            {% if event.description != "" %}
-                <!-- Event description  -->
-                <hr>
-                <div class="row blurred">
-                    <div class="col-md-1 col-12 m-0 fs-1">
-                        <i class="fa-solid fa-circle-info text-lightblue"></i>
-                    </div>
-                    <div class="col-12 col-md-11 m-0 fs-4">
-                        <span style="white-space: pre-wrap;" id="descriptionText">{{ event.description }}</span>
-                    </div>
-                </div>
-            {% endif %}
         </div>
     </div>
 
-    <!-- Chart area  -->
-    <div class="row p-2 mb-3 event-chart-div shadow rounded{% if event.is_cancelled %} filter-grayscale{% endif %}" id="chartAreaDiv">
-        <div class="col-12 col-lg-4 p-0">
-            <div class="position-relative">
-                <canvas id="totChart"></canvas>
+    <!-- Preferences: confirmed participants and votes per date -->
+    <div class="row mb-3{% if event.is_cancelled %} filter-grayscale{% endif %}">
+        <section class="col-12 event-chart-div shadow rounded p-3 preferences" id="chartAreaDiv" aria-labelledby="preferencesTitle">
+            <div class="preferences-header">
+                <h2 class="preferences-title" id="preferencesTitle">
+                    <i class="fa-solid fa-chart-simple text-blue" aria-hidden="true"></i>
+                    {% translate "Preferences" %}
+                </h2>
+                <span class="preferences-pill">
+                    {% blocktranslate count counter=event.participants|length %}{{ counter }} participant{% plural %}{{ counter }} participants{% endblocktranslate %}
+                </span>
             </div>
-        </div>
-        <div class="col-12 col-lg-8 p-0">
-            <div class="position-relative">
-                <canvas id="datesChart"></canvas>
-            </div>
-        </div>
+
+            {% if event.participants %}
+                <div class="preferences-grid">
+                    <!-- Confirmed participants (doughnut) -->
+                    <div class="pref-card pref-summary">
+                        <div class="donut" data-confirmed="{{ event.confirmed_count }}" data-total="{{ event.participants|length }}">
+                            <svg viewBox="0 0 150 150" role="img" aria-label="{% blocktranslate with confirmed=event.confirmed_count total=event.participants|length %}{{ confirmed }} of {{ total }} participants chose at least one date{% endblocktranslate %}">
+                                <circle class="donut-track" cx="75" cy="75" r="62"></circle>
+                                <circle class="donut-seg donut-seg-confirmed" cx="75" cy="75" r="62"></circle>
+                                <circle class="donut-seg donut-seg-none" cx="75" cy="75" r="62"></circle>
+                            </svg>
+                            <span class="donut-center" aria-hidden="true"><span class="donut-value">{{ event.confirmed_count }}</span>/{{ event.participants|length }}</span>
+                        </div>
+                        <ul class="pref-legend">
+                            <li><span class="pref-dot pref-dot-confirmed"></span><strong>{{ event.confirmed_count }}</strong> {% translate "confirmed" %}</li>
+                            <li><span class="pref-dot pref-dot-none"></span><strong>{{ event.unconfirmed_count }}</strong> {% translate "no indication" %}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Votes for each date (bars) -->
+                    <div class="pref-card pref-votes">
+                        <span class="pref-card-label">{% translate "Votes per date" %}</span>
+                        <ul class="pref-rows">
+                            {% for row in event.date_votes %}
+                                <li class="pref-row{% if row.date == event.best_date %} pref-row-best{% endif %}{% if not row.count %} pref-row-zero{% endif %}" style="--pct: {% widthratio row.count event.participants|length 100 %}%; --i: {{ forloop.counter0 }}">
+                                    <span class="pref-label">
+                                        {{ row.date_formatted|date:"D j M" }} · {{ row.date_formatted|time:"G:i" }}
+                                        {% if row.date == event.best_date %}
+                                            <span class="pref-best-pill"><i class="fa-solid fa-check" aria-hidden="true"></i> {% translate "Best" %}</span>
+                                        {% endif %}
+                                    </span>
+                                    <span class="pref-track"><span class="pref-fill"></span></span>
+                                    <span class="pref-count">{{ row.count }}</span>
+                                </li>
+                            {% endfor %}
+                            {% if event.unconfirmed_count %}
+                                <li class="pref-row pref-row-none" style="--pct: {% widthratio event.unconfirmed_count event.participants|length 100 %}%; --i: {{ event.date_votes|length }}">
+                                    <span class="pref-label">{% translate "No indication" %}</span>
+                                    <span class="pref-track"><span class="pref-fill"></span></span>
+                                    <span class="pref-count">{{ event.unconfirmed_count }}</span>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            {% else %}
+                <p class="pref-empty text-muted">
+                    <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+                    {% translate "No preferences yet." %}
+                </p>
+            {% endif %}
+        </section>
     </div>
 
     <!-- Modal to see participant list -->

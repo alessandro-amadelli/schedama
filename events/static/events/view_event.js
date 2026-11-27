@@ -2,7 +2,6 @@ let pollingInterval;
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeEntirePage();
-    document.addEventListener('modeChanged', updateCharts);
 
     // Event listeners for modals to reset body padding when opening a second modal
     document.getElementById('modalDateView').addEventListener('show.bs.modal', function () {
@@ -38,25 +37,10 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-function updateCharts() {
-    // Render and update charts
-    document.querySelectorAll("canvas").forEach((element) => {
-        try {
-            // Awful try-catch to make things work because...JS!
-            const ctx = element.getContext('2d');
-            const chart = Chart.getChart(ctx);
-            chart.render();
-            chart.update();
-        } catch {}
-    });
-}
-
 var updateInterval = "";
 var deadlineStart = "";
 var deadlineEnd = "";
 
-var totDoughnutPlot = null;
-var dateBarChart = null;
 
 function initializeEntirePage() {
     // On page load, delete previous modifications from localStorage
@@ -73,13 +57,8 @@ function initializeEntirePage() {
     // Display event duration in readable format
     displayDurationText();
 
-    // Draw charts
-    if (participants.length > 0) {
-        initializeChartTot();
-        initializeChartDates();
-    } else {
-        displayNoData();
-    }
+    // Preferences section (doughnut and bars), animated when it becomes visible
+    initializePreferences();
 
     // Button to cancel participation
     const btnCancelParticipate = document.querySelector("#btnCancelParticipate");
@@ -340,190 +319,77 @@ function displayDurationText() {
     durationText.innerText = text;
 }
 
-function displayNoData() {
-    const chartDiv = document.querySelector("#chartAreaDiv");
-    chartDiv.innerHTML = `<div class="col-12">
-    <i class="fa-solid fa-chart-pie"></i> No data
-    </div>
-    `;
-    chartDiv.classList.add("text-center");
-    return false;
-}
-
-function initializeChartTot() {
-    if (totDoughnutPlot) {
-        totDoughnutPlot.destroy();
+function initializePreferences() {
+    const section = document.querySelector("#chartAreaDiv");
+    const donut = section ? section.querySelector(".donut") : null;
+    if (!donut) {
+        return;
     }
 
-    let confirmed = 0;
-    let notConfirmed = 0;
-    participants.forEach(p => {
-        if (p.dates.length > 0) {
-            confirmed += 1;
-        } else {
-            notConfirmed +=1;
+    // Doughnut geometry: one arc for each segment, with a gap between them
+    const radius = 62;
+    const strokeWidth = 12;
+    const gap = 6;
+    const circumference = 2 * Math.PI * radius;
+    const confirmed = parseInt(donut.dataset.confirmed);
+    const total = parseInt(donut.dataset.total);
+    const segments = [
+        [donut.querySelector(".donut-seg-confirmed"), confirmed],
+        [donut.querySelector(".donut-seg-none"), total - confirmed],
+    ];
+    const visibleSegments = segments.filter(([, value]) => value > 0).length;
+    let start = 0;
+
+    donut.style.setProperty("--circumference", circumference);
+    segments.forEach(([circle, value]) => {
+        if (value <= 0) {
+            circle.remove();
+            return;
         }
+        const arc = circumference * value / total;
+        // Round caps add half the stroke width at both ends: remove it (and the gap) from the arc
+        const length = visibleSegments > 1 ? Math.max(arc - gap - strokeWidth, 0.001) : circumference;
+        const offset = visibleSegments > 1 ? start + (gap + strokeWidth) / 2 : 0;
+        circle.style.setProperty("--dash", `${length} ${circumference}`);
+        circle.style.strokeDashoffset = -offset;
+        start += arc;
     });
 
-    let data = {
-        labels: [gettext("Confirmed"),gettext("Not confirmed")],
-        datasets: [{
-            backgroundColor: ["#06d6a0", "#6f7372"],
-            data: [confirmed, notConfirmed],
-            hoverOffset: 10,
-            borderWidth: 0,
-            spacing: 5
-        }],        
+    // Animation starts only when the section becomes visible
+    section.classList.add("will-animate");
+    const startAnimation = () => {
+        section.classList.add("is-visible");
+        countUp(donut.querySelector(".donut-value"), confirmed);
     };
-
-    let config = {
-        type: 'doughnut',
-        data,
-        options: {
-            cutout: "88%",
-            plugins: {
-                legend: {
-                display: false
-                },
-            },
-        },
-        plugins: [{
-            id: 'centerText',
-            beforeDraw: function(chart, a, b) {
-                const width = chart.width,
-                height = chart.height,
-                ctx = chart.ctx;
-                ctx.restore();
-                const fontSize = (height/110).toFixed(2);
-                ctx.font = fontSize + "em sans-serif";
-                ctx.textBaseline = "middle";
-                const text = confirmed + "/" + (confirmed + notConfirmed),
-                textX = Math.round((width - ctx.measureText(text).width) / 2),
-                textY = height / 2;
-                ctx.fillText(text, textX, textY);
-                if (document.querySelector("body").classList.contains("dark-mode")) {
-                    ctx.fillStyle = "#ffffff";
-                } else {
-                    ctx.fillStyle = "#000000";
-                }
-                ctx.save();
-            }
-        }]
-    };
-
-    totDoughnutPlot = new Chart(
-        document.querySelector("#totChart"),
-        config
-    );
+    if (!("IntersectionObserver" in window)) {
+        requestAnimationFrame(() => requestAnimationFrame(startAnimation));
+        return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            startAnimation();
+        }
+    }, { threshold: 0.3 });
+    observer.observe(section);
 }
 
-function initializeChartDates() {
-    if (dateBarChart) {
-        dateBarChart.destroy();
+function countUp(element, target, duration = 900) {
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
     }
-
-    let evDates = dates.slice();
-    let values = [];
-    let labels = [];
-    let noIndic = 0;
-    let colors = [];
-
-    // Build values and labels arrays for chart
-    evDates.forEach(d => {
-        let datVal = 0;
-        participants.forEach((p, i) => {
-            if (p.dates.includes(d)) {
-                datVal += 1;
-            }
-        });
-        if (datVal > 0) {
-            values.push(datVal);
-            // Chart labels (in "dd/mm h.HH:MM" format)
-            let s = d.substring(8,10) + "/" + d.substring(5,7) + " h." + d.substring(11);
-            labels.push(s);
+    const startTime = performance.now();
+    const step = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        element.textContent = Math.round(target * eased);
+        if (progress < 1) {
+            requestAnimationFrame(step);
         }
-    });
-
-    // Adding bar for no indications
-    participants.forEach((p) => {
-        if (p.dates.length == 0) {
-            noIndic += 1;
-        }
-    });
-    if (noIndic > 0) {
-        labels.push(gettext("No Indications"));
-        values.push(noIndic);
-    }
-
-    // Set color of bars (with max bars colored differently)
-    values.forEach((val) => {
-        if (val == Math.max(...values)) {
-            colors.push("#06d6a0"); // Color of preferred date
-        } else {
-            colors.push("#118ab2");
-        }
-    });
-
-    let data = {
-        labels: labels,
-        datasets: [{
-            axis: 'y',
-            label: gettext("Preferences"),
-            data: values,
-            backgroundColor: colors,
-            barPercentage: 0.4,
-            borderRadius: 6,
-        }],
     };
-
-    let config = {
-        type: "bar",
-        data,
-        options: {
-            indexAxis: 'y',
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        display: false
-                    }
-                },
-                y: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        stepSize: 1
-                    }
-                }
-            }
-        },
-        plugins: [{
-            id: 'changeLabelColor',
-            beforeDraw: (chart) => {
-                let labelColor = "#000000";
-                if (document.querySelector("body").classList.contains("dark-mode")) {
-                    labelColor = "#ffffff";
-                }
-                const ctx = chart.ctx;
-                chart.options.scales.y.ticks.color = labelColor;
-            }
-        }]
-    };
-
-    dateBarChart = new Chart(
-        document.querySelector("#datesChart"),
-        config
-    );
+    element.textContent = "0";
+    requestAnimationFrame(step);
 }
-
 
 function clearParticipateModal() {
     const partName = document.querySelector("#newPartName");
